@@ -1,12 +1,15 @@
 # Operator guide
 
+Start with the [quick start](QUICK_START.md). The [unified source guide](UNIFIED_SYSTEM.md)
+covers optional component development. Compatible boards use the same CONFIG RAM BIN.
+
 ## The boot choices
 
 F is the bootstrap in B3:$F000–$FFFF. Its menu offers `S` for recovery, `A`/`B` for separately installed monitor slots and `0`–`3` for enabled user banks. A configured bank entry is a jump address; F does not interpret BASIC, Forth, a selector or another opaque program.
 
 The menu depends on a valid saved C/D record for enabled banks and the default. Missing or invalid records lead to recovery. An absent MON slot cannot be selected successfully. The F-only recovery loader works without monitors, extensions or a journal.
 
-`REC>` accepts `?`, `L`, `A`, `B`, `0`–`3` and `C1`/`C2`/`C3`. `C1` selects USB, `C2` ACIA and `C3` both consoles. This preview's qualification uses the USB model; ACIA remains an open physical test item.
+`REC>` accepts `?`, `L`, `A`, `B`, `0`–`3` and `C1`/`C2`/`C3`. `C1` selects USB, `C2` ACIA and `C3` both consoles. This release's physical claim is USB; ACIA remains an open physical test item.
 
 ## Load a RAM tool
 
@@ -35,7 +38,7 @@ Load `STR8N-F-CONFIG-RAM.bin`. Its prompt is `RAM CONFIG ? B C I W Q>`.
 | `I` | Initialize only completely blank C/D; see installation boundaries |
 | `Q` | Restart through F using the saved default |
 
-Entries are $8000–$E000 in $1000 steps. B3:$C000 and $D000 are excluded because they contain the journal. F:$F000 is never an application entry. `B` with arguments changes saved configuration; it does not install or validate the application bytes. CONFIG has no bank-disable command in this preview, so enable only a bank that is ready to boot.
+Entries are $8000–$E000 in $1000 steps. B3:$C000 and $D000 are excluded because they contain the journal. F:$F000 is never an application entry. `B` with arguments changes saved configuration; it does not install or validate the application bytes. CONFIG has no bank-disable command in this release, so enable only a bank that is ready to boot.
 
 For a reversible default exercise on an already provisioned board, first inspect the saved settings and ensure MON A is valid. `C A` saves A; `Q` starts it. Return to recovery, reload CONFIG, use `C S`, then `Q`. Each save appends a record and may eventually require journal rollover; retain the wear history. Do not run a demonstration save on a preservation-only inspection visit.
 
@@ -49,4 +52,9 @@ Install every required sector and verify the complete application's image before
 
 Applications own their application behavior and must match the board hardware. F's resident RAM service entries and reserved work areas are defined in [str8n-v2-public.inc](../src/include/str8n-v2-public.inc) and [str8n-v2-eq.inc](../src/include/str8n-v2-eq.inc). Calls require IRQ disabled and decimal mode clear; on 65C816 use emulation mode, D=0, DBR=0 and PBR=0. Bank-independent calls use the RAM facade after checking its signature. Calling F ROM routines requires B3 visible.
 
-MON A/B, VERSION/CAPS extensions, CONFIG saves, RTC, maintenance and EDU/SRAM are separate onboarding stages. They are not prerequisites for F-only recovery or the RAM demo. Only CONFIG and opaque tools in this repository are part of this preview package; the other stages remain in the parent project until extracted and qualified.
+The operator kit supplies CONFIG, OPAQUE, DEMO, READBACK and optional BASE MONs.
+BASE MON is a compact inspection/launch shell. Full-system M1 maps, WORK/EDU,
+RTC status and richer interfaces are separate optional applications. Legacy
+compatibility commands may report unavailable; their presence in old help does
+not install the corresponding full-system provider. The source package retains
+VX1/ES1/MAINT/FLASH development without making it part of F.

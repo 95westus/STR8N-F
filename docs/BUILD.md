@@ -1,26 +1,39 @@
-# Build and verify
+# Source, integrity and packaging
 
-The tree is self-contained. No script imports the parent STR8-N project, a local board backup or a historical builder. Python 3.11+ runs the offline checks. Rebuilding firmware requires the installed WDC `wdc02as` assembler and `wdcln` linker on PATH; these proprietary tools are not redistributed.
-
-From the repository root:
-
-```text
-python tools/build.py --out build/one
-python tools/build.py --out build/two
-python tools/verify.py --build build/one --compare build/two
-python tests/test_boot_and_opaque.py --build build/one --out build/cpu-one
-```
-
-Use fresh output directories. The builder copies `src/`, assembles the RAM worker and vectors first, regenerates symbol/image includes, links F and the three RAM tools, and checks every output BIN against `baseline.json`. It supplies a 4096-byte F image with reset/interrupt vectors and supplies matching S19s for inspection. F's own raw loader accepts BIN, not S19.
-
-`firmware/` holds the preview's built candidate: payloads, symbol maps as JSON and a source-hash build manifest. `python tools/verify.py` verifies those files without requiring WDC. The model tests use the vendored BSD CPU cores, with synthetic flash and counters. They cover saved/manual B0–B3 entry, F-only recovery cancellation, CONFIG entry/default saves and opaque read/replace/no-op/restore with protected-sector and durable-wear assertions. They shorten polling/delays and CRC loops and cannot validate physical serial timing, power cuts or ACIA operation.
-
-For packaging after verification:
+The source tree is independent of the parent STR8-N project and private captures.
+Python 3.11+ is enough to check or package the existing payloads:
 
 ```text
-python tools/package.py --out dist
+python tools/verify_system.py
+python tools/make_release.py --out dist/release
 ```
 
-The ZIP uses an explicit public-file allowlist, a fixed timestamp and sorted paths. It excludes `.git`, build outputs, serial logs and owner backups. A file manifest and external SHA-256 accompany the package. GitHub CI verifies the checked-in candidate and runs the CPU/NOR suite; it does not claim to rebuild firmware without WDC.
+These are file/source/manifest checks and ZIP creation, not firmware builds or
+CPU simulations. The operator kit has a standalone `python verify_package.py`.
+The source package retains all optional modules; see the
+[unified source guide](UNIFIED_SYSTEM.md).
 
-The CONFIG candidate differs from its board-specific predecessor only in the same-length `2609` → `STR8` banner. Its addresses and instructions are unchanged. All other BINs retain their predecessor hashes. The baseline, provenance and validation files preserve that distinction.
+## Rebuild only when required
+
+A firmware source change requires WDC wdc02as and wdcln on PATH. Those proprietary
+tools are not redistributed. Use a fresh output directory:
+
+```text
+python tools/build_system.py --out build/changed-source
+```
+
+This builds all 18 payloads. `tools/build.py` is the shared four-component
+F/CONFIG/OPAQUE/DEMO builder used by the system build. Neither builder requires
+parent-tree inputs. Baselines deliberately refuse changed firmware bytes until
+that change is explicitly versioned and its affected evidence updated.
+
+Do not make a routine second build or run CPU models for documentation/packaging.
+Existing results are retained in validation/. For a concrete defect requiring
+execution checks, the CPU suites can be selected explicitly; CI does not run
+those suites on ordinary pushes. Reproduction is an explicit investigation or
+release requirement when firmware bytes change, not an automatic extra step.
+
+The 0.2.0 release reuses already built payloads and earlier source reproduction.
+F and unchanged optional components keep their earlier hashes. CONFIG has a
+same-length generic banner; MAINT/EDU-client generic text and CRC changes are
+recorded in their baselines. No new assembly build or simulation is claimed.

@@ -183,11 +183,168 @@
       "source": "BUILD/pr04-b15-cancel-r3/s/core/service-eq.inc",
       "sha256": "501168b5ecbe27fc1c88292936d77b07152f2d7faa81638d12a6f3b684c00086",
       "extracted_sha256": "fce4745cf3a75d1ba20e969414851814289d07192dc60b46c28ec66fd987a214"
+    },
+    "src/core/monitor-template.asm": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/monitor-b0.asm",
+      "sha256": "58229333b775050bd1357bae3f4005e6178def86453de2244fbbeea1ed52cbd8",
+      "extracted_sha256": "d2eded4937e4c8cb3d72252613e463818c9bdc57f7fb998397edce57fb7fe623"
+    },
+    "src/core/text-ids.inc": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/text-ids.inc",
+      "sha256": "6432b7ba652c5bf2d1ec16baabc757aa95b791109924d3b16b49e87dd860689c",
+      "extracted_sha256": "13b5e881c51177ffe9188d4563cdbe27e76f855f45f9c86dd8a45f32611ce7a0"
+    },
+    "src/core/app-fixed-symbols.inc": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/app-fixed-symbols.inc",
+      "sha256": "62d025f68474663c2b61e05466418ea13581eca8bf42d986c0db9c1f6759ce71",
+      "extracted_sha256": "d11c77a50ecc9b24d326390e14aacb3d04435ddeaab5336abf1abbfbcb73efc0"
+    },
+    "src/core/str8n-v2-monitor.inc": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/str8n-v2-monitor.inc",
+      "sha256": "56b5897ff35c12aa323f16116bffa41bc8e088e7e0c204455c62bb1540cdb32c",
+      "extracted_sha256": "5ff6ff3551e32a892e2858a8e442f72c31030beaa77b0de0f20cd668bf3f2d38"
+    },
+    "src/core/str8n-v2-load.inc": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/str8n-v2-load.inc",
+      "sha256": "61693e7f69dce0897ca1cdfc0d14bb304ed73d1b4b43b12d27f9600fca29e5ba",
+      "extracted_sha256": "7cadf52f26408d4408ffbdac3e0ef57751b3fa22d790946653575597b4edeffa"
+    },
+    "src/core/str8n-v2-flash.inc": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/str8n-v2-flash.inc",
+      "sha256": "1f8f9d887e7c0ef1336ae14e6f6662fa65f6c3d514da6e083aa5d8c787594c45",
+      "extracted_sha256": "70318221aa20f991f07b3fb46f1846d796f38a2d200bc2597f9fc7d8098929bf"
+    },
+    "src/core/str8n-v2-config.inc": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/str8n-v2-config.inc",
+      "sha256": "d4674fb65d9b0daad3a74ae843a10815201eca79cdc8107c89ca561b1742a091",
+      "extracted_sha256": "0880d54836bb206dc7e1f5daf08d502b9b27422cea338265b9c0d2c894c1ea69"
+    },
+    "src/core/text-image.inc": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/text-image.inc",
+      "sha256": "d78a3b1e1a2e06f4c893864bf81c0b96d593e4246770963db584c260bf35fbdd",
+      "extracted_sha256": "fa76841da79e64b9f50ce2543d13d27054c964de4140ba6dc3e26b0f7234c9ae"
+    },
+    "src/core/batch-gate.inc": {
+      "source": "BUILD/pr04-b15-cancel-r3/s/core/batch-gate.inc",
+      "sha256": "bb669bbc998b0ff0241fd88ca39572a5284daeda665ceacc9f302f97a6bbbbfe",
+      "extracted_sha256": "b45d6fd982386f0554093544401c27eedb7cc86dd2be7d45275d3454b3b65b1f"
+    },
+    "src/core/version-caps-e000.asm": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step08-VERSION-build-r7/s/core/version-caps-e000.asm",
+      "sha256": "3a2e3aa5595ef5867df7ca2a45d31bfa8725d0d4976295fa02f57073b9e96d18",
+      "extracted_sha256": "d95c7fc1becefa8944f9ac4541d415f5bb62cf876909200c029e0f2e374ece5b"
+    },
+    "src/core/version-caps-public.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step08-VERSION-build-r7/s/core/version-caps-public.inc",
+      "sha256": "96a4a7d8e78cb04bf4c41573277f8171d88eddef4d8a432ab047b3502ea8e1ab",
+      "extracted_sha256": "96a4a7d8e78cb04bf4c41573277f8171d88eddef4d8a432ab047b3502ea8e1ab"
+    },
+    "src/core/version-caps-identities.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step08-VERSION-build-r7/s/core/version-caps-identities.inc",
+      "sha256": "e13e48fb1769ee7f290ec276a17db5056a3b64940151ac36e125af41b80c9d8f",
+      "extracted_sha256": "f0f6efbb996b75a1aa90b6ec086ef79c9b43e3427068aad86b825395096cd42e"
+    },
+    "src/core/version-caps-client.asm": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step08-VERSION-build-r7/s/core/version-caps-client.asm",
+      "sha256": "bedeb1a2d710460ab9712beee2f52caa699810ba3ba6a5323d3d142f87951ec9",
+      "extracted_sha256": "46584a120677af6002132cbafabf658f8c2a97b43a3dd9acd344dbb1d4c10069"
+    },
+    "src/core/version-caps-mon.inc": {
+      "source": "prototypes/boot-record-v2/version-caps-mon.inc",
+      "sha256": "5f039606fac11df0d76c9e32f0f189e5d18d12d6ae31bca6858b6a47885cd4cd",
+      "extracted_sha256": "5f039606fac11df0d76c9e32f0f189e5d18d12d6ae31bca6858b6a47885cd4cd"
+    },
+    "src/core/ram-maint-ro.asm": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step14-MAINT-RO-build-r1/s/core/ram-maint-ro.asm",
+      "sha256": "abb2b9b2ca5d137531608723027e3b19fe6c866678dd2ec980467fb196ac9ae5",
+      "extracted_sha256": "e3093d1fd16fde1c9b86bd2f57822345fa1eb46d65da1d725b79320eff1865ba"
+    },
+    "src/core/maint-ro-params.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step14-MAINT-RO-build-r1/s/core/maint-ro-params.inc",
+      "sha256": "71d9efc52e42fc240602ea2344d08e46c39725ef9de5e37781c2d30bf51e2037",
+      "extracted_sha256": "beb58731d081a0322f9978f27f62b6e13e23172338be72a8b0eda82e28003ffa"
+    },
+    "src/core/maint-ro-duplicates.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step14-MAINT-RO-build-r1/s/core/maint-ro-duplicates.inc",
+      "sha256": "0a4db5680f37e545cf30161076ba3770aec939f686df6ada15f0da7c8ae5e511",
+      "extracted_sha256": "d646a97a2b1840b232b47e2f52c3c32e708381e5421a79b3ba3a4704176234f5"
+    },
+    "src/core/maint-ro-ram-guards.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step14-MAINT-RO-build-r1/s/core/maint-ro-ram-guards.inc",
+      "sha256": "72f88694db590a46b55cf65502baf64e5fa25b172b5521d945bc6a3dcdd3c380",
+      "extracted_sha256": "884fbfe274074be33a2db666217aba5ba171c1c80dd8f04f1d4a765b6146d4fc"
+    },
+    "src/core/edu-sram.asm": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step15-EDU-SRAM-build-r3/s/core/edu-sram.asm",
+      "sha256": "7c35838589eeb58f5d57a41202a9d2028affb7ceb98db905f70078826bcb6558",
+      "extracted_sha256": "f109d0a766e46138f04234b4bf9e77a090d3d7a517990ef1bc3d7b610d06cf0b"
+    },
+    "src/core/edu-sram-params.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step15-EDU-SRAM-build-r3/s/core/edu-sram-params.inc",
+      "sha256": "baf396ff9f2aab68bc9c38d34defa2121decb4eba7c85fc85ec4949d5923eb9f",
+      "extracted_sha256": "8342903dbf79db93572c4f498937ef2dedffab6db3b7d34b7268947a39a5c94b"
+    },
+    "src/core/edu-client.asm": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step15-EDU-SRAM-build-r3/s/core/edu-client.asm",
+      "sha256": "51ffd7bfb831a1ba99b104a9c703f30abbe225abfd1ea35ccf0f48d0e88b6f70",
+      "extracted_sha256": "f9ebf7b13fe80dd2ccc6a82fa48d94e1f430c2c34ec7feea46d4efc4a5f91295"
+    },
+    "src/core/edu-client-params.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step15-EDU-SRAM-build-r3/s/core/edu-client-params.inc",
+      "sha256": "9bffd756590ad76aaf6d3041ed82fb1f2932cf35f29fd98b4faf1294b0905455",
+      "extracted_sha256": "0c993536451282af2771312734980bd7ee9141e550469ccae3aea969bd0156b4"
+    },
+    "src/core/edu-client-crc.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step15-EDU-SRAM-build-r3/s/core/edu-client-crc.inc",
+      "sha256": "c8bfabe9333a3359ea383fe084b7afad7fc7619d64bd7163cc009c78dfad8438",
+      "extracted_sha256": "2a65462e39737a2bb15a22c85df738031055780bf77ddddccf17832c0c953241"
+    },
+    "src/core/edu-client-guards.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step15-EDU-SRAM-build-r3/s/core/edu-client-guards.inc",
+      "sha256": "7469f730134f4acae9073457702b362fb6c366e592d598cb5a8fe26eb9038052",
+      "extracted_sha256": "c0347072f3c60116dcf1063f39b6f3732111d8d0d2e58724eb647bc12ffc673b"
+    },
+    "src/core/edu-client-header.inc": {
+      "source": "output/qualification/2609-b15-onboarding-20261027T212009Z/step15-EDU-SRAM-build-r3/s/core/edu-client-header.inc",
+      "sha256": "42329f65ad6efba147ced5b321f2dcb2835b23b406590b5f9e1c5a6c32c99830",
+      "extracted_sha256": "afba668fd3a37372f8ad02750349548de3ba80139cea2ce66ab6f8312bbe14c2"
+    },
+    "src/core/bank-monitor-apply.inc": {
+      "source": "BUILD/b15-bank-monitor-led-r1/s/core/bank-monitor-apply.inc",
+      "sha256": "10506d8596c07682a44e4f6f120dd145e2c6b86c75ebc9ee2dab5c26f3129084",
+      "extracted_sha256": "c54721726436e38c17f3c3a6480c7a2732a86e042395cc76f7f0fd5b42495d2d"
+    },
+    "src/core/bank-monitor-target.inc": {
+      "source": "BUILD/b15-bank-monitor-led-r1/s/core/bank-monitor-target.inc",
+      "sha256": "82bbe06f878f78f87747ece2748c6e58742653ade541cee9dbc3629a2be9ff6a",
+      "extracted_sha256": "c71935280f16ba270d343301574de38a2e1c35d4938a9f43242c1bebc4565453"
+    },
+    "src/core/bank-monitor-crc.inc": {
+      "source": "BUILD/b15-bank-monitor-led-r1/s/core/bank-monitor-crc.inc",
+      "sha256": "9c59b946e618fffc411ebac253a876d8627ae17157d0b9733a21d3153d62977f",
+      "extracted_sha256": "59970f790de66e22fd7df7454d33eea121396a757c65fda851594f1a2c60e472"
+    },
+    "src/core/bank-monitor.asm": {
+      "source": "prototypes/boot-record-v2/bank-monitor.asm",
+      "sha256": "940f3964b3e3862a1e1e05b3d61cd6f1a0bee2cccc972e55f34f63f8a8d49621",
+      "extracted_sha256": "940f3964b3e3862a1e1e05b3d61cd6f1a0bee2cccc972e55f34f63f8a8d49621"
+    },
+    "src/core/bank-monitor-entry.asm": {
+      "source": "prototypes/boot-record-v2/bank-monitor-entry.asm",
+      "sha256": "aa30836463289d14efd610fbd9db53d202be2e6b5c90499d12a931781b8a37b7",
+      "extracted_sha256": "aa30836463289d14efd610fbd9db53d202be2e6b5c90499d12a931781b8a37b7"
+    },
+    "src/core/mon-absent-service.inc": {
+      "source": "prototypes/boot-record-v2/mon-absent-service.inc",
+      "sha256": "886779ba71e05359867d0a521cf164a1997608ff7c23f228429e295c1ff4e560",
+      "extracted_sha256": "886779ba71e05359867d0a521cf164a1997608ff7c23f228429e295c1ff4e560"
     }
   },
   "local_changes": {
     "src/core/ram-config.asm": "Same-length generic STR8 banner replaces board number; code addresses unchanged",
-    "src/core/ram-installer.asm": "Correct historical comment to raw $0200 loading; code unchanged"
+    "src/core/ram-installer.asm": "Correct historical comment to raw $0200 loading; code unchanged",
+    "src/core/ram-maint-ro.asm": "Same-length generic banner and B0/E labels; policies come from the board inventory, not inferred image contents"
   },
-  "text_normalization": "Public text uses LF. Original source hashes remain sha256; extracted_sha256 includes LF normalization and declared local edits."
+  "text_normalization": "Public text uses LF. Original source hashes remain sha256; extracted_sha256 includes LF normalization and declared local edits.",
+  "unification": "One b15 source closure for both CPU/board profiles; optional MON/VX1/ES1/FLASH/MAINT sources; no owner captures or wear data"
 }

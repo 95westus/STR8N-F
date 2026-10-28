@@ -1,26 +1,61 @@
-# Release status
+# STR8N-F 0.2.0 release scope
 
-Repository/package name: **STR8N-F**. First public tag: **v0.1.0-preview.1**. Firmware lineage remains **b15 / PR04 / generation $8000000F**. Repository versioning does not rename or silently advance the on-board firmware identity.
+An early Boot & Recovery Toolkit release: b15 F, matching CONFIG, OPAQUE,
+DEMO and READBACK RAM tools, optional BASE MON A/B, packet preparation,
+operator instructions and component destinations. The separate source ZIP
+retains the unified source closure and optional system components.
+Package 0.2.0 and F generation 8000000F are different identities.
 
-This source preview extracts a small, directly buildable project around F and opaque B0–B3 booting. It contains no original WDC firmware, owner flash images, PF/RTC records, SRAM backups, board EUI/USB identities or personal wear counts. The CONFIG banner is generic. Synthetic counts in model tests are fixtures.
+## Supported scope
 
-Completed preview checks:
+- WDC banked 65C02 and 65C816 emulation runtime, USB/FT245.
+- Reset chooser, saved/default/manual bank entry and B3:F recovery.
+- F-only recovery/raw RAM loading without MONs or a journal.
+- Compatible existing SNBT C/D; blank-only initialization with prior wear unknown.
+- Immediate CONFIG entry/default saves; manual paced OIP1 reads/replacements,
+  preimage checks, durable erase reservation and full sector readback.
+- Explicit external-programmer F-sector provisioning under the installation
+  boundaries. An automatic factory converter is not implied.
 
-- Two independent direct-source builds produce matching four-component BINs.
-- SHA-256 checks bind the built files to the exact sources and baseline.
-- Both CPU models pass 26 boot/config/opaque NOR test groups.
-- Packaging and extracted-package checks require no parent-tree inputs.
+B0/B1/B2 are user-owned. Ordinary opaque writes exclude B3:A/B/C/D/F.
+An address admitted by OIP1 does not authorize replacing owner backups or
+optional services. Those remain subject to the actual inventory.
 
-These checks supplement the parent project's board-specific onboarding work. They do not convert that work into general factory-board or ACIA qualification.
+## Evidence for the exact bytes
 
-Before a stable 1.0 release:
+The [public hardware summary](../validation/hardware-summary.json) identifies
+its artifact hashes and scope. Private original receipts stay with the owner.
 
-1. Finish the actual CONFIG save/restore exercise on the existing preserved board, retaining its wear, backup and SRAM evidence.
-2. Extract a general factory-WDC backup/F-only RAM migrator and a journal initializer with explicit unknown-history/import policy. Verify that unrelated sectors remain unchanged and stop at REC> after each stage.
-3. Provide a matching host opaque installer with identity admission, binary framing, escrow, progress, readback and clear recovery states. Perform the install/read/no-op/restore lesson on hardware with a designated sacrificial target.
-4. Cold-boot every supported CPU/console/bank path, test missing/torn/conflicting C/D and monitor images, and exercise interrupted writes and power transitions. ACIA needs its own physical evidence.
-5. Freeze the public service contract, image map, firmware identity and operator keystrokes, and reproduce the final release from a clean checkout.
+- Exact F was installed on 2512 (65C02) and 2609 (65C816 emulation) over USB.
+  2512 includes initial Ctrl-C and normal BIN reception evidence.
+- CONFIG enable/entry/default/restore was demonstrated on 2512. The b15 CONFIG
+  predecessor saved A, booted it, restored S and booted REC on 2609. The shipped
+  generic CONFIG changes only its same-length banner. The shipped common CONFIG
+  ran on 2512 for inspection and independent executed-RAM checking.
+- OIP1/FLASH writes, no-op/readback and restoration were demonstrated on 2512.
+  No new opaque install on the current 2609 ES1/VX1 profile is claimed.
+  READBACK and owner-RAM restoration ran on the 2512 preservation path.
+- Both CPU models previously exercised core boot/config/OIP. The unified source
+  was independently reproduced before this release. These are inherited results,
+  not newly executed release tests.
 
-MON A/B, VERSION/CAPS, MAINT and EDU/SRAM may become separate optional packages after extraction and testing. A B1 application selector and OSI BASIC/Fig-Forth images are another package with its own licensing and integration tests. A combined full-load BIN must declare every sector it replaces; it must not become the default factory onboarding path.
+Release checks cover archive membership, SHA-256, source/provenance, component
+addresses, documentation and extracted-package integrity. No board flashing,
+firmware build or CPU/NOR rerun is part of this release. 2205 remains read-only.
 
-Publishing procedure for this preview: commit the prepared standalone tree, create `95westus/STR8N-F`, push main, then publish the ZIP and checksum as a GitHub **prerelease**. A stable release tag follows completion of the applicable gates above.
+## Limits and deferred work
+
+Raw L executes after an idle interval without declared length or transfer CRC.
+A local file checksum does not verify device reception. Independent RAM readback
+occurs after execution, not before it. Incomplete transfers must not be treated
+as valid tools.
+
+Physical ACIA acceptance, native 816 applications, physical interrupted-power
+acceptance, a general preserving factory-WDC migrator, owner-history import or
+repair and an automatic live opaque installer remain outside the supplied
+workflow. Healthy F can load repair tools; destroyed F/reset vectors need an
+external recovery mechanism. Stable 1.0 factory acceptance is not claimed.
+
+The SPI WORK message journal, WTOR, login/session features, new maps, personality
+ports and BASIC/Forth selector remain future work. Full-system images do not
+become relocatable opaque applications merely by being stored in a BIN.

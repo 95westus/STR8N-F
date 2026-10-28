@@ -1,13 +1,13 @@
-"""Create the deterministic public source-preview ZIP after offline verification."""
+"""Package the public source and existing payloads; no firmware build or simulation."""
 import argparse,hashlib,json,zipfile
 from pathlib import Path
 from verify import ROOT,read,sha,verify
 
 
-def package(out):
-    files=verify();release=read(ROOT/'release.json');out=Path(out).resolve()
+def package(out,files=None):
+    files=verify() if files is None else files;release=read(ROOT/'release.json');out=Path(out).resolve()
     if out.exists():raise ValueError('Use a new output directory')
-    out.mkdir(parents=True);name=release['project']+'-'+release['tag'];path=out/(name+'.zip')
+    out.mkdir(parents=True);name=release['project']+'-'+release['tag']+'-source';path=out/(name+'.zip')
     manifest=json.dumps(dict(project=release['project'],version=release['version'],prerelease=release['prerelease'],
         files={p.relative_to(ROOT).as_posix():sha(p) for p in files}),indent=2).encode()+b'\n'
     with zipfile.ZipFile(path,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
