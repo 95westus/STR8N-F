@@ -1,5 +1,6 @@
 ; Immutable Bank-3 F bootstrap and independent binary recovery console.
-; B3:A/B separately linked monitor slots; B3:C/D config/wear journal.
+; BASE1: B3:C/D config/wear journal; other non-F sectors are owner images.
+; A/B monitor-shaped images remain optional, not layout reservations.
 ; No routine firmware operation writes F. Flash busy execution stays in RAM.
                         MODULE V2_BOOT
                         XDEF BOOT_END
@@ -35,8 +36,10 @@ BOOT_API_HEX_WORD: JMP FC_HEX_WORD
 BOOT_API_HEX_BYTE: JMP FC_HEX_BYTE
 BOOT_RESERVED:          RTS
                         DB "CA",$01,$17             ; F035
-BOOT_API_PROMOTE:       JMP BOOT_META_PROMOTE       ; F038, config including preference
-                        DB $FF,$FF,$FF,$FF
+BOOT_API_PROMOTE:       JMP BOOT_META_PROMOTE       ; F039, config including preference
+; Stable public identity locator; descriptor may move in a later F generation.
+BOOT_ID_LOCATOR:        DB "FI"
+                        DW BOOT_ID_DESCRIPTOR
                         INCLUDE "sr-stubs.inc"      ; F040, 19 six-byte stubs
 BOOT_API_READ:          JMP BOOT_META_READ           ; F0B2
 BOOT_API_CFG:           JMP BOOT_META_CFG            ; F0B5
@@ -105,7 +108,6 @@ P_LONG_4:
                         STA V2_PIA_CRA
                         LDA #V2_LED_RUNNING
                         STA V2_LED
-        DB $EA,$EA,$EA
         LDA #<BOOT_NO_SERVICE
         STA JE_HANDLER
         LDA #>BOOT_NO_SERVICE
@@ -341,8 +343,6 @@ B11_NOT_HELP:
         BNE B14_NOT_LOAD
         JMP RL_LOAD
 B14_NOT_LOAD:
-B14_FREE_DISPATCH:
-        DB $EA,$EA,$EA,$EA,$EA,$EA,$EA,$EA,$EA,$EA,$EA,$EA,$EA,$EA,$EA
         CMP #'A'
         BNE P_LONG_36
         JMP BR_A
@@ -375,7 +375,7 @@ BR_MESSAGE:
 BOOT_VECTOR_IMAGE: INCLUDE "vectors-image.inc"
 B14_MAIN_BASE:
 ; Raw BIN receiver. Empty polls count nominal CPU cycles; no frame/CRC/length.
-; Main fits the tail of the old 302-byte RLP1 region after relocated vectors.
+; Legacy patch padding is removed; receiver instructions/timers are unchanged.
 RL_LOAD_BYTE:
         PHA
         LDA V2_RX_BAD
@@ -431,7 +431,6 @@ B14_RANGE_POP:
         LDY #>BR_REFUSED
         JMP BR_MESSAGE
 B14_MAIN_END:
-        DS B14_MAIN_BASE+106-B14_MAIN_END,$FF
 BOOT_USB_WAIT_DONE:
         STZ DC_BINARY
         JSR V2W_RX_RESET
@@ -443,8 +442,6 @@ BOOT_USB_WAIT_DONE:
         STA BR_TICKS
         LDY #0
         JMP BOOT_DRAIN_BEGIN
-B13_FREE_B12_FREE_TX_ERROR:
-        DB $FF,$FF,$FF,$FF,$FF,$FF
 B14_INIT_BASE:
 RL_LOAD:
         STZ B14_PENDING
@@ -493,11 +490,10 @@ B14_FIRST_GOT:
 B14_FIRST_BAD:
         JMP B14_RX_BAD
 B14_INIT_END:
-        DS B14_INIT_BASE+99-B14_INIT_END,$FF
 BOOT_CONSUMING: DB 13,10,"WAIT...",13,10,0
 
 
-; b07 append-only display code: keep every prior PR04 private call fixed.
+; PR05 compaction: public entries stay fixed; private callers are rebuilt.
 B07_PRINT_CHOICES:
         JSR BOOT_PRINT
         LDX #<B07_PREFIX
@@ -523,8 +519,6 @@ B15_CANCEL:
 B15_CANCEL_OK:
         STZ DC_BINARY
         JMP BOOT_RECOVERY
-B14_FREE_FIRST:
-        DB $FF,$FF,$FF,$FF
 BOOT_READ_RECORD:
         STZ BR_VALID
         STZ BR_CONFLICT
@@ -639,8 +633,6 @@ B12_HELP:
         LDY #>B12_HELP_TAIL
         JMP BR_MESSAGE
 B12_HELP_TEXT: DB 76,61,48,50,48,48,32,94,67,61,99,97,110,99,101,108,32,105,100,108,101,51,115,13,10,65,47,66,32,48,0
-B14_FREE_B12_HELP_TEXT:
-B12_FREE_B12_HELP_TEXT:
 BOOT_CHECK_FIELDS:
         LDA JE_FRAME+6
         BEQ P_LONG_93
@@ -697,8 +689,6 @@ BR_FIELDS_OK: SEC
 BR_FIELDS_BAD: CLC
         RTS
 B12_HELP_TAIL: DB 45,51,32,67,49,85,83,66,47,50,65,67,73,65,47,51,98,111,116,104,13,10,0
-B14_FREE_B12_HELP_TAIL:
-        DB $FF
 B13_USB_START:
         LDY #20
 BOOT_USB_WAIT:
@@ -706,8 +696,6 @@ BOOT_USB_WAIT:
         DEY
         BNE BOOT_USB_WAIT
         JMP BOOT_USB_WAIT_DONE
-B13_FREE_B12_FREE_B12_HELP_TAIL:
-        DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 BOOT_META_READ: LDA #0
         JMP BR_SERVICE
 BOOT_META_CFG: LDA #1
@@ -721,7 +709,7 @@ BR_SERVICE: JMP (JE_HANDLER)
 BOOT_NO_SERVICE: CLC
         RTS
 BOOT_UPDATE: JMP BOOT_RECOVERY
-BOOT_COMPAT_DATA: DB "PR04"
+BOOT_COMPAT_DATA: DB "PR05"
 BR_STRINGS:
 BR_CHOICES:
 BOOT_B08_READ_LINE:
@@ -744,32 +732,20 @@ BOOT_B08_READ_LINE:
         JMP BR_DISPATCH
 B08_READ_VALID: SEC
 B08_READ_DONE: RTS
-        DB $EA
 BR_RECOVERY: DB "Recovery L A/B 0-3 C1/2/3 ?",13,10,0
-B14_FREE_BANNER:
-        DB $FF,$FF
-
-B12_FREE_BANNER:
-        DB $FF,$FF
 
 BR_PROMPT: DB "REC> ",0
 BR_USAGE: DB "REFUSED: command",13,10,0
 BR_REFUSED: DB "REFUSED: RAM range",13,10,0
 B14_RX_TEXT: DB "REFUSED: receive error",13,10,0
 RL_SEND: DB "SEND BIN",13,10,0
-B14_FREE_MESSAGES:
-        DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 BOOT_DRAIN_DONE:
         JSR V2W_RX_RESET
         STZ V2_SKIP_LF
-        DB $EA,$EA,$EA
         JSR BOOT_SELECT
-        JMP BOOT_START_CHOICES+3
-B13_FREE_B12_FREE_LOADED:
+        JMP BOOT_SHOW_STARTUP
 
 BR_SIGNATURE: DB "SNBT",1,32
-B14_FREE_SIGNATURE:
-        DB $FF,$FF,$FF,$FF,$FF,$FF
 BOOT_CON_SELECT:
         DEC A
         CMP #3
@@ -959,8 +935,6 @@ BOOT_DRAIN_PAD:
         DEC BR_TICKS
         BNE BOOT_DRAIN_LOOP
         JMP BOOT_DRAIN_DONE
-B13_FREE_SLOT:
-        DB $FF
 BOOT_SR_ROUTE:          PHA
                         PHY
                         LDA V2_PTR
@@ -1041,6 +1015,15 @@ BOOT_API_SKIP: JMP FC_SKIP_SPACES
         INCLUDE "prototype-console.inc"
 
 BOOT_WORKER_IMAGE: INCLUDE "worker-image.inc"
+
+; Append-only identity addition: all pre-existing PR05 call addresses stay put.
+BOOT_ID_DESCRIPTOR: INCLUDE "boot-identity.inc"
+BOOT_SHOW_STARTUP:
+        LDX #<BOOT_ID_TEXT
+        LDY #>BOOT_ID_TEXT
+        JSR BOOT_PRINT
+        JMP BOOT_START_CHOICES+3
+BOOT_ID_TEXT: INCLUDE "boot-banner.inc"
 
 BOOT_END:
         ENDMOD

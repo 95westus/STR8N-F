@@ -378,7 +378,7 @@ EC_GUARDS:
         INCLUDE "edu-client-guards.inc"
 EC_EXPECTED_HEADER:
         INCLUDE "edu-client-header.inc"
-EC_TITLE: DB "ES1 EDU/SRAM READ ONLY / STR8 b15",13,10,0
+EC_TITLE: DB "ES1 EDU/SRAM READ ONLY / STR8 b15c1 PR05",13,10,0
 EC_PROMPT: DB "EDU RO> ",0
 EC_HELP_TEXT:
         DB "S software info; V VIA inputs; A acknowledge disabled CB flags",13,10

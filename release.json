@@ -1,15 +1,19 @@
 {
   "project": "STR8N-F",
-  "version": "0.2.0",
-  "tag": "v0.2.0",
-  "prerelease": false,
-  "status": "early-toolkit-release",
-  "firmware_lineage": "b15 / PR04 / 8000000F",
+  "version": "0.3.0-dev-base1-r1",
+  "tag": "unpublished-base1-r1",
+  "prerelease": true,
+  "status": "base1-frozen-candidate-hardware-pending",
+  "firmware_lineage": "STR8N-F 0.3.0 / F g00000001 / BASE1 / PR05",
   "repository": "https://github.com/95westus/STR8N-F",
   "hardware_flashed_for_this_release": false,
-  "release_scope": "USB boot/recovery toolkit for compatible b15 boards and explicit F-sector provisioning",
-  "assembly_builds_for_this_release": 0,
+  "release_scope": "Frozen boot identity and RAM WDC map; matched BASE1 toolkit; hardware acceptance pending",
+  "assembly_builds_for_this_release": 1,
   "CPU_simulations_for_this_release": 0,
-  "main_asset": "STR8N-F-v0.2.0.zip",
-  "source_asset": "STR8N-F-v0.2.0-source.zip"
+  "main_asset": null,
+  "source_asset": null,
+  "F_rebuilt_for_minimal_layout": true,
+  "F_frozen": true,
+  "F_generation": "00000001",
+  "SNBT_monitor_generation": "8000000F"
 }

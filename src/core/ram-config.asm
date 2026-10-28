@@ -316,7 +316,7 @@ CF_LONG_39:
 CONFIG_PRINT_DONE:
         RTS
 CONFIG_BANNER:
-        DB "STR8 RAM CONFIG / b15 F / settings writes are immediate",13,10
+        DB "STR8N-F CONFIG 0.3.0 / BASE1 / PR05 / settings writes are immediate",13,10
         DB "Inspect only: ? B C W Q; B/C with arguments and I may write",13,10,0
 CONFIG_TEXT: DB "RAM CONFIG ? B C I W Q> ",0
 CONFIG_OK: DB "OK",13,10,0

@@ -524,7 +524,7 @@ OI_FINISH:
         INCLUDE "bank-monitor-crc.inc"
         INCLUDE "prototype-engine.inc"
 
-BM_BANNER: DB 13,10,"FLASH / MAINT - b15 example",13,10,"? help; Q returns to MON",13,10,0
+BM_BANNER: DB 13,10,"FLASH / MAINT - b15c1 PR05 example",13,10,"? help; Q returns to MON",13,10,0
 BM_PROMPT: DB "FLASH> ",0
 BM_BANK_TEXT: DB "Data bank B",0
 BM_HELP: DB "B0..B3 data bank; D addr (16 bytes)",13,10

@@ -1,39 +1,24 @@
-# Source, integrity and packaging
+# BASE1 build and freeze policy
 
-The source tree is independent of the parent STR8-N project and private captures.
-Python 3.11+ is enough to check or package the existing payloads:
+`python tools/verify_base1.py` checks existing files only. It does not assemble,
+emulate, open a port or flash a device. Historical CPU reports are not current
+BASE1 qualification.
 
-```text
-python tools/verify_system.py
-python tools/make_release.py --out dist/release
-```
+The identity build compiled F once and built affected CONFIG, OPAQUE, DEMO,
+MAP and READBACK against it. Worker/vector images were unchanged; NFM1/NFA1
+were reused. No reproduction build or CPU model ran.
 
-These are file/source/manifest checks and ZIP creation, not firmware builds or
-CPU simulations. The operator kit has a standalone `python verify_package.py`.
-The source package retains all optional modules; see the
-[unified source guide](UNIFIED_SYSTEM.md).
-
-## Rebuild only when required
-
-A firmware source change requires WDC wdc02as and wdcln on PATH. Those proprietary
-tools are not redistributed. Use a fresh output directory:
+F_FREEZE.json now locks F. For a later source change requiring RAM assembly:
 
 ```text
-python tools/build_system.py --out build/changed-source
+python tools/build_base1.py --only map --out build/new-map
 ```
 
-This builds all 18 payloads. `tools/build.py` is the shared four-component
-F/CONFIG/OPAQUE/DEMO builder used by the system build. Neither builder requires
-parent-tree inputs. Baselines deliberately refuse changed firmware bytes until
-that change is explicitly versioned and its affected evidence updated.
+Selections: config, opaque, demo, map, readback. Use a fresh output directory.
+Unselected payloads and frozen F are reused with hashes checked. Inspect the
+output manifest before promoting changed RAM files. WDC tools are required
+only for actual assembly; no installation or publication is automatic.
 
-Do not make a routine second build or run CPU models for documentation/packaging.
-Existing results are retained in validation/. For a concrete defect requiring
-execution checks, the CPU suites can be selected explicitly; CI does not run
-those suites on ordinary pushes. Reproduction is an explicit investigation or
-release requirement when firmware bytes change, not an automatic extra step.
-
-The 0.2.0 release reuses already built payloads and earlier source reproduction.
-F and unchanged optional components keep their earlier hashes. CONFIG has a
-same-length generic banner; MAINT/EDU-client generic text and CRC changes are
-recorded in their baselines. No new assembly build or simulation is claimed.
+Old F/full-system builder paths are retired or redirect to the canonical RAM
+builder. Initial-F mode is already consumed. A future boot defect needs a new,
+reviewed F generation and reference proof, not an override of this lock.

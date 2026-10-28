@@ -24,6 +24,9 @@ def require(condition,message):
 
 
 def verify(build=None,compare=None):
+    raise ValueError('BASE1 uses tools/verify_base1.py; historical CPU evidence is not current qualification')
+    if 'candidate' in read(ROOT/'release.json').get('status',''):
+        raise ValueError('Unqualified PR05 candidate: use tools/check_fcompact.py for static layout checks; historical CPU evidence does not apply')
     build=Path(build or ROOT/'firmware').resolve();baseline=read(ROOT/'baseline.json');manifest=read(build/'manifest.json')
     require(manifest['passed'] and manifest['hardware_access'] is False,'Build manifest failed or claims hardware access')
     require(set(manifest['artifacts'])==set(baseline['artifacts']),'Artifact set mismatch')
@@ -48,7 +51,7 @@ def verify(build=None,compare=None):
     frame=header(1,0x90,bytes(4096),0x1234)
     require(frame[:12]==b'OIP1\x01\x01\x01\x90\x00\x10\x34\x12' and len(frame)==20,'OIP1 header mismatch')
     require(crc(frame[:18])==int.from_bytes(frame[18:20],'little'),'Header CRC mismatch')
-    for sector in (0xa0,0xb0,0xc0,0xd0,0xf0):
+    for sector in (0xc0,0xd0,0xf0):
         require(not allowed(3,sector),'Protected sector admitted')
         try:header(3,sector)
         except ValueError:pass

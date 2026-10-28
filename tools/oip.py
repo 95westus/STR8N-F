@@ -3,7 +3,7 @@ import binascii
 
 def crc(data):return binascii.crc_hqx(bytes(data),65535)
 
-def allowed(bank,sector):return bank in range(4) and sector in range(0x80,0x100,0x10) and (bank<3 or sector in (0x80,0x90,0xe0))
+def allowed(bank,sector):return bank in range(4) and sector in range(0x80,0x100,0x10) and (bank<3 or sector in (0x80,0x90,0xa0,0xb0,0xe0))
 
 def header(bank,sector,payload=None,preimage_crc=0):
     if not allowed(bank,sector):raise ValueError('Protected/noncanonical target')

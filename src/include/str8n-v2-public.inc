@@ -26,6 +26,12 @@ STR8V2_RESERVED1        EQU     STR8V2_BOARD_QUERY
 STR8V2_RESERVED2        EQU     $F02E
 STR8V2_RESERVED3        EQU     $F031
 STR8V2_CAPS_DATA        EQU     $F035
+; BASE1 identity discovery, B3 visible. F03C contains "FI" followed by a
+; little-endian descriptor pointer. Validate NFI1, length/format and CRC.
+; This is read-only data, not an executable entry or an OS identity service.
+STR8V2_ID_LOCATOR       EQU     $F03C
+STR8V2_ID_BYTES         EQU     $40
+STR8V2_ID_FORMAT        EQU     $01
 
 ; CAPS_QUERY returns A=format, X=flags, Y=descriptor length, C=1.
 ; The fixed descriptor is "CA", format, flags. Native vectors are supported;

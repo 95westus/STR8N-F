@@ -5,9 +5,9 @@
         INCLUDE "vectors-symbols.inc"
         INCLUDE "boot-symbols.inc"
         CODE
-; OIP1: standalone whole-sector opaque installer. Linked at $2000 and run
-; through F's verified RLP1 loader. No MON code or application RAM scratch.
-; b15 uses raw L and RAM entry $0200 (the older RLP1/$2000 route is retired).
+; BASE1 OIP1: standalone whole-sector opaque installer at $0200 via raw L.
+; B0-B2:8-F and B3:8/9/A/B/E are user targets; B3:C/D/F stay protected.
+; No MON code or application RAM scratch. Raw L has no transfer CRC/length.
 ; Header/state below are part of the disposable tool image; $6800-$77FF is the
 ; existing reserved flash staging buffer. All target-side code executes in RAM.
 OI_PTR EQU V2_PTR
@@ -424,14 +424,10 @@ OI_LONG_51:
         JMP OI_RANGE_OK
 OI_LONG_52:
         LDA OI_HEADER+7
-        CMP #$80
-        BNE OI_LONG_53
-        JMP OI_RANGE_OK
-OI_LONG_53:
-        CMP #$90
-        BNE OI_LONG_54
-        JMP OI_RANGE_OK
-OI_LONG_54:
+        ; The preceding checks established >=80 and a zero low nibble.
+        ; Thus below C0 admits exactly 80/90/A0/B0; only E0 is above it.
+        CMP #$C0
+        BCC OI_RANGE_OK
         CMP #$E0
         BEQ OI_LONG_55
         JMP OI_VALIDATE_BAD
@@ -614,7 +610,7 @@ OI_LONG_73:
         RTS
 
 OI_SIGNATURE: DB "OIP1",1
-OI_MENU_TEXT: DB "INSTALLER I Q> ",0
+OI_MENU_TEXT: DB "OPAQUE BASE1 / PR05 I Q> ",0
 OI_SEND_HEADER: DB "SEND OIP1 HEADER",13,10,0
 OI_SEND_PAYLOAD: DB "SEND 4096",13,10,0
 OI_READ_TEXT: DB "READ SECTOR+CRC",13,10,0

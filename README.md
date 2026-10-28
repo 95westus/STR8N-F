@@ -1,81 +1,69 @@
-# STR8N-F — Boot & Recovery Toolkit
+# STR8N-F 0.3.0 — BASE1 / PR05
 
-**[Download v0.2.0](https://github.com/95westus/STR8N-F/releases/tag/v0.2.0)**
-for WDC 65C02 and 65C816 emulation-mode boards, using USB/FT245.
+F is now self-identifying and **source/binary frozen**, generation **00000001**.
+This is an unpublished candidate; hardware acceptance is pending. No board was
+accessed or flashed, and 2205 remains an untouched read-only reference.
 
-STR8N-F boots your own images in B0-B3 and provides recovery from a single
-**4096-byte sector at B3:$F000-$FFFF**. Matching RAM tools configure boot,
-transfer opaque sectors and export data. MON A/B are optional. The bootstrap
-requires no EDU, SPI SRAM, RTC, filesystem or full STR8-N installation.
-
-The toolkit ZIP is the operator download. A separate source ZIP contains the
-unified local-source build and optional components. This is an early toolkit
-release, not completed 1.0 factory-migration acceptance. The shipped F remains
-**b15 / PR04 / 8000000F**; package version 0.2.0 does not rename its firmware.
-
-## Start here
-
-- [Quick start](docs/QUICK_START.md): recovery, CONFIG and selecting an image.
-- [Installation](docs/INSTALLATION.md): exact destinations and preservation.
-- [Operator guide](docs/OPERATOR_GUIDE.md): commands and boot records.
-- [Opaque image contract](docs/IMAGE_CONTRACT.md) / [OIP1 transfer](docs/OPAQUE_PROTOCOL.md).
-- [RAM export/restoration](docs/READBACK.md).
-- [Release scope/evidence](docs/RELEASE_STATUS.md) / [Release notes](docs/RELEASE_NOTES.md).
-
-## Operator kit
-
-| File | Destination / purpose |
-|---|---|
-| STR8N-F-BOOT-4096.bin | B3:F000-FFFF only; reset, boot choices, recovery and raw RAM loader |
-| STR8N-F-CONFIG-RAM.bin | RAM $0200; inspect settings/wear, enable entries and save a default |
-| STR8N-F-OPAQUE-RAM.bin | RAM $0200; OIP1 read/replace with preimage checks and erase accounting |
-| STR8N-F-DEMO-RAM.bin | RAM $0200; small console/capability demonstration |
-| STR8N-F-READBACK-RAM.bin | RAM $0200; binary export and fixed-range RAM restore |
-| Optional BASE MON A/B | Separate 4 KiB monitor sectors; inspection shells |
-
-The RAM files are BIN programs, not flash images. At REC>, enter C1, then L,
-then binary-send the selected RAM BIN after SEND BIN. F executes it at $0200
-after approximately three seconds of transfer silence. Initial Ctrl-C cancels.
-Raw L has no declared length or transfer CRC; interrupted transfers can execute
-a partial tool. Preserve owner RAM before loading if needed.
-
-For an image already installed and verified at B1:$9000, use RAM CONFIG:
+Startup now prints:
 
 ```text
-B 1 9000
-C 1
-B
-Q
+STR8N-F 0.3.0 g00000001
+BASE1 / PR05
 ```
 
-Each setting command saves immediately. CONFIG selects an image; it does not
-install or validate code. Compatible C/D records are required for saved policy
-and ordinary opaque writes. Missing records do not prevent F recovery. I can
-initialize completely blank C/D only, recording previous wear as unknown.
+The existing chooser/recovery commands follow. F identifies boot/recovery;
+the running OS/image owns its own identity and board/service status.
 
-## Ownership and optional development
+| Flash | BASE1 role |
+| --- | --- |
+| B0/B1/B2:8-F | Owner opaque images |
+| B3:8/9/A/B/E | Owner opaque images |
+| B3:C/D | Boot settings and erase-accounting journal |
+| B3:F | Exactly 4096 bytes of bootstrap/recovery |
 
-B0, B1 and B2 are user-owned in the N/F profile. It reserves no g0034 source
-arena or full-system utility banks there. Existing contents remain owner data;
-new profiles do not erase them or make a WDC backup expendable. B3:C/D hold
-boot/configuration/wear records, A/B are optional MONs, and F is the bootstrap.
-B3:8/9/E can hold separately assigned optional components.
+Opaque capacity is 116 KiB. Optional A/B monitor-selection compatibility does
+not reserve those physical sectors. No MON, EDU, VERSION provider or SPI SRAM
+is required. Available targets may still contain owner data.
 
-The [unified source guide](docs/UNIFIED_SYSTEM.md) covers optional VX1, ES1,
-read-only MAINT and FLASH development. These are not automatically installed
-by the operator kit. Detailed EDU/RAM/SSRAM/RTCC status belongs to those system
-components. Existing g0034 images require porting before opaque personality use.
+The append-only identity change preserves existing PR05 private addresses,
+worker/vector bytes and hardware vectors. The FI locator at F03C points to a
+bounded identity record. F has 367 usable tail bytes.
+[F_FREEZE.json](F_FREEZE.json) binds its exact bytes and inputs. See the
+[identity contract](docs/F_IDENTITY.md) and [resolved issues](docs/ISSUES_RESOLVED.md).
 
-The future message journal will reserve optional SPI SRAM WORK space only,
-preserving formatted program storage and the separate flash boot journal.
-Journaling, WTOR, login/session policy, map cleanup and BASIC/Forth remain planned.
-No WDC firmware, owner journal, SRAM or RTC/PF captures are distributed.
+F generation 00000001 is a new component counter. The existing SNBT field for
+optional monitor generation stays 8000000F; journal sequence is separate.
+Changing a setting, OS name or RAM catalogue does not change F generation.
+The current toolkit still uses matched PR05 private calls; a general public
+ABI migration is not claimed.
 
-## Source and integrity
+The new `STR8N-F-MAP-RAM.bin` supplies `M 1` grid, `M 2` sector detail and
+`M 3` wear detail. W+ means recognized WDC resident bytes; W? means possible
+WDC; U+ unknown; .. erased; F+ admitted running F. WDC recognition covers
+F800-FFFF only and does not validate the whole bank or prove bootability.
+See [RAM map details](docs/RAM_MAP.md). Load the RAM tool through recovery L.
 
-See [build instructions](docs/BUILD.md). The source is independent of the parent
-STR8-N tree. WDC assembler tools are needed only to rebuild. Prebuilt payloads,
-SHA-256 baselines and existing evidence are included. The runtime kit has its
-own verify_package.py. The source tool tools/verify_system.py checks consistency
-without opening a port, rebuilding or running CPU models. No routine simulation
-or repeat assembly build was performed for this unchanged firmware release.
+Check existing files:
+
+```text
+python tools/verify_base1.py
+python tools/boot_identity.py firmware/payload/STR8N-F-BOOT-4096.bin
+```
+
+For a later RAM catalogue change:
+
+```text
+python tools/build_base1.py --only map --out build/fresh-map-output
+```
+
+Frozen F is copied/hash-checked, not assembled. No routine reproduction build,
+CPU model or device action occurs. See [build policy](docs/BUILD.md).
+
+Six matching payloads are prepared: F, CONFIG, OPAQUE, DEMO, READBACK and MAP.
+The independent NFM1/NFA1 helpers are reused without rebuilding. BASE1 host
+prompts, SHA/size checks and map guards match these files. Checks are static or
+host-only; no target instructions or devices ran.
+
+Hardware acceptance, existing-SNBT F upgrades and generic live F-recovery
+provisioning remain release gates. The WDC command remains explicitly
+unqualified. Published v0.2.0 and previous MIN1/compaction checkpoints are unchanged.
