@@ -98,8 +98,12 @@ STOP: no device opened; no flash written; execution/hardware qualification pendi
   committed snapshots or regressing counters are refused. A separate inspected
   history import/repair is needed.
 - Clean existing SNBT plus identical F is a no-op: retain all settings/history.
-  Reinitialization is refused. An existing-SNBT F upgrade is also refused until
-  its onboard append-before-erase reservation path is implemented.
+  Reinitialization is refused. This factory executor also refuses existing-SNBT
+  F upgrades; it has no onboard append-before-erase reservation operation.
+  A separate source-only NFU1 upgrade now implements that reservation for the
+  known b15 F and an available erased append page; it is not this factory path.
+  See [existing-journal F upgrade](../docs/JOURNAL_F_UPGRADE.md). Hardware acceptance
+  and future kit integration remain pending.
 - New provisioning installs F first if needed, then D and C. The engine erases
   each listed destination, including a blank journal sector. Each attempt is
   reserved in the private host receipt. D's committed snapshot reserves C's

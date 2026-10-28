@@ -37,8 +37,10 @@ Remaining before a complete public migration release:
 1. Hardware acceptance on supported CPUs/USB: physical reset, banner, recovery,
    first-byte Ctrl-C/normal BIN loading, journals, opaque operations and boot,
    and independent preservation/restoration evidence.
-2. Existing-SNBT F upgrade with a durable onboard append reservation. The
-   current factory path refuses this unsupported upgrade and preserves history.
+2. Existing-SNBT F upgrade hardware acceptance. The separate NFU1 source path
+   commits an onboard append reservation before F erase; it supports known b15
+   F and available append space. The factory provisioner still refuses upgrades.
+   See JOURNAL_F_UPGRADE.md; existing kits remain unchanged.
 3. Generic live provisioning after programmer-installed F: source implementation
    is complete in nf_provision_live.py with mandatory pre-helper escrow and
    plan-only default. Hardware acceptance and future kit integration remain
