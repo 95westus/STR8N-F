@@ -1,0 +1,91 @@
+# STR8N-F Serial Console 0.1.0
+
+The Python console is included in the BASE1 candidate kit. It provides an ASCII
+terminal and function-key transfers to recovery's RAM loader. Every shortcut
+also has a button; laptops may require Fn. Console versioning is independent of
+the frozen F version and generation.
+
+Install Python 3.11+ with Tk support, extract the complete candidate ZIP, and run
+these commands from its directory:
+
+```text
+python -m pip install -r requirements-console.txt
+python tools/nf_console.py
+```
+
+On Windows, `py` may replace `python`. On Linux, Tk may require your distribution's
+`python3-tk` package. Tk and a desktop display are required; pyserial 3.5 is the
+only pip dependency. Source is intended for Windows, Linux and macOS; physical
+serial and keyboard acceptance on those platforms remains pending.
+
+Select the board's port and baud rate (default 115200, 8N1), close any terminal
+already using that port, then press F10. You can preselect with
+`python tools/nf_console.py --port COM4 --baud 115200`; this does not connect.
+The console requests DTR/RTS off and no flow control, sends no reset or probe,
+and never connects automatically. USB adapters may still toggle modem lines
+when opened; this needs hardware acceptance with the actual adapter.
+
+| Key | Action |
+| --- | --- |
+| F1 | Show help |
+| F2 | Choose a host RAM BIN |
+| F3 | Send the chosen BIN at an observed `SEND BIN` |
+| F4 | From an observed `REC>`, send L, wait for `SEND BIN`, send chosen BIN |
+| F5 | Load the bundled MAP RAM tool through recovery |
+| F6 | Load the bundled CONFIG RAM tool through recovery |
+| F7 | Load the bundled OPAQUE RAM tool through recovery |
+| F8 | Load the bundled DEMO RAM tool through recovery |
+| F9 | Start/stop an optional private host transcript |
+| F10 | Connect/disconnect |
+| F11 | Clear the local display |
+| F12 | Ctrl-C; cancel before the first payload byte |
+
+For example, enter recovery on the board and wait for `REC>`. If it was already
+waiting before you connected, press Enter once to obtain a fresh prompt. Press
+F5, wait for the RAM tool's prompt, then type `M1` and Enter. Use the running
+tool's Q command to return to recovery before another preset. The console
+requires the observed prompt; it does not guess the board's mode.
+
+To load your own program, use F2 and F4 at `REC>`. Alternatively type L, wait
+for `SEND BIN`, then press F3. BINs must run at $0200 and fit $0200-$64FF
+(1-25344 bytes). The bytes are sent exactly, without header, newline conversion
+or appended terminator, in paced chunks. A leading $03 would cancel the loader
+and is refused. Bundled tools are checked against their manifest before L is
+sent. Known flash components are refused; arbitrary BIN contents cannot be
+automatically proven to be a RAM program. Do not choose a programmer ROM,
+opaque flash image, Intel HEX or S-record file for these shortcuts.
+
+The loader runs the image after roughly three seconds of input idle. The
+console waits for queued output to drain and an additional 3.5 seconds before
+releasing the terminal. Its completion message means host bytes were sent:
+raw L supplies no declared length, CRC or independent board readback. Check
+the expected program prompt. The console does not restore RAM overwritten by
+the loaded program; use the migration workflow when owner-RAM preservation is
+required.
+
+Ctrl-C can cancel before the first payload byte. After that it is literal BIN
+data: the console blocks cancellation/keyboard injection and finishes the file.
+Disconnect/window close is deferred until transfer and idle interval finish.
+A serial failure is reported without retry; a partial image may run after idle,
+so inspect/reset the board before continuing. Do not unplug an active transfer.
+
+Type ASCII in the terminal; Enter sends CR. Ctrl+V pastes paced ASCII text;
+Ctrl+Shift+C copies selected output. F12 and Ctrl+C send Ctrl-C outside an
+active payload. The terminal displays board echo, not local echo, and handles
+plain text rather than ANSI cursor-control screens.
+
+F9 creates a new JSONL transcript with UTC timestamps, exact RX/TX bytes in
+hex, and transfer/status events. It never overwrites a log. These files can
+contain private board data; they are host files, separate from both board
+journals. Logging is off until requested.
+
+Function keys only connect, send terminal input or load RAM tools. They do not
+erase/program flash, save boot settings or run migration automatically.
+CONFIG and OPAQUE can write when you explicitly issue their commands. The
+verbose WDC migrator remains a separate, gated CLI; a migration shortcut is
+deferred until hardware acceptance. Leave board 2205 alone.
+
+Release acceptance must exercise physical keys/buttons, Ctrl-C before payload,
+normal BIN loading, disconnect deferral, and actual adapter timing on an
+authorized board. Current evidence covers host protocol tests and hidden Tk
+widget routing only; no board/CPU execution is claimed.

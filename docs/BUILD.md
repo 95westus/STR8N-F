@@ -22,3 +22,16 @@ only for actual assembly; no installation or publication is automatic.
 Old F/full-system builder paths are retired or redirect to the canonical RAM
 builder. Initial-F mode is already consumed. A future boot defect needs a new,
 reviewed F generation and reference proof, not an override of this lock.
+
+The release kit also carries Serial Console 0.1.0, its pinned pyserial
+requirement and [operator guide](SERIAL_CONSOLE.md). Host-only console changes
+need no assembly. For a changed console, run `python -m unittest tests.test_console`
+and `python tests/console_tk_smoke.py` (Tk display required, fake worker). Record those checks
+separately from firmware qualification; do not rerun unrelated CPU suites.
+Package the existing files once with
+`python tools/package_base1.py --out dist/fresh-candidate-directory`.
+This checks frozen inputs and copies files without rebuilding firmware.
+Inspect the ZIP's console/dependency/guide and MANIFEST hashes. Before public
+release, complete physical console-key, USB timing and loader acceptance on an
+authorized board, alongside the outstanding migration gates. No automatic
+flashing, publication or 2205 access is part of packaging.

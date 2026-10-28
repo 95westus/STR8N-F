@@ -1,4 +1,4 @@
-# STR8N-F 0.3.0 — BASE1 / PR05
+# STR8N-F 0.3.0 â€” BASE1 / PR05
 
 F is now self-identifying and **source/binary frozen**, generation **00000001**.
 This is an unpublished candidate; hardware acceptance is pending. No board was
@@ -42,6 +42,13 @@ The new `STR8N-F-MAP-RAM.bin` supplies `M 1` grid, `M 2` sector detail and
 WDC; U+ unknown; .. erased; F+ admitted running F. WDC recognition covers
 F800-FFFF only and does not validate the whole bank or prove bootability.
 See [RAM map details](docs/RAM_MAP.md). Load the RAM tool through recovery L.
+
+Serial Console 0.1.0 is included for interactive use and function-key RAM
+loading. Install `requirements-console.txt`, then run `python tools/nf_console.py`.
+F2 selects a file, F4 loads it from recovery, and F5-F8 load MAP/CONFIG/OPAQUE/DEMO.
+F10 explicitly connects; nothing opens on startup. See the
+[console guide and full key table](docs/SERIAL_CONSOLE.md). Host checks pass;
+physical serial/keyboard acceptance remains pending. F is unchanged.
 
 Check existing files:
 

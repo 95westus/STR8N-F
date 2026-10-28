@@ -1,5 +1,5 @@
 {
-  "stage": "BASE1 identity frozen; RAM map and matching hosts prepared",
+  "stage": "BASE1 F frozen; serial console and release toolkit prepared",
   "profile": "BASE1",
   "identity": {
     "product": "STR8N-F",
@@ -82,7 +82,7 @@
   "address_proof": "validation/pr05-address-proof.json",
   "independent_helpers_rebuilt": false,
   "remaining": [
-    "Hardware acceptance",
+    "Hardware acceptance including console keys, USB timing and normal/cancelled RAM loading",
     "History-preserving existing-SNBT F upgrade",
     "Generic live F-recovery provisioning",
     "Qualified WDC reset/startup boundary and interrupted-migration repair"
@@ -160,7 +160,7 @@
     "tools/nf_recovery.py": "441e17ed66efc5378098f6a0a557556d783f3642ac88e178a227bc50782677fb",
     "tools/oip.py": "b7ea2a114c83da0861a34db6024657024b2f4a586e8ce3fdb50681906aba4c69",
     "tools/package.py": "567e4a9fdd554099cd071a214ab70884058d0f08c1286cfa5e6ebd7b1a3f4e79",
-    "tools/package_base1.py": "44e1d73fbd88ff91b8e2e1821aabd28d34b0712656064ba611b9fc8b9e466cec",
+    "tools/package_base1.py": "dc1800af9e8250eb9ee4f3c13b6a46369fc5e980019143435782921a1a084c98",
     "tools/package_minimal.py": "b140feb99167dcd610276f13e09e25e90226c2cbe9347671dffea0f80cb128ae",
     "tools/qualify_system.py": "8992aebf6a218b21eeb09e5bbf64b06a8c85264083e83f209031b32156a2e63f",
     "tools/verify.py": "89ba5a0b04b012b27806f03696de5a090f9ebf31ad704cabb87ad1a5f2483107",
@@ -174,7 +174,20 @@
     "migration-host/nf_migrate.py": "df1649f648a35d8592d3be035abf61abe1c53111c128d78512e97c09ed45885f",
     "migration-host/nf_migrate_live.py": "1f718c0f0af93ed12fa1fbfd0a5a0628894e082ceb6d735c6d177429d4a9647f",
     "migration-host/test_nf_migrate.py": "27a5f9890e3a36549092cdf4fab71ba5a37210f941665fd1e58b5ec74084819f",
-    "migration-host/test_nf_migrate_live.py": "334a9536d9a7ecf229c1d5467fd15d80e9aa2135cf7354d3a80c5cfaf2fc7fd8"
+    "migration-host/test_nf_migrate_live.py": "334a9536d9a7ecf229c1d5467fd15d80e9aa2135cf7354d3a80c5cfaf2fc7fd8",
+    "requirements-console.txt": "0b81718d1cbe8a7696e45a9388c9205272b5e345cd79d0cf1ccfb7a9fd1925e9",
+    "tools/nf_console.py": "5305d55735f4a6fe5de4e8ab0e6ae11bb10df2abd580b3db8743b6ab1d5972e0",
+    "tools/console_core.py": "e1046d869b5f74abcc8b9c2eed924f4dd056fb91599de0e23e5ad02a477718bd",
+    "tests/test_console.py": "58ddaba49964abfd2b687fd69e47be5db33ae97b74b5dce67494470d5167c20f",
+    "tests/console_tk_smoke.py": "2c6ff55f2c8a41cdbc66218d1668f3eaccb3729857b3cd86b57fb933b753423e"
   },
-  "canonical_text": "LF; source hashes survive Git normalization"
+  "canonical_text": "LF; source hashes survive Git normalization",
+  "host_console": {
+    "version": "0.1.0",
+    "checks": "validation/console-host-checks.json",
+    "host_tests_passed": 19,
+    "hidden_Tk_smoke_passed": true,
+    "hardware_qualified": false,
+    "firmware_rebuilds": 0
+  }
 }

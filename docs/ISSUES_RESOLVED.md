@@ -23,6 +23,13 @@ Resolved in this checkpoint:
 - Reused independent NFM1/NFA1 helpers without rebuilding. Older exact-F-bound
   optional payloads remain reference-only, not matching BASE1 binaries.
 
+Serial Console 0.1.0 now supplies file selection, prompt-gated RAM loading,
+MAP/CONFIG/OPAQUE/DEMO presets, explicit connection and optional host logging.
+One I/O owner keeps terminal input out of a BIN. Ctrl-C is limited to before
+payload, and disconnect waits for serial drain/idle. The console, requirements
+and operator guide are included by the candidate packager. Host/Tk checks do
+not qualify physical function keys or USB serial behavior.
+
 Remaining before a complete public migration release:
 
 1. Hardware acceptance on supported CPUs/USB: physical reset, banner, recovery,

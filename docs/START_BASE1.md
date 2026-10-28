@@ -1,7 +1,19 @@
-# STR8N-F 0.3.0 — BASE1 / PR05
+# STR8N-F 0.3.0 â€” BASE1 / PR05
 
 F generation 00000001 is source/binary frozen. This toolkit is an unpublished
 candidate with hardware acceptance pending. No board was modified to prepare it.
+
+The kit includes a Python serial console with function-key file sending:
+
+```text
+python -m pip install -r requirements-console.txt
+python tools/nf_console.py
+```
+
+F10 connects to the selected port. At REC>, F2 chooses a RAM BIN and F4 sends
+it after SEND BIN; F5-F8 load MAP, CONFIG, OPAQUE and DEMO directly. Each has
+a button. See the [console guide](docs/SERIAL_CONSOLE.md) for all keys,
+Ctrl-C rules and the pending hardware acceptance checks.
 
 Startup prints:
 

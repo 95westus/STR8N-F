@@ -41,6 +41,8 @@ def package(out):
     for rel in ('LICENSE','layout.json','release.json','checkpoint.json','identity.json','F_FREEZE.json',
                 'docs/MINIMAL_RELEASE.md','docs/OPAQUE_HOST.md','docs/RECOVERY_BASE1.md',
                 'docs/F_IDENTITY.md','docs/ISSUES_RESOLVED.md','docs/RAM_MAP.md',
+                'docs/SERIAL_CONSOLE.md','requirements-console.txt',
+                'tools/nf_console.py','tools/console_core.py','validation/console-host-checks.json',
                 'firmware/minimal-manifest.json','migration-host/README.md',
                 'migration-host/nf_migrate.py','migration-host/nf_migrate_live.py',
                 'tools/nf_opaque.py','tools/nf_recovery.py','tools/oip.py','tools/boot_identity.py',
@@ -58,7 +60,7 @@ def package(out):
            for p in sorted(kit.rglob('*')) if p.is_file()}
     manifest=dict(project='STR8N-F',profile='BASE1',status='unpublished-candidate',
                   execution_qualified=False,hardware_qualified=False,F_bytes=4096,
-                  F_sha256=sha(f),files=files)
+                  F_sha256=sha(f),host_console_version='0.1.0',files=files)
     (kit/'MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     zip_path=out/'STR8N-F-BASE1-candidate.zip'
     with zipfile.ZipFile(zip_path,'x',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
