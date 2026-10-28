@@ -1,5 +1,5 @@
 {
-  "stage": "BASE1 F frozen; serial console and release toolkit prepared",
+  "stage": "BASE1 kit includes preserving 2512/b15 console result; BASE1 and migration acceptance open",
   "profile": "BASE1",
   "identity": {
     "product": "STR8N-F",
@@ -28,7 +28,7 @@
   "OS_status_in_F": false,
   "WDC_recognition_in_F": false,
   "CPU_simulations": 0,
-  "hardware_access": false,
+  "hardware_access": true,
   "boards_modified": [],
   "board_2205_touched": false,
   "published": false,
@@ -82,10 +82,11 @@
   "address_proof": "validation/pr05-address-proof.json",
   "independent_helpers_rebuilt": false,
   "remaining": [
-    "Hardware acceptance including console keys, USB timing and normal/cancelled RAM loading",
-    "History-preserving existing-SNBT F upgrade",
-    "Generic live F-recovery provisioning",
-    "Qualified WDC reset/startup boundary and interrupted-migration repair"
+    "Frozen BASE1 hardware acceptance on supported CPUs/adapters",
+    "End-to-end WDC migration/reset and interrupted-migration repair qualification",
+    "Generic live provisioning after programmer-installed F",
+    "History-preserving existing-SNBT F upgrade: implement or explicitly exclude",
+    "Native console key/button/dialog and disconnect/timing acceptance"
   ],
   "sources": {
     "src/core/app-fixed-symbols.inc": "8bfcd87e9f7bc98cedeb2999b770624b5536bb06060b31923a1fd9b78387ab0c",
@@ -160,7 +161,7 @@
     "tools/nf_recovery.py": "441e17ed66efc5378098f6a0a557556d783f3642ac88e178a227bc50782677fb",
     "tools/oip.py": "b7ea2a114c83da0861a34db6024657024b2f4a586e8ce3fdb50681906aba4c69",
     "tools/package.py": "567e4a9fdd554099cd071a214ab70884058d0f08c1286cfa5e6ebd7b1a3f4e79",
-    "tools/package_base1.py": "dc1800af9e8250eb9ee4f3c13b6a46369fc5e980019143435782921a1a084c98",
+    "tools/package_base1.py": "171338a314235a85f0c90a2c43e84851d4ee4568b4eea15f27fa235d4d79876c",
     "tools/package_minimal.py": "b140feb99167dcd610276f13e09e25e90226c2cbe9347671dffea0f80cb128ae",
     "tools/qualify_system.py": "8992aebf6a218b21eeb09e5bbf64b06a8c85264083e83f209031b32156a2e63f",
     "tools/verify.py": "89ba5a0b04b012b27806f03696de5a090f9ebf31ad704cabb87ad1a5f2483107",
@@ -192,6 +193,14 @@
     "serial_trial": "validation/console-2512-hardware.json",
     "b15_serial_trial_passed": true,
     "physical_keypresses_verified": false,
-    "BASE1_firmware_qualified": false
-  }
+    "BASE1_firmware_qualified": false,
+    "evidence_in_candidate_kit": true
+  },
+  "candidate_checkpoint": "base1-2512-results-r1",
+  "release_checklist": "docs/RELEASE_STATUS.md",
+  "boards_accessed": [
+    "2512"
+  ],
+  "flash_written": false,
+  "hardware_access_scope": "Legacy b15 serial-console trial only; frozen BASE1 firmware not installed or qualified"
 }

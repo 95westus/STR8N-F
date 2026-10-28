@@ -2,7 +2,9 @@
 
 F is now self-identifying and **source/binary frozen**, generation **00000001**.
 This is an unpublished candidate; hardware acceptance is pending. No board was
-accessed or flashed, and 2205 remains an untouched read-only reference.
+flashed. The console was tested on existing b15 on 2512 with preservation;
+2205 remains untouched. See the [release checklist](docs/RELEASE_STATUS.md) and
+[sanitized test receipt](validation/console-2512-hardware.json).
 
 Startup now prints:
 

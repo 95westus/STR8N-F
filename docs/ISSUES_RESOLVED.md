@@ -27,8 +27,10 @@ Serial Console 0.1.0 now supplies file selection, prompt-gated RAM loading,
 MAP/CONFIG/OPAQUE/DEMO presets, explicit connection and optional host logging.
 One I/O owner keeps terminal input out of a BIN. Ctrl-C is limited to before
 payload, and disconnect waits for serial drain/idle. The console, requirements
-and operator guide are included by the candidate packager. Host/Tk checks do
-not qualify physical function keys or USB serial behavior.
+and operator guide are included by the candidate packager. The preserving 2512
+b15 serial trial passed, including cancellation and normal loading. Its receipt
+is included in the kit and bound to the tested console hashes. Native physical
+keys/dialogs and matching BASE1 hardware acceptance remain pending.
 
 Remaining before a complete public migration release:
 
@@ -42,5 +44,7 @@ Remaining before a complete public migration release:
 4. Qualified vendor-startup/peripheral behavior across the WDC reset boundary
    and an explicitly admitted interrupted-migration recovery procedure.
 
-No board was accessed for this checkpoint. 2205 remains read-only. Host tests
-and source freeze do not mark these remaining items complete.
+The [release checklist](RELEASE_STATUS.md) details scope and acceptance gates.
+2512 was accessed only for the preserving b15 console trial; no flash changed.
+2205 was not accessed. Host checks, legacy b15 results and source freeze do not
+mark BASE1 or migration hardware acceptance complete.

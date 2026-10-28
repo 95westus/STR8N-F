@@ -7,7 +7,7 @@
   "firmware_lineage": "STR8N-F 0.3.0 / F g00000001 / BASE1 / PR05",
   "repository": "https://github.com/95westus/STR8N-F",
   "hardware_flashed_for_this_release": false,
-  "release_scope": "Frozen BASE1 F and RAM toolkit plus Python serial console; hardware acceptance pending",
+  "release_scope": "Frozen BASE1 toolkit and Python console with preserving 2512/b15 serial result; BASE1 and migration hardware acceptance pending",
   "assembly_builds_for_this_release": 1,
   "CPU_simulations_for_this_release": 0,
   "main_asset": null,
@@ -23,5 +23,10 @@
     "passed": true,
     "scope": "Real serial and Tk key bindings with matched b15 RAM tools",
     "BASE1_firmware_qualified": false
-  }
+  },
+  "candidate_checkpoint": "base1-2512-results-r1",
+  "release_checklist": "docs/RELEASE_STATUS.md",
+  "included_hardware_evidence": [
+    "validation/console-2512-hardware.json"
+  ]
 }

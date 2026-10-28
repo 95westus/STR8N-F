@@ -1,7 +1,13 @@
 # STR8N-F 0.3.0 — BASE1 / PR05
 
 F generation 00000001 is source/binary frozen. This toolkit is an unpublished
-candidate with hardware acceptance pending. No board was modified to prepare it.
+candidate with hardware acceptance pending. No flash was changed for this checkpoint.
+
+The [release checklist](docs/RELEASE_STATUS.md) separates completed checks from
+open gates. The included [2512 test receipt](validation/console-2512-hardware.json)
+records a passing console trial on existing b15: Ctrl-C at SEND BIN, normal BIN
+loading, Tk function-key bindings and verified flash/RAM preservation. BASE1
+firmware and native keyboard/dialog acceptance remain pending. No 2205 access.
 
 The kit includes a Python serial console with function-key file sending:
 

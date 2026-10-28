@@ -30,6 +30,11 @@ def package(out):
         assert (ROOT/'firmware/payload'/name).stat().st_size==info['bytes']
     f=ROOT/'firmware/payload/STR8N-F-BOOT-4096.bin'
     assert f.stat().st_size==4096 and sha(f)==fw['F_sha256']
+    trial_path='validation/console-2512-hardware.json'
+    trial=json.loads((ROOT/trial_path).read_text(encoding='utf-8'))
+    assert trial['passed'] and trial['no_flashing'] and not trial['BASE1_firmware_qualified']
+    for rel,digest in trial['tested_files'].items():
+        assert sha(ROOT/rel)==digest,'2512 evidence no longer matches '+rel
     out.mkdir(parents=True)
     kit=out/'STR8N-F-BASE1-candidate'
     kit.mkdir()
@@ -40,16 +45,17 @@ def package(out):
     shutil.copyfile(ROOT/'docs/START_BASE1.md',kit/'README.md')
     for rel in ('LICENSE','layout.json','release.json','checkpoint.json','identity.json','F_FREEZE.json',
                 'docs/MINIMAL_RELEASE.md','docs/OPAQUE_HOST.md','docs/RECOVERY_BASE1.md',
-                'docs/F_IDENTITY.md','docs/ISSUES_RESOLVED.md','docs/RAM_MAP.md',
+                'docs/F_IDENTITY.md','docs/ISSUES_RESOLVED.md','docs/RELEASE_STATUS.md','docs/RAM_MAP.md',
                 'docs/SERIAL_CONSOLE.md','requirements-console.txt',
                 'tools/nf_console.py','tools/console_core.py','validation/console-host-checks.json',
+                trial_path,
                 'firmware/minimal-manifest.json','migration-host/README.md',
                 'migration-host/nf_migrate.py','migration-host/nf_migrate_live.py',
                 'tools/nf_opaque.py','tools/nf_recovery.py','tools/oip.py','tools/boot_identity.py',
                 'tools/map_catalog.py','tools/verify_base1.py','migrator/PROTOCOL.md'):
         dest=kit/rel;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/rel,dest)
         if rel=='migration-host/README.md':
-            text=dest.read_text().replace('../migrator/payload/','../migrator/')
+            text=dest.read_text(encoding='utf-8').replace('../migrator/payload/','../migrator/')
             dest.write_text(text,encoding='utf-8',newline='\n')
     for folder,name,dest in ((engine,'template.bin','migrator/template.bin'),
                              (engine,'engine-manifest.json','migrator/engine-manifest.json'),
@@ -60,7 +66,10 @@ def package(out):
            for p in sorted(kit.rglob('*')) if p.is_file()}
     manifest=dict(project='STR8N-F',profile='BASE1',status='unpublished-candidate',
                   execution_qualified=False,hardware_qualified=False,F_bytes=4096,
-                  F_sha256=sha(f),host_console_version='0.1.0',files=files)
+                  F_sha256=sha(f),host_console_version='0.1.0',
+                  console_serial_trial=dict(board='2512',existing_firmware='b15',passed=True,
+                      evidence=trial_path,physical_keypresses_verified=False,
+                      BASE1_firmware_qualified=False),files=files)
     (kit/'MANIFEST.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     zip_path=out/'STR8N-F-BASE1-candidate.zip'
     with zipfile.ZipFile(zip_path,'x',zipfile.ZIP_DEFLATED,compresslevel=9) as z:

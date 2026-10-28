@@ -31,7 +31,10 @@ separately from firmware qualification; do not rerun unrelated CPU suites.
 Package the existing files once with
 `python tools/package_base1.py --out dist/fresh-candidate-directory`.
 This checks frozen inputs and copies files without rebuilding firmware.
-Inspect the ZIP's console/dependency/guide and MANIFEST hashes. Before public
+The kit includes the sanitized 2512/b15 receipt and release checklist. Packaging
+refuses a receipt whose tested console hashes no longer match; raw captures and
+backups are never included. Inspect the ZIP's console/dependency/guide, evidence
+and MANIFEST hashes. Before public
 release, complete physical console-key, USB timing and loader acceptance on an
 authorized board, alongside the outstanding migration gates. No automatic
 flashing, publication or 2205 access is part of packaging.
