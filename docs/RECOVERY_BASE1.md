@@ -29,8 +29,11 @@ restoration verified. A timeout, CRC or byte mismatch stops without retries.
 
 Loading a RAM tool borrows application RAM. Original escrow must precede the
 first helper upload; a dump taken afterward cannot recover the overwritten
-prefix. The programmer-installed F route needs an explicit disposable-RAM or
-pre-existing-escrow procedure before it can make any preservation claim.
+prefix. The implemented [live C/D route](LIVE_CD_PROVISIONING.md) requires
+explicit original pre-helper escrow, binds it to the selected USB/CPU, saves
+it durably before loading, and restores/verifies it at completion. No implicit
+disposable-RAM path is supplied. This source command remains unqualified and
+has not been added to the existing release kit.
 
 Current evidence: source/build inspection and fake-stream host tests. No CPU
 model or physical device has qualified the new BASE1 service or its integration.

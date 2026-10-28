@@ -39,8 +39,10 @@ Remaining before a complete public migration release:
    and independent preservation/restoration evidence.
 2. Existing-SNBT F upgrade with a durable onboard append reservation. The
    current factory path refuses this unsupported upgrade and preserves history.
-3. Generic live provisioning after programmer-installed F. Per-run plan/engine
-   and recovery wrapper exist; the live WDC command is not this route.
+3. Generic live provisioning after programmer-installed F: source implementation
+   is complete in nf_provision_live.py with mandatory pre-helper escrow and
+   plan-only default. Hardware acceptance and future kit integration remain
+   pending; the existing kit was deliberately left unchanged.
 4. Qualified vendor-startup/peripheral behavior across the WDC reset boundary
    and an explicitly admitted interrupted-migration recovery procedure.
 

@@ -207,7 +207,11 @@ The separate `capture` command stops back at WDC with original RAM **still
 escrowed and unrestored**. Separate `execute` accepts a rendered private WDC
 plan and requires matching READBACK. `migrate` combines capture, preparation,
 execution and the completion callback. Existing-SNBT F upgrades and generic
-live F-recovery provisioning remain outside this WDC CLI.
+live F-recovery provisioning remain outside this WDC CLI. The latter is now
+implemented separately in `nf_provision_live.py`; see
+[live C/D provisioning](../docs/LIVE_CD_PROVISIONING.md). It requires original
+pre-helper RAM escrow and defaults to capture/plan/verify/restore without flash
+writes. Hardware qualification and integration into a future kit remain pending.
 
 `recovery_callback(...)` and `execute_wdc(...)` also accept the already owned
 link and retain its private serial trace. No imported module opens a port.

@@ -31,11 +31,12 @@ BASE1 firmware. Raw serial logs, RAM and vendor/owner images remain private.
 | --- | --- | --- |
 | Frozen BASE1 hardware acceptance | Physical reset/startup identity, supported CPU modes and adapters, recovery cancellation/normal load, matched MAP/CONFIG/OPAQUE/READBACK, boot-default persistence, opaque boot/return, journal/wear behavior and independent preservation checks | Blocks qualifying the BASE1 firmware/toolkit, including the programmer-only 4K distribution |
 | WDC RAM migration acceptance | Real end-to-end verbose migration, physical reset boundaries, vendor startup/peripheral effects, final independent flash/RAM/ZP verification, and a documented/admitted interrupted-migration repair procedure | Blocks the promised public WDC-to-STR8N RAM migrator |
-| Generic provisioning after programmer-installed F | Wire the existing plan/engine/recovery pieces into a supported live workflow for C/D; qualify it on hardware | Blocks claiming a complete fresh-board setup through the 4K programmer route; F alone does not provision occupied vendor C/D |
+| Generic provisioning after programmer-installed F | Source implementation now complete in nf_provision_live.py; original-escrow procedure and focused host checks added. Hardware acceptance and future kit integration remain pending | F alone does not provision occupied vendor C/D; existing kit intentionally unchanged |
 | Existing-SNBT F upgrade | Implement durable onboard append-before-erase reservation and qualify history-preserving upgrade | Current factory path deliberately refuses it; must be implemented or explicitly excluded from the first release |
 | Console operator acceptance | Native physical F-key/button/file/help-dialog checks, disconnect deferral and supported host/adapter timing with matching BASE1 tools | Still pending; the b15 serial trial closes only its stated subset |
 
-The two absent live paths are implementation work, not extra simulations.
+The existing-SNBT F upgrade remains implementation work. Live C/D provisioning
+is implemented in source; see [its procedure](LIVE_CD_PROVISIONING.md).
 The other gates require authorized hardware work. The current no-flashing
 instruction leaves those hardware gates open. Board 2205 remains outside all
 release work.
