@@ -16,5 +16,12 @@
   "F_frozen": true,
   "F_generation": "00000001",
   "SNBT_monitor_generation": "8000000F",
-  "host_console_version": "0.1.0"
+  "host_console_version": "0.1.0",
+  "host_console_serial_trial": {
+    "board": "2512",
+    "existing_firmware": "b15",
+    "passed": true,
+    "scope": "Real serial and Tk key bindings with matched b15 RAM tools",
+    "BASE1_firmware_qualified": false
+  }
 }

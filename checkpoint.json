@@ -188,6 +188,10 @@
     "host_tests_passed": 19,
     "hidden_Tk_smoke_passed": true,
     "hardware_qualified": false,
-    "firmware_rebuilds": 0
+    "firmware_rebuilds": 0,
+    "serial_trial": "validation/console-2512-hardware.json",
+    "b15_serial_trial_passed": true,
+    "physical_keypresses_verified": false,
+    "BASE1_firmware_qualified": false
   }
 }

@@ -47,8 +47,9 @@ Serial Console 0.1.0 is included for interactive use and function-key RAM
 loading. Install `requirements-console.txt`, then run `python tools/nf_console.py`.
 F2 selects a file, F4 loads it from recovery, and F5-F8 load MAP/CONFIG/OPAQUE/DEMO.
 F10 explicitly connects; nothing opens on startup. See the
-[console guide and full key table](docs/SERIAL_CONSOLE.md). Host checks pass;
-physical serial/keyboard acceptance remains pending. F is unchanged.
+[console guide and full key table](docs/SERIAL_CONSOLE.md). Host checks and a
+preserving 2512/b15 serial trial pass. Native key/dialog checks and BASE1
+hardware acceptance remain pending. F is unchanged.
 
 Check existing files:
 

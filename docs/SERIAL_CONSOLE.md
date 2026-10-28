@@ -87,5 +87,16 @@ deferred until hardware acceptance. Leave board 2205 alone.
 
 Release acceptance must exercise physical keys/buttons, Ctrl-C before payload,
 normal BIN loading, disconnect deferral, and actual adapter timing on an
-authorized board. Current evidence covers host protocol tests and hidden Tk
-widget routing only; no board/CPU execution is claimed.
+authorized board. The 2512 checkpoint on October 28, 2026 exercised the released console over
+real COM4 serial with the existing b15 F and matching prebuilt b15 RAM tools.
+All F1-F12 bindings were exercised using Tk-generated key events; native
+file/help dialogs used deterministic test substitutes. Ctrl-C at SEND BIN,
+F3/F4 normal loading, demo calculation/input and independent code readback
+passed. F5 loaded the matched b15 MAINT tool under the MAP preset filename;
+F6-F8 loaded matching CONFIG, OPAQUE and DEMO. No settings or flash writes
+were issued. All four flash banks matched, owner RAM $0200-$66FF and ZP
+$00-$DF matched after restoration, and MON B/COM4 were returned/released.
+The harness was corrected after mistakenly waiting twice for SEND BIN on
+manual F3; the demo had already loaded and run normally. Raw captures and
+backups remain private. Native key presses/dialogs and BASE1 firmware on
+hardware remain pending; this does not qualify the complete BASE1 release.
