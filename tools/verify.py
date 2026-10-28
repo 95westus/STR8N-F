@@ -7,7 +7,7 @@ from oip import allowed,crc,header
 ROOT=Path(__file__).resolve().parents[1]
 sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
 read=lambda path:json.loads(path.read_text(encoding='utf-8'))
-PUBLIC_FILES=('.gitignore','.gitattributes','README.md','LICENSE','CHANGELOG.md','ORIGIN.json','baseline.json','release.json')
+PUBLIC_FILES=('.gitignore','.gitattributes','README.md','LICENSE','CHANGELOG.md','ORIGIN.json','baseline.json','release.json','profiles.json','system-baseline.json')
 PUBLIC_DIRS=('src','tools','tests','docs','firmware','validation','.github')
 
 

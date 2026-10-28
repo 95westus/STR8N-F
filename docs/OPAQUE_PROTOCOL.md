@@ -35,4 +35,9 @@ python tools/oip.py replace --bank 1 --sector 9000 --before before.bin --image a
 
 The output includes `header.bin`, a manifest and, for replace, `payload.bin`. Header/payload are deliberately separate files. A new output directory is required. Both the helper and device reject protected B3:A/B/C/D/F targets. B0 is allowed by the protocol, so an owner WDC backup in B0 must be preserved by choosing another target.
 
-The preview lacks a general live transfer client, admission/escrow workflow and full-bank readback comparison utility. Use these files for offline inspection/protocol development until that host workflow passes the release gates.
+The 0.2.0 helper prepares packets; it is not an automatic live installer.
+Use the explicit paced procedure above with independent preimage/payload
+verification and binary capture for reads. The matching
+[READBACK RAM service](READBACK.md) exports complete banks with CRC. Preserve
+owner RAM before loading tools. A general automated admission/escrow/transfer
+client remains future work.
