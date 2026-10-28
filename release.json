@@ -1,0 +1,10 @@
+{
+  "project": "STR8N-F",
+  "version": "0.1.0-preview.1",
+  "tag": "v0.1.0-preview.1",
+  "prerelease": true,
+  "status": "source-preview",
+  "firmware_lineage": "b15 / PR04 / 8000000F",
+  "repository": "https://github.com/95westus/STR8N-F",
+  "hardware_flashed_for_this_extraction": false
+}
