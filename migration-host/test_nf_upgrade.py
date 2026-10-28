@@ -1,5 +1,7 @@
 """Focused upgrade serialization and transport ordering; no CPU/flash model."""
 import json
+import contextlib
+import io
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
@@ -124,6 +126,21 @@ class Upgrade(unittest.TestCase):
             state=planning.read_json(run/'result.json')
             self.assertTrue(state['journal_may_have_changed'] and state['owner_RAM_restore_required'])
             self.assertFalse(state['F_may_have_changed'] or state['passed'])
+    def test_archived_reference_plan_is_refused_before_any_device_or_output(self):
+        with temporary_directory() as tmp:
+            root=Path(tmp);self.plan(root)
+            path=root/'capture/capture.json';meta=planning.read_json(path);meta['reference_only']=True
+            path.write_bytes(planning.encoded(meta))
+            plan_root=root/'reference-plan'
+            upgrade.prepare(root/'capture',plan_root,cpu='65c02',target_file=root/'F.bin')
+            with self.assertRaisesRegex(ValueError,'reference-only plan cannot execute'):
+                upgrade.execute(SimpleNamespace(),plan_root,root/'run',allow_unqualified=True)
+            self.assertFalse((root/'run').exists())
+            argv=['nf_upgrade.py','execute','--plan',str(plan_root),'--out',str(root/'run'),
+                  '--port','COM4','--execute','--allow-unqualified']
+            with patch('sys.argv',argv),patch.object(upgrade.recovery_transport,'RecoveryLink') as factory,contextlib.redirect_stderr(io.StringIO()):
+                with self.assertRaises(SystemExit):upgrade.main()
+            factory.assert_not_called()
 
 
 class Link:

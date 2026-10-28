@@ -120,6 +120,8 @@ def inspect(root):
 def execute(link,plan_root,run_root,*,allow_unqualified=False,reset_wait=60,message=print,pace=live.time.sleep):
     planning.require(allow_unqualified,'Explicit --allow-unqualified required')
     plan_root,run_root=Path(plan_root),Path(run_root);plan=inspect(plan_root)
+    planning.require(not plan['source_identity'].get('reference_only'),
+                     'Archived reference-only plan cannot execute; fresh double-read capture required')
     planning.require(not plan['transaction']['completed_noop'],'No upgrade planned; no device needed')
     readback=(ROOT/'firmware/payload/STR8N-F-READBACK-RAM.bin').read_bytes()
     planning.require(len(readback)==3078 and planning.sha(readback)==live.READBACK_SHA256,
@@ -194,6 +196,8 @@ def main():
             result=inspect(args.plan)
             if args.command=='execute':
                 planning.require(args.allow_unqualified and args.execute,'--execute and --allow-unqualified required; no port opened')
+                planning.require(not result['source_identity'].get('reference_only'),
+                    'Archived reference-only plan cannot execute; fresh double-read capture required')
                 if result['transaction']['completed_noop']:
                     print('NO-OP PLAN: target F already matches; no device opened.');return
                 planning.require(planning.sha((ROOT/'firmware/payload/STR8N-F-READBACK-RAM.bin').read_bytes())

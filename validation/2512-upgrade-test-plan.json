@@ -1,0 +1,42 @@
+{
+  "board": "2512",
+  "status": "prepared-review-only",
+  "execution_authorized": false,
+  "live_capture_performed": false,
+  "archival_reference_admissible": true,
+  "archived_plan_execution_refused_before_IO": true,
+  "expected_reference_append": "D300",
+  "expected_reference_commit": "D3FF",
+  "expected_reference_sequence_before": 951,
+  "expected_reference_sequence_after": 952,
+  "expected_F_count_before": 21,
+  "expected_F_count_reserved": 22,
+  "C_D_erases_planned": 0,
+  "boot_default_preserved": "B",
+  "required_final_prompt": "REC>",
+  "fresh_dual_capture_required": true,
+  "host_followup_checks_passed": 1,
+  "check": "Archived reference-only plan rejected by CLI/API before port/output creation",
+  "F_frozen": true,
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "NFU1_sha256": "137a73923af1661a6af03d8dc9351e1b1f650f4c6e3381669ae3cf020f8c6b62",
+  "firmware_builds": 0,
+  "CPU_simulations": 0,
+  "serial_ports_opened": 0,
+  "board_2205_accessed": false,
+  "release_kit_updated": false,
+  "existing_kit_assets_verified_unchanged": true,
+  "reference_review_sha256": "89f09ed97ed7e3e4e5b3efc12f0f255de73f755089fc04154eb589845eb30940",
+  "files": {
+    "docs/2512_UPGRADE_BASE1_TEST_PLAN.md": "19e7e088f189f2ebfb0873802385e646fd0607d60ce26eb2757e325f5affdcfb",
+    "docs/JOURNAL_F_UPGRADE.md": "35af105d11afc8cfbe783df843fe380906060e6a665639fc73e1503678d4da82",
+    "migration-host/nf_upgrade.py": "2e3462d637741efdacb596ed56cba7fe509504e0722acf12ad0452ca46cddce5",
+    "migration-host/test_nf_upgrade.py": "442bffc9e6156bbd83ea5fdcede138545e6ee1bbd34761f15327c39a1c0b03aa"
+  },
+  "separate_scope_required": [
+    "CONFIG persistence/opaque programming and boot with approved scratch target and wear delta",
+    "Power-cut/partial-F repair qualification",
+    "Native 65C816 and remaining platform coverage",
+    "WDC migrator acceptance"
+  ]
+}

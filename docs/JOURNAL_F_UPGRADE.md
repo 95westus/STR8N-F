@@ -11,6 +11,12 @@ WDC migration acceptance. Current no-flashing instructions leave the actual
 hardware steps pending. This source work does not update any release kit.
 Board 2205 remains excluded.
 
+The board-specific [2512 acceptance plan](2512_UPGRADE_BASE1_TEST_PLAN.md)
+defines fresh-capture gates, the archived D300 reference delta and independent
+preservation checks. Archived captures marked `reference_only: true` may be
+prepared/inspected, but the CLI and execution API refuse them before device
+access. A fresh reviewed capture is required for any later authorized run.
+
 ## Supported transaction
 
 The source must contain clean, committed SNBT history and either the exact
