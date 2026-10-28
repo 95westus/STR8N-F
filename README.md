@@ -1,4 +1,4 @@
-# STR8N-F 0.3.0 â€” BASE1 / PR05
+# STR8N-F 0.3.0 — BASE1 / PR05
 
 F is now self-identifying and **source/binary frozen**, generation **00000001**.
 This is an unpublished candidate; hardware acceptance is pending. No board was

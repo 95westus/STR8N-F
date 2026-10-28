@@ -1,4 +1,4 @@
-# STR8N-F 0.3.0 â€” BASE1 / PR05
+# STR8N-F 0.3.0 — BASE1 / PR05
 
 F generation 00000001 is source/binary frozen. This toolkit is an unpublished
 candidate with hardware acceptance pending. No board was modified to prepare it.
