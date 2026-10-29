@@ -346,5 +346,8 @@
     "src/core/ram-maint-ro.asm": "Same-length generic banner and B0/E labels; policies come from the board inventory, not inferred image contents"
   },
   "text_normalization": "Public text uses LF. Original source hashes remain sha256; extracted_sha256 includes LF normalization and declared local edits.",
-  "unification": "One b15 source closure for both CPU/board profiles; optional MON/VX1/ES1/FLASH/MAINT sources; no owner captures or wear data"
+  "unification": "One b15 source closure for both CPU/board profiles; optional MON/VX1/ES1/FLASH/MAINT sources; no owner captures or wear data",
+  "scope": "Historical ancestor extraction; not the current BASE1 file hashes",
+  "current_manifest": "firmware/minimal-manifest.json",
+  "F_freeze": "F_FREEZE.json"
 }

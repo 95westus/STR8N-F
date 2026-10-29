@@ -1,61 +1,55 @@
-# STR8N-F 0.2.0 release scope
+# STR8N-F 0.3.0 — release scope and evidence
 
-An early Boot & Recovery Toolkit release: b15 F, matching CONFIG, OPAQUE,
-DEMO and READBACK RAM tools, optional BASE MON A/B, packet preparation,
-operator instructions and component destinations. The separate source ZIP
-retains the unified source closure and optional system components.
-Package 0.2.0 and F generation 8000000F are different identities.
+Release preparation: **October 28, 2026**. F is **0.3.0 g00000001 / BASE1 /
+PR05**, exactly 4096 frozen bytes. The public ABI is unchanged. **Mona** is
+the planned optional monitor, with no binary included in this release.
 
-## Supported scope
+> 4KB of firmware. One board. Up to four boot environments.
 
-- WDC banked 65C02 and 65C816 emulation runtime, USB/FT245.
-- Reset chooser, saved/default/manual bank entry and B3:F recovery.
-- F-only recovery/raw RAM loading without MONs or a journal.
-- Compatible existing SNBT C/D; blank-only initialization with prior wear unknown.
-- Immediate CONFIG entry/default saves; manual paced OIP1 reads/replacements,
-  preimage checks, durable erase reservation and full sector readback.
-- Explicit external-programmer F-sector provisioning under the installation
-  boundaries. An automatic factory converter is not implied.
+Compatible, user-supplied images run one at a time on shared CPU/RAM/peripherals.
+This describes the bank architecture; hardware qualification is limited to
+the receipts.
 
-B0/B1/B2 are user-owned. Ordinary opaque writes exclude B3:A/B/C/D/F.
-An address admitted by OIP1 does not authorize replacing owner backups or
-optional services. Those remain subject to the actual inventory.
+## Closed 2512 cases
 
-## Evidence for the exact bytes
+| Case | Result and evidence |
+| --- | --- |
+| Known-b15 existing-journal F upgrade | [Passed](2512_BASE1_ACCEPTANCE.md): reservation before F, prior history/settings/images retained |
+| BASE1 identity, reset, recovery and RAM tools | [Passed](2512_BASE1_ACCEPTANCE.md): physical resets, MAP, READBACK, Ctrl-C and normal BIN loading |
+| Python terminal operator acceptance | [Passed](2512_BASE1_ACCEPTANCE.md): native F1-F12, dialogs and real-port disconnect deferral; original RAM restored |
+| CONFIG and opaque install/boot | [Passed](2512_B0_POWERCUT_ACCEPTANCE.md): persistence, RAM/flash writes and boot, original images/policy/RAM restored |
+| WDC RAM migration | [Passed](2512_WDC_MIGRATION_ACCEPTANCE.md): real vendor debugger/archive, public F/D/C conversion, recovery and preservation |
+| Programmer-installed-F C/D entry | [Passed](2512_PROGRAMMER_F_CD_ACCEPTANCE.md): public no-op and declared non-SNBT first journal, four C/D erases, F golden |
+| Interrupted C/D journal cases | [Passed](2512_CD_RECOVERY_ACCEPTANCE.md): six named chip-idle cuts, original rows/settings/images/RAM restored, current counts retained |
+| Interrupted-F runtime gate | [Closed by scope](GOLDEN_F_RECOVERY_SCOPE.md): F assumed golden; no interrupted-F pass claimed |
 
-The [public hardware summary](../validation/hardware-summary.json) identifies
-its artifact hashes and scope. Private original receipts stay with the owner.
+All passes are limited to their receipts. The WDC and programmer-F conversions
+explicitly archived replaced raw history on the host while importing latest
+tracked counts. The 2512 checkpoint is REC>, COM4 released, latest
+sequence 1000, three records, C=52/D=32/F=24; original owner images, settings
+and RAM/ZP verified. The later 2609 ZIP checkpoint is REC>, COM8 released,
+seq1024/11 records and C=78/D=47/F=31, with all ten old rows retained.
+2205 was not accessed; 2604 was excluded from the 2609 trial.
 
-- Exact F was installed on 2512 (65C02) and 2609 (65C816 emulation) over USB.
-  2512 includes initial Ctrl-C and normal BIN reception evidence.
-- CONFIG enable/entry/default/restore was demonstrated on 2512. The b15 CONFIG
-  predecessor saved A, booted it, restored S and booted REC on 2609. The shipped
-  generic CONFIG changes only its same-length banner. The shipped common CONFIG
-  ran on 2512 for inspection and independent executed-RAM checking.
-- OIP1/FLASH writes, no-op/readback and restoration were demonstrated on 2512.
-  No new opaque install on the current 2609 ES1/VX1 profile is claimed.
-  READBACK and owner-RAM restoration ran on the 2512 preservation path.
-- Both CPU models previously exercised core boot/config/OIP. The unified source
-  was independently reproduced before this release. These are inherited results,
-  not newly executed release tests.
+## 0.3.0 package scope
 
-Release checks cover archive membership, SHA-256, source/provenance, component
-addresses, documentation and extracted-package integrity. No board flashing,
-firmware build or CPU/NOR rerun is part of this release. 2205 remains read-only.
+The final operator/source packages correct rc1 docs, update release metadata
+and include the 2609 receipt. Firmware, console, migration hosts and engines
+remain unchanged. The rc1 ZIP stays immutable; its live result belongs to its
+exact hash. A static equivalence check does not claim another hardware trial.
 
-## Limits and deferred work
+| Item | Status |
+| --- | --- |
+| Existing-SNBT upgrade from extracted rc1 | [2609 passed](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md), 65C816 emulation/FT245; terminal core checked, native GUI keys not repeated |
+| Final 0.3.0 package live trial | NOT RUN; unchanged runtime files, new docs/metadata |
+| WDC and programmer-F package routes | NOT RUN from an extraction; reviewed 2512 source/hardware cases passed |
+| Python terminal | Included; native keys/dialogs passed on 2512, core cancellation/load passed on 2609 |
+| Original captures for b15 upgrade | Operator precondition; no standalone automated capture CLI |
+| Mona / expanded service ABI | Planned, outside this release |
+| Other CPU modes/adapters/hosts and occupied layouts | Unqualified |
+| Interrupted F installation, electrical mid-pulse failures, arbitrary damaged history | Outside qualified scope |
 
-Raw L executes after an idle interval without declared length or transfer CRC.
-A local file checksum does not verify device reception. Independent RAM readback
-occurs after execution, not before it. Incomplete transfers must not be treated
-as valid tools.
-
-Physical ACIA acceptance, native 816 applications, physical interrupted-power
-acceptance, a general preserving factory-WDC migrator, owner-history import or
-repair and an automatic live opaque installer remain outside the supplied
-workflow. Healthy F can load repair tools; destroyed F/reset vectors need an
-external recovery mechanism. Stable 1.0 factory acceptance is not claimed.
-
-The SPI WORK message journal, WTOR, login/session features, new maps, personality
-ports and BASIC/Forth selector remain future work. Full-system images do not
-become relocatable opaque applications merely by being stored in a BIN.
+See [release notes](RELEASE_NOTES.md), [installation](INSTALLATION.md),
+[rc1 findings](RC1_KNOWN_ISSUES.md) and [packaging workflow](RELEASE_WORKFLOW.md).
+Normal runtime recovery keeps F golden. Packaging performs no board actions,
+power cuts, firmware builds or CPU simulations. 2205 remains excluded.

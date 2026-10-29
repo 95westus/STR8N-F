@@ -1,5 +1,5 @@
-; First b15 MAINT stage: no flash/config writer or arbitrary execution entry.
-; Matching b15 private bank/line/read bindings; all banked work executes in RAM.
+; BASE1 RAM map/maintenance: read-only image recognition and owner data inspection.
+; Matching PR05 private bindings; no flash/config writer or execution entry.
         MODULE RAM_MAINT_RO_B15
         INCLUDE "str8n-v2-eq.inc"
         INCLUDE "str8n-v2-public.inc"
@@ -822,6 +822,11 @@ MA_MAP:
         BCC MRO_LONG_98
         JMP MA_MAP_READY
 MRO_LONG_98:
+        ; Preserve familiar M1/M2/M3 as well as spaced M 1/2/3.
+        LDX MA_POS
+        LDA STR8V2_LINE,X
+        CMP #' '
+        BNE MRO_LONG_99
         JSR MA_NEED_SPACE
         BCS MRO_LONG_99
         JMP MA_BAD
@@ -884,6 +889,7 @@ MA_USED:
         LDA #'U'
         STA MA_STATUS
 MA_SCAN_DONE:
+        JSR MAP_RECOGNIZE
         JSR MA_HOME
         LDA MA_VIEW
         CMP #1
@@ -899,8 +905,7 @@ MRO_LONG_107:
         JSR MA_SPACE_NAME
 MA_GRID_CELL:
         JSR MA_SPACE
-        LDA MA_STATUS
-        JSR STR8V2_RAM_PUTC
+        JSR MAP_PRINT_CELL
         LDA MA_MS
         CMP #$F0
         BEQ MRO_LONG_108
@@ -918,10 +923,9 @@ MA_MAP_DETAIL:
         LSR A
         LSR A
         LSR A
-        JSR STR8V2_RAM_HEX_NIBBLE
+        JSR MAP_PRINT_NIBBLE
         JSR MA_SPACE
-        LDA MA_STATUS
-        JSR STR8V2_RAM_PUTC
+        JSR MAP_PRINT_CELL
         JSR MA_SPACE
         LDA MA_VIEW
         CMP #3
@@ -933,6 +937,7 @@ MRO_LONG_109:
 MA_MAP_ROLE:
         JSR MA_ROLE
         JSR MA_PRINT
+        JSR MAP_DETAIL
         JSR STR8V2_RAM_NEWLINE
 MA_MAP_NEXT:
         INC MA_MAP_INDEX
@@ -1034,51 +1039,26 @@ MA_MAP_COUNT_VALID:
         JMP STR8V2_RAM_HEX_OUT
 MA_ROLE:
         LDA MA_MB
-        BNE MRO_LONG_116
-        JMP MA_ROLE_BACKUP
-MRO_LONG_116:
         CMP #3
-        BEQ MRO_LONG_117
-        JMP MA_ROLE_OWNER
-MRO_LONG_117:
+        BNE MA_ROLE_OWNER
         LDA MA_MS
-        CMP #$A0
-        BCS MRO_LONG_118
-        JMP MA_ROLE_OWNER
-MRO_LONG_118:
         CMP #$C0
-        BCS MRO_LONG_119
-        JMP MA_ROLE_MON
-MRO_LONG_119:
-        CMP #$E0
-        BCS MRO_LONG_120
-        JMP MA_ROLE_JOURNAL
-MRO_LONG_120:
-        BNE MRO_LONG_121
-        JMP MA_ROLE_VX
-MRO_LONG_121:
-        LDX #<MA_ROLE_F_TEXT
-        LDY #>MA_ROLE_F_TEXT
-        RTS
-MA_ROLE_VX:
-        LDX #<MA_ROLE_VX_TEXT
-        LDY #>MA_ROLE_VX_TEXT
+        BEQ MA_ROLE_JOURNAL
+        CMP #$D0
+        BEQ MA_ROLE_JOURNAL
+        CMP #$F0
+        BEQ MA_ROLE_F
+MA_ROLE_OWNER:
+        LDX #<MA_ROLE_OWNER_TEXT
+        LDY #>MA_ROLE_OWNER_TEXT
         RTS
 MA_ROLE_JOURNAL:
         LDX #<MA_ROLE_JOURNAL_TEXT
         LDY #>MA_ROLE_JOURNAL_TEXT
         RTS
-MA_ROLE_MON:
-        LDX #<MA_ROLE_MON_TEXT
-        LDY #>MA_ROLE_MON_TEXT
-        RTS
-MA_ROLE_BACKUP:
-        LDX #<MA_ROLE_BACKUP_TEXT
-        LDY #>MA_ROLE_BACKUP_TEXT
-        RTS
-MA_ROLE_OWNER:
-        LDX #<MA_ROLE_OWNER_TEXT
-        LDY #>MA_ROLE_OWNER_TEXT
+MA_ROLE_F:
+        LDX #<MA_ROLE_F_TEXT
+        LDY #>MA_ROLE_F_TEXT
         RTS
 
 ; Copy and admit the current snapshot without linking any journal writer.
@@ -1166,7 +1146,7 @@ MRO_LONG_130:
         JMP MA_PRINT_NEXT
 MA_PRINT_DONE:
         RTS
-MA_TITLE: DB "STR8 RAM MAINT / b15 / READ ONLY",13,10,0
+MA_TITLE: DB "STR8N-F MAP 0.3.0 / BASE1 / PR05 / READ ONLY",13,10,0
 MA_PROMPT: DB "MAINT RO> ",0
 MA_HELP_TEXT:
         DB "M [1|2|3] grid / sectors (default) / wear",13,10
@@ -1182,20 +1162,18 @@ MA_BUFFER_TEXT: DB "BUFFER LOADED; D displays; K CRC; no write command",13,10,0
 MA_CRC_TEXT: DB "CRC16=",0
 MA_MATCH_TEXT: DB "MATCH",13,10,0
 MA_DIFFERENT_TEXT: DB "DIFFERENT AT DEST ",0
-MA_GRID_TITLE: DB "BANK 8 9 A B C D E F",13,10,0
-MA_MAP_LEGEND: DB "E=all FF; U=programmed. Roles are policy, not image validation. READ ONLY.",13,10,0
+MA_GRID_TITLE: DB "   8  9  A  B  C  D  E  F",13,10,0
+MA_MAP_LEGEND: DB ".. erased; U+ unknown; W+ known WDC resident; W? possible; F+ running F.",13,10,"WDC marks cover F800-FFFF only, not the whole bank or a tested boot.",13,10,"BASE1: C/D journal, F recovery; all other sectors owner-assigned. READ ONLY.",13,10,0
 MA_SEQUENCE_TEXT: DB "SNBT SEQ=",0
 MA_DEFAULT_TEXT: DB " DEFAULT=",0
 MA_MASK_TEXT: DB " BANKS=",0
 MA_UNKNOWN_TEXT: DB " UNKNOWN=",0
 MA_NO_JOURNAL_TEXT: DB "SNBT unavailable/ambiguous; wear counts unknown",13,10,0
 MA_UNKNOWN_COUNT: DB "??????",0
-MA_ROLE_BACKUP_TEXT: DB "OWNER IMAGE PRESERVE",0
-MA_ROLE_OWNER_TEXT: DB "OWNER/UNCLASSIFIED",0
-MA_ROLE_MON_TEXT: DB "MON-SLOT PROTECTED",0
+MA_ROLE_OWNER_TEXT: DB "OWNER IMAGE SPACE",0
 MA_ROLE_JOURNAL_TEXT: DB "JOURNAL PROTECTED",0
-MA_ROLE_VX_TEXT: DB "OPTIONAL OWNER IMG",0
 MA_ROLE_F_TEXT: DB "BOOT-F PROTECTED",0
+        INCLUDE "map-recognition.inc"
 MA_GUARD_TABLE:
         INCLUDE "maint-ro-ram-guards.inc"
 MA_IMAGE_CRC: DW 0
@@ -1225,6 +1203,14 @@ MA_STATUS: DB 0
 MA_MAP_INDEX: DB 0
 MA_TABLE_INDEX: DB 0
 MA_JVALID: DB 0
+MAP_MARK: DB 0
+MAP_PROFILE: DB 0
+MAP_CPU: DB 0
+MAP_RESET: DW 0
+MAP_NAME: DW 0
+MAP_CATALOG_INDEX: DB 0
+MAP_HASH: DS 4
+MAP_TERM: DS 4
 MA_JOURNAL: DS 256
 MA_END:
         ENDMOD

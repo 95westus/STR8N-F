@@ -1,81 +1,133 @@
-# STR8N-F — Boot & Recovery Toolkit
+# STR8N-F 0.3.0 — BASE1 / PR05
 
-**[Download v0.2.0](https://github.com/95westus/STR8N-F/releases/tag/v0.2.0)**
-for WDC 65C02 and 65C816 emulation-mode boards, using USB/FT245.
+> 4KB of firmware. One board. Up to four boot environments.
 
-STR8N-F boots your own images in B0-B3 and provides recovery from a single
-**4096-byte sector at B3:$F000-$FFFF**. Matching RAM tools configure boot,
-transfer opaque sectors and export data. MON A/B are optional. The bootstrap
-requires no EDU, SPI SRAM, RTC, filesystem or full STR8-N installation.
+Choose among compatible, user-supplied images in four selectable flash banks.
+One environment runs at a time on the same physical CPU, RAM (approximately
+32KB on the supported boards) and peripherals. Applications and operating
+environments are supplied separately; this kit provides boot/recovery tools.
 
-The toolkit ZIP is the operator download. A separate source ZIP contains the
-unified local-source build and optional components. This is an early toolkit
-release, not completed 1.0 factory-migration acceptance. The shipped F remains
-**b15 / PR04 / 8000000F**; package version 0.2.0 does not rename its firmware.
+**[Download 0.3.0](https://github.com/95westus/STR8N-F/releases/tag/v0.3.0)**:
+[4KB F.bin](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/F.bin),
+[operator kit](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-BASE1-0.3.0.zip),
+[source ZIP](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-BASE1-0.3.0-source.zip)
+and [checksums](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/SHA256SUMS.txt).
+Read the [user manual](docs/USER_MANUAL.md) for WDC migration, opaque-image
+installation and saving a bank as the default. The operator kit includes the
+WDC RAM migration programs and Python serial terminal. F.bin and the manual
+are additive release downloads; original ZIPs and the v0.3.0 tag stay intact.
 
-## Start here
+One 4096-byte bootstrap/recovery component selects among those flash banks.
+Hardware qualification is listed below. The raw-L application range is
+$0200-$64FF; preservation tools escrow $0200-$66FF and owner ZP $00-$DF.
 
-- [Quick start](docs/QUICK_START.md): recovery, CONFIG and selecting an image.
-- [Installation](docs/INSTALLATION.md): exact destinations and preservation.
-- [Operator guide](docs/OPERATOR_GUIDE.md): commands and boot records.
-- [Opaque image contract](docs/IMAGE_CONTRACT.md) / [OIP1 transfer](docs/OPAQUE_PROTOCOL.md).
-- [RAM export/restoration](docs/READBACK.md).
-- [Release scope/evidence](docs/RELEASE_STATUS.md) / [Release notes](docs/RELEASE_NOTES.md).
+**STR8N-F 0.3.0 is the scoped 4KB foundation release.** F remains
+**STR8N-F 0.3.0 g00000001 / BASE1 / PR05**, source and binary frozen.
+The reviewed 2512 cases and the [2609 extracted-ZIP existing-SNBT upgrade](docs/2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md)
+passed. The final package retains the same runtime files and corrects rc1
+documentation; it has no additional live trial. Packaged WDC/programmer-F
+provisioning routes remain untested. See [release notes](docs/RELEASE_NOTES.md),
+[rc1 findings](docs/RC1_KNOWN_ISSUES.md),
+[closeout status](docs/RELEASE_STATUS.md) and [ZIP workflow](docs/RELEASE_WORKFLOW.md).
 
-## Operator kit
+## Included
 
-| File | Destination / purpose |
-|---|---|
-| STR8N-F-BOOT-4096.bin | B3:F000-FFFF only; reset, boot choices, recovery and raw RAM loader |
-| STR8N-F-CONFIG-RAM.bin | RAM $0200; inspect settings/wear, enable entries and save a default |
-| STR8N-F-OPAQUE-RAM.bin | RAM $0200; OIP1 read/replace with preimage checks and erase accounting |
-| STR8N-F-DEMO-RAM.bin | RAM $0200; small console/capability demonstration |
-| STR8N-F-READBACK-RAM.bin | RAM $0200; binary export and fixed-range RAM restore |
-| Optional BASE MON A/B | Separate 4 KiB monitor sectors; inspection shells |
+- Exact 4096-byte programmer F BIN, also supplied beside the ZIP.
+- Matching CONFIG, OPAQUE, DEMO, MAP and READBACK RAM BINs.
+- **Python Serial Console 0.1.0**, function-key transfers, pinned pyserial
+  requirement and [terminal guide](docs/SERIAL_CONSOLE.md).
+- Verbose WDC RAM migration, programmer-installed-F C/D provisioning and
+  known-b15 existing-journal F upgrade tools, with prebuilt engines.
+- SHA-256 manifest/checker, installation guides and scoped hardware receipts.
 
-The RAM files are BIN programs, not flash images. At REC>, enter C1, then L,
-then binary-send the selected RAM BIN after SEND BIN. F executes it at $0200
-after approximately three seconds of transfer silence. Initial Ctrl-C cancels.
-Raw L has no declared length or transfer CRC; interrupted transfers can execute
-a partial tool. Preserve owner RAM before loading if needed.
+No assembler is needed to use the kit. Owner/vendor firmware, captured RAM,
+per-board plans and private qualification packets are not supplied.
 
-For an image already installed and verified at B1:$9000, use RAM CONFIG:
+## Start the Python terminal
+
+Install Python 3.11+ with Tk, extract the complete operator ZIP, then run:
 
 ```text
-B 1 9000
-C 1
-B
-Q
+python -m pip install -r requirements-console.txt
+python tools/verify_release_kit.py .
+python tools/nf_console.py
 ```
 
-Each setting command saves immediately. CONFIG selects an image; it does not
-install or validate code. Compatible C/D records are required for saved policy
-and ordinary opaque writes. Missing records do not prevent F recovery. I can
-initialize completely blank C/D only, recording previous wear as unknown.
+Select the port and press **F10** to connect. At an observed REC>, **F2**
+chooses a RAM BIN and **F4** loads it; **F3** sends at an observed SEND BIN.
+**F5-F8** load MAP, CONFIG, OPAQUE and DEMO. **F9** controls a private log;
+**F12/Ctrl-C** cancels before the first BIN byte. Every shortcut has a button.
+The console does not connect or migrate automatically. Disconnect it before
+a migration CLI owns the same port. See [quick start](docs/QUICK_START.md).
 
-## Ownership and optional development
+Raw L runs received RAM after input idle, without a length/CRC guarantee.
+Loading borrows owner RAM; use the migration escrow/restoration procedure
+when preservation is required.
 
-B0, B1 and B2 are user-owned in the N/F profile. It reserves no g0034 source
-arena or full-system utility banks there. Existing contents remain owner data;
-new profiles do not erase them or make a WDC backup expendable. B3:C/D hold
-boot/configuration/wear records, A/B are optional MONs, and F is the bootstrap.
-B3:8/9/E can hold separately assigned optional components.
+## Boot and storage
 
-The [unified source guide](docs/UNIFIED_SYSTEM.md) covers optional VX1, ES1,
-read-only MAINT and FLASH development. These are not automatically installed
-by the operator kit. Detailed EDU/RAM/SSRAM/RTCC status belongs to those system
-components. Existing g0034 images require porting before opaque personality use.
+Startup prints:
 
-The future message journal will reserve optional SPI SRAM WORK space only,
-preserving formatted program storage and the separate flash boot journal.
-Journaling, WTOR, login/session policy, map cleanup and BASIC/Forth remain planned.
-No WDC firmware, owner journal, SRAM or RTC/PF captures are distributed.
+```text
+STR8N-F 0.3.0 g00000001
+BASE1 / PR05
+```
 
-## Source and integrity
+F then offers its chooser and recovery. The running image supplies its own
+OS identity and EDU, RTC, SRAM or other service status. **Mona** is the
+name chosen for a future optional monitor/launcher; [it is planned](docs/MONA.md),
+with no Mona binary or expanded F ABI in this release.
 
-See [build instructions](docs/BUILD.md). The source is independent of the parent
-STR8-N tree. WDC assembler tools are needed only to rebuild. Prebuilt payloads,
-SHA-256 baselines and existing evidence are included. The runtime kit has its
-own verify_package.py. The source tool tools/verify_system.py checks consistency
-without opening a port, rebuilding or running CPU models. No routine simulation
-or repeat assembly build was performed for this unchanged firmware release.
+| Flash region | BASE1 role |
+| --- | --- |
+| B0/B1/B2:8-F | Owner opaque images |
+| B3:8/9/A/B/E | Owner opaque images; A/B monitors are optional occupants |
+| B3:C/D | Persistent boot settings and erase-attempt journal |
+| B3:F | Exactly 4096 bytes of bootstrap/recovery |
+
+Opaque capacity is **116 KiB**. F needs no MON, EDU, provider or SPI SRAM.
+Available addresses may already hold owner data. CONFIG saves enable/entry/
+default; OPAQUE installs admitted image sectors. Installing and choosing a
+default boot are separate operations.
+
+The programmer file is firmware/payload/STR8N-F-BOOT-4096.bin for B3:F only,
+not a whole-chip image. F alone does not convert occupied C/D. Choose the
+route in [installation](docs/INSTALLATION.md):
+
+| Starting state | Route |
+| --- | --- |
+| WDCMONv2, no recognized N-F journal | [WDC migration](migration-host/README.md) |
+| Frozen BASE1 F already installed | [Live C/D provisioning](docs/LIVE_CD_PROVISIONING.md) |
+| Supported b15 F and valid SNBT | [Journal-preserving F upgrade](docs/JOURNAL_F_UPGRADE.md) |
+
+Damaged/conflicting or unsupported history is refused. Prior lifetime remains
+unknown; tracked evidence can carry forward. Zeros do not prove unused flash.
+Normal recovery assumes F stays golden. No hardware action or power-cut
+test is part of this release packaging.
+
+## Qualification boundary
+
+2512 evidence covers BASE1 reset/recovery, native console keys/dialogs, Ctrl-C
+and BIN loading, CONFIG/opaque write-and-boot, reviewed chip-idle C/D recovery,
+WDC migration and programmer-F provisioning. The extracted rc1 existing-SNBT
+upgrade and terminal core checks also passed on 2609/65C816 emulation/FT245.
+Other CPU modes, adapters, occupied
+layouts and electrical interruptions remain unqualified. 2205 stays excluded.
+The explicit --allow-unqualified switch remains for those broader limits.
+
+F generation, toolkit version, console version and journal sequence are
+independent. [F_FREEZE.json](F_FREEZE.json) and the
+[identity contract](docs/F_IDENTITY.md) bind F. Its SHA-256 is
+`8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1`.
+Packaging copied verified existing firmware without rebuilding, simulation,
+board access or publication. The later 2609 upgrade is recorded separately;
+the tested rc1 ZIP remains immutable.
+
+## Source branches
+
+`main` is the integration branch for the current released foundation and
+documentation. The immutable `v0.3.0` tag identifies the released source;
+later documentation commits do not change the download archives. New work
+uses short `codex/...` feature branches and pull requests into `main`.
+Mona and proposed service/ABI extensions are follow-on work. See
+[development policy](docs/DEVELOPMENT.md).

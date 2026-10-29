@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "board": "2512",
+  "console_version": "0.1.0",
+  "completed_utc": "2026-10-28T23:33:40.595835+00:00",
+  "real_serial": true,
+  "function_key_bindings_verified": true,
+  "physical_keypresses_verified": false,
+  "native_dialogs_verified": false,
+  "Ctrl_C_at_SEND_BIN_verified": true,
+  "normal_BIN_execution_and_code_readback_verified": true,
+  "all_flash_bytes_unchanged": true,
+  "boot_settings_and_wear_unchanged": true,
+  "opaque_images_unchanged": true,
+  "owner_RAM_0200_66FF_restored": true,
+  "owner_ZP_00_DF_preserved": true,
+  "final_monitor": "B",
+  "port_released": true,
+  "no_flashing": true,
+  "board_2205_accessed": false,
+  "firmware_builds": 0,
+  "CPU_simulations": 0,
+  "BASE1_firmware_qualified": false,
+  "limits": [
+    "Tk-generated function-key events, not a physical keyboard",
+    "Native file/help dialogs substituted with deterministic local choices",
+    "Existing b15 F and matched b15 tools; BASE1 firmware not installed/qualified"
+  ],
+  "tested_files": {
+    "tools/nf_console.py": "5305d55735f4a6fe5de4e8ab0e6ae11bb10df2abd580b3db8743b6ab1d5972e0",
+    "tools/console_core.py": "e1046d869b5f74abcc8b9c2eed924f4dd056fb91599de0e23e5ad02a477718bd"
+  },
+  "private_report_sha256": "d1e0f9b6443414d86ae017e47482b50a087109a6b83fa641c4231149b954361e",
+  "harness_correction": "Manual F3 had already consumed SEND BIN; payload ran normally; resume from known DEMO input prompt"
+}

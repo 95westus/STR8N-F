@@ -24,6 +24,8 @@ MS_COMMAND:
         BEQ MS_ZP
         CMP #'W'
         BEQ MS_WRITE
+        CMP #'Y'
+        BEQ MS_WRITE_ZP
         CMP #'Q'
         BEQ MS_QUIT
         CMP #'J'
@@ -45,7 +47,7 @@ MS_RAM:
         STZ V2_PTR
         LDA #2
         STA V2_PTR+1
-        LDA #$63
+        LDA #$65
         STA MS_PAGES
         BRA MS_SEND
 MS_ZP:
@@ -102,7 +104,7 @@ MS_SUM:
         BCC MS_LOCK
         JMP MS_MENU
 MS_WRITE:
-        ; Fixed 25344-byte restore. Trailer CRC is verified before success.
+        ; BASE1 fixed 25856-byte owner restore: 0200-66FF. Code stays at 6800.
         JSR J_CRC_INIT
         STZ V2_PTR
         LDA #2
@@ -115,7 +117,7 @@ MS_WRITE_BYTE:
         BNE MS_WRITE_BYTE
         INC V2_PTR+1
         LDA V2_PTR+1
-        CMP #$65
+        CMP #$67
         BNE MS_WRITE_BYTE
         JSR V2W_GETC
         CMP J_CRC
@@ -125,6 +127,38 @@ MS_WRITE_BYTE:
         BNE MS_LOCK
         LDA V2_RX_BAD
         BNE MS_LOCK
+        JMP MS_MENU
+MS_WRITE_ZP:
+        ; Stage/CRC all 224 bytes before restoring owner ZP 00-DF.
+        ; 6700 is reserved journal-frame scratch, outside owner RAM/code.
+        JSR J_CRC_INIT
+        LDX #0
+MS_ZP_RECEIVE:
+        PHX
+        JSR V2W_GETC
+        PLX
+        STA $6700,X
+        PHX
+        JSR J_CRC_BYTE
+        PLX
+        INX
+        CPX #$E0
+        BNE MS_ZP_RECEIVE
+        JSR V2W_GETC
+        CMP J_CRC
+        BNE MS_LOCK
+        JSR V2W_GETC
+        CMP J_CRC+1
+        BNE MS_LOCK
+        LDA V2_RX_BAD
+        BNE MS_LOCK
+        LDX #0
+MS_ZP_RESTORE:
+        LDA $6700,X
+        STA $00,X
+        INX
+        CPX #$E0
+        BNE MS_ZP_RESTORE
         JMP MS_MENU
 MS_BOOT:
         STZ DC_BINARY
@@ -142,5 +176,5 @@ MS_BAD:
         JMP MS_MENU
 MS_LOCK:
         JMP MS_LOCK
-MS_PROMPT: DB "RAM SERVICE> ",0
+MS_PROMPT: DB "RAM SERVICE BASE1> ",0
 MS_END:

@@ -72,7 +72,7 @@ DEMO_PRINT_NEXT:
 DEMO_PRINT_DONE:
         RTS
 DEMO_TITLE:
-        DB "STR8-N b15 F USER DEMO",13,10
+        DB "STR8N-F BASE1 DEMO 0.3.0",13,10
         DB "This program runs in RAM using F only.",13,10
         DB "No journal, monitor or extension is required.",13,10,0
 DEMO_CPU_TEXT: DB "CPU code (02=65C02, 16=65C816): ",0

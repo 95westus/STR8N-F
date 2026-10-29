@@ -1,0 +1,92 @@
+{
+  "B0_9_erased_state_preserved": true,
+  "CONFIG_B_C_W_inspection_passed": true,
+  "CONFIG_or_opaque_writes": 0,
+  "CPU": "65C02",
+  "CPU_simulations": 0,
+  "C_D_sector_erases": 0,
+  "Ctrl_C_at_SEND_BIN_passed": true,
+  "F_count_after": 22,
+  "F_count_before": 21,
+  "F_frozen": true,
+  "F_generation": "00000001",
+  "F_sector_erases": 1,
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "F_version": "0.3.0",
+  "MAP_M1_M2_M3_passed": true,
+  "OPAQUE_menu_Q_passed": true,
+  "WDC_resident_recognized": "B0:F W+; resident F800-FFFF only",
+  "all_actual_post_banks_match_plan": true,
+  "all_other_counters_preserved": true,
+  "all_owner_images_preserved": true,
+  "board": "2512",
+  "board_2205_accessed": false,
+  "default_preserved": "B",
+  "enabled_mask_preserved": "0F",
+  "entries_preserved": [
+    "8000",
+    "8000",
+    "8000",
+    "8000"
+  ],
+  "existing_kit_assets_verified_unchanged": true,
+  "final_prompt": "REC>",
+  "firmware_builds_this_trial": 0,
+  "hardware": true,
+  "journal_append": "D300",
+  "journal_commit": "D3FF",
+  "journal_pages_appended": 1,
+  "limits": [
+    "65C02/FT245/Windows host only; 816 and ACIA not qualified",
+    "CONFIG persistence, opaque programming/boot and power-loss repair excluded",
+    "Legacy b15 MON/FLASH images retained but execution compatibility unqualified",
+    "DEMO independent residual image excludes first three trampoline-overwritten bytes",
+    "Native F-keys/dialogs tested; all button aliases not individually tested",
+    "One FF precedes the initial post-upgrade startup; raw capture retained, cause not established"
+  ],
+  "live_disconnect_deferral_passed": true,
+  "native_F1_F12_passed": true,
+  "native_dialogs_passed": true,
+  "normal_BIN_F3_F4_passed": true,
+  "original_RAM_0200_66FF_restored": true,
+  "original_ZP_00_DF_restored": true,
+  "other_boards_accessed": false,
+  "passed": true,
+  "physical_BASE1_resets_verified": 2,
+  "port": "COM4",
+  "port_released": true,
+  "power_cut_tests": 0,
+  "private_reports_sha256": {
+    "base1-console/live-report.json": "49d56cc83ee8c0b7bdf53b2f091724686c4061eefd6ca9a9a2ea67bc09a53bdb",
+    "disconnect-trial/result.json": "06904cad7dff27df13eddf7d5aa4e8c35ab7c2207e6da4caf9962188cd4fe61c",
+    "repeat-reset/result.json": "9997b31eecf4831222da5c85e79d1cdd639fe8c1e3faaa4ce93699b6df232ebd",
+    "upgrade-byte-audit.json": "62a1ba6f01eef84cbcbff7da9ea95c4c95fb2be2d3d33626037ee986b38e2db5",
+    "upgrade-run/result.json": "b68bf6e045c94aa2ddbb0d06716fbf3b2430d5d4215ae53cc5220c9f41ad1d8a"
+  },
+  "release_kit_updated": false,
+  "remaining": [
+    "Dedicated approved scratch/fixture for CONFIG/opaque writes and boot",
+    "Power/interrupted-F repair qualification",
+    "Supported 816/ACIA and legacy-image compatibility coverage",
+    "Dedicated WDC migrator/provisioning fixture",
+    "Future kit integration/publication when requested"
+  ],
+  "repeat_reset_non_ASCII": [
+    {
+      "offset": 0,
+      "value": 255
+    }
+  ],
+  "retained_prior_records": 19,
+  "scope": "2512 known-b15 journal-preserving F upgrade and preserving BASE1/PR05 acceptance",
+  "sequence_after": 952,
+  "sequence_before": 951,
+  "source_sha256": {
+    "migration-host/nf_upgrade.py": "2e3462d637741efdacb596ed56cba7fe509504e0722acf12ad0452ca46cddce5",
+    "migrator/upgrade/payload/template.bin": "137a73923af1661a6af03d8dc9351e1b1f650f4c6e3381669ae3cf020f8c6b62",
+    "tools/console_core.py": "e1046d869b5f74abcc8b9c2eed924f4dd056fb91599de0e23e5ad02a477718bd",
+    "tools/nf_console.py": "5305d55735f4a6fe5de4e8ab0e6ae11bb10df2abd580b3db8743b6ab1d5972e0",
+    "tools/nf_recovery.py": "441e17ed66efc5378098f6a0a557556d783f3642ac88e178a227bc50782677fb"
+  },
+  "total_records": 20
+}

@@ -1,54 +1,76 @@
-# Installation boundaries
+# Installation routes and preservation
 
-## Preserve the board first
+Use the complete 0.3.0 operator ZIP, including its Python terminal, hosts,
+prebuilt engines, manifests and guides. Reviewed source paths passed on
+2512/65C02/FT245, and the unchanged rc1 existing-SNBT package route passed on
+2609/65C816 emulation/FT245. Final-package live trials and packaged WDC/
+programmer-F provisioning remain untested; see [release status](RELEASE_STATUS.md).
 
-Inventory the CPU, bank layout, entry addresses and resident firmware. Save complete original bank images, settings, erase history and any attached SRAM/provider data. Verify two independent reads agree before a destructive operation. Original WDC firmware and owner captures are not distributed by this repository.
+## Preserve first
 
-B0 may be the owner's WDC backup. Preserve that B0 unless the owner explicitly assigns it as an installation target. Opaque installation and boot configuration are different operations: selecting an entry must not implicitly copy sectors or replace a backup.
+Inventory CPU, bank layout, entries, resident firmware and current journal.
+Retain agreeing independent complete-bank reads and original owner RAM/ZP
+escrow before helpers overwrite it. Preserve attached owner storage separately.
+Do not assume erased sectors or B0 are disposable. WDC firmware is backed up
+from the owner's board and is not distributed in this kit.
 
-## The F-only image
+## Select the route
 
-`firmware/payload/STR8N-F-BOOT-4096.bin` is **exactly 4096 bytes** for **B3:$F000â€“$FFFF only**. Reset vector is $F004. For a physical flash programmer, the bank/sector offset depends on its selected device and wiring; calculate and verify the actual address mapping before programming. Do not write this file as a complete 32 KiB bank or 128 KiB device image. Verify the programmed 4096 bytes byte-for-byte, reset into F and confirm `REC>`.
+| Current state | Procedure |
+| --- | --- |
+| WDCMONv2, blank/unrecognized C/D | [WDC capture/migrate](../migration-host/README.md): archive, admit, F if needed, then D/C |
+| Byte-identical BASE1 F installed | [Live C/D provisioning](LIVE_CD_PROVISIONING.md): original escrow, fresh capture, D then C only |
+| Supported b15 F with valid SNBT | [Existing-journal upgrade](JOURNAL_F_UPGRADE.md): append reservation, replace F only |
+| Valid SNBT and identical BASE1 F | Keep settings/history; public provisioning is a no-op |
+| Damaged/conflicting/legacy or mixed recognized history | Stop for inspected handling; first provisioning refuses conversion |
 
-A factory WDC board needs an audited RAM migrator to perform that F-only write while keeping original banks unchanged. That board-specific migrator is not included in this toolkit release. Its eventual public workflow must back up WDC, choose the backup bank, preserve/import wear evidence, write only F, verify and stop at `REC>`. A blanket full-flash image would violate that workflow.
+Use an explicit port and fresh private plans. Disconnect the terminal before
+a CLI takes its port. No board or B0 backup destination is selected automatically.
 
-For the standard linear B0/B1/B2/B3 ordering of a 128 KiB flash device, B3:F
-occupies device offsets $1F000-$1FFFF. Confirm the actual programmer mapping.
-Use a preserving sector operation; whole-chip erase is not a preserving update.
-Keep a full original chip read and the correct external recovery path.
+## The 4K programmer file
 
-## Optional compact monitors
+firmware/payload/STR8N-F-BOOT-4096.bin is exactly **4096 bytes**, for
+**B3:$F000-$FFFF**, reset entry $F004. Under standard linear 128 KiB
+B0/B1/B2/B3 ordering its device offsets are **$1F000-$1FFFF**. Verify actual
+programmer/device mapping. This is neither a complete bank nor a whole chip.
+A preserving update must not silently erase the chip.
 
-BASE MON A is exactly 4096 bytes for B3:$A000-$AFFF; BASE MON B is exactly
-4096 bytes for B3:$B000-$BFFF. Their standard linear device offsets are
-$1A000 and $1B000. F does not require them. They are component images,
-not raw L RAM input, and OPAQUE refuses those protected destinations.
-Install them only with an explicitly admitted component/programmer procedure
-that preserves current journals, owner bytes and actual wear accounting.
-The kit does not supply an automatic MON installer.
+Verify programmed bytes, physically RESET, observe the BASE1 identity and
+select S/recovery. F-only installation leaves occupied C/D unchanged.
+F is golden after successful installation. Automatic recovery from erased
+or interrupted F installation is outside the runtime contract.
 
-## C/D journals and wear counts
+## Journals and wear
 
-F-only recovery and DEMO do not require C/D. Saved bank/default choices and normal opaque erase accounting require compatible, valid C/D journals.
+F reads boot records but does not create/mutate the journal. Recovery and
+DEMO can run without one. Saved defaults and normal opaque erase accounting
+need compatible C/D records.
 
-CONFIG `I` is a **blank-only primitive**: it refuses any nonblank byte in either journal sector and never erases them. It creates default S, all banks disabled and zero observed erase counters with unknown history marked. Those zeros mean no recorded erases in this journal, not a lifetime count or proof of unused flash. Factory programming also contributes unknown history.
+CONFIG I requires both C/D completely blank and never erases them. It creates
+S/recovery, disabled banks, entries all 8000, zero tracked counts and unknown
+prior history. Zero means no tracked erases, not unused flash.
 
-Do not use this primitive to replace owner counts or invent a lifetime starting value. Existing C/D must be inspected and preserved or restored with a qualified owner-history process. The general factory provisioning policy and wear-history import tool remain release gates. The previously qualified board-specific history importer is not silently generalized by this preview.
+First provisioning erases D then C and counts those attempts. WDC migration
+also counts F when it changes. Programmer-installed identical F does not
+manufacture a recorded F erase. Import only source-bound owner evidence.
+External programmer erases are not automatically discoverable, even on a new
+chip. Attempts are reserved before erasing and are not rolled back on failure.
 
-## Optional sectors
+The [2512 trial](2512_PROGRAMMER_F_CD_ACCEPTANCE.md) explicitly archived/replaced
+its raw journal and imported latest counts. It does not authorize clearing
+another owner's history.
 
-| B3 sector | Role in this layout |
-|---|---|
-| 8, 9, E | Potential opaque/provider space; inventory before use |
-| A, B | Optional matching monitor slots |
-| C, D | Configuration and wear journals |
-| F | Bootstrap and recovery |
+## Owner images and completion
 
-B3 user booting is supported at a configured allowed entry when an appropriate image is present. It does not make all B3 sectors available. Journal relocation to D/E or SPI SRAM is a future layout change, not a configuration option in this build.
+B0-B2 and B3:8/9/A/B/E are owner space. Optional monitor-shaped images may
+occupy A/B, but are not required. Retained b15 MON/FLASH execution under BASE1
+remains unqualified. This release supplies no mandatory MON image. Mona remains planned.
 
-## Release boundary
+Install/verify an image before enabling it with CONFIG. OPAQUE protects C/D/F.
+Keep recovery as default while replacing a boot image; save the intended
+default separately. See [quick start](QUICK_START.md) and [opaque host](OPAQUE_HOST.md).
 
-The supported evidence and remaining 1.0 work are listed in
-[release scope](RELEASE_STATUS.md). No board was flashed to prepare 0.2.0;
-the existing b15 firmware bytes are retained. General factory migration and
-owner-history import remain separate work.
+Preservation requires independent final bank comparison, original RAM/ZP
+restoration and readback, REC>, and released serial ownership. An engine
+message alone is insufficient. On failure retain power, backups and logs;
+no blind retry, automatic rollback or extra erase is implied. 2205 stays excluded.
