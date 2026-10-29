@@ -9,9 +9,9 @@ Branch: `codex/mona-monb`. Foundation: immutable N-F `v0.3.0`,
 | # | Work and deliverable | Exit condition | Current status |
 | --- | --- | --- | --- |
 | 1 | Review g0034 compatibility: identify exact A/B reference images, public/private calls, providers, entry shims and RAM ownership | A source-backed reuse/replace decision, named incompatibilities and an evidence inventory; no claim of execution compatibility | Initial review complete; [findings](MON_AB_COMPATIBILITY_REVIEW.md) |
-| 2 | Define the shared monitor contract: entry/reentry, identity, console, parsing, bank selection, RAM/scratch, application launch and deliberate recovery return | Written interface and memory allocation; minimal command set and optional-provider behavior agreed; no F changes | Next |
-| 3 | Implement the minimal shared Mona core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | Planned |
-| 4 | Qualify A and B as independent occupants using the same core | Correct slot/header/CRC/private binding and separate identity; authorized real-board entry, commands, handoff/return and preservation checks pass for both | Planned; no board access authorized by this document |
+| 2 | Define the shared monitor contract: entry/reentry, identity, console, parsing, bank selection, RAM/scratch, application launch and deliberate recovery return | Written interface and memory allocation; minimal command set and optional-provider behavior defined; no F changes | [Revision 1 defined](MON_AB_CONTRACT.md) |
+| 3 | Implement the minimal shared Mona core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | Initial A/B/RAM candidates built once; NOT_EXECUTION_QUALIFIED |
+| 4 | Qualify A and B as independent occupants using the same core | Correct slot/header/CRC/private binding and separate identity; authorized real-board entry, commands, handoff/return and preservation checks pass for both | [2512 scope](MON_AB_2512_TRIAL_SCOPE.md) authorized; RAM smoke and fresh preflight precede flash |
 | 5 | Add useful personalities through command tables/modules | Launcher/status and maintenance features added as individually reviewed increments while common behavior stays shared | Follow-on |
 
 Checkpoint 4 is the usable A/B foundation. Checkpoint 5 is incremental; it
@@ -35,8 +35,9 @@ do not require unrelated codebases.
   second build. Build only when the implementation is ready or changed code
   makes it necessary. File/source evidence checks remain part of this review.
 - Hardware work needs an explicit target and reviewed writes, fresh backups,
-  original owner RAM escrow and preservation/readback. Current work is source
-  only: no ports, flashing, power cuts or board access, including 2205.
+  original owner RAM escrow and preservation/readback. The owner authorized the
+  reviewed 2512/COM4 A/B trial; no other boards or power cuts are included.
+  F stays frozen; failure before successful RAM smoke prevents monitor flashing.
 
 ## First review result
 

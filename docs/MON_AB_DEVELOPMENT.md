@@ -23,11 +23,13 @@ F remains frozen at exactly 4096 bytes. This branch does not expand F's ABI,
 move the release tag or change published downloads. C/D stay boot/wear journal
 space; A/B remain optional occupants of owner image space.
 
-The [five-checkpoint plan](MON_AB_PLAN.md) is now recorded. Checkpoint 1's
-[initial compatibility review](MON_AB_COMPATIBILITY_REVIEW.md) identifies the
-exact g0034 pair, its private-call dependencies and RAM conflicts. It is not a
-BASE1-compatible binary; the next checkpoint defines a new shared contract.
+The [five-checkpoint plan](MON_AB_PLAN.md) and [shared contract](MON_AB_CONTRACT.md)
+are recorded. Checkpoint 1's [compatibility review](MON_AB_COMPATIBILITY_REVIEW.md)
+identified the exact g0034 pair and its conflicts. A new common core now builds
+A/B and RAM smoke candidates in one build pass; these are not execution-qualified.
 
-No new MON binary is built or qualified. No simulation, flashing or board
-access occurs; image, settings, history and owner-RAM preservation constraints
-remain. The original branch-creation checkpoint is retained in Git history.
+EDU, SSRAM, RTCC, battery and wear remain visible status fields. Unavailable
+provider data uses `--`; battery/wear use one `*` caveat. The monitor reads
+tracked wear without installing a journal writer. The owner authorized the
+[reviewed 2512 trial](MON_AB_2512_TRIAL_SCOPE.md); its real result is still pending.
+No F rebuild or CPU simulation occurs. Original checkpoints remain in Git history.

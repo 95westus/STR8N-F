@@ -1,0 +1,133 @@
+"""Build the initial Mona A/B and RAM candidates once; never rebuild F or access a port."""
+import argparse
+import binascii
+import hashlib
+import json
+from pathlib import Path
+import re
+import shutil
+import subprocess
+from build_system import long_branches
+
+ROOT = Path(__file__).resolve().parents[1]
+sha = lambda body: hashlib.sha256(body).hexdigest()
+read_json = lambda path: json.loads(path.read_text(encoding='utf-8'))
+
+
+def equs(path):
+    return {name:int(value,16) for name,value in re.findall(
+        r'^(\w+)\s+EQU\s+\$([0-9A-Fa-f]+)', path.read_text(encoding='utf-8'), re.M)}
+
+
+def cells(path):
+    found = {}
+    for line in path.read_text(encoding='ascii').splitlines():
+        row = bytes.fromhex(line[2:])
+        assert len(row) == row[0]+1 and sum(row)&255 == 255
+        if line.startswith('S1'):
+            address = int.from_bytes(row[1:3],'big')
+            for offset,value in enumerate(row[3:-1]):
+                assert address+offset not in found
+                found[address+offset] = value
+    return found
+
+
+def build(out):
+    out = Path(out).resolve()
+    if out.exists():
+        raise ValueError('Use a fresh build directory; previous outputs are preserved')
+    assembler,linker = shutil.which('wdc02as'),shutil.which('wdcln')
+    if not assembler or not linker:
+        raise ValueError('WDC assembler/linker not found')
+    freeze = read_json(ROOT/'F_FREEZE.json')
+    f = (ROOT/'firmware/payload/STR8N-F-BOOT-4096.bin').read_bytes()
+    assert len(f) == 4096 and sha(f) == freeze['sha256']
+    for name,digest in freeze['sources'].items():
+        assert sha((ROOT/name).read_bytes()) == digest, name
+    dependency = read_json(ROOT/'monitors/base1-dependency.json')
+    assert dependency['foundation']['F_sha256'] == sha(f)
+    bs = equs(ROOT/'src/core/boot-symbols.inc')
+    ws = equs(ROOT/'src/core/worker-public-symbols.inc')
+    private = dict(MON_F_READ=ws['V2W_READ'], MON_F_EXECUTE=ws['V2W_EXECUTE'],
+                   MON_F_RECOVERY=bs['BOOT_RECOVERY'], MON_F_NO_SERVICE=bs['BOOT_NO_SERVICE'],
+                   MON_F_BOOT_READ=bs['BOOT_READ_RECORD'])
+    crc = binascii.crc_hqx(f,0xffff)
+    inputs = {path.relative_to(ROOT).as_posix():sha(path.read_bytes())
+              for path in sorted((ROOT/'monitors/src').glob('*')) if path.is_file()}
+    out.mkdir(parents=True)
+    artifacts = {}
+    logs = []
+    for variant,page,label in (('A',0xa0,'MON A'),('B',0xb0,'MON B'),('RAM',0,'RAM')):
+        stage = out/variant
+        stage.mkdir()
+        origin = page*256+0x80 if page else 0x0200
+        for filename in ('mona.asm','adapter.inc','layout.inc'):
+            body = (ROOT/'monitors/src'/filename).read_text(encoding='utf-8')
+            body = body.replace('MON_SLOT_LABEL', '"'+label+'"')
+            if filename != 'layout.inc':
+                body = long_branches(body, prefix='M_LONG_'+variant+'_'+filename.replace('.','_')+'_')
+            (stage/filename).write_text(body,encoding='utf-8',newline='\n')
+        shutil.copyfile(ROOT/'src/include/str8n-v2-public.inc', stage/'str8n-v2-public.inc')
+        declarations = dict(private, MON_SLOT_PAGE=page,
+                            MON_SLOT_CHAR=ord(variant[0]), MON_F_CRC_LO=crc&255, MON_F_CRC_HI=crc>>8)
+        (stage/'foundation.inc').write_text(''.join(f'{name} EQU ${value:04X}\n' for name,value in declarations.items()),
+                                            encoding='ascii',newline='\n')
+        entry = '        DB "SN",2,0\n        JMP M_START\n        JMP M_START\n' if page else '        JMP M_START\n'
+        (stage/'entry.inc').write_text(entry,encoding='ascii',newline='\n')
+        for command in ([assembler,'-G','-L','-S','-W','mona.asm'],
+                        [linker,'-g','-s','-t',f'-c{origin:04X}','-hm19','-j','-o','mona.s19','mona.obj']):
+            done = subprocess.run(command,cwd=stage,capture_output=True,text=True)
+            logs.append(dict(variant=variant,command=command,returncode=done.returncode,
+                             stdout=done.stdout,stderr=done.stderr))
+            (out/'build-log.json').write_text(json.dumps(logs,indent=2)+'\n',encoding='utf-8',newline='\n')
+            if done.returncode:
+                raise RuntimeError('Mona build failed; inspect '+str(out/'build-log.json'))
+        sy = {name:int(value,16) for value,name in re.findall(r'^\s*([0-9A-Fa-f]{8})\s+(\w+)\s*$',
+              (stage/'mona.map').read_text(encoding='utf-8'),re.M)}
+        memory = cells(stage/'mona.s19')
+        assert set(memory) == set(range(origin,sy['M_END']))
+        body = bytes(memory[address] for address in range(origin,sy['M_END']))
+        assert sy['M_RA']-sy['M_EXPECT_ID'] == 40
+        assert len(body) <= (3968 if page else 25344)
+        if page:
+            assert body[:4] == b'SN\x02\0' and body[4] == body[7] == 0x4c
+            image = bytearray(b'\xff'*4096)
+            image[:8] = b'MI\x01'+bytes((page,3,1,0,0))
+            image[8:12] = (1).to_bytes(4,'little')
+            for offset,value in ((12,len(body)),(14,origin+4),(16,origin+7)):
+                image[offset:offset+2] = value.to_bytes(2,'little')
+            image[20:24] = b'PR05'
+            image[31] = 0
+            for offset in range(32,72,2):
+                image[offset:offset+2] = sy['M_UNSUPPORTED'].to_bytes(2,'little')
+            image[128:128+len(body)] = body
+            image[18:20] = binascii.crc_hqx(image[:18]+image[32:],0xffff).to_bytes(2,'little')
+            filename = 'MONA-0.1.0-dev-g00000001-'+variant+'.bin'
+            destination = f'B3:{page*256:04X}'
+        else:
+            image = body
+            filename = 'MONA-0.1.0-dev-g00000001-RAM.bin'
+            destination = 'RAM:0200; smoke candidate borrows owner RAM'
+        (out/filename).write_bytes(image)
+        artifacts[filename] = dict(bytes=len(image),sha256=sha(image),variant=variant,
+                                   destination=destination,linked_bytes=len(body),
+                                   entry=f'{origin+4 if page else origin:04X}',
+                                   linked_end=f'{sy["M_END"]:04X}',status='NOT_EXECUTION_QUALIFIED')
+        print(filename, len(image),'bytes; linked',len(body),'bytes',flush=True)
+    report = dict(schema=1,component='Mona',version='0.1.0-dev',generation='00000001',
+                  build_passes=1,assembly_tool_invocations=len(logs),F_rebuilt=False,
+                  F_sha256=sha(f),F_CRC16=f'{crc:04X}',private_adapter=private,
+                  foundation=dependency['foundation'],source_sha256=inputs,artifacts=artifacts,
+                  monitor_RAM='6A00-6AFF',owner_RAM_ROM_startup='0200-66FF unchanged',
+                  status_rows=['EDU','SSRAM','RTCC','Battery','Wear'],
+                  status_limits='-- no reported provider data; * physical battery condition/prior wear unverified',
+                  journal_access='Read selected page and verify full record CRC; no writer installed',
+                  CPU_simulations=0,hardware_access=False,flashing=False,execution_qualified=False)
+    (out/'manifest.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')
+    return report
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--out',type=Path,required=True)
+    build(parser.parse_args().out)

@@ -2,7 +2,8 @@
 
 **MON A/B development branch:** [five-checkpoint plan](docs/MON_AB_PLAN.md)
 and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
-No new monitor binary is built; N-F v0.3.0 remains the frozen foundation.
+Initial Mona A/B and RAM candidates are built once and await execution
+qualification; N-F v0.3.0 remains the frozen foundation.
 
 > Give me 4KB, I can give you 4 boards.
 

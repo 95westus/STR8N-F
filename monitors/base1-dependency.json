@@ -2,7 +2,7 @@
   "schema": 1,
   "component": "MON A/B development",
   "branch": "codex/mona-monb",
-  "status": "checkpoint-1-initial-source-review-complete; no new monitor binary",
+  "status": "checkpoint-3-candidate-built; execution-qualification-pending",
   "foundation": {
     "repository": "https://github.com/95westus/STR8N-F",
     "tag": "v0.3.0",
@@ -22,7 +22,9 @@
   "plan": "docs/MON_AB_PLAN.md",
   "compatibility_review": "docs/MON_AB_COMPATIBILITY_REVIEW.md",
   "compatibility_inventory": "monitors/review/g0034-base1-compatibility.json",
-  "next_checkpoint": "2: shared monitor contract and memory allocation",
+  "shared_contract": "docs/MON_AB_CONTRACT.md",
+  "candidate_manifest": "monitors/payload/manifest.json",
+  "next_checkpoint": "4: authorized 2512 RAM smoke and A/B install/restore trial",
   "hardware_access": false,
   "flashing": false
 }
