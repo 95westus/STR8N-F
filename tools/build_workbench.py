@@ -30,13 +30,14 @@ def build(out, generation=1):
     ws = equs(ROOT/'src/core/worker-public-symbols.inc')
     crc = binascii.crc_hqx(f, 0xffff)
     private = dict(WB_F_READ=ws['V2W_READ'], WB_F_EXECUTE=ws['V2W_EXECUTE'],
+                   WB_F_SELECT=ws['V2W_SELECT'], WB_F_BYTE=ws['V2W_BYTE']+2,
                    WB_F_RECOVERY=bs['BOOT_RECOVERY'],
                    WB_F_CRC_LO=crc & 255, WB_F_CRC_HI=crc >> 8)
     out.mkdir(parents=True)
     source_hashes = {}
     branch_layout = {}
     for filename in ('workbench.asm', 'workbench-loader.asm',
-                     'workbench-layout.inc', 'workbench-sram.inc'):
+                     'workbench-layout.inc', 'workbench-sram.inc', 'workbench-store.inc'):
         path = ROOT/'monitors/src'/filename
         body = path.read_text(encoding='utf-8')
         body = body.replace('WB_GENERATION_TEXT',generation_text)
@@ -100,7 +101,8 @@ def build(out, generation=1):
                   entry='REC> L raw RAM BIN; existing Mona g4 has no L/module dispatch',
                   return_path='Q -> public RAM HOLD -> active monitor, or recovery if unavailable',
                   monitor_A_B_changed=False, F_rebuilt=False, hardware_access=False,
-                  flash_writes=False, journal_writes=False, SRAM_writes=False,
+                  flash_writes='Explicit S into fully erased owner-declared B0/B1 AREA only; no erase',
+                  journal_writes=False, SRAM_writes=False,
                   EDU='Explicit session OFF/ON; ON is a wiring selection, not presence proof',
                   SPI=dict(profile='EDU Rev D PB0 SCK/PB1 MOSI/PB2 SRAM CS/PB5 MISO; PB3 CS kept high',
                            opcodes=['05 RDMR', '03 READ'], automatic_probe=False,
@@ -109,8 +111,9 @@ def build(out, generation=1):
                            prior_input_pin_output_latch='Unreadable: sampled ORB restoration only'),
                   records=dict(format='SR/01; no payload checksum', scan='bytewise 8000-DFFF, selected bank',
                                table=True, restore=True, restore_names='unique within selected bank',
-                               store=False, run='Explicit R without L; old program ABI not thereby qualified'),
-                  planned=['Mona core dispatch and native L', 'Store', 'APPS and maintenance/config/opaque routing',
+                               store='S bank flash RAMfirst RAMlast [name]; YES; commit last, per-byte readback; AREA window required',
+                               run='Explicit R without L; old program ABI not thereby qualified'),
+                  planned=['APPS and maintenance/config/opaque routing',
                            'Source/ASM/DEBUG', 'WORKSPACE allocation review and separate append-only messages'],
                   build_passes=1, assembler_linker_invocations=len(logs),
                   branch_layout=branch_layout, CPU_simulations=0)

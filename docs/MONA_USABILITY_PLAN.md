@@ -254,3 +254,14 @@ The earlier build-only section above is historical; it is not the current
 qualification state. SS1 status is live-qualified; SS2/fallback remains a source
 implementation without positive hardware evidence here. Store, app/maintenance
 routing, source/ASM/DEBUG and WORKSPACE message allocation/writes remain open.
+
+## G6 / Store checkpoint (2026-10-29)
+
+G6 now uses the selected-bank B0>..B3> prompt and keeps slot identity in the
+banner. WB1 g3 adds explicit AREA/S and passed a real Store/Table/Restore/run
+cycle, including cancellation and duplicate handling. This closes the basic
+flash-record Store port; no allocator or payload checksum is implied.
+[Acceptance](MON_AB_G6_2512_ACCEPTANCE.md) records the unplanned native D rotation,
+its exact-history restoration and retained extra wear count. Future zero-erase
+plans must use the native capacity check before writing. Next: apps/maintenance
+routing, source/ASM/DEBUG and WORKSPACE allocation before persistent messages.

@@ -43,6 +43,19 @@ W_BOUNDARY EQU $654C
 ; Caller declares its lowest legal destination page before a bridged command.
 ; Standalone shell clears this to zero; the absolute minimum remains 0200.
 W_RAM_FLOOR EQU $6550
+W_AREA_ON EQU $6551
+W_AREA_BANK EQU $6552
+W_AREA_FIRST EQU $6553
+W_AREA_END EQU $6555
+W_STORE_FIRST EQU $6557
+W_STORE_NEXT EQU $6559
+W_STORE_LEFT EQU $655B
+W_STORE_INDEX EQU $655D
+W_STORE_GATE EQU $655E
+W_F_FLASH_PTR EQU $E4
+W_F_DATA EQU $F0
+W_F_NMI_GATE EQU $F4
+W_LED EQU $7FA0
 W_PTR EQU $E0
 W_COPY EQU $E6
 W_F_ADDR EQU $E2

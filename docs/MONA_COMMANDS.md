@@ -1,15 +1,20 @@
-# Mona g00000005: monitor and WB1 commands
+# Mona g00000006: bank prompt and WB1 commands
 
-Mona **0.1.0-dev g00000005** provides the same commands in A and B, on frozen
+Mona **0.1.0-dev g00000006** provides the same commands in A and B, on frozen
 N-F 0.3.0 / BASE1 / PR05. This is a development monitor, not a replacement N-F
-release. The [g5 / WB1 acceptance](MON_AB_G5_2512_ACCEPTANCE.md) covers installed
+release. The [g6 / WB1 acceptance](MON_AB_G6_2512_ACCEPTANCE.md) covers installed
 2512 A/B and the physical B default. G4's force evidence is retained in its
 [earlier receipt](../monitors/validation/2512-mona-g00000004-install.json).
 
-The [WB1 module](MONA_WORKBENCH_WB1.md) adds Table/Restore and explicit read-only
-EDU/SRAM status. WB1 g2 is RAM-qualified, not stored in flash. Load it with L
+The [WB1 g3 module](MONA_STORE.md) adds AREA/Store, Table/Restore and explicit
+read-only EDU/SRAM status. It is RAM-qualified, not stored in flash. Load it with L
 when needed; restoring owner RAM evicts it. No persistent module sector has
 been allocated.
+
+The monitor prompt is B0> through B3> for the selected data bank. Active MON A/B
+stays in the banner. A monitor restart/HOLD starts with data bank3 again.
+The g6 trial had one unplanned D rotation; its raw history was restored and the
+extra erase retained in the count. See the acceptance/incident record above.
 
 ## Commands
 
@@ -25,6 +30,9 @@ been allocated.
 | `G addr` | Explicit application entry; public HOLD restarts the active monitor |
 | `L` | ROM Mona: enter frozen F's raw RAM BIN loader; Ctrl-C before payload returns REC> |
 | `T [bank]`, `R [bank] name\|address [L]` | Loaded WB1: Table/Restore; suffix L loads only |
+| `AREA bank first last`, `AREA` | Loaded WB1 g3: declare/close a B0/B1 owner flash window; no flash write |
+| `S bank flash RAMfirst RAMlast [name]` | Loaded WB1 g3: Store fresh SR01 bytes after YES, no erase |
+| `HELP` | Full loaded-module help |
 | `EDU [ON\|OFF]`, `SRAM`, `WORK` | Loaded WB1: explicit session EDU policy and read-only layout/capacity |
 | `Q` | Deliberately return to REC>, regardless of the saved default |
 
@@ -35,7 +43,7 @@ transactional rollback operation. A RAM smoke image refuses G and ordinary M
 into its code pages.
 
 `TIME` replaces the development g2 clock command T. T now dispatches to the
-loaded WB1 record table; missing/corrupt modules are refused. Maps, Store,
+loaded WB1 record table; missing/corrupt modules are refused. Maps,
 apps/maintenance routing, source/ASM/DEBUG, interactive Modify and dump
 continuation/paging remain planned.
 Dump ranges are no longer limited to 256 bytes. A range intersecting $7F00-$7FFF
@@ -44,10 +52,10 @@ is refused as a whole; ordinary D does not inspect I/O.
 ## Dump and ordinary Modify
 
 ```text
-MonaB> D 2000 203F
-MonaB> M 2000 41 42 43 00
+B3> D 2000 203F
+B3> M 2000 41 42 43 00
 2000: 41 42 43 00                                      |ABC.|
-MonaB> D 2000 2003
+B3> D 2000 2003
 ```
 
 The shown addresses are examples, not free-space declarations. M intentionally

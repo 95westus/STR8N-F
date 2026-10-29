@@ -1,18 +1,19 @@
-# Mona g5 / WB1: records and EDU/SRAM checkpoint
+# Mona g6 / WB1 g3: records and EDU/SRAM checkpoint
 
-2026-10-29. **2512 qualification passed: g5 installed in A/B; WB1 g2 RAM-qualified.**
-See [acceptance](MON_AB_G5_2512_ACCEPTANCE.md). Published kit/downloads and golden
-F remain unchanged. The full workbench still requires Store,
+2026-10-29. **G6 installed in A/B; WB1 g3 Store functionality passed, with a recovered scope deviation.**
+See [acceptance](MON_AB_G6_2512_ACCEPTANCE.md), including the unplanned D rotation
+and exact history restoration at D100. Published kit/downloads and golden
+F remain unchanged. The full workbench still requires
 apps, maintenance/config/opaque, source/ASM/DEBUG and SRAM storage/messages.
 
 ## Implemented in candidates versus planned
 
 | Component | Candidate implementation | Status |
 | --- | --- | --- |
-| Mona g5 A/B | Identical commands; native L; checked WB1 dispatch; normal M respects module RAM | Qualified and installed on 2512 |
-| Mona g5 RAM | Same bridge; L/G refused; Restore protects this monitor's code pages | Qualified on 2512 |
-| WB1 g2 RAM | Table/Restore; session EDU control; guarded SRAM layout/capacity; Q to monitor | Qualified on 2512; reload after owner-RAM restoration |
-| Store and apps/maintenance routing | Still required | Planned |
+| Mona g6 A/B | Identical commands; native L; checked WB1 dispatch; normal M respects module RAM | Qualified and installed on 2512 |
+| Mona g6 RAM | Same bridge; L/G refused; Restore protects this monitor's code pages | Qualified on 2512 |
+| WB1 g3 RAM | AREA/Store/Table/Restore; session EDU control; guarded SRAM layout/capacity; Q to monitor | Qualified on 2512; reload after owner-RAM restoration |
+| Apps/maintenance routing | Still required | Planned |
 | Source editor/ASM/DEBUG | Retained legacy assets need compatible ports | Planned |
 | SRAM PROGRAM/source writes | No write code in WB1 | Planned |
 | Persistent WORKSPACE messages | Allocation review and append-only writer needed | Planned |
@@ -21,12 +22,12 @@ Current files and SHA-256:
 
 | File under monitors/candidates | Bytes | SHA-256 |
 | --- | ---: | --- |
-| `g00000005/MONA-0.1.0-dev-g00000005-A.bin` | 4096 | `05fabfc5b5efc10eedaa70eabe773096f661a40241cfa3e757d004633bc9a87b` |
-| `g00000005/MONA-0.1.0-dev-g00000005-B.bin` | 4096 | `13b399d70bcbee3e333dc35972e9f8d8a6515bd99aeb5dd81d1a95089571c8d2` |
-| `g00000005/MONA-0.1.0-dev-g00000005-RAM.bin` | 3908 | `4bc99ac1c10c13552207a62f4665585fb30d687f89de35b5b9f4a6ed200934e8` |
-| `wb1-g00000002/MONA-WORKBENCH-WB1-g00000002-RAM.bin` | 5376 | `63c5eab2b79ae4fbe5e9dd63e4f41a1bfc23c8bffbb306f7fc07976f7440f727` |
+| `g00000006/MONA-0.1.0-dev-g00000006-A.bin` | 4096 | `d750b721cd36f2b8dbd6330045872226115f319ed1b3f6427bacee375642df4f` |
+| `g00000006/MONA-0.1.0-dev-g00000006-B.bin` | 4096 | `5f7110f35b007da9a203940d74cca57d4b268c43446421113ebd9b9b7feaf3b5` |
+| `g00000006/MONA-0.1.0-dev-g00000006-RAM.bin` | 3916 | `88f823768913a5c9a53af2af770bbb41c4d421411e532fde951c1ea540b8ae2b` |
+| `wb1-g00000003/MONA-WORKBENCH-WB1-g00000003-RAM.bin` | 5376 | `08b3bb7828933ebced2f410bac38b2a79071cda214df31c66dc3c295e960224d` |
 
-A/B payloads use 3917 bytes, leaving 51. WB1 g2 code uses 3997 of 5118 bytes,
+A/B payloads use 3925 bytes, leaving 43. WB1 g3 code uses 5088 of 5118 bytes,
 plus its two-byte CRC trailer. F stays 4096 bytes with SHA-256
 `8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1`.
 
@@ -39,7 +40,7 @@ below are **not captured hardware output or approval to install A/B**:
 ```text
 REC> L
 SEND BIN
-<send MONA-WORKBENCH-WB1-g00000002-RAM.bin>
+<send MONA-WORKBENCH-WB1-g00000003-RAM.bin>
 WORKBENCH> ?
 WORKBENCH> T 1
 WORKBENCH> EDU ON
@@ -189,3 +190,15 @@ The corrected trial and A/B installation passed, including physical saved-B
 boot and full owner-RAM/ZP readback. The original g1 candidates and interrupted
 host-run evidence are retained separately. SS2/fallback hardware paths remain
 unobserved; the positive SRAM evidence is for this board's primary SS1 layout.
+
+## Current g6 / Store checkpoint
+
+[Store use](MONA_STORE.md) describes AREA/S and the no-erase SR01 programmer.
+G6 displays B0> through B3> for the selected data bank; active MON A/B stays
+in the banner. The earlier g5 RAM/ROM and WB1 g2 finding sections are historical.
+Store byte programming passed through g6 RAM; ROM g6 passed native L and module
+dispatch/read paths. The original no-C/D-erase scope was exceeded by one native
+D rotation. Its old raw record was restored at D100 without another erase; all
+thirteen original raw records are present, and D count33 is retained. See
+[G6 acceptance](MON_AB_G6_2512_ACCEPTANCE.md). Source/ASM/DEBUG, app/maintenance
+routing and WORKSPACE message writes remain open. F/downloads are unchanged.

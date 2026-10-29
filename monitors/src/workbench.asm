@@ -1,4 +1,4 @@
-; WB1 RAM workbench. No flash or SRAM write entry points in this checkpoint.
+; WB1 RAM workbench. Store programs fresh SR01 bytes only; never erases.
 ; ROM monitor bridge contract: validate immutable 5000-63FF first, A=data bank,
 ; X/Y=40-byte NUL-terminated command. C=handled, A=resulting bank. D/DBR/PBR=0,
 ; E=1, SEI/CLD. Existing g4 does not yet dispatch here; use the RAM shell.
@@ -79,6 +79,21 @@ W_COMMAND_START:
         BEQ W_RESTORE_CMD
         CMP #'Q'
         BEQ W_QUIT
+        CMP #'S'
+        BNE W_DEVICE_NAMES
+        LDA W_LINE+1,X
+        BEQ WS_STORE
+        CMP #' '
+        BEQ WS_STORE
+W_DEVICE_NAMES:
+        LDX #<WS_AREA_WORD
+        LDY #>WS_AREA_WORD
+        JSR W_MATCH
+        BCS WS_AREA
+        LDX #<WS_HELP_WORD
+        LDY #>WS_HELP_WORD
+        JSR W_MATCH
+        BCS W_HELP_ARGS
         LDX #<W_EDU_WORD
         LDY #>W_EDU_WORD
         JSR W_MATCH
@@ -100,6 +115,7 @@ W_HANDLED:
         RTS
 W_HELP:
         INX
+W_HELP_ARGS:
         JSR W_END_ARGS
         BCC W_UNHANDLED
         LDX #<W_HELP_TEXT
@@ -523,6 +539,7 @@ W_HEADER_INC:
         STA W_ADDR+1
         PLA
         STA W_ADDR
+W_CHECK_HEADER:
         LDA W_HEADER
         CMP #'S'
         BNE W_RECORD_BAD
@@ -682,6 +699,7 @@ W_CACHE_HIT:
         PLX
         RTS
 
+        INCLUDE "workbench-store.inc"
         INCLUDE "workbench-sram.inc"
 
 W_CANCEL:
@@ -838,8 +856,9 @@ W_TITLE: DB 13,10,"Mona WORKBENCH WB1 gWB_GENERATION_TEXT / BASE1 PR05",13,10
 W_PROMPT_TEXT: DB "WORKBENCH> ",0
 W_SYNTAX_TEXT: DB "REFUSED: syntax, unavailable command or invalid line",13,10,0
 W_HELP_TEXT: DB "B0..3; T [bank]; R [bank] name|addr [L]",13,10
+        DB "AREA bank first last; S bank flash RAMfirst RAMlast [name]",13,10
         DB "EDU [ON|OFF]; SRAM; SRAM PREP; WORK; Q monitor",13,10
-        DB "S/ASM/DEBUG/APPS/CONFIG/OPAQUE integration pending",13,10,0
+        DB "AREA alone clears; HELP",13,10,0
 W_BANK_TEXT: DB "Data bank B",0
 W_TABLE_TEXT: DB "SR01: + complete, ? pending; addr load length name (hex)",13,10,0
 W_TABLE_END_TEXT: DB "Scan ended. SR01 has no payload checksum.",13,10,0

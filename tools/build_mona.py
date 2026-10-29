@@ -135,6 +135,7 @@ def build(out, generation):
                   F_sha256=sha(f),F_CRC16=f'{crc:04X}',private_adapter=private,
                   foundation=dependency['foundation'],source_sha256=inputs,artifacts=artifacts,
                   monitor_RAM='6A00-6AFF',owner_RAM_ROM_startup='0200-66FF unchanged',
+                  prompt='B0> through B3> follows selected data bank; active A/B remains in banner',
                   status_rows=['EDU','SSRAM','RTCC','Battery','Wear'],
                   commands=['?','V','TIME','B[0-3]','D addr [end]','M addr byte...','!M addr byte...','G addr','L','Q',
                             'WB1 module: T/R/EDU/SRAM/WORK'],
