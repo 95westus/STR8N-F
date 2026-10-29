@@ -59,6 +59,10 @@ flash command has been sent. Fresh live double-capture admission is mandatory
 immediately before setup. On failure: keep power, stop without retry, retain
 escrow/intent; use the identified T48 III/Xgpro if ROM recovery is unavailable.
 No deliberate F/C/D interruption is included in this happy-path conversion.
+The original chip capture is a recovery reference, not an automatic rollback
+of wear history. Any programmer recovery must retain the latest durable erase
+reservations and account conservatively for programmer erases before a new
+journal is admitted. Do not blindly reinstall the older journal counters.
 
 ## Exact factory transaction
 
