@@ -56,6 +56,23 @@ M_MODULE_ID_BYTE:
         SEC
         RTS
 M_MODULE_ID: DB "MW",WB_FORMAT,WB_PAGES,"PR05"
+M_SERVICE_CHECK:
+        LDX #7
+M_SERVICE_ID_BYTE:
+        LDA MON_SERVICE_BASE,X
+        CMP M_SERVICE_ID,X
+        BNE M_F_FAIL
+        DEX
+        BPL M_SERVICE_ID_BYTE
+        LDA #>MON_SERVICE_BASE
+        LDX #SB_PAGES
+        JSR M_CRC_PAGES
+        LDA M_CRC
+        ORA M_CRC+1
+        BNE M_F_FAIL
+        SEC
+        RTS
+M_SERVICE_ID: DB "MS",SB_FORMAT,SB_PAGES,"PR05"
 M_CRC_PAGES:
         STZ M_PTR
         STA M_PTR+1

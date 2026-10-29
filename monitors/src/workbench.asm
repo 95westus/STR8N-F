@@ -11,11 +11,19 @@ W_BEGIN:
         DB "MW",WB_FORMAT,WB_PAGES,"PR05"
         JMP W_DISPATCH
         JMP W_SHELL
+        JMP W_INIT
 W_SHELL:
         SEI
         CLD
         LDX #$FF
         TXS
+        JSR W_INIT
+        JSR STR8V2_RAM_RX_RESET
+        LDX #<W_TITLE
+        LDY #>W_TITLE
+        JSR W_PUTS
+        BRA W_PROMPT
+W_INIT:
         LDX #0
 W_CLEAR:
         STZ $6400,X
@@ -25,10 +33,7 @@ W_CLEAR:
         BNE W_CLEAR
         LDA #3
         STA W_BANK
-        JSR STR8V2_RAM_RX_RESET
-        LDX #<W_TITLE
-        LDY #>W_TITLE
-        JSR W_PUTS
+        RTS
 W_PROMPT:
         LDX #<W_PROMPT_TEXT
         LDY #>W_PROMPT_TEXT
@@ -87,6 +92,18 @@ W_COMMAND_START:
         CMP #' '
         BEQ WS_STORE
 W_DEVICE_NAMES:
+        LDX #<WC_WORD
+        LDY #>WC_WORD
+        JSR W_MATCH
+        BCS WC_COMMAND
+        LDX #<WC_MAINT_WORD
+        LDY #>WC_MAINT_WORD
+        JSR W_MATCH
+        BCS WC_MAINT
+        LDX #<WC_FLASH_WORD
+        LDY #>WC_FLASH_WORD
+        JSR W_MATCH
+        BCS WC_MAINT
         LDX #<WS_AREA_WORD
         LDY #>WS_AREA_WORD
         JSR W_MATCH
@@ -723,14 +740,38 @@ W_CACHE_HIT:
         INCLUDE "workbench-store.inc"
         INCLUDE "workbench-sram.inc"
         INCLUDE "workbench-batch.inc"
+        INCLUDE "workbench-clock.inc"
+        INCLUDE "workbench-clock-read.inc"
 
 W_CANCEL:
         PHX
         PHY
         JSR STR8V2_RAM_CHECK_CANCEL
-        BCC W_NOT_CANCELED
+        BCS W_CANCEL_FOUND
+        ; Frozen F latches Ctrl-C only; ESC stays in its ordinary RX queue.
+        ; Inspect without consuming other typeahead. An explicit cancel may
+        ; discard queued input, exactly as the foundation Ctrl-C path does.
+        LDY W_RX_COUNT
+        BEQ W_CANCEL_CLEAR
+        LDX $FD
+W_CANCEL_SCAN:
+        TXA
+        AND #63
+        TAX
+        LDA $7D40,X
+        CMP #27
+        BEQ W_CANCEL_FOUND
+        INX
+        DEY
+        BNE W_CANCEL_SCAN
+W_CANCEL_CLEAR:
+        CLC
+        BRA W_NOT_CANCELED
+W_CANCEL_FOUND:
+        JSR STR8V2_RAM_RX_RESET
         LDA #1
         STA W_BAD
+        SEC
 W_NOT_CANCELED:
         PLY
         PLX
@@ -873,14 +914,14 @@ W_CRC_NEXT:
         PLX
         RTS
 W_TITLE: DB 13,10,"STR8-N WORKBENCH WB2 gWB_GENERATION_TEXT / BASE1 PR05",13,10
-        DB "RAM 0200-3FFF; module borrows 4000-66FF",13,10
+        DB "RAM 0200-47FF; module borrows 4800-66FF",13,10
         DB "EDU OFF (session); ? help; Q returns to monitor",13,10,0
 W_PROMPT_TEXT: DB "WORKBENCH> ",0
 W_SYNTAX_TEXT: DB "REFUSED: syntax, unavailable command or invalid line",13,10,0
 W_HELP_TEXT: DB "B0..3; T [bank]; R [bank] name|addr [L]",13,10
         DB "AREA bank first last; S bank flash RAMfirst RAMlast [name]",13,10
         DB "EDU [ON|OFF]; SRAM; SRAM PREP; WORK; Q monitor",13,10
-        DB "AREA alone clears; HELP",13,10
+        DB "CLOCK read-only; Q -> Bx> for M1/W/D/M/!M",13,10
         DB "BATCH cmd;cmd (34 bytes): B T ? HELP EDU SRAM WORK",13,10,0
 W_BANK_TEXT: DB "Data bank B",0
 W_TABLE_TEXT: DB "SR01: + complete, ? pending; addr load length name (hex)",13,10,0

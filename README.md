@@ -1,35 +1,32 @@
-# STR8N-F — BASE1 / PR05
+# STR8N-F â€” BASE1 / PR05
 
 **MON A/B development branch:** [development plan](docs/MON_AB_PLAN.md)
 and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
-MON A/B **0.1.0-dev g00000006** is [installed and tested on 2512](docs/MON_AB_G6_2512_ACCEPTANCE.md),
-with identical A/B commands: hex/ASCII Dump, RAM Modify/readback, explicit
-`!M` force, TIME, bank selection, G, native L and Q. The separately loaded
-[WB1 g3 RAM module](docs/MONA_STORE.md) adds explicit AREA/Store, Table/Restore and
-guarded EDU/SRAM status, including 2512's existing SS1 layout. The prompt is
-`B0>` through `B3>` for the selected data bank; active A/B stays in the banner.
-Saved default B boots g6
-after RESET; owner RAM/ZP were restored and verified afterward. Restoring owner
-RAM evicts WB1; reload its BIN with L when needed. F remains frozen.
-An unplanned D journal rotation exceeded the trial scope; its old raw record
-was restored at D100 without another erase, and D's extra wear count is retained.
-See the [incident record](docs/G6_D_ROTATION_REMEDIATION.md).
-See the [command manual](docs/MONA_COMMANDS.md). Apps/maintenance routing,
-source/ASM/DEBUG, rich startup and persistent WORKSPACE messages remain the
-[full-workbench target](docs/MONA_USABILITY_PLAN.md).
-**Full 2.0b35 capability is required**, including **BATCH**, automatic **T/S/R
-for flash and SSRAM PROGRAM**, and **APPS**. These are unfinished gates in the
-[parity checklist](docs/MON_B35_PARITY.md), not features already supplied by g6.
-The Mona name is retired. New banners/artifact names use STR8-N / MON A/B.
-[g7 / WB2 g1](docs/MON_AB_G7_WB2.md) is built, with command results and a bounded
-BATCH subset; **not live-qualified or installed**. It temporarily borrows
-4000-66FF and limits application RAM to 0200-3FFF while loaded. Installed g6 and
-its immutable evidence retain the old name. Full parity remains open.
-MON A/B is unreleased; N-F v0.3.0 downloads are unchanged.
-Installed-generation built space: **F 367 bytes, MON A 43, MON B 43, WB1 30**; run
-`python tools/monitor_space.py` to verify the linked binaries without rebuilding.
-New g7/WB2 candidate space: **MON A/B 36 bytes each; WB2 3609 bytes**, as detailed
-in the candidate checkpoint. The next gate is the preserving 2512 RAM-only trial.
+MON A/B **0.1.0-dev g00000008** is [installed and tested on 2512](docs/MON_AB_G8_2512_ACCEPTANCE.md),
+with identical A/B commands and the familiar B0> through B3> prompt.
+**M1/M2/M3 and W are back**, using the optional B3:E dispatcher without borrowing
+owner RAM. **CLOCK** opens a bounded read-only RTC page. **MAINT/FLASH** load the
+board-stored workbench from B2:8/9; no host BIN is needed. The module has
+Table/Restore, explicit AREA/Store, EDU/SRAM status and the bounded BATCH subset.
+
+The saved B default boots g8. All original boot/wear rows, other images and
+owner RAM/ZP were preserved and verified after physical RESET; COM4 is released.
+WORK dispatch and positive BATCH ESC/Ctrl-C cancellation also passed the
+service repair. The installed tools use STR8-N / MON A/B; Mona is retired. F and published
+N-F v0.3.0 downloads remain unchanged.
+
+**Full 2.0b35 capability remains the completion target**, including AUTO T/S/R
+for flash and SSRAM PROGRAM, full APPS/source/ASM/DEBUG, CLOCK administration,
+the 4KB FLASH editor and the merged MAINT/CONFIG pages. See the
+[command manual](docs/MONA_COMMANDS.md), [accepted services design](docs/MON_BOARD_SERVICES_PLAN.md)
+and [parity checklist](docs/MON_B35_PARITY.md). These planned features are not
+implied by the current command names.
+
+Free bytes: **F 367; MON A/B 67 each; E 981; WB2 273**. Explicit MAINT/CLOCK loads
+borrow RAM 4800-66FF; application RAM while loaded is 0200-47FF. M1/W do not load
+that module. The refined layout saves 2KB RAM and one flash sector against the
+earlier 9KB prototype. Restoring owner RAM evicts WB2; explicit commands reload
+it from flash. See the acceptance record for measured sizes and qualification.
 
 > Give me 4KB, I can give you 4 boards.
 

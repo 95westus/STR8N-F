@@ -1,31 +1,33 @@
-# MON A/B g00000006: bank prompt and WB1 commands
+# MON A/B g00000008: board-stored services
 
-MON A/B **0.1.0-dev g00000006** provides the same commands in A and B, on frozen
-N-F 0.3.0 / BASE1 / PR05. This is a development monitor, not a replacement N-F
-release. The [g6 / WB1 acceptance](MON_AB_G6_2512_ACCEPTANCE.md) covers installed
-2512 A/B and the physical B default. G4's force evidence is retained in its
-[earlier receipt](../monitors/validation/2512-mona-g00000004-install.json).
+STR8-N **0.1.0-dev g00000008** is installed in both slots on 2512, using frozen
+N-F 0.3.0 / BASE1 / PR05. [Acceptance](MON_AB_G8_2512_ACCEPTANCE.md) records both
+slot checks, physical saved-default B boot and exact owner RAM/ZP restoration.
+The prompt B0> through B3> shows the selected data bank; slot identity stays
+in the banner. Q/reentry starts with data bank 3 again.
 
-The [WB1 g3 module](MONA_STORE.md) adds AREA/Store, Table/Restore and explicit
-read-only EDU/SRAM status. It is RAM-qualified, not stored in flash. Load it with L
-when needed; restoring owner RAM evicts it. No persistent module sector has
-been allocated.
+M1/W use the optional E dispatcher without borrowing owner RAM. MAINT or CLOCK
+explicitly loads WB2 g3 from the B2:8/9 flash bundle; no host BIN is needed.
+It borrows RAM 4800-66FF, leaving application RAM 0200-47FF while loaded. Owner
+restoration evicts it; the next explicit tool load retrieves it from flash.
+Use MAINT then Q to load it before ordinary T/S/R/BATCH commands if absent.
 
-The monitor prompt is B0> through B3> for the selected data bank. Active MON A/B
-stays in the banner. A monitor restart/HOLD starts with data bank3 again.
-The g6 trial had one unplanned D rotation; its raw history was restored and the
-extra erase retained in the count. See the acceptance/incident record above.
-
-The Mona product name is retired. This manual describes the exact existing g6
-bytes, whose banner and filenames still use that historical name. New source
-identity is STR8-N / MON A/B. [Full 2.0b35 parity](MON_B35_PARITY.md), including
-BATCH, AUTO flash/SSRAM T/S/R and APPS, remains unfinished.
+CLOCK is a read-only page. FLASH currently aliases the workbench. Advanced
+CLOCK, the full sector editor/erase/copy, merged CONFIG menu and complete
+[2.0b35 parity](MON_B35_PARITY.md) remain open. Mona is retired; old filenames
+and immutable qualification artifacts retain their historical spelling.
 
 ## Commands
 
 | Command | Function |
 | --- | --- |
 | `?` | Help |
+| `M`, `M1`, `M2`, `M3` | Sector-format grid, layout notes, or wear counters; read-only |
+| `W` | All32 tracked erase counts in hex; shared prior-wear caveat |
+| `APPS` | Native service catalogue; compatible owner-app discovery remains planned |
+| `CLOCK` | Load from flash, read/refresh RTC, Q back to caller; no SET/history administration |
+| `MAINT`, `FLASH` | Explicitly load/enter the workbench; Q returns to the active monitor |
+| `BATCH cmd;cmd` | Loaded WB2 returning-command subset, 34 text bytes; full core/app parity open |
 | `B0`-`B3` or `B 0`-`B 3` | Select the flash data bank; RAM is common to all banks |
 | `D addr [end]` | Hex/ASCII dump; default 16 bytes; explicit larger ranges allowed |
 | `M addr byte...` | Checked ordinary owner-RAM edit, 1-8 bytes, with readback |
@@ -34,23 +36,23 @@ BATCH, AUTO flash/SSRAM T/S/R and APPS, remains unfinished.
 | `V` | Status, including the last labelled RTCC sample and tracked wear maximum |
 | `G addr` | Explicit application entry; public HOLD restarts the active monitor |
 | `L` | ROM MON A/B: enter frozen F's raw RAM BIN loader; Ctrl-C before payload returns REC> |
-| `T [bank]`, `R [bank] name\|address [L]` | Loaded WB1: Table/Restore; suffix L loads only |
-| `AREA bank first last`, `AREA` | Loaded WB1 g3: declare/close a B0/B1 owner flash window; no flash write |
-| `S bank flash RAMfirst RAMlast [name]` | Loaded WB1 g3: Store fresh SR01 bytes after YES, no erase |
+| `T [bank]`, `R [bank] name\|address [L]` | Loaded WB2: Table/Restore; suffix L loads only |
+| `AREA bank first last`, `AREA` | Loaded WB2 g3: declare/close a B0/B1 owner flash window; no flash write |
+| `S bank flash RAMfirst RAMlast [name]` | Loaded WB2 g3: Store fresh SR01 bytes after YES, no erase |
 | `HELP` | Full loaded-module help |
-| `EDU [ON\|OFF]`, `SRAM`, `WORK` | Loaded WB1: explicit session EDU policy and read-only layout/capacity |
+| `EDU [ON\|OFF]`, `SRAM`, `WORK` | Loaded WB2: explicit session EDU policy and read-only layout/capacity |
 | `Q` | Deliberately return to REC>, regardless of the saved default |
 
 Addresses and data are hexadecimal. Lowercase is accepted. Parse/overflow/
 range checks cover the whole input before an edit begins. Ctrl-C/ESC cancel
-input and stop a dump between rows. An edit already being committed is not a
+input; Ctrl-C stops a core dump between rows. Both keys stop WB2 Table/BATCH.
+An edit already being committed is not a
 transactional rollback operation. A RAM smoke image refuses G and ordinary M
 into its code pages.
 
 `TIME` replaces the development g2 clock command T. T now dispatches to the
-loaded WB1 record table; missing/corrupt modules are refused. Maps,
-apps/maintenance routing, source/ASM/DEBUG, interactive Modify and dump
-continuation/paging remain planned.
+loaded WB2 record table; missing/corrupt modules are refused. Native maps/wear and the service front door now work. Full app discovery,
+source/ASM/DEBUG, interactive Modify and dump continuation/paging remain planned.
 Dump ranges are no longer limited to 256 bytes. A range intersecting $7F00-$7FFF
 is refused as a whole; ordinary D does not inspect I/O.
 
@@ -70,7 +72,7 @@ excluded from ordinary M. The monitor verifies each stored RAM byte and echoes
 an independently read hex/ASCII row. A hardware verify failure can leave a
 partial edit and reports that explicitly.
 
-G5 additionally reserves 5000-66FF against ordinary M while WB1 passes admission.
+G8 reserves 4800-66FF against ordinary M while WB2 passes admission.
 The RAM smoke monitor declares its own code reservation to module Restore.
 Forced !M may deliberately evict the module; a bad module CRC blocks dispatch.
 
@@ -129,8 +131,38 @@ generation does not silently change that binding; the matching RAM CONFIG
 command `C B` can explicitly save B with its current generation. See the
 [2512 binding review](MON_AB_G4_DEFAULT_BINDING_SCOPE.md).
 
-The richer startup profile, EDU mode, SSRAM allocation and battery age policy
+The richer startup profile, persistent EDU policy, SSRAM allocation and battery age policy
 remain unported. Their rows use `--`; TIME supplies only a labelled device-time
 sample with no inferred zone. Battery health and prior physical wear retain
 the shared `*` caveat. No native 65C816 debugging or alternate-console
 qualification is implied by the foundation's advertised vector capabilities.
+
+
+## BATCH and board settings
+
+The current BATCH allowlist is B/bank, T/Table, ?, HELP, EDU and bare SRAM/WORK
+status. All separators and allowed command names are checked before the first
+command; individual arguments are checked when that command is reached. A
+failure stops subsequent commands. The queue is separate from console input;
+Store/YES, loaders, PREP, R/run and application handoff are excluded. Positive
+ESC and Ctrl-C cancellation passed during Table inside BATCH, with result $03
+and the following bank command unexecuted. WB2 adapts frozen F's Ctrl-C-only
+facade to recognize queued ESC; ordinary noncancel typeahead is not consumed.
+
+```text
+B3> M1
+B3> W
+B3> MAINT
+WORKBENCH> BATCH B1;T;B3
+WORKBENCH> CLOCK
+CLOCK> R
+CLOCK> Q
+WORKBENCH> Q
+B3>
+```
+
+Examples show navigation, not free-storage declarations. CONFIG/OPAQUE remain
+matching standalone N-F RAM tools: Q to REC> and use the Python console's
+existing loading workflow. The planned merged menu does not make those old
+private utility entry points compatible. The accepted
+[FLASH/MAINT design](MON_BOARD_SERVICES_PLAN.md) records the next increment.

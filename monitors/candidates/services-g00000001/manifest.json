@@ -1,0 +1,194 @@
+{
+  "schema": 1,
+  "component": "BASE1 optional services",
+  "generation": "00000001",
+  "status": "BUILD_ONLY_NOT_EXECUTION_QUALIFIED",
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "source_sha256": {
+    "monitors/src/services.asm": "1908765264f1b60b49a2c9e4132883b65d3f47bec568e21c4a123790f864ae86",
+    "monitors/src/service-layout.inc": "0e1548651af25fac1954c9bf8708f3dd2c8a95b8b113c40fd3f5ce09d591bb1e",
+    "monitors/src/service-map.inc": "45dc62b7ecb10056368679afbd71604cd64e95ec9797248130aa924c98caee79",
+    "monitors/src/service-wear.inc": "a56a89a7c24c7febc18c689b166ac41c43a3de5f7a0486522a2b77ef4551ce28",
+    "monitors/src/service-interface.inc": "f079e810b4ac4f926ee8820b66939aa581eeed3119f83b9c454b7b64746f2ee3",
+    "monitors/src/service-load.asm": "392fce77ac4228d41722d6bd57733e3ecde3330eae1f63fe910dc611963e6607",
+    "monitors/src/service-bundle-boot.asm": "84561b266927e68006481df818cff1703ebeca96c19a3932328fad94504abc0a",
+    "monitors/src/workbench-interface.inc": "eb9293c14ffa08d63085d8518473415fd4b9706f8ae944c25fa3559587ba94a1",
+    "src/core/map-wdc-catalog.inc": "a017983e7bf24bbbd90999839b1a3f3acb45e6aee53f2b909e46315633650806"
+  },
+  "private_adapter": {
+    "SB_F_SELECT": 30792,
+    "SB_F_READ": 30768,
+    "SB_F_BOOT_READ": 62735,
+    "SB_F_RECOVERY": 62127,
+    "SB_F_CRC_LO": 237,
+    "SB_F_CRC_HI": 41
+  },
+  "artifacts": {
+    "STR8N-SERVICES-g00000001-E.bin": {
+      "variant": "E",
+      "bytes": 4096,
+      "sha256": "3104851c29bc07f5585ce7c98fcac9b836911774645ed9e7deec662764e5522f",
+      "linked_bytes": 3072,
+      "free_bytes": 1022,
+      "origin": "E000",
+      "command_entry": "E008"
+    },
+    "STR8N-SERVICES-g00000001-RAM.bin": {
+      "variant": "RAM",
+      "bytes": 4096,
+      "sha256": "a4127f4d1c557ae44e89848d82ac3b3dd0a5f58acb6f30de16c5e3d243777217",
+      "linked_bytes": 3072,
+      "free_bytes": 1022,
+      "origin": "2000",
+      "command_entry": "2008"
+    },
+    "STR8N-SERVICES-g00000001-B2-8000.bin": {
+      "variant": "B2 bundle",
+      "bytes": 8192,
+      "sha256": "1ef8e295c36a89187a50de00b8e6d0989e690c1b4e554a6cc359887f50c1bff2",
+      "sectors": [
+        "B2:8",
+        "B2:9"
+      ],
+      "module_origin": "8200",
+      "boot_entry": "8000",
+      "loader_bytes": 237,
+      "prefix_bytes": 44,
+      "free_flash_tail_bytes": 512
+    },
+    "STR8N-MON-SERVICES-g00000008-RAM.bin": {
+      "variant": "RAM trial composite",
+      "bytes": 11776,
+      "sha256": "7eaa69f61e9b6c53f2785f6209dca60adfd8db3e89796256094c50df922fbe1d",
+      "RAM": "0200-2FFF",
+      "service_origin": "2000",
+      "core_generation": "00000008"
+    }
+  },
+  "build_passes": 1,
+  "assembler_linker_invocations": 8,
+  "workbench_manifest": "monitors\\candidates\\wb2-g00000002-r2\\manifest.json",
+  "monitor_manifest": "monitors\\candidates\\g00000008\\manifest.json",
+  "readonly_commands": [
+    "M1",
+    "M2",
+    "M3",
+    "W",
+    "APPS"
+  ],
+  "readonly_RAM": "6700-69FF; no owner RAM/ZP writes",
+  "explicit_workbench_commands": [
+    "MAINT",
+    "FLASH",
+    "CLOCK"
+  ],
+  "module_RAM": "4800-66FF",
+  "CLOCK": "bounded read-only MCP79411; advanced administration remains planned",
+  "FLASH": "workbench entry only; full sector buffer/editor and journaled erase/copy remain planned",
+  "BATCH": "returning WB2 subset; no loader/flash write/application handoff",
+  "F_rebuilt": false,
+  "hardware_access": false,
+  "CPU_simulations": 0,
+  "branch_layout": {
+    "loader/services.asm": {
+      "short_branches": 39,
+      "expanded_branches": 11,
+      "conservative_bytes": 1168
+    },
+    "loader/service-map.inc": {
+      "short_branches": 49,
+      "expanded_branches": 12,
+      "conservative_bytes": 1129
+    },
+    "loader/service-wear.inc": {
+      "short_branches": 5,
+      "expanded_branches": 9,
+      "conservative_bytes": 474
+    },
+    "loader/service-load.asm": {
+      "short_branches": 17,
+      "expanded_branches": 1,
+      "conservative_bytes": 246
+    },
+    "loader/service-bundle-boot.asm": {
+      "short_branches": 1,
+      "expanded_branches": 0,
+      "conservative_bytes": 44
+    },
+    "E/services.asm": {
+      "short_branches": 39,
+      "expanded_branches": 11,
+      "conservative_bytes": 1168
+    },
+    "E/service-map.inc": {
+      "short_branches": 49,
+      "expanded_branches": 12,
+      "conservative_bytes": 1129
+    },
+    "E/service-wear.inc": {
+      "short_branches": 5,
+      "expanded_branches": 9,
+      "conservative_bytes": 474
+    },
+    "E/service-load.asm": {
+      "short_branches": 17,
+      "expanded_branches": 1,
+      "conservative_bytes": 246
+    },
+    "E/service-bundle-boot.asm": {
+      "short_branches": 1,
+      "expanded_branches": 0,
+      "conservative_bytes": 44
+    },
+    "RAM/services.asm": {
+      "short_branches": 39,
+      "expanded_branches": 11,
+      "conservative_bytes": 1168
+    },
+    "RAM/service-map.inc": {
+      "short_branches": 49,
+      "expanded_branches": 12,
+      "conservative_bytes": 1129
+    },
+    "RAM/service-wear.inc": {
+      "short_branches": 5,
+      "expanded_branches": 9,
+      "conservative_bytes": 474
+    },
+    "RAM/service-load.asm": {
+      "short_branches": 17,
+      "expanded_branches": 1,
+      "conservative_bytes": 246
+    },
+    "RAM/service-bundle-boot.asm": {
+      "short_branches": 1,
+      "expanded_branches": 0,
+      "conservative_bytes": 44
+    },
+    "bundle/services.asm": {
+      "short_branches": 39,
+      "expanded_branches": 11,
+      "conservative_bytes": 1168
+    },
+    "bundle/service-map.inc": {
+      "short_branches": 49,
+      "expanded_branches": 12,
+      "conservative_bytes": 1129
+    },
+    "bundle/service-wear.inc": {
+      "short_branches": 5,
+      "expanded_branches": 9,
+      "conservative_bytes": 474
+    },
+    "bundle/service-load.asm": {
+      "short_branches": 17,
+      "expanded_branches": 1,
+      "conservative_bytes": 246
+    },
+    "bundle/service-bundle-boot.asm": {
+      "short_branches": 1,
+      "expanded_branches": 0,
+      "conservative_bytes": 44
+    }
+  }
+}

@@ -21,4 +21,5 @@ __pycache__/
 /monitors/candidates/*/*.inc
 /monitors/candidates/*/*.s19
 /monitors/candidates/*/build-log.json
+/monitors/candidates/*/staging/
 *.jsonl

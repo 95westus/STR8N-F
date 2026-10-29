@@ -289,3 +289,13 @@ It is not execution-qualified or installed; g6 remains on 2512. The
 [RAM-only scope](MON_AB_G7_WB2_RAM_SCOPE.md) preserves every flash byte, boot
 setting and owner RAM/ZP. Automatic T/S/R for flash and SSRAM PROGRAM, APPS,
 complete BATCH and full b35 source/output RAM behavior still require integration.
+
+## G8 / board-services checkpoint
+
+[G8 acceptance](MON_AB_G8_2512_ACCEPTANCE.md) is the current installed state on
+2512. It restores M1/W directly, adds read-only CLOCK and loads WB2 from B2:8/9
+for explicit tools. The module occupies 4800-66FF, leaving 0200-47FF for apps
+while loaded. A/B retain identical commands and Bx> prompts. The earlier g7
+build-only statement is historical. See the [services plan](MON_BOARD_SERVICES_PLAN.md)
+for the next FLASH editor and merged MAINT/CONFIG work; AUTO storage, full apps,
+source/ASM/DEBUG and WORKSPACE messages remain open.

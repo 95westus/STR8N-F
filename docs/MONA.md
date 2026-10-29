@@ -2,9 +2,9 @@
 
 The Mona name is retired. New runtime banners use **STR8-N / MON A or MON B**,
 with their own monitor version and generation. Historical filenames, branch
-spelling, g1-g6 binaries and receipts stay intact. The installed g6 still has
-the old banner. [g7/WB2](MON_AB_G7_WB2.md) has built the new name but is not yet
-live-qualified or installed. No monitor binary is included in the published
+spelling, g1-g6 binaries and receipts stay intact. Both installed g8 slots use
+the new banner. [G8 acceptance](MON_AB_G8_2512_ACCEPTANCE.md) records the direct
+map/wear services, board-stored WB2 and read-only CLOCK. No monitor binary is included in the published
 N-F 0.3.0 kit.
 
 STR8N-F stays the frozen 4096-byte bootstrap/recovery foundation. MON A/B
@@ -13,7 +13,7 @@ supplies the practical monitor, richer status, applications and workbench.
 completion target, including BATCH, AUTO T/S/R on flash and SSRAM PROGRAM,
 APPS, source/ASM/DEBUG, maintenance/config/opaque access and EDU/SRAM/WORK.
 
-[G6 / WB1 g3 acceptance](MON_AB_G6_2512_ACCEPTANCE.md) records the current 2512
+[G8 acceptance](MON_AB_G8_2512_ACCEPTANCE.md) records the current 2512
 state; see the [command manual](MONA_COMMANDS.md) for implemented commands.
 Full parity remains unfinished. Retained legacy images are not automatically
 BASE1-compatible; the [compatibility review](MON_AB_COMPATIBILITY_REVIEW.md)

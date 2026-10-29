@@ -1,9 +1,15 @@
-# MON A/B common contract (g6 core and WB1)
+# MON A/B common contract
 
-This describes installed g6. The [g7/WB2 candidate contract](MON_AB_G7_WB2.md)
-adds a completion result and expanded temporary RAM module; it is built but not
-execution-qualified or installed. Its ABI/layout is deliberately versioned,
-and full 2.0b35 parity remains open.
+Current: [g8 acceptance](MON_AB_G8_2512_ACCEPTANCE.md) and the
+[command manual](MONA_COMMANDS.md). G8 A/B remain identical, use optional E
+services with scratch 6700-69FF and explicitly load WB2 at 4800-66FF from B2:8/9.
+Application RAM while loaded is 0200-47FF. The RAM qualification composite
+reserves 0200-2FFF. M1/W use E without loading WB2 or borrowing owner RAM/ZP.
+WB2 retains the versioned completion result and bounded BATCH introduced in
+[g7](MON_AB_G7_WB2.md). Full 2.0b35 parity remains open.
+
+The remaining g6/WB1 details below describe the historical core contract;
+current module addresses and ownership are superseded by the linked g8 manual.
 
 Foundation: exact N-F `v0.3.0`, F generation 00000001, BASE1 / PR05.
 F stays frozen. This contract is for a new independent monitor core, not a

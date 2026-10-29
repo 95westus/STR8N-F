@@ -78,3 +78,13 @@ shared result codes, an expanded explicitly loaded RAM module and a bounded
 BATCH subset. Each component built once; no execution qualification or install.
 The [2512 RAM-only gate](MON_AB_G7_WB2_RAM_SCOPE.md) is prepared. AUTO flash/SSRAM
 T/S/R, APPS, complete BATCH and the full workbench RAM budget remain open.
+
+## G8 installed checkpoint
+
+[G8 acceptance](MON_AB_G8_2512_ACCEPTANCE.md) supersedes the build-only g7 state:
+both identical slots are installed on 2512, with physical default-B boot,
+direct M1/W, board-stored workbench, read-only CLOCK and MAINT/FLASH entry.
+The refined module saves 2KB RAM and one flash sector against the g7 prototype.
+WORK routing, CRC refusal and BATCH cancellation have a separate repair scope.
+F stays frozen. Full AUTO T/S/R, APPS/source/ASM/DEBUG and maintenance parity
+remain required; the command manual marks current limits.

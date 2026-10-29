@@ -79,7 +79,7 @@ def report(monitor_manifest=None, workbench_manifest=None):
     filename = module_info.get('filename', 'WB1-module-5000.bin')
     module = checked(wb_path.parent/filename, module_info['bytes'], module_info['sha256'])
     version = {'WB1': 1, 'WB2': 2}[workbench['interface']]
-    require(origin in (0x4000, 0x5000) and origin+len(module) == 0x6400,
+    require(origin in (0x4000, 0x4800, 0x5000) and origin+len(module) == 0x6400,
             'Invalid module memory extent')
     require(module[:8] == b'MW'+bytes((version, len(module)//256))+b'PR05', 'Module header mismatch')
     require(binascii.crc_hqx(module, 0xffff) == 0, 'Module CRC mismatch')
@@ -90,8 +90,26 @@ def report(monitor_manifest=None, workbench_manifest=None):
                      linked_bytes=linked, reserved_bytes=2,
                      free_bytes=erased(module, linked, len(module)-2), sha256=digest(module)))
 
+    service_sources = {}
+    if (monitor_manifest is None and workbench_manifest is None
+            and dependency.get('current_service_manifest')):
+        service_path = ROOT/dependency['current_service_manifest']
+        service = read_json(service_path)
+        service_sources = service['source_sha256']
+        require(service['F_sha256'] == digest(f), 'Service foundation mismatch')
+        name, info = next((n, a) for n, a in service['artifacts'].items() if a['variant'] == 'E')
+        extension = checked(service_path.parent/name, info['bytes'], info['sha256'])
+        require(extension[:8] == b'MS\x01\x10PR05' and binascii.crc_hqx(extension, 0xffff) == 0,
+                'Service header/CRC mismatch')
+        rows.append(dict(component=f'E services g{service["generation"]}', total_bytes=len(extension),
+                         linked_bytes=info['linked_bytes'], reserved_bytes=2,
+                         free_bytes=erased(extension, info['linked_bytes'], len(extension)-2), sha256=digest(extension)))
+        name, info = next((n, a) for n, a in service['artifacts'].items() if a['variant'] == 'B2 bundle')
+        bundle = checked(service_path.parent/name, info['bytes'], info['sha256'])
+        require(bundle[512:512+len(module)] == module, 'Installed bundle/module pair mismatch')
+
     changed = []
-    for name, expected in {**monitor['source_sha256'], **workbench['sources']}.items():
+    for name, expected in {**monitor['source_sha256'], **workbench['sources'], **service_sources}.items():
         if digest((ROOT/name).read_bytes()) != expected:
             changed.append(name)
     return dict(basis='existing built binaries; not available owner storage', components=rows,

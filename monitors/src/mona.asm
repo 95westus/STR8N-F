@@ -67,7 +67,7 @@ M_PROMPT:
         CMP #'Q'
         BEQ M_QUIT
 M_MODULE:
-        JSR M_MODULE_CHECK
+        JSR M_SERVICE_CHECK
         BCC M_MODULE_MISSING
         ; A RAM-loaded monitor must not be overwritten by a module Restore.
         LDA #MON_SLOT_PAGE
@@ -75,13 +75,13 @@ M_MODULE:
         LDA #2
         BRA M_MODULE_FLOOR
 M_MODULE_RAM:
-        LDA #>(M_END+$FF)
+        LDA #MON_RAM_FLOOR
 M_MODULE_FLOOR:
-        STA WB_CLIENT_FLOOR
+        STA SB_CLIENT_FLOOR
         LDA M_BANK
         LDX #<M_LINE
         LDY #>M_LINE
-        JSR WB_COMMAND
+        JSR MON_SERVICE_BASE+8
         BCC M_SYNTAX
         STA M_BANK
         JMP M_PROMPT
@@ -322,8 +322,18 @@ M_RANGE:
 ; Parse and stage the complete edit before its first target write.
 ; RAM is common to all banks. ROM, I/O, stack and system state are excluded.
 M_MODIFY:
+        JSR M_SKIP
+        BEQ M_MODULE
+        CMP #'A'
+        BNE M_MODIFY_NUMERIC
+        LDA M_LINE+1,X
+        CMP #'I'
+        BEQ M_MODULE
+M_MODIFY_NUMERIC:
         JSR M_HEX_WORD
         BCC M_SYNTAX
+        JSR M_SKIP
+        BEQ M_MODULE
         LDA M_VALUE
         STA M_ADDR
         LDA M_VALUE+1
@@ -370,7 +380,7 @@ M_EDIT_RANGE:
         LDA #MON_SLOT_PAGE
         BNE M_EDIT_READY
         LDA M_ADDR+1
-        CMP #>(M_END+$FF)
+        CMP #MON_RAM_FLOOR
         BCC M_RANGE
         BRA M_EDIT_READY
 M_EDIT_ZP:
@@ -380,7 +390,7 @@ M_EDIT_ZP:
         CMP #$E0
         BCS M_RANGE
 M_EDIT_READY:
-        ; Valid WB2 borrows 4000-66FF; ordinary Modify respects that range.
+        ; Admitted WB2 borrows through66FF; ordinary Modify respects its base.
         LDA M_LAST+1
         CMP #>WB_ORIGIN
         BCC M_EDIT_CANCEL
@@ -704,27 +714,27 @@ M_TITLE:
 M_CPU_TEXT: DB "CPU $",0
 M_CAPS_TEXT: DB "  caps $",0
 M_OPTIONAL_TEXT:
-        DB "EDU/SSRAM: WB2 module commands",13,10,0
+        DB "EDU/SSRAM: MAINT",13,10,0
 M_BATTERY_TEXT: DB "Battery: --*",13,10,0
 M_TIME_ERROR_TEXT: DB "RTCC read refused/failed $",0
 M_WEAR_TEXT: DB "Wear: ",0
 M_MAX_TEXT: DB " tracked max $",0
 M_NO_WEAR_TEXT: DB "--*",13,10,0
 M_LIMIT_TEXT:
-        DB "-- no data; * Battery health/prior wear unverified; counts track attempts.",13,10,0
+        DB "-- no data; * Health/prior wear unverified; tracked attempts.",13,10,0
 M_BANK_TEXT: DB "Data bank B",0
 M_HELP_TEXT:
         DB "? V TIME; B0..3; D addr [end]; G addr; L RAM BIN",13,10
-        DB "M RAM / !M force: addr bytes (1-8); flash 1->0 only",13,10
-        DB "B3:C/D/F protected; no erase; Q REC",13,10
-        DB "WB2: BATCH S T R EDU SRAM WORK; L loads",13,10,0
+        DB "M/!M addr bytes (1-8); force flash 1->0",13,10
+        DB "B3:C/D/F protected; Q REC",13,10
+        DB "M1-3 W APPS CLOCK MAINT; BATCH S T R EDU SRAM WORK",13,10,0
 M_SYNTAX_TEXT: DB "REFUSED: syntax (use ?)",13,10,0
-M_INPUT_TEXT: DB "Input cancelled/rejected; no command executed.",13,10,0
+M_INPUT_TEXT: DB "Input canceled/rejected",13,10,0
 M_CANCEL_TEXT: DB "Dump cancelled.",13,10,0
 M_RANGE_TEXT: DB "REFUSED: range/entry",13,10,0
-M_VERIFY_TEXT: DB "RAM verify failed; edit may be partial.",13,10,0
-M_BAD_F_TEXT: DB "REFUSED: frozen BASE1 / PR05 required.",13,10,0
-M_MODULE_TEXT: DB "WB2 absent/invalid; load its RAM BIN with L",13,10,0
+M_VERIFY_TEXT: DB "RAM verify failed; partial edit",13,10,0
+M_BAD_F_TEXT: DB "BASE1/PR05 mismatch",13,10,0
+M_MODULE_TEXT: DB "Services absent/invalid",13,10,0
 M_END:
         ENDMOD
         END

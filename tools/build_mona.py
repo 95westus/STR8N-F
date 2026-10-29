@@ -65,7 +65,7 @@ def build(out, generation):
     private['MON_F_LOAD'] = 0xf000+f.index(load_pattern)
     crc = binascii.crc_hqx(f,0xffff)
     core_sources=('mona.asm','adapter.inc','layout.inc','rtc-read.inc','force.inc',
-                  'workbench-interface.inc')
+                  'workbench-interface.inc','service-interface.inc')
     inputs = {'monitors/src/'+name:sha((ROOT/'monitors/src'/name).read_bytes()) for name in core_sources}
     out.mkdir(parents=True)
     artifacts = {}
@@ -88,7 +88,8 @@ def build(out, generation):
             (stage/filename).write_text(body,encoding='utf-8',newline='\n')
         shutil.copyfile(ROOT/'src/include/str8n-v2-public.inc', stage/'str8n-v2-public.inc')
         declarations = dict(private, MON_SLOT_PAGE=page,
-                            MON_SLOT_CHAR=ord(variant[0]), MON_F_CRC_LO=crc&255, MON_F_CRC_HI=crc>>8)
+                            MON_SLOT_CHAR=ord(variant[0]), MON_SERVICE_BASE=0xE000 if page else 0x2000,
+                            MON_RAM_FLOOR=2 if page else 0x30, MON_F_CRC_LO=crc&255, MON_F_CRC_HI=crc>>8)
         (stage/'foundation.inc').write_text(''.join(f'{name} EQU ${value:04X}\n' for name,value in declarations.items()),
                                             encoding='ascii',newline='\n')
         entry = '        DB "SN",2,0\n        JMP M_START\n        JMP M_START\n' if page else '        JMP M_START\n'
@@ -143,9 +144,11 @@ def build(out, generation):
                   prompt='B0> through B3> follows selected data bank; active A/B remains in banner',
                   status_rows=['EDU','SSRAM','RTCC','Battery','Wear'],
                   commands=['?','V','TIME','B[0-3]','D addr [end]','M addr byte...','!M addr byte...','G addr','L','Q',
-                            'WB2 module: BATCH/S/T/R/AREA/HELP/EDU/SRAM/WORK'],
-                  workbench_bridge=dict(interface='WB2',module_RAM='4000-63FF',state_RAM='6400-66FF',
-                    admission='MW/02/24/PR05 and CRC16 zero residue over all 9216 bytes before every call',
+                            'MS services: M1/M2/M3/W/APPS/MAINT/FLASH/CLOCK; WB2: BATCH/S/T/R/AREA/HELP/EDU/SRAM/WORK'],
+                  service_dispatcher=dict(interface='MS/01/10/PR05',ROM='B3:E000-EFFF',RAM='2000-2FFF',
+                    admission='Header and zero CRC residue over all4096 bytes',owner_RAM_M1_W=False),
+                  workbench_bridge=dict(interface='WB2',module_RAM='4800-63FF',state_RAM='6400-66FF',
+                    admission='MW/02/1C/PR05 and CRC16 zero residue over all 7168 bytes before every call',
                     ordinary_Modify_respects_module=True,force_Modify_may_evict_module=True,
                     module_required=False,missing_or_corrupt_module='refused; core D/M/G/Q remain available',
                     legacy_WB1_accepted=False,completion_result='655F; 0 OK, 1 syntax/unsupported, 2 refused, 3 canceled, 4 partial'),
