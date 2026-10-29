@@ -21,3 +21,11 @@ migration remains NOT RUN; the 2609 hardware pass retains its rc1 ZIP hash.
 
 The source/package metadata published=false fields describe packaging time.
 Later publication is recorded externally without changing these archives.
+
+## Publication
+
+Published October 28, 2026, 23:35:49 America/Chicago as [v0.3.0](https://github.com/95westus/STR8N-F/releases/tag/v0.3.0).
+All nine GitHub asset sizes and SHA-256 digests matched local files;
+freeze-integrity CI passed. [Publication receipt](../validation/base1-0.3.0-publication.json).
+The release tag points to the exact packaged source checkpoint; later
+receipt commits do not change either ZIP or the frozen F.
