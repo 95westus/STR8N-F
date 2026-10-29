@@ -2,6 +2,9 @@
 
 > 4KB of firmware. One board. Up to four boot environments.
 
+For WDC W65C02SXB (65C02) and W65C816SXB (65C816 emulation), with optional
+matching W65C02EDU or W65C816EDU add-on boards. BASE1 does not require EDU.
+
 Compatible, user-supplied images run one at a time, sharing the same CPU,
 approximately 32KB RAM on supported boards, and peripherals.
 
