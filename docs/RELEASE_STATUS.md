@@ -1,5 +1,13 @@
 # STR8N-F BASE1 / PR05 release status
 
+Later hardware checkpoint: [2512 B0 write/boot and real power loss](2512_B0_POWERCUT_ACCEPTANCE.md)
+passed. CONFIG saved entry/default, an opaque image booted directly and after
+physical reset, and recovery survived power loss with an incomplete B0 image
+at a chip-idle checkpoint. Originals were restored, all older records retained,
+and F/kit assets unchanged. Restoring the incompatible original MON default
+required a guarded test-only escrow helper; normal CONFIG correctly refused it.
+Flash-pulse/torn-journal/interrupted-F and factory WDC acceptance remain open.
+
 Checkpoint: October 28, 2026. Unpublished candidate, F 0.3.0 g00000001,
 Serial Console 0.1.0. The 4096-byte F is frozen. Packaging this checkpoint
 copies existing firmware; no assembly, simulation or board access is required.

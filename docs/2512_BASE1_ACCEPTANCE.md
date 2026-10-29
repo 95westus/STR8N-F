@@ -1,5 +1,9 @@
 # 2512 upgrade and preserving BASE1 acceptance: passed
 
+Subsequent, separately authorized [B0 write/boot and power-loss tests](2512_B0_POWERCUT_ACCEPTANCE.md)
+also passed. Figures below describe the earlier preserving upgrade case;
+the newer receipt records its additional reservations.
+
 Local date October 28, 2026; physical trials recorded October 29 UTC.
 Board 2512, 65C02, COM4/FT245, Windows host. The user explicitly authorized
 one journal reservation append and the frozen 4K F replacement, followed by
