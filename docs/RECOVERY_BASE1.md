@@ -6,10 +6,13 @@ routines. Neither is a promised recovery path for erased or corrupted F.
 Interrupted-F testing is outside the installed-BASE1 runtime contract and
 remains NOT RUN. Initial installation/explicit F upgrade is a separate case.
 
-The prepared [2512 C/D interruption plan](2512_CD_RECOVERY_SCOPE_REVIEW.md)
-adds a separate source-bound RAM lab for exact partial-record completion and
-peer-erase recovery. Its hardware trial is NOT RUN. It does not turn this
-read-only service into a flash writer or relax general damaged-history refusal.
+The [2512 C/D interruption trial](2512_CD_RECOVERY_ACCEPTANCE.md) passed six
+reviewed chip-idle USB power-cycle cases using a separate source-bound RAM lab
+for exact partial-record completion, committed-record recognition and peer-erase
+recovery. Original records/images/policy/RAM were restored; F stayed unchanged.
+This does not turn the read-only service into a flash writer or relax general
+damaged-history refusal. Electrical interruption during an active flash pulse
+and arbitrary damaged layouts remain outside that pass.
 
 The matching `STR8N-F-READBACK-RAM.bin` is 3078 bytes and loads through F's raw L
 at 0200, then copies a 439-byte service to 6800. Its visible prompt is

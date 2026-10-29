@@ -1,9 +1,11 @@
 # 2512 interrupted C/D recovery: B3 scope review
 
-Prepared for review, **not authorized for execution and not run**. The owner
-requested C/D interruption recovery from REC>, with F golden, images/boot
-settings/owner RAM preserved, and B3 scope reviewed first. Board 2205 and the
-release kit remain excluded. No port has been opened for this preparation.
+The owner approved this exact scope and the
+[2512 hardware trial passed](2512_CD_RECOVERY_ACCEPTANCE.md). The original
+preparation and authorization are retained in the private evidence. The tables
+below describe the reviewed budget and checkpoints; actual results have a
+separate acceptance receipt. F remained golden, images/boot settings/owner RAM
+were preserved, and 2205 and the release kit remained excluded.
 
 ## Exact persistent footprint
 
@@ -104,7 +106,8 @@ Private 19-phase byte-exact previews, packets and driver are under:
 The preview remains reference-only until fresh live admission. The final JCR1
 template SHA-256 is
 `b92853d16b34c98c339a4f87396cfd740b230b53e112af0d50a8b6c3e4e5c0a5`.
-Hardware qualification remains NOT RUN. This proposed pass covers the named
-chip-idle interruption cases on 65C02/FT245, not every damaged layout, flash
-pulse, CPU or adapter. Any failure stops for inspection with F and escrow
-available; there is no automatic retry, extra erase or counter rollback.
+The named chip-idle interruption cases passed on 65C02/FT245. This does not
+qualify every damaged layout, flash pulse, CPU or adapter. The transport stop
+after cycle 2, read-only inspection and bounded host continuation are documented
+in the acceptance report. No flash operation was retried, and no extra erase
+or counter rollback occurred.
