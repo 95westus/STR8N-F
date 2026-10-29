@@ -6,7 +6,11 @@ physical reset, and recovery survived power loss with an incomplete B0 image
 at a chip-idle checkpoint. Originals were restored, all older records retained,
 and F/kit assets unchanged. Restoring the incompatible original MON default
 required a guarded test-only escrow helper; normal CONFIG correctly refused it.
-Flash-pulse/torn-journal/interrupted-F and factory WDC acceptance remain open.
+The separately approved [2512 WDC migration](2512_WDC_MIGRATION_ACCEPTANCE.md)
+also passed: real vendor resets/archive, public NFM1 F/D/C provisioning,
+physical BASE1 recovery, source-bound wear import and final original policy,
+images and RAM restoration. Six erases were recorded; original raw history is
+archived on the host. Flash-pulse/torn-journal/interrupted-F coverage remains open.
 
 Checkpoint: October 28, 2026. Unpublished candidate, F 0.3.0 g00000001,
 Serial Console 0.1.0. The 4096-byte F is frozen. Packaging this checkpoint
@@ -42,8 +46,8 @@ existing kit and its release manifests remain their prior package snapshot.
 
 | Gate | What remains | Release impact |
 | --- | --- | --- |
-| Frozen BASE1 hardware acceptance | 2512 reset/identity/recovery/BIN/MAP/CONFIG inspection/OPAQUE menu/READBACK and preservation passed. CONFIG save, opaque programming/boot, other supported modes/adapters and interruption coverage remain | Preserving 65C02 case closed; broader release gate remains |
-| WDC RAM migration acceptance | Real end-to-end verbose migration, physical reset boundaries, vendor startup/peripheral effects, final independent flash/RAM/ZP verification, and a documented/admitted interrupted-migration repair procedure | Blocks the promised public WDC-to-STR8N RAM migrator |
+| Frozen BASE1 hardware acceptance | 2512 reset/identity/recovery/BIN/MAP/CONFIG save/opaque programming/boot/READBACK and preservation passed, including chip-idle incomplete-image power loss. Other supported modes/adapters and flash-pulse/torn-journal/F interruption remain | Tested 65C02/FT245 cases closed; broader release gate remains |
+| WDC RAM migration acceptance | 2512 real WDC archive/reset/public NFM1 F/D/C migration and independent flash/RAM/ZP preservation passed. Other occupied layouts/platforms, peripheral effects and exercised interrupted-migration repair remain | 65C02/FT245 happy path closed; general acceptance and future kit integration remain |
 | Generic provisioning after programmer-installed F | Source implementation now complete in nf_provision_live.py; original-escrow procedure and focused host checks added. Hardware acceptance and future kit integration remain pending | F alone does not provision occupied vendor C/D; existing kit intentionally unchanged |
 | Existing-SNBT F upgrade | Known-b15 to BASE1 on 2512 passed: D300 committed before F, old records/settings/images retained, original RAM restored. Failure/interruption and 816 coverage remain | Happy path closed; full/damaged journals still refused. Future kit integration pending |
 | Console operator acceptance | Native F1-F12/help/file/log dialogs, exact normal loading/cancellation and real-port disconnect deferral passed on 2512/BASE1 | Individual button aliases and other supported host/adapter coverage remain |
@@ -51,10 +55,11 @@ existing kit and its release manifests remain their prior package snapshot.
 The existing-SNBT upgrade is implemented separately in source; see
 [its transaction](JOURNAL_F_UPGRADE.md). Live C/D provisioning is also implemented
 in source; see [its procedure](LIVE_CD_PROVISIONING.md).
-The user lifted the flashing hold only for the completed 2512 reservation/F
-trial. CONFIG/opaque writes, power cuts, other boards and WDC migration were
-not authorized by that approval. Those remaining gates require a separate
-approved target/fixture and scope. Board 2205 remains excluded.
+The user separately authorized the completed 2512 reservation/F upgrade,
+B0 CONFIG/opaque tests, B0 power loss, and the reviewed six-erase current-chip
+WDC trial. Those approvals do not authorize other boards or additional F/C/D
+fault tests. Board 2205 remains excluded. Existing release kit assets stay at
+their earlier package snapshot until the user authorizes a kit update.
 
 An earlier programmer-only release could explicitly omit WDC migration and
 existing-SNBT upgrade support, but it would still need frozen-BASE1 hardware

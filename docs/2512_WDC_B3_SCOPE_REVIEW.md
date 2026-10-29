@@ -1,17 +1,19 @@
 # 2512 WDC migration: B3 scope review
 
-Review only. The user authorized WDC migration subject to reviewing B3 first,
-then chose "continue current flash" instead of a spare. The original review
-below covered the migration transaction. The additional current-chip setup
-pass is detailed next and still needs that expanded scope reviewed before
-execution. Board 2205 is excluded. Frozen F source/bytes and kit ZIPs remain
-unchanged; temporary fixture programming would replace the installed F.
+Reviewed scope, subsequently approved and completed: the user explicitly
+approved the expanded six-erase current-chip trial. See the
+[actual acceptance result](2512_WDC_MIGRATION_ACCEPTANCE.md). The original
+review below covered the migration transaction; current-chip setup added a
+second F/D/C pass. Board 2205 stayed excluded. Frozen F source/release bytes
+and kit ZIPs are unchanged; the installed F was temporarily replaced with
+WDC, then restored to the exact frozen BASE1 image.
 
 ## Current-chip preparation adds three erases
 
-After the completed B0 power-loss case, 2512 is at REC> with original images,
-policy and RAM restored. It has 29 valid records, sequence 961, C/D/F counts
-47/27/22, B0:9 count 9. DD/DE are blank; DF remains reserved.
+At the reviewed starting checkpoint after the B0 power-loss case, 2512 was
+at REC> with original images, policy and RAM restored: 29 valid records,
+sequence 961, C/D/F counts 47/27/22 and B0:9 count 9. DD/DE were blank and
+DF reserved. The linked acceptance receipt records the later final state.
 
 | Stage | Exact writes | Accounting / retained evidence |
 | --- | --- | --- |
@@ -54,9 +56,9 @@ is not executed. Final REC>, port released, exact frozen BASE1 F restored.
 
 Prepared private plan and original full-chip recovery bytes:
 `C:\SRC\STR8-N\output\qualification\2512-closeout-20261028-r1\wdc-current-scope`.
-Execution remains gated by `--execute-reviewed-six-erases`; no setup/migration
-flash command has been sent. Fresh live double-capture admission is mandatory
-immediately before setup. On failure: keep power, stop without retry, retain
+Execution used `--execute-reviewed-six-erases` after the explicit approval and
+fresh live double-capture admission. The six-erase happy path passed.
+For a future failure: keep power, stop without retry, retain
 escrow/intent; use the identified T48 III/Xgpro if ROM recovery is unavailable.
 No deliberate F/C/D interruption is included in this happy-path conversion.
 The original chip capture is a recovery reference, not an automatic rollback
