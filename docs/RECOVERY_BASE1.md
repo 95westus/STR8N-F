@@ -1,5 +1,11 @@
 # BASE1 independent readback and owner-RAM restoration
 
+Recovery assumes [golden F](GOLDEN_F_RECOVERY_SCOPE.md): valid, verified and
+unchanged. REC> runs in F, and the RAM service below relies on matching F CRC
+routines. Neither is a promised recovery path for erased or corrupted F.
+Interrupted-F testing is outside the installed-BASE1 runtime contract and
+remains NOT RUN. Initial installation/explicit F upgrade is a separate case.
+
 The matching `STR8N-F-READBACK-RAM.bin` is 3078 bytes and loads through F's raw L
 at 0200, then copies a 439-byte service to 6800. Its visible prompt is
 `RAM SERVICE BASE1> `. This is a new fixed-range protocol; old `RAM SERVICE>`
@@ -37,5 +43,7 @@ has not been added to the existing release kit.
 
 The authorized [2512 BASE1 case](2512_BASE1_ACCEPTANCE.md) exercised this service
 on real 65C02 hardware: independent full-bank CRC/SHA checks, full RAM/ZP
-restoration and verified return to REC>. Broader CPU/platform, fault paths and
-the complete WDC migrator integration remain unqualified. No CPU model ran.
+restoration and verified return to REC>. The later
+[2512 WDC migration](2512_WDC_MIGRATION_ACCEPTANCE.md) also passed its real
+integration and restoration path. Broader CPU/platform and remaining fault
+paths retain their separate qualification limits. No CPU model ran.

@@ -3,6 +3,25 @@
 Accepted direction: 2026-10-28. This document describes the release being
 prepared; an implemented component is not hardware-qualified by this plan.
 
+## Golden-F recovery boundary
+
+Owner direction: "stay in rec>" and "we assume f is golden." The installed,
+verified frozen F is the recovery anchor for BASE1 runtime. Normal recovery
+procedures leave B3:F intact and use REC> to load matching RAM tools. Recovery
+qualification concerns RAM transfers, opaque images and the C/D journal.
+
+Deliberately erasing or partly programming F is outside this runtime contract.
+Interrupted-F fault tests remain NOT RUN; their runtime gate is closed by this
+explicit scope assumption, not by a hardware pass. This changes no F bytes,
+generation, ABI or hardware write protection. See the
+[current B3 scope](GOLDEN_F_RECOVERY_SCOPE.md).
+
+Initial programmer/WDC installation must verify F and reach REC> before this
+assumption applies. A failure while first installing or explicitly upgrading F
+still needs a separately admitted repair path; automatic recovery from that
+failure has not been qualified. The installation and upgrade tools remain
+separate from ordinary recovery with golden F.
+
 ## Persistent footprint
 
 Only B3:F and the C/D journal belong to N/F. B0-B2 and B3:8/9/A/B/E are user
