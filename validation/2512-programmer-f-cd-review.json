@@ -1,0 +1,67 @@
+{
+  "CPU": "65C02",
+  "CPU_simulations": 0,
+  "F_builds": 0,
+  "F_erases": 0,
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "F_writes": 0,
+  "NFC1_template_sha256": "24d984119fde4cf53abe4a788ea821b72317f0ab24de331af95a90739e764172",
+  "RAM_lab_builds": 1,
+  "USB_serial": "A10MQFLCA",
+  "automatic_approval_review_rejection": "Creation of executable COM4 driver rejected before exact four-erase and journal-replacement approval",
+  "board": "2512",
+  "board_2205_excluded": true,
+  "executable_driver_created": false,
+  "execution_blocked_until_exact_scope_approval": true,
+  "existing_kit_hashes_unchanged": true,
+  "final_counts_proposed": {
+    "C": 52,
+    "D": 32,
+    "F": 24
+  },
+  "final_records_proposed": 3,
+  "final_sequence_proposed": 1000,
+  "flash_simulations": 0,
+  "hardware_access": false,
+  "original_counts": {
+    "C": 50,
+    "D": 30,
+    "F": 24
+  },
+  "original_policy_config_generation_and_RAM_restoration_required": true,
+  "original_raw_records_archived_not_restored_on_chip": true,
+  "original_records": 20,
+  "original_sequence": 996,
+  "physical_resets_proposed": 4,
+  "power_cuts": 0,
+  "private_packet_sha256": {
+    "fixture-engine.bin": "973da2bbb757038062c0a1b66c0ca505348be7cfb1e38d41746341febe13cd64",
+    "fixture-loader.bin": "858fe16dcb4e9a3423b12b411efa3903340671d9c553e9a0ffe66f64887f39e3",
+    "fixture-transfer-0.bin": "f47a8ec3e9aff2318d896942282ad4fe37d6391c82914f54a5da8a37de1300c6",
+    "fixture-transfer-1.bin": "f47a8ec3e9aff2318d896942282ad4fe37d6391c82914f54a5da8a37de1300c6",
+    "history-import.json": "42fd99f1a93e2f7f701d46060ee239e74a9e6cecd7e7a591acd5d245800631d9",
+    "policy-engine.bin": "05e051ae54584f9de9635468eb05775c4274b1adddd756f8d443a4f7b1063980",
+    "policy-loader.bin": "735746d0a2c22b1a1af3c078a4d045437ea8a54582e82062c965781629d91a2d"
+  },
+  "private_scope_sha256": "21f8d7fe725297ac58660640ffecef518c6e96f06027236a687324fbcd6062ac",
+  "public_classifier_and_writer_unchanged": true,
+  "release_kit_updated": false,
+  "schema": 1,
+  "scope_document": "docs/2512_PROGRAMMER_F_CD_SCOPE_REVIEW.md",
+  "scope_document_sha256": "23caf8301cd61a52431876e2c34388c2af44f7cfcff7a3f662913dc4f9a020cc",
+  "sector_erases": {
+    "C": 2,
+    "D": 2
+  },
+  "source_sha256": {
+    "migration-host/nf_migrate.py": "df1649f648a35d8592d3be035abf61abe1c53111c128d78512e97c09ed45885f",
+    "migration-host/nf_migrate_live.py": "1f718c0f0af93ed12fa1fbfd0a5a0628894e082ceb6d735c6d177429d4a9647f",
+    "migration-host/nf_provision_live.py": "6bf56212fb6d1c0aa41bf0e6cfc4fed52270408929bf4362598515259c33ccb8",
+    "migrator/build.py": "6303d994b4113b647781f69c7048f3b4e6492928c75f13a41d228535d86c1ae7",
+    "migrator/payload/template.bin": "794cc2cb3dc3ea514b4994b4661317cce4e6cb7e9d5dc6a77485a5d3dc682728",
+    "src/core/boot-symbols.inc": "c8675574f76489dff7563dc14395556e167b618168a25551f0235f7ac71d4cc0",
+    "tools/build_cd_provisioning_lab.py": "ec89004fe4dff16648b85c97b74f1a43eedca311fd4c9f64031b9b085992caaa",
+    "tools/nf_recovery.py": "441e17ed66efc5378098f6a0a557556d783f3642ac88e178a227bc50782677fb"
+  },
+  "status": "PREPARED_SCOPE_APPROVAL_PENDING_HARDWARE_NOT_RUN"
+}

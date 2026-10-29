@@ -8,6 +8,9 @@ raw-L relocation wrapper. No assembly or change to frozen F is needed.
 Status: focused host admission/framing/ordering checks passed. No physical
 device, CPU model or flash model has qualified this new path. It remains
 behind `--allow-unqualified`. The existing release kit has not been updated.
+The [2512 C/D scope review](2512_PROGRAMMER_F_CD_SCOPE_REVIEW.md) now details
+the proposed no-power-cut hardware trial. It awaits exact four-erase and
+on-chip journal replacement approval; preparation is not hardware acceptance.
 This source command requires the complete source checkout, including
 `migrator/build.py` for the existing pure wrapper generator. Future kit
 integration is separate work; do not copy this file alone into an old kit.
