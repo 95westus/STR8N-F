@@ -5,12 +5,13 @@ separate F-recovery route; it never uses the WDC debugger or programs F.
 It reuses the existing NFM1 engine and generates only its per-run plan and
 raw-L relocation wrapper. No assembly or change to frozen F is needed.
 
-Status: focused host admission/framing/ordering checks passed. No physical
-device, CPU model or flash model has qualified this new path. It remains
-behind `--allow-unqualified`. The existing release kit has not been updated.
-The [2512 C/D scope review](2512_PROGRAMMER_F_CD_SCOPE_REVIEW.md) now details
-the proposed no-power-cut hardware trial. It awaits exact four-erase and
-on-chip journal replacement approval; preparation is not hardware acceptance.
+Status: [2512 hardware acceptance](2512_PROGRAMMER_F_CD_ACCEPTANCE.md)
+passed the reviewed existing-journal no-op and occupied non-SNBT first-journal
+paths on 65C02/FT245, with source-bound history import and independent owner
+preservation. The [C/D scope](2512_PROGRAMMER_F_CD_SCOPE_REVIEW.md) used four
+erases, zero F writes and no power cuts. Other layouts/platforms and interrupted
+provisioning remain unqualified; `--allow-unqualified` remains explicit.
+No CPU or flash model ran. The existing release kit has not been updated.
 This source command requires the complete source checkout, including
 `migrator/build.py` for the existing pure wrapper generator. Future kit
 integration is separate work; do not copy this file alone into an old kit.
@@ -95,8 +96,8 @@ erase intent and fsynced phase/results. It must not enter Git or a public kit.
 ## Explicit execution, after separate authorization
 
 The implementation accepts `--execute` in addition to the above arguments,
-with a fresh output directory. No execution is authorized or performed by
-this documentation checkpoint. Hardware acceptance is still required.
+with a fresh output directory. The reviewed 2512 trial exercised this entry;
+other platforms/layouts and interrupted provisioning remain unqualified.
 
 Execution repeats live capture and planning; it never replays an old plan.
 The rendered 8192-byte engine is wrapped for L at 0200, relocated backwards
@@ -134,7 +135,8 @@ Failed/partial operations are not resumed automatically. Retain power, escrow,
 bank captures and phase logs for an inspected recovery procedure. Qualification
 of interrupted-migration repair remains a separate release gate.
 
-Operator acceptance must still prove actual F reset/loading, C/D commit and
-wear accounting, power/interruption behavior, independent preservation and
-original-RAM restoration on supported hardware. Board 2205 is excluded from
-current work. No release kit was rebuilt or updated for this implementation.
+The 2512 acceptance proves real F reset/loading, C/D commit and wear
+accounting, independent flash preservation and original-RAM restoration for
+the declared happy path. Power/interruption behavior, other occupied layouts
+and other supported platforms retain separate qualification limits.
+Board 2205 was excluded. No release kit was rebuilt or updated.

@@ -46,8 +46,10 @@ first helper upload; a dump taken afterward cannot recover the overwritten
 prefix. The implemented [live C/D route](LIVE_CD_PROVISIONING.md) requires
 explicit original pre-helper escrow, binds it to the selected USB/CPU, saves
 it durably before loading, and restores/verifies it at completion. No implicit
-disposable-RAM path is supplied. This source command remains unqualified and
-has not been added to the existing release kit.
+disposable-RAM path is supplied. Its reviewed
+[2512 hardware entry](2512_PROGRAMMER_F_CD_ACCEPTANCE.md) passed the no-op and
+occupied non-SNBT provisioning cases. Other platforms/layouts and interrupted
+provisioning remain unqualified; the existing release kit is unchanged.
 
 The authorized [2512 BASE1 case](2512_BASE1_ACCEPTANCE.md) exercised this service
 on real 65C02 hardware: independent full-bank CRC/SHA checks, full RAM/ZP

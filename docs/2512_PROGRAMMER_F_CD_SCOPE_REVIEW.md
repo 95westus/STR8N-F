@@ -1,9 +1,11 @@
 # 2512 programmer-installed F: C/D provisioning scope review
 
-Prepared, not executed. The owner requested this gate next, with C/D scope
-reviewed first, F golden, images/boot settings/owner RAM preserved, no power
-cuts, and 2205 and the release kit excluded. No serial port has been opened.
-The exact four-erase and on-chip journal replacement scope below awaits approval.
+The owner approved this exact scope and the
+[2512 public provisioning trial passed](2512_PROGRAMMER_F_CD_ACCEPTANCE.md).
+The tables below retain the reviewed four-erase and on-chip journal replacement
+budget. F stayed golden; images, boot settings and owner RAM were preserved.
+No power cuts occurred, and 2205 and the release kit remained excluded.
+The original preparation/approval and exact packets remain in private evidence.
 
 ## Why a fixture is required
 
@@ -120,11 +122,12 @@ An initial host preparation assertion used the wrong classifier label; it
 stopped without hardware access, was corrected, and needed no RAM rebuild.
 The first incomplete preparation remains separate from the completed review.
 
-Automatic approval review rejected creation of the executable COM4 trial
-driver before approval of this exact four-erase/journal-replacement scope.
-No driver was created and no execution occurred. After scope approval, finish
-and inspect that driver, bind the public fresh plan before Y, and seal its
-source/packet hashes before opening COM4. The hardware gate remains open.
+Automatic approval review initially rejected creation of the executable
+COM4 trial driver before exact scope approval. The owner then explicitly
+approved the four-erase/journal-replacement trial. The driver was created,
+inspected and sealed afterward, and bound the public fresh plan before Y.
+The reviewed 2512 happy-path hardware gate is now closed; broader limits below
+remain. No hardware action preceded approval.
 
 This happy-path trial addresses the separate programmer-installed-F entry on
 2512/65C02/FT245. It does not qualify every occupied vendor layout, 65C816,
