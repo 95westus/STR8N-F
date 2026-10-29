@@ -2,6 +2,17 @@
 
 > 4KB of firmware. One board. Up to four boot environments.
 
+For WDC's **W65C02SXB** and **W65C816SXB** boards:
+
+| SXB board | N-F CPU mode | Optional matching EDU add-on |
+| --- | --- | --- |
+| W65C02SXB | 65C02 | W65C02EDU |
+| W65C816SXB | 65C816 emulation | W65C816EDU |
+
+The EDU add-ons are optional; BASE1 boot/recovery does not require EDU.
+See [WDC's board descriptions](https://wdc65xx.com/Single-Board-Computers)
+for the hardware. N-F's tested scope is listed below.
+
 Choose among compatible, user-supplied images in four selectable flash banks.
 One environment runs at a time on the same physical CPU, RAM (approximately
 32KB on the supported boards) and peripherals. Applications and operating
