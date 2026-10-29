@@ -12,7 +12,7 @@ Branch: `codex/mona-monb`. Foundation: immutable N-F `v0.3.0`,
 | 2 | Define the shared monitor contract: entry/reentry, identity, console, parsing, bank selection, RAM/scratch, application launch and deliberate recovery return | Written interface and memory allocation; minimal command set and optional-provider behavior defined; no F changes | [G2 contract recorded](MON_AB_CONTRACT.md); expanded usability target specified separately |
 | 3 | Implement the minimal shared Mona core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | A/B/RAM candidates built once; exact hashes qualified on 2512 in checkpoint 4 |
 | 4 | Qualify A and B as independent occupants using the same core | Correct slot/header/CRC/private binding and separate identity; authorized real-board entry, commands, handoff/return and preservation checks pass for both | [2512 acceptance passed](MON_AB_2512_ACCEPTANCE.md); originals and owner RAM restored |
-| 5 | Complete the practical common monitor, rich startup and optional debugger/services | D/M/G/L/Q usability, familiar commands/status and compatible optional modules; A/B remain identical | [Usability plan](MONA_USABILITY_PLAN.md) now prioritizes Dump/Modify/loading; g2 RTCC RAM passed but the full monitor is unfinished |
+| 5 | Complete the practical common monitor, rich startup and optional debugger/services | D/M/G/L/Q usability, familiar commands/status and compatible optional modules; A/B remain identical | [G4 installed on 2512](MON_AB_G4_2512_ACCEPTANCE.md): Dump/Modify/force, TIME and saved B boot pass; L/maps/rich startup/DEBUG remain unfinished |
 
 Checkpoint 4 proves the small A/B foundation; it is not acceptance of the full
 usable monitor. Checkpoint 5 is incremental and does not change N-F 0.3.0.
@@ -33,8 +33,9 @@ do not require unrelated codebases.
 - Begin with inspection rather than flash/config mutation commands. Existing
   CONFIG/OPAQUE tools remain separate until an explicit integration is designed.
 - The practical monitor target includes intentional RAM Modify, loading, rich
-  startup and an optional debugger. Prioritize D/M/G/L/Q next; keep both slots
-  alike. The 264 remaining g2 slot bytes do not bound the entire feature suite:
+  startup and an optional debugger. G4 delivers inline D/M and explicit force;
+  L, interactive use and optional modules come next. Keep both slots alike.
+  The 68 remaining g4 slot bytes do not bound the entire feature suite:
   separately admitted modules may supply larger features without changing F.
 - No CPU model, offline regression group, reproduction build or speculative
   second build. Build only when the implementation is ready or changed code
@@ -56,4 +57,5 @@ That review led to the shared BASE1 contract and new core qualified in checkpoin
 clarified the goal as a highly usable monitor resembling the familiar command
 and startup experience. The [revised delivery order](MONA_USABILITY_PLAN.md)
 puts basic Dump/Modify/loading first, followed by rich startup and DEBUG.
-A/B remain identical; separate personalities are deferred. F stays frozen.
+Dump/Modify and explicit force have now passed in g4 on 2512. A/B remain
+identical; separate personalities are deferred. F stays frozen.

@@ -2,15 +2,13 @@
 
 **MON A/B development branch:** [five-checkpoint plan](docs/MON_AB_PLAN.md)
 and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
-Mona generation 1 A/B and RAM candidates were built once and passed the
-[scoped 2512 trial](docs/MON_AB_2512_ACCEPTANCE.md). Original images and owner RAM
-are restored. [Generation 2 adds an explicit RTCC reader](docs/MON_AB_RTCC_ADAPTER.md)
-whose [RAM trial passed on 2512](docs/MON_AB_G2_RAM_ACCEPTANCE.md); g2 A/B ROM
-startup remains untested. A/B remain identical at the owner's
-request. Mona remains unreleased and N-F v0.3.0 remains the frozen foundation.
-The [usable-monitor target](docs/MONA_USABILITY_PLAN.md) prioritizes Dump/Modify,
-RAM loading, familiar startup status and an optional debugger; those extensions
-are planned, not implied by the small-core acceptance.
+Mona **0.1.0-dev g00000004** is [installed and tested on 2512](docs/MON_AB_G4_2512_ACCEPTANCE.md),
+with identical A/B commands: hex/ASCII Dump, RAM Modify/readback, explicit
+`!M` force, TIME, bank selection, G and Q. Saved default B boots g4 after RESET;
+owner RAM/ZP were restored and verified afterward. F remains frozen.
+See the [command manual](docs/MONA_COMMANDS.md). L, maps, rich profile-driven
+startup and DEBUG remain the [usability target](docs/MONA_USABILITY_PLAN.md).
+Mona is unreleased; these development artifacts do not change N-F v0.3.0 downloads.
 
 > Give me 4KB, I can give you 4 boards.
 

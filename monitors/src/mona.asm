@@ -1,4 +1,4 @@
-; Shared Mona core: no flash/config writers, no legacy provider installation.
+; Shared Mona core: explicit owner-RAM Modify; no flash/config writers.
         MODULE MONA
         INCLUDE "str8n-v2-public.inc"
         INCLUDE "layout.inc"
@@ -31,6 +31,7 @@ M_RA_CHECK:
         STA M_BANK
         JSR M_STATUS
 M_PROMPT:
+        STZ M_FORCE
         LDX #<M_PROMPT_TEXT
         LDY #>M_PROMPT_TEXT
         JSR M_PUTS
@@ -40,16 +41,20 @@ M_PROMPT:
         JSR M_SKIP
         BEQ M_PROMPT
         INX
+        CMP #'!'
+        BEQ M_FORCE_NAME
         CMP #'?'
         BEQ M_HELP
         CMP #'V'
         BEQ M_VERSION
         CMP #'T'
-        BEQ M_TIME_COMMAND
+        BEQ M_TIME_NAME
         CMP #'B'
         BEQ M_BANK_COMMAND
         CMP #'D'
         BEQ M_DUMP
+        CMP #'M'
+        BEQ M_MODIFY
         CMP #'G'
         BEQ M_GO
         CMP #'Q'
@@ -58,6 +63,13 @@ M_SYNTAX:
         LDX #<M_SYNTAX_TEXT
         LDY #>M_SYNTAX_TEXT
         JMP M_MESSAGE
+M_FORCE_NAME:
+        LDA M_LINE,X
+        CMP #'M'
+        BNE M_SYNTAX
+        INX
+        INC M_FORCE
+        JMP M_MODIFY
 M_INPUT_BAD:
         JSR STR8V2_RAM_RX_RESET
         LDX #<M_INPUT_TEXT
@@ -74,6 +86,16 @@ M_VERSION:
         BCC M_SYNTAX
         JSR M_STATUS
         JMP M_PROMPT
+M_TIME_NAME:
+        LDY #0
+M_TIME_MATCH:
+        LDA M_LINE,X
+        CMP M_TIME_SUFFIX,Y
+        BNE M_SYNTAX
+        INX
+        INY
+        CPY #3
+        BCC M_TIME_MATCH
 M_TIME_COMMAND:
         JSR M_END_ARGS
         BCC M_SYNTAX
@@ -150,8 +172,7 @@ M_DUMP_PREFLIGHT:
         STA M_LAST+1
         SBC M_FIRST+1
         BCC M_RANGE
-        BNE M_RANGE
-        STZ M_LEFT+1
+        STA M_LEFT+1
         INC M_LEFT
         BNE M_DUMP_IO
         INC M_LEFT+1
@@ -191,6 +212,39 @@ M_DUMP_BYTE:
         LDA M_INDEX
         CMP M_ROW
         BCC M_DUMP_BYTE
+M_DUMP_PAD:
+        LDA M_INDEX
+        CMP #16
+        BCS M_DUMP_ASCII
+        LDA #' '
+        JSR STR8V2_RAM_PUTC
+        JSR STR8V2_RAM_PUTC
+        JSR STR8V2_RAM_PUTC
+        INC M_INDEX
+        BRA M_DUMP_PAD
+M_DUMP_ASCII:
+        LDA #' '
+        JSR STR8V2_RAM_PUTC
+        LDA #'|'
+        JSR STR8V2_RAM_PUTC
+        STZ M_INDEX
+M_ASCII_BYTE:
+        LDX M_INDEX
+        LDA M_BUFFER,X
+        CMP #32
+        BCC M_ASCII_DOT
+        CMP #127
+        BCC M_ASCII_OUT
+M_ASCII_DOT:
+        LDA #'.'
+M_ASCII_OUT:
+        JSR STR8V2_RAM_PUTC
+        INC M_INDEX
+        LDA M_INDEX
+        CMP M_ROW
+        BCC M_ASCII_BYTE
+        LDA #'|'
+        JSR STR8V2_RAM_PUTC
         JSR STR8V2_RAM_NEWLINE
         CLC
         LDA M_ADDR
@@ -217,6 +271,99 @@ M_DUMP_CANCEL:
 M_RANGE:
         LDX #<M_RANGE_TEXT
         LDY #>M_RANGE_TEXT
+        JMP M_MESSAGE
+; Parse and stage the complete edit before its first target write.
+; RAM is common to all banks. ROM, I/O, stack and system state are excluded.
+M_MODIFY:
+        JSR M_HEX_WORD
+        BCC M_SYNTAX
+        LDA M_VALUE
+        STA M_ADDR
+        LDA M_VALUE+1
+        STA M_ADDR+1
+        STZ M_ROW
+M_EDIT_PARSE:
+        JSR M_HEX_WORD
+        BCC M_SYNTAX
+        LDA M_DIGITS
+        CMP #3
+        BCS M_SYNTAX
+        LDY M_ROW
+        LDA M_VALUE
+        STA M_EDIT,Y
+        INC M_ROW
+        JSR M_SKIP
+        BEQ M_EDIT_RANGE
+        LDA M_ROW
+        CMP #8
+        BCS M_SYNTAX
+        BRA M_EDIT_PARSE
+M_EDIT_RANGE:
+        LDA M_ROW
+        DEC A
+        CLC
+        ADC M_ADDR
+        STA M_LAST
+        LDA M_ADDR+1
+        ADC #0
+        STA M_LAST+1
+        BCS M_RANGE
+        LDA M_FORCE
+        BNE MF_PREFLIGHT
+        LDA M_ADDR+1
+        BEQ M_EDIT_ZP
+        CMP #2
+        BCC M_RANGE
+        CMP #$67
+        BCS M_RANGE
+        LDA M_LAST+1
+        CMP #$67
+        BCS M_RANGE
+        ; The RAM smoke image additionally protects its complete code pages.
+        LDA #MON_SLOT_PAGE
+        BNE M_EDIT_READY
+        LDA M_ADDR+1
+        CMP #>(M_END+$FF)
+        BCC M_RANGE
+        BRA M_EDIT_READY
+M_EDIT_ZP:
+        LDA M_LAST+1
+        BNE M_RANGE
+        LDA M_LAST
+        CMP #$E0
+        BCS M_RANGE
+M_EDIT_READY:
+        JSR STR8V2_RAM_CHECK_CANCEL
+        BCS M_INPUT_BAD
+        LDA M_ADDR
+        STA M_PTR
+        LDA M_ADDR+1
+        STA M_PTR+1
+        LDA F_NMI_HOLD
+        PHA
+        LDA #1
+        STA F_NMI_HOLD
+        LDY #0
+M_EDIT_COPY:
+        LDA M_EDIT,Y
+        STA (M_PTR),Y
+        CMP (M_PTR),Y
+        BNE M_EDIT_FAILED
+        INY
+        CPY M_ROW
+        BCC M_EDIT_COPY
+        PLA
+        STA F_NMI_HOLD
+        LDA M_ROW
+        STA M_LEFT
+        STZ M_LEFT+1
+        ; Echo independently read bytes, using the normal hex/ASCII row.
+        JMP M_HAVE_ROW
+M_EDIT_FAILED:
+        PLA
+        STA F_NMI_HOLD
+        LDX #<M_VERIFY_TEXT
+        LDY #>M_VERIFY_TEXT
         JMP M_MESSAGE
 M_GO:
         JSR M_HEX_WORD
@@ -506,9 +653,11 @@ M_UNSUPPORTED:
         RTS
 
         INCLUDE "rtc-read.inc"
+        INCLUDE "force.inc"
         INCLUDE "adapter.inc"
 M_RA: DB "RA",1,13
 M_HEX_DIGITS: DB "0123456789ABCDEF"
+M_TIME_SUFFIX: DB "IME"
 M_PROMPT_TEXT: DB "Mona",MON_SLOT_CHAR,"> ",0
 M_TITLE:
         DB 13,10,"Mona 0.1.0-dev gMON_GENERATION_TEXT / ",MON_SLOT_LABEL,13,10
@@ -524,21 +673,24 @@ M_WEAR_TEXT: DB "Wear: ",0
 M_MAX_TEXT: DB " tracked max $",0
 M_NO_WEAR_TEXT: DB "--*",13,10,0
 M_LIMIT_TEXT:
-        DB "-- no reported data; T explicitly reads EDU Rev D RTCC.",13,10
+        DB "-- unavailable; TIME reads EDU RTCC.",13,10
         DB "* Battery condition/prior flash wear unverified; counts are tracked attempts.",13,10,0
 M_BANK_TEXT: DB "Data bank B",0
 M_HELP_TEXT:
         DB "? help; V status; B [0-3] data bank",13,10
-        DB "T sample EDU Rev D RTCC; idle PA0/PA7 inputs required",13,10
-        DB "D addr [end] inspect 1-256 bytes; G addr application handoff",13,10
-        DB "Q recovery; hex addresses; no flash/config writes",13,10,0
+        DB "TIME RTCC; EDU Rev D PA0/PA7 idle inputs",13,10
+        DB "D addr [end] hex/ASCII; G addr run",13,10
+        DB "M addr byte... RAM (1-8); readback",13,10
+        DB "!M addr byte... FORCE; B3:C/D/F protected",13,10
+        DB "Q REC; hex; !M flash 1->0 only, no erase",13,10,0
 M_SYNTAX_TEXT: DB "REFUSED: syntax (use ?)",13,10,0
 M_INPUT_TEXT: DB "Input cancelled/rejected; no command executed.",13,10,0
 M_CANCEL_TEXT: DB "Dump cancelled.",13,10,0
-M_RANGE_TEXT: DB "REFUSED: range/entry (I/O and reserved regions protected)",13,10,0
-M_GO_TEXT: DB "Application handoff; public HOLD restarts the active monitor.",13,10,0
-M_BAD_F_TEXT: DB "REFUSED: matching frozen BASE1 / PR05 required. Halted.",13,10,0
-M_UNSUPPORTED_TEXT: DB "REFUSED: legacy monitor service unavailable",13,10,0
+M_RANGE_TEXT: DB "REFUSED: range/entry",13,10,0
+M_GO_TEXT: DB "Run; HOLD returns to monitor.",13,10,0
+M_VERIFY_TEXT: DB "RAM verify failed; edit may be partial.",13,10,0
+M_BAD_F_TEXT: DB "REFUSED: frozen BASE1 / PR05 required.",13,10,0
+M_UNSUPPORTED_TEXT: DB "Service unavailable",13,10,0
 M_END:
         ENDMOD
         END

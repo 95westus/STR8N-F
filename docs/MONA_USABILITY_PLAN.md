@@ -37,11 +37,12 @@ separate A/B startup trial.
 | --- | --- | --- |
 | `?` | Concise grouped help; advertise installed commands and identify unavailable modules | Basic help exists; expand as commands land |
 | `B0`-`B3` | Select the data/inspection bank; no boot-policy save | Existing parser accepts adjacent or spaced bank digit; retain both forms |
-| `D addr [end]` | Useful hex dump, ASCII column, continuation and cancel/paging | G2 has hex rows, default 16 bytes, maximum 256; expand ranges and add display usability |
-| `M addr byte...` | Modify ordinary application RAM, with complete preflight and displayed readback | **Missing; first implementation priority** |
+| `D addr [end]` | Useful hex dump, ASCII column, continuation and cancel/paging | G4 adds hex/ASCII and ranges beyond 256 bytes; paging/continuation remain planned |
+| `M addr byte...` | Modify ordinary application RAM, with complete preflight and displayed readback | G4 implements inline 1-8-byte owner ZP/RAM edits; interactive editing remains planned |
+| `!M addr byte...` | Explicit force to ZP/stack/RAM/I/O and allowed flash, no erase | G4 implements it; owner chose B3:C/D/F protection; dangerous active-system edits are not qualification tests |
 | `G addr` | Explicit application entry with a documented monitor-return convention | Basic admitted one-way launch exists; owner-application return still needs qualification |
 | `L` | Receive a host RAM BIN using the matching console workflow | Available in REC>, not yet integrated at the Mona prompt |
-| `TIME` | Fresh bounded RTCC read/display through an admitted device profile | G2 temporarily calls this `T`; add TIME and resolve that development alias before record commands ship |
+| `TIME` | Fresh bounded RTCC read/display through an admitted device profile | G4 uses TIME; g2's temporary T alias is removed and T is reserved for records |
 | `V` | Refresh the monitor's overall status display | Exists; g2 RTCC is a labelled retained sample, not an automatic new read |
 | `M`, `M1`, `M2`, `M3` | Summary/grid, ranges/reservations, tracked wear view | Existing RAM MAP tool is separate; map forms need a monitor adapter |
 | `W` | Detailed tracked wear counts with the shared caveat | G2 only displays a maximum; port the full read-only view |
@@ -59,7 +60,7 @@ Do not reuse top-level `R`, `S`, `C` or `B` for conventional debugger shortcuts:
 they already have record/config/bank meanings here. The debugger can use such
 letters inside a distinct `DEBUG>` prompt. `TIME` is the intended clock name;
 `T` must be available for the familiar record-list command. The temporary g2
-clock alias is not a released compatibility promise.
+clock alias was not a released compatibility promise; g4 reserves bare T.
 
 `M` needs deliberate disambiguation: bare M and a sole selector 1/2/3 are map
 requests; an address followed by bytes is an edit. Never execute a valid prefix
@@ -186,6 +187,7 @@ such execution/step paths remain unsupported.
 
 The order can overlap source reviews, but write-capable features get separate
 preservation scopes. Existing g1/g2 evidence stays valid for its exact bytes;
-the expanded monitor is not yet implemented or qualified. This planning change
-made no build, simulation, serial access, flash write or published-download change.
-2205 and all other boards remain untouched.
+the full expanded monitor remains unfinished. Subsequent g4 work implements
+Dump/Modify and force; see the [command manual](MONA_COMMANDS.md) and installation
+receipt. This original planning checkpoint itself made no build or board access.
+Published N-F downloads, 2205 and all other boards remain untouched.

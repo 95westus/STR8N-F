@@ -16,8 +16,10 @@ Ordinary opaque images boot through a configured bank entry. The retained
 g0034 monitor's [compatibility review](MON_AB_COMPATIBILITY_REVIEW.md) found it
 incompatible unchanged. A new common Mona core instead passed a scoped 2512
 trial. [Generation 2's RTCC adapter](MON_AB_RTCC_ADAPTER.md) passed its RAM trial
-on 2512; g2 A/B ROM startup remains untested. A and B stay identical for now at
-the owner's request.
+on 2512; g2 A/B ROM startup remains untested. [G4 is now installed on 2512](MON_AB_G4_2512_ACCEPTANCE.md),
+with Dump/Modify, explicit force, TIME and saved-default B startup tested.
+A and B stay identical for now at the owner's request. See the
+[current command manual](MONA_COMMANDS.md).
 
 Trees such as Applications / Hardware / Maintenance belong in Mona or another
 optional image. LED, buzzer, SPI workspace/message services and additional

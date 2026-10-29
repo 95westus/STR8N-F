@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import shutil
 import subprocess
-from build_system import long_branches
+from mona_branches import conservative_branches
 
 ROOT = Path(__file__).resolve().parents[1]
 sha = lambda body: hashlib.sha256(body).hexdigest()
@@ -53,23 +53,29 @@ def build(out, generation):
     ws = equs(ROOT/'src/core/worker-public-symbols.inc')
     private = dict(MON_F_READ=ws['V2W_READ'], MON_F_EXECUTE=ws['V2W_EXECUTE'],
                    MON_F_RECOVERY=bs['BOOT_RECOVERY'], MON_F_NO_SERVICE=bs['BOOT_NO_SERVICE'],
-                   MON_F_BOOT_READ=bs['BOOT_READ_RECORD'])
+                   MON_F_BOOT_READ=bs['BOOT_READ_RECORD'],MON_F_SELECT=ws['V2W_SELECT'],
+                   MON_F_BYTE=ws['V2W_BYTE']+2)
     crc = binascii.crc_hqx(f,0xffff)
     inputs = {path.relative_to(ROOT).as_posix():sha(path.read_bytes())
               for path in sorted((ROOT/'monitors/src').glob('*')) if path.is_file()}
     out.mkdir(parents=True)
     artifacts = {}
     logs = []
+    branch_layout = {}
     for variant,page,label in (('A',0xa0,'MON A'),('B',0xb0,'MON B'),('RAM',0,'RAM')):
         stage = out/variant
         stage.mkdir()
         origin = page*256+0x80 if page else 0x0200
-        for filename in ('mona.asm','adapter.inc','layout.inc','rtc-read.inc'):
+        for filename in ('mona.asm','adapter.inc','layout.inc','rtc-read.inc','force.inc'):
             body = (ROOT/'monitors/src'/filename).read_text(encoding='utf-8')
             body = body.replace('MON_SLOT_LABEL', '"'+label+'"')
             body = body.replace('MON_GENERATION_TEXT', generation_text)
             if filename != 'layout.inc':
-                body = long_branches(body, prefix='M_LONG_'+variant+'_'+re.sub(r'\W','_',filename)+'_')
+                body,info = conservative_branches(body, prefix='M_LONG_'+variant+'_'+re.sub(r'\W','_',filename)+'_')
+                branch_layout[variant+'/'+filename] = info
+                if filename=='force.inc':
+                    kernel=body.split('MF_FLASH_IMAGE:',1)[1].split('MF_FLASH_END:',1)[0]
+                    assert [line.strip() for line in kernel.splitlines() if line.strip().startswith('JMP ')]==['JMP MF_FLASH_DONE']
             (stage/filename).write_text(body,encoding='utf-8',newline='\n')
         shutil.copyfile(ROOT/'src/include/str8n-v2-public.inc', stage/'str8n-v2-public.inc')
         declarations = dict(private, MON_SLOT_PAGE=page,
@@ -92,6 +98,7 @@ def build(out, generation):
         assert set(memory) == set(range(origin,sy['M_END']))
         body = bytes(memory[address] for address in range(origin,sy['M_END']))
         assert sy['M_RA']-sy['M_EXPECT_ID'] == 40
+        assert sy['MF_FLASH_END']-sy['MF_FLASH_IMAGE']<128
         assert len(body) <= (3968 if page else 25344)
         if page:
             assert body[:4] == b'SN\x02\0' and body[4] == body[7] == 0x4c
@@ -101,6 +108,7 @@ def build(out, generation):
             for offset,value in ((12,len(body)),(14,origin+4),(16,origin+7)):
                 image[offset:offset+2] = value.to_bytes(2,'little')
             image[20:24] = b'PR05'
+            image[24] = 0xFE  # Mona install-check byte; outside F's CRC/admission fields.
             image[31] = 0
             for offset in range(32,72,2):
                 image[offset:offset+2] = sy['M_UNSUPPORTED'].to_bytes(2,'little')
@@ -124,9 +132,20 @@ def build(out, generation):
                   foundation=dependency['foundation'],source_sha256=inputs,artifacts=artifacts,
                   monitor_RAM='6A00-6AFF',owner_RAM_ROM_startup='0200-66FF unchanged',
                   status_rows=['EDU','SSRAM','RTCC','Battery','Wear'],
-                  status_limits='-- no reported data; explicit T samples EDU Rev D MCP79411; cached sample has no zone; * no physical battery/prior wear certification',
+                  commands=['?','V','TIME','B[0-3]','D addr [end]','M addr byte...','!M addr byte...','G addr','Q'],
+                  branch_layout=branch_layout,
+                  install_check=dict(offset=24,final_byte='FE',staging_byte='FF',
+                    purpose='Native !M byte-program check after a fresh monitor-sector erase; no extra erase',
+                    excluded_from_F_CRC=True),
+                  force_modify=dict(max_bytes=8,protected=['B3:C','B3:D','B3:F'],erase=False,
+                    flash_preflight='Whole command must satisfy old AND new == new; identical bytes skipped',
+                    raw_IO_readback=False,RAM_kernels=['6B00-6B7F','6D00-6D2A'],may_halt_on_system_edits=True),
+                  RAM_modify=dict(max_bytes=8,ranges=['0000-00DF','0200-66FF'],complete_preflight=True,
+                    readback=True,RAM_candidate_code_pages_protected=True,flash_writes=False),
+                  dump=dict(default_bytes=16,max_bytes='Entire valid non-I/O range',ASCII=True,cancel_between_rows=True),
+                  status_limits='-- no reported data; explicit TIME samples EDU Rev D MCP79411; cached sample has no zone; * no physical battery/prior wear certification',
                   personalities='A and B identical commands; only slot identity differs',
-                  RTCC_adapter=dict(trigger='Explicit T only; V never probes',profile='WDC EDU Rev D / MCP79411 / VIA1 PA0 SCL, PA7 SDA',
+                  RTCC_adapter=dict(trigger='Explicit TIME only; V never probes',profile='WDC EDU Rev D / MCP79411 / VIA1 PA0 SCL, PA7 SDA',
                     automatic_startup=False,RTC_data_writes=False,EEPROM_or_SRAM_access=False,
                     max_snapshot_attempts=3,SCL_wait_polls=255,owner_RAM_borrowed=False),
                   journal_access='Read selected page and verify full record CRC; no writer installed',

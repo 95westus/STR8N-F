@@ -2,7 +2,7 @@
   "schema": 1,
   "component": "MON A/B development",
   "branch": "codex/mona-monb",
-  "status": "g1-A/B-passed-on-2512; g2-RTCC-RAM-passed-on-2512; g2-ROM-startup-untested; unreleased",
+  "status": "g4-installed-on-2512; RAM-and-A/B-pass; physical-saved-default-B-pass; unreleased",
   "foundation": {
     "repository": "https://github.com/95westus/STR8N-F",
     "tag": "v0.3.0",
@@ -27,23 +27,30 @@
   "hardware_acceptance": "docs/MON_AB_2512_ACCEPTANCE.md",
   "hardware_receipt": "monitors/validation/2512-mona-0.1.0-dev-g00000001.json",
   "qualified_board": "2512 / 65C02 / FT245",
-  "current_candidate_manifest": "monitors/candidates/g00000002/manifest.json",
-  "current_candidate_review": "monitors/review/g00000002-rtcc-candidate.json",
-  "current_candidate_all_variants_qualified": false,
+  "current_candidate_manifest": "monitors/candidates/g00000004/manifest.json",
+  "current_candidate_review": "docs/MON_AB_G4_2512_ACCEPTANCE.md",
+  "current_candidate_all_variants_qualified": true,
   "current_candidate_qualification_by_variant": {
-    "RAM": "2512 / 65C02 / FT245 RTCC trial passed",
-    "A": "Built; ROM startup untested",
-    "B": "Built; ROM startup untested"
+    "RAM": "2512 / 65C02 / FT245 Dump/Modify/force/TIME trial passed",
+    "A": "F-admitted entry, native !M byte-program and handoff passed",
+    "B": "F-admitted entry, native !M byte-program, handoff and physical saved-default boot passed"
   },
   "RTCC_RAM_acceptance": "docs/MON_AB_G2_RAM_ACCEPTANCE.md",
   "RTCC_RAM_receipt": "monitors/validation/2512-mona-g00000002-RAM-rtcc.json",
+  "current_install_receipt": "monitors/validation/2512-mona-g00000004-final.json",
+  "command_manual": "docs/MONA_COMMANDS.md",
   "A_B_personalities": "Identical at owner request; distinct personalities deferred",
   "usability_plan": "docs/MONA_USABILITY_PLAN.md",
-  "next_checkpoint": "5: practical D/M/G/L/Q core and module-size review; rich startup and optional DEBUG next; A/B identical",
+  "next_checkpoint": "5: monitor L, interactive Modify/dump paging and optional status/debug modules; A/B identical",
   "hardware_access": true,
   "flashing": true,
   "trial_monitor_erases": 4,
   "F_writes": 0,
   "C_D_erases": 0,
-  "Mona_left_installed": false
+  "Mona_left_installed": true,
+  "installed_board": "2512",
+  "installed_generation": "00000004",
+  "installed_default": "B",
+  "latest_install_monitor_erases": 2,
+  "latest_install_journal_appends": 3
 }

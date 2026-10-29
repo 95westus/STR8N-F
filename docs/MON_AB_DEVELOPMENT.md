@@ -66,3 +66,18 @@ at the monitor layer with its own workspace and hook/return contract. Only F
 must remain the frozen 4KB foundation; larger features can use optional modules
 without assuming any owner sector free. No new build or board action accompanies
 this design checkpoint.
+
+## Installed increment: generation 4
+
+The owner requested installation on 2512, selected Dump/Modify first and added
+!M with B3:C/D/F protected. [G4 acceptance](MON_AB_G4_2512_ACCEPTANCE.md) records
+the exact installed A/B/RAM hashes and qualification limits. G3 was built but
+superseded before installation. G4 adds hex/ASCII and longer dump ranges, checked
+inline RAM/ZP Modify, explicit raw force, no-erase flash 1-to-0 preflight, and
+TIME naming. Both A/B remain alike. The [manual](MONA_COMMANDS.md) distinguishes
+these working commands from L/maps/DEBUG and full startup features still planned.
+
+Only A/B were erased, once each, with original images backed up. C600/C700
+retain those erase attempts; separately approved C800 binds the existing B
+default to g4. F is unchanged, original records remain exact, and post-reset
+full owner RAM/ZP readback matches escrow. Final context is MonaB>, COM4 free.
