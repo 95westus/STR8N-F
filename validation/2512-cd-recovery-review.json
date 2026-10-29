@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "status": "PREPARED_FOR_B3_REVIEW_HARDWARE_NOT_RUN",
+  "board": "2512",
+  "CPU": "65C02",
+  "USB_serial": "A10MQFLCA",
+  "F_golden": true,
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "proposed_erases": {
+    "C": 1,
+    "D": 1,
+    "F": 0
+  },
+  "proposed_USB_power_cycles": 6,
+  "proposed_final_counts": {
+    "C": 50,
+    "D": 30,
+    "F": 24
+  },
+  "reference_sequence": 965,
+  "proposed_final_sequence": 996,
+  "proposed_final_valid_records": 20,
+  "original_three_records_restored_at_original_addresses": true,
+  "images_boot_policy_owner_RAM_preservation_required": true,
+  "hardware_access": false,
+  "flash_writes_performed": 0,
+  "CPU_simulations": 0,
+  "F_builds": 0,
+  "production_CONFIG_changed": false,
+  "board_2205_excluded": true,
+  "release_kit_updated": false,
+  "scope_document": "docs/2512_CD_RECOVERY_SCOPE_REVIEW.md",
+  "helper_source_sha256": "24b2d729c2b0ba729d3ddc65ab83b9635aa923a399abf86043bba49f31d507ed",
+  "builder_sha256": "aa58969e0c3700ddf2b02e1c71eb2b024cc0ef314831e2275b3658f4ab0ec29e",
+  "template_sha256": "b92853d16b34c98c339a4f87396cfd740b230b53e112af0d50a8b6c3e4e5c0a5",
+  "scope_sha256": "683726e2681be1d0e1fa6d681655b9d6ceb6c1b6b65b6ce818db2ce69ac2bfa3",
+  "packet_manifest_sha256": "f228d2209b93773c3f8caa260869a2139b375ee03122de6251126f52744af35f",
+  "driver_sha256": "7a674e843a29833c5e7ad738f66c1eb50c6afb1745773bedbaac7ae933c654af",
+  "preparation_only_builds": {
+    "successful_RAM_builds": 3,
+    "reasons": [
+      "initial implementation",
+      "guarded peer publication after restoring original rows",
+      "clear busy LEDs at verified idle checkpoints"
+    ],
+    "F_builds": 0,
+    "CPU_models": 0
+  }
+}

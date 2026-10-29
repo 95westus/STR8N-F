@@ -7,6 +7,12 @@ runtime gate is closed by the owner's stated assumption. Interrupted initial
 F installation/explicit upgrade remains an unqualified maintenance case.
 This decision made no board, firmware or release-kit changes.
 
+Prepared next: [2512 interrupted C/D B3 scope](2512_CD_RECOVERY_SCOPE_REVIEW.md).
+The source-bound RAM lab and exact packets are ready for review: one C erase,
+one D erase and six chip-idle USB power cycles, with F untouched and original
+records/images/policy/RAM restored. Hardware is NOT RUN; no board command was
+sent during preparation. The general damaged-journal classifier remains strict.
+
 Later hardware checkpoint: [2512 B0 write/boot and real power loss](2512_B0_POWERCUT_ACCEPTANCE.md)
 passed. CONFIG saved entry/default, an opaque image booted directly and after
 physical reset, and recovery survived power loss with an incomplete B0 image
@@ -54,6 +60,7 @@ existing kit and its release manifests remain their prior package snapshot.
 
 | Gate | What remains | Release impact |
 | --- | --- | --- |
+| Interrupted C/D recovery | Source-bound lab, byte-exact phase plan and B3 review prepared. Six chip-idle interruption cases await explicit scope approval and hardware execution | Open; no fault-test pass claimed by preparation |
 | Frozen BASE1 hardware acceptance | 2512 reset/identity/recovery/BIN/MAP/CONFIG save/opaque programming/boot/READBACK and preservation passed, including chip-idle incomplete-image power loss. Other supported modes/adapters and flash-pulse/torn-journal cases remain | Golden F assumed intact; tested 65C02/FT245 cases closed; broader runtime qualification remains |
 | WDC RAM migration acceptance | 2512 real WDC archive/reset/public NFM1 F/D/C migration and independent flash/RAM/ZP preservation passed. Other occupied layouts/platforms, peripheral effects and exercised interrupted-migration repair remain | 65C02/FT245 happy path closed; general acceptance and future kit integration remain |
 | Generic provisioning after programmer-installed F | Source implementation now complete in nf_provision_live.py; original-escrow procedure and focused host checks added. Hardware acceptance and future kit integration remain pending | F alone does not provision occupied vendor C/D; existing kit intentionally unchanged |
