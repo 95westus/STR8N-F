@@ -59,3 +59,9 @@ and startup experience. The [revised delivery order](MONA_USABILITY_PLAN.md)
 puts basic Dump/Modify/loading first, followed by rich startup and DEBUG.
 Dump/Modify and explicit force have now passed in g4 on 2512. A/B remain
 identical; separate personalities are deferred. F stays frozen.
+
+The owner's full-environment clarification makes R/T/S Restore/Table/Store,
+apps, MAINT/CONFIG/OPAQUE and integrated source/ASM/DBG the completion target.
+Their existing data/component images were retained; their old command interface
+is not yet restored in Mona. Follow the [workbench acceptance workflow](MONA_USABILITY_PLAN.md)
+and prioritize reconnecting these services over further standalone D/M polish.

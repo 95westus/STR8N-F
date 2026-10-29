@@ -6,6 +6,38 @@ identical. The small g1/g2 cores are implementation checkpoints, not the final
 feature target. The next increment prioritizes everyday monitor commands over
 adding more isolated status fields.
 
+## Full workbench is the completion target
+
+The owner clarified that R/T/S **Restore/Table/Store**, apps, MAINT/CONFIG/OPAQUE
+and the source/assembler/debugger environment remain part of the intended
+product. G4's monitor commands do not replace or complete that environment.
+Larger modules are an implementation method; calling them optional does not
+remove these capabilities from the full workbench's acceptance criteria.
+
+The 2512 g4 saved readbacks confirm retained component signatures and exact
+preservation outside the replaced A/B images and appended C/D records:
+
+| Component | Retained evidence / present access | Remaining work |
+| --- | --- | --- |
+| Restore/Table/Store records | B1 SR/01 records retained | Port R/T/S command dispatch and checked record storage/loading |
+| Source editor/store | B1:9 NS/01/01 component retained | Port its version-paired assembler/storage interfaces |
+| Assembler | B1:E AP/01/01 application and continuation in F retained | Review BASE1 host calls, entry/return and source/output ownership; integrate ASM |
+| Debugger | B1:A DG/01/01 component retained | Port its private bindings/context/traps; integrate DEBUG |
+| Apps and maintenance services | B2 UX utilities and B3:8/9/E service/extension images retained | Compatible discovery, dispatch and return; no blind legacy entry |
+| CONFIG/OPAQUE/MAP | Matching host RAM BINs remain available from REC> | Provide coherent Mona launch/menu access and preservation rules |
+
+These are retention/source-inventory findings, not new execution qualification
+of old binaries under BASE1. The old A/B originals are backed up on the host.
+Only the monitor sectors were replaced; the full old command dispatcher was
+not automatically ported with the preserved services.
+
+The completion workflow is **edit source -> assemble -> Store -> Table ->
+Restore -> run -> debug -> return to Mona**, with apps and maintenance/config
+accessible from the same environment. Keep both A/B interfaces alike and F
+frozen. Next prioritize the command/module bridge, R/T/S and app/maintenance
+access, then complete source/ASM and DBG integration. Further standalone D/M
+polish does not take priority over restoring this workflow.
+
 ## Size and layer boundaries
 
 Only STR8N-F must remain the frozen **4096-byte foundation**. Its A/B admission
@@ -54,6 +86,7 @@ separate A/B startup trial.
 | `MAINT`, `SRAM`, `WORK`, `EDU` | Useful hardware/storage pages and explicit configuration | Legacy providers are not compatible merely because their signatures exist; port as optional modules |
 | `BATCH ...` | Bounded complete-command sequences with ESC cancellation | Planned after individual commands and their failure/confirmation behavior are settled |
 | `DEBUG` | Enter disassembly/register/breakpoint/step tools | Planned monitor module; details below |
+| `ASM` / source editor | Edit, assemble, retain/restore source and run generated output | Legacy B1 components retained; compatible integration is a required full-workbench deliverable |
 | `Q` | Deliberately return to REC>, regardless of the saved default | Implemented; retain |
 
 Do not reuse top-level `R`, `S`, `C` or `B` for conventional debugger shortcuts:
@@ -178,12 +211,15 @@ such execution/step paths remain unsupported.
 
 ## Delivery order and current boundary
 
-1. Practical common core: D/M/G/L/Q, bank selection, help and clear errors.
-2. Rich profile-driven startup, maps and full tracked wear view; preserve the
-   familiar TIME versus record-T distinction.
-3. Optional DEBUG: disassembly/registers, then reviewed RAM trap/step/continue.
-4. Integrated journaled flash/config/update and named-record tools.
-5. Maintenance/storage pages and batch workflows as their modules are admitted.
+1. Practical common core: retain g4 D/M/G/Q and add the load/module bridge.
+2. Reconnect Restore/Table/Store, apps and maintenance/config/opaque access,
+   preserving the familiar TIME versus record-T distinction.
+3. Integrate source editor/ASM and the complete edit/assemble/store/restore/run
+   workflow with declared source/output/workspace ownership.
+4. Integrate DEBUG: disassembly/registers, then reviewed RAM trap/step/continue
+   and reliable return to Mona.
+5. Complete rich startup, maps/wear views and storage/batch pages through the
+   same admitted modules. Preserve all of these in the full-workbench target.
 
 The order can overlap source reviews, but write-capable features get separate
 preservation scopes. Existing g1/g2 evidence stays valid for its exact bytes;

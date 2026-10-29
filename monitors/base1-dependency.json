@@ -41,7 +41,7 @@
   "command_manual": "docs/MONA_COMMANDS.md",
   "A_B_personalities": "Identical at owner request; distinct personalities deferred",
   "usability_plan": "docs/MONA_USABILITY_PLAN.md",
-  "next_checkpoint": "5: monitor L, interactive Modify/dump paging and optional status/debug modules; A/B identical",
+  "next_checkpoint": "5: module/load bridge, Restore/Table/Store, apps and MAINT/CONFIG/OPAQUE; complete integrated source/ASM/DBG workbench; A/B identical",
   "hardware_access": true,
   "flashing": true,
   "trial_monitor_erases": 4,
