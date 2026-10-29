@@ -35,5 +35,7 @@ it durably before loading, and restores/verifies it at completion. No implicit
 disposable-RAM path is supplied. This source command remains unqualified and
 has not been added to the existing release kit.
 
-Current evidence: source/build inspection and fake-stream host tests. No CPU
-model or physical device has qualified the new BASE1 service or its integration.
+The authorized [2512 BASE1 case](2512_BASE1_ACCEPTANCE.md) exercised this service
+on real 65C02 hardware: independent full-bank CRC/SHA checks, full RAM/ZP
+restoration and verified return to REC>. Broader CPU/platform, fault paths and
+the complete WDC migrator integration remain unqualified. No CPU model ran.

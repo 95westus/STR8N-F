@@ -34,12 +34,18 @@ keys/dialogs and matching BASE1 hardware acceptance remain pending.
 
 Remaining before a complete public migration release:
 
+The later authorized [2512 BASE1 case](2512_BASE1_ACCEPTANCE.md) passed the
+journal-preserving F upgrade, repeated reset/recovery, normal BIN/cancellation,
+matching read-only RAM tools, native keys/dialogs, live disconnect deferral and
+full image/RAM/ZP preservation. This closes that scoped 65C02 case; the broader
+items below remain. Existing kit archives were not changed.
+
 1. Hardware acceptance on supported CPUs/USB: physical reset, banner, recovery,
    first-byte Ctrl-C/normal BIN loading, journals, opaque operations and boot,
    and independent preservation/restoration evidence.
-2. Existing-SNBT F upgrade hardware acceptance. The separate NFU1 source path
-   commits an onboard append reservation before F erase; it supports known b15
-   F and available append space. The factory provisioner still refuses upgrades.
+2. Existing-SNBT F upgrade interruption/other-platform acceptance. The known-b15
+   happy path on 2512 passed with a committed reservation before F erase and all
+   old history retained. The factory provisioner still refuses upgrades.
    See JOURNAL_F_UPGRADE.md; existing kits remain unchanged.
 3. Generic live provisioning after programmer-installed F: source implementation
    is complete in nf_provision_live.py with mandatory pre-helper escrow and
@@ -49,6 +55,6 @@ Remaining before a complete public migration release:
    and an explicitly admitted interrupted-migration recovery procedure.
 
 The [release checklist](RELEASE_STATUS.md) details scope and acceptance gates.
-2512 was accessed only for the preserving b15 console trial; no flash changed.
-2205 was not accessed. Host checks, legacy b15 results and source freeze do not
-mark BASE1 or migration hardware acceptance complete.
+2512 later received the explicitly authorized one-page reservation and frozen
+F update. 2205 was not accessed. The scoped 2512 pass does not mark the full
+BASE1 platform/write/failure matrix or WDC migration acceptance complete.

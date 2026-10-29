@@ -27,20 +27,26 @@ BASE1 firmware. Raw serial logs, RAM and vendor/owner images remain private.
 
 ## Open gates
 
+Update: the authorized [2512 BASE1 acceptance](2512_BASE1_ACCEPTANCE.md) has now
+passed the existing-journal upgrade, repeated reset, preserving RAM-tool and
+native-console checks. F stayed frozen. Source receipts have been added; the
+existing kit and its release manifests remain their prior package snapshot.
+
 | Gate | What remains | Release impact |
 | --- | --- | --- |
-| Frozen BASE1 hardware acceptance | Physical reset/startup identity, supported CPU modes and adapters, recovery cancellation/normal load, matched MAP/CONFIG/OPAQUE/READBACK, boot-default persistence, opaque boot/return, journal/wear behavior and independent preservation checks | Blocks qualifying the BASE1 firmware/toolkit, including the programmer-only 4K distribution |
+| Frozen BASE1 hardware acceptance | 2512 reset/identity/recovery/BIN/MAP/CONFIG inspection/OPAQUE menu/READBACK and preservation passed. CONFIG save, opaque programming/boot, other supported modes/adapters and interruption coverage remain | Preserving 65C02 case closed; broader release gate remains |
 | WDC RAM migration acceptance | Real end-to-end verbose migration, physical reset boundaries, vendor startup/peripheral effects, final independent flash/RAM/ZP verification, and a documented/admitted interrupted-migration repair procedure | Blocks the promised public WDC-to-STR8N RAM migrator |
 | Generic provisioning after programmer-installed F | Source implementation now complete in nf_provision_live.py; original-escrow procedure and focused host checks added. Hardware acceptance and future kit integration remain pending | F alone does not provision occupied vendor C/D; existing kit intentionally unchanged |
-| Existing-SNBT F upgrade | Separate NFU1 source implementation now appends/commits an F attempt reservation before F erase; qualify it on hardware | Known b15 source only; full/damaged journals refused. Factory path still refuses upgrades. Future kit integration pending |
-| Console operator acceptance | Native physical F-key/button/file/help-dialog checks, disconnect deferral and supported host/adapter timing with matching BASE1 tools | Still pending; the b15 serial trial closes only its stated subset |
+| Existing-SNBT F upgrade | Known-b15 to BASE1 on 2512 passed: D300 committed before F, old records/settings/images retained, original RAM restored. Failure/interruption and 816 coverage remain | Happy path closed; full/damaged journals still refused. Future kit integration pending |
+| Console operator acceptance | Native F1-F12/help/file/log dialogs, exact normal loading/cancellation and real-port disconnect deferral passed on 2512/BASE1 | Individual button aliases and other supported host/adapter coverage remain |
 
 The existing-SNBT upgrade is implemented separately in source; see
 [its transaction](JOURNAL_F_UPGRADE.md). Live C/D provisioning is also implemented
 in source; see [its procedure](LIVE_CD_PROVISIONING.md).
-The other gates require authorized hardware work. The current no-flashing
-instruction leaves those hardware gates open. Board 2205 remains outside all
-release work.
+The user lifted the flashing hold only for the completed 2512 reservation/F
+trial. CONFIG/opaque writes, power cuts, other boards and WDC migration were
+not authorized by that approval. Those remaining gates require a separate
+approved target/fixture and scope. Board 2205 remains excluded.
 
 An earlier programmer-only release could explicitly omit WDC migration and
 existing-SNBT upgrade support, but it would still need frozen-BASE1 hardware

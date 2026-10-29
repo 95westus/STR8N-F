@@ -4,11 +4,15 @@ Source implementation: `migration-host/nf_upgrade.py`, separate NFU1 RAM
 engine under `migrator/upgrade/`. Factory provisioning continues to refuse
 existing-journal F upgrades; it never resets history to perform an upgrade.
 Frozen BASE1 F 0.3.0 g00000001 and the factory NFM1 engine remain unchanged.
-The new RAM variant was assembled once. No CPU/flash model or device ran.
+The new RAM variant was assembled once without CPU/flash models. The later
+authorized [2512 hardware case](2512_BASE1_ACCEPTANCE.md) passed its known-b15
+upgrade with exact preservation. Interruption and other-platform acceptance
+remain pending; existing kit archives were not updated.
 
 The accepted work order is existing-journal upgrade, BASE1 acceptance, then
-WDC migration acceptance. Current no-flashing instructions leave the actual
-hardware steps pending. This source work does not update any release kit.
+WDC migration acceptance. The one-reservation/F-only 2512 trial was later
+authorized and completed; additional writes/fault tests remain outside that
+scope. This source work does not update any release kit.
 Board 2205 remains excluded.
 
 The board-specific [2512 acceptance plan](2512_UPGRADE_BASE1_TEST_PLAN.md)

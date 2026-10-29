@@ -1,5 +1,11 @@
 # 2512 existing-journal F upgrade and BASE1 acceptance plan
 
+Later status: the explicitly authorized preserving 2512 trial passed; see
+[actual acceptance](2512_BASE1_ACCEPTANCE.md). The original review plan below
+is retained as planning context, not standing permission for another run.
+Its separate destructive/platform/migrator scopes remain open. The archived
+reference stays execution-blocked; actual execution used fresh dual captures.
+
 Status: prepared for review, not authorized for execution. No board or port
 was accessed to prepare this plan. No flashing, firmware assembly, release-kit
 update or 2205 access is included. Work order: journal-preserving upgrade,

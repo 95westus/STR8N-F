@@ -100,3 +100,10 @@ The harness was corrected after mistakenly waiting twice for SEND BIN on
 manual F3; the demo had already loaded and run normally. Raw captures and
 backups remain private. Native key presses/dialogs and BASE1 firmware on
 hardware remain pending; this does not qualify the complete BASE1 release.
+
+The later [2512 BASE1 acceptance](2512_BASE1_ACCEPTANCE.md) exercised real native
+F1-F12 keys/dialogs with matching BASE1 tools and a real-port disconnect request
+after the first payload chunk. All flash matched the approved upgrade postimage
+and original owner RAM/ZP were restored/read back. This closes the stated
+65C02/COM4 case, not other platforms, every button alias or destructive writes.
+Existing kit ZIPs were intentionally not updated with this later evidence.

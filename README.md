@@ -1,10 +1,12 @@
 # STR8N-F 0.3.0 — BASE1 / PR05
 
 F is now self-identifying and **source/binary frozen**, generation **00000001**.
-This is an unpublished candidate; hardware acceptance is pending. No board was
-flashed. The console was tested on existing b15 on 2512 with preservation;
-2205 remains untouched. See the [release checklist](docs/RELEASE_STATUS.md) and
-[sanitized test receipt](validation/console-2512-hardware.json).
+This is an unpublished candidate. The authorized 2512 known-b15 upgrade and
+preserving BASE1/PR05 hardware case passed, including native console keys and
+original RAM/image/history preservation. Broader release acceptance remains
+pending; 2205 is untouched. See the [2512 result](docs/2512_BASE1_ACCEPTANCE.md)
+and [release checklist](docs/RELEASE_STATUS.md). Existing release archives were
+deliberately left unchanged.
 
 Startup now prints:
 
@@ -49,9 +51,9 @@ Serial Console 0.1.0 is included for interactive use and function-key RAM
 loading. Install `requirements-console.txt`, then run `python tools/nf_console.py`.
 F2 selects a file, F4 loads it from recovery, and F5-F8 load MAP/CONFIG/OPAQUE/DEMO.
 F10 explicitly connects; nothing opens on startup. See the
-[console guide and full key table](docs/SERIAL_CONSOLE.md). Host checks and a
-preserving 2512/b15 serial trial pass. Native key/dialog checks and BASE1
-hardware acceptance remain pending. F is unchanged.
+[console guide and full key table](docs/SERIAL_CONSOLE.md). Host checks and the
+preserving 2512/BASE1 native-key/dialog trial pass. Other platforms and the
+remaining write/failure matrix are still pending. F is unchanged.
 
 Check existing files:
 
