@@ -1,4 +1,4 @@
-# STR8N-F 0.3.0 — BASE1 / PR05
+# STR8N-F v0.3.0 — BASE1 / PR05
 
 > 4KB of firmware. One board. Up to four boot environments.
 
@@ -18,7 +18,7 @@ One environment runs at a time on the same physical CPU, RAM (approximately
 32KB on the supported boards) and peripherals. Applications and operating
 environments are supplied separately; this kit provides boot/recovery tools.
 
-**[Download 0.3.0](https://github.com/95westus/STR8N-F/releases/tag/v0.3.0)**:
+**[Download N-F v0.3.0 — BASE1 / PR05](https://github.com/95westus/STR8N-F/releases/tag/v0.3.0)**:
 [4KB F.bin](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/F.bin),
 [operator kit](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-BASE1-0.3.0.zip),
 [source ZIP](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-BASE1-0.3.0-source.zip)
