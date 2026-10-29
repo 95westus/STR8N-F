@@ -20,11 +20,16 @@ source/ASM/DEBUG, rich startup and persistent WORKSPACE messages remain the
 **Full 2.0b35 capability is required**, including **BATCH**, automatic **T/S/R
 for flash and SSRAM PROGRAM**, and **APPS**. These are unfinished gates in the
 [parity checklist](docs/MON_B35_PARITY.md), not features already supplied by g6.
-The Mona name is retired. New source banners/artifact names use STR8-N / MON A/B;
-installed g6 and its immutable evidence still carry the old name until the next
-functional build/install. MON A/B is unreleased; N-F v0.3.0 downloads are unchanged.
-Current built space: **F 367 bytes, MON A 43, MON B 43, WB1 30**; run
+The Mona name is retired. New banners/artifact names use STR8-N / MON A/B.
+[g7 / WB2 g1](docs/MON_AB_G7_WB2.md) is built, with command results and a bounded
+BATCH subset; **not live-qualified or installed**. It temporarily borrows
+4000-66FF and limits application RAM to 0200-3FFF while loaded. Installed g6 and
+its immutable evidence retain the old name. Full parity remains open.
+MON A/B is unreleased; N-F v0.3.0 downloads are unchanged.
+Installed-generation built space: **F 367 bytes, MON A 43, MON B 43, WB1 30**; run
 `python tools/monitor_space.py` to verify the linked binaries without rebuilding.
+New g7/WB2 candidate space: **MON A/B 36 bytes each; WB2 3609 bytes**, as detailed
+in the candidate checkpoint. The next gate is the preserving 2512 RAM-only trial.
 
 > Give me 4KB, I can give you 4 boards.
 

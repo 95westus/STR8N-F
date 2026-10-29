@@ -1,4 +1,4 @@
-"""Build the WB1 RAM-only checkpoint once; never rebuild F or access hardware."""
+"""Build the WB2 RAM-only checkpoint once; never rebuild F or access hardware."""
 import argparse
 import binascii
 import json
@@ -36,8 +36,9 @@ def build(out, generation=1):
     out.mkdir(parents=True)
     source_hashes = {}
     branch_layout = {}
-    for filename in ('workbench.asm', 'workbench-loader.asm',
-                     'workbench-layout.inc', 'workbench-sram.inc', 'workbench-store.inc'):
+    for filename in ('workbench.asm', 'workbench-loader.asm', 'workbench-interface.inc',
+                     'workbench-layout.inc', 'workbench-sram.inc', 'workbench-store.inc',
+                     'workbench-batch.inc'):
         path = ROOT/'monitors/src'/filename
         body = path.read_text(encoding='utf-8')
         body = body.replace('WB_GENERATION_TEXT',generation_text)
@@ -52,7 +53,7 @@ def build(out, generation=1):
         encoding='ascii', newline='\n')
     logs = []
     objects = {}
-    for stem, origin, end_symbol in (('workbench', 0x5000, 'W_CODE_END'),
+    for stem, origin, end_symbol in (('workbench', 0x4000, 'W_CODE_END'),
                                     ('workbench-loader', 0x0200, 'WL_END')):
         for command in ([assembler, '-G', '-L', '-S', '-W', stem+'.asm'],
                         [linker, '-g', '-s', '-t', f'-c{origin:04X}', '-hm19', '-j',
@@ -73,32 +74,36 @@ def build(out, generation=1):
         objects[stem] = (bytes(memory[a] for a in range(origin, symbols[end_symbol])), symbols)
     body, symbols = objects['workbench']
     loader, _ = objects['workbench-loader']
+    contract = equs(ROOT/'monitors/src/workbench-interface.inc')
+    assert contract['WB_ORIGIN'] == 0x4000 and contract['WB_PAGES'] == 36
+    assert contract['WB_FORMAT'] == 2 and contract['WB_RESULT'] == 0x655F
     assert len(loader) <= 256, 'Loader overlaps source module at 0300'
-    assert len(body) <= 5118, 'Module overlaps its CRC trailer at 63FE'
-    assert body[:8] == b'MW\x01\x14PR05'
+    assert len(body) <= 9214, 'Module overlaps its CRC trailer at 63FE'
+    assert body[:8] == b'MW\x02\x24PR05'
     for offset, target in ((8, 'W_DISPATCH'), (11, 'W_SHELL')):
         assert body[offset:offset+3] == b'\x4c'+symbols[target].to_bytes(2, 'little')
-    module = body+b'\xff'*(5118-len(body))
+    module = body+b'\xff'*(9214-len(body))
     module += binascii.crc_hqx(module, 0xffff).to_bytes(2, 'big')
-    assert len(module) == 5120 and binascii.crc_hqx(module, 0xffff) == 0
+    assert len(module) == 9216 and binascii.crc_hqx(module, 0xffff) == 0
     image = loader+b'\xff'*(256-len(loader))+module
-    assert len(image) == 5376 and 0x0200+len(image) == 0x1700
-    filename = 'STR8N-WORKBENCH-WB1-g'+generation_text+'-RAM.bin'
+    assert len(image) == 9472 and 0x0200+len(image) == 0x2700
+    filename = 'STR8N-WORKBENCH-WB2-g'+generation_text+'-RAM.bin'
     (out/filename).write_bytes(image)
-    (out/'WB1-module-5000.bin').write_bytes(module)
-    report = dict(schema=1, component='STR8-N RAM workbench', interface='WB1',
+    (out/'WB2-module-4000.bin').write_bytes(module)
+    report = dict(schema=1, component='STR8-N RAM workbench', interface='WB2',
                   generation=generation_text, status='BUILD_ONLY_NOT_EXECUTION_QUALIFIED',
                   artifact=dict(filename=filename, bytes=len(image), sha256=sha(image)),
-                  module=dict(origin='5000', bytes=5120, linked_bytes=len(body),
+                  module=dict(origin='4000', filename='WB2-module-4000.bin', bytes=9216, linked_bytes=len(body),
                               linked_end=f'{symbols["W_CODE_END"]:04X}',
                               sha256=sha(module), crc='CCITT FFFF; big-endian trailer; residue zero',
-                              header='MW 01 14 PR05', command_entry='5008', shell_entry='500B'),
+                              header='MW 02 24 PR05', command_entry='4008', shell_entry='400B'),
                   bridge_client_RAM_floor='6550: lowest destination page; RAM monitor declares code end rounded up',
+                  command_result=dict(address='655F',values={'0':'OK','1':'syntax/unsupported','2':'refused','3':'canceled','4':'partial destination'}),
                   foundation_sha256=sha(f), private_adapter=private,
                   loader_bytes=len(loader), sources=source_hashes,
-                  RAM_borrowed=['0200-16FF transfer staging', '5000-63FF module', '6400-66FF state'],
-                  application_RAM_while_loaded='0200-4FFF', system_ZP=['E0-E1', 'E2-E3', 'E6-E7', 'EA'],
-                  entry='REC> L or ROM monitor L raw RAM BIN; g5+ supports module dispatch',
+                  RAM_borrowed=['0200-26FF transfer staging', '4000-63FF module', '6400-66FF state'],
+                  application_RAM_while_loaded='0200-3FFF', system_ZP=['E0-E1', 'E2-E3', 'E6-E7', 'EA'],
+                  entry='REC> L or ROM monitor L raw RAM BIN; only g7+ bridges WB2',
                   return_path='Q -> public RAM HOLD -> active monitor, or recovery if unavailable',
                   monitor_A_B_changed=False, F_rebuilt=False, hardware_access=False,
                   flash_writes='Explicit S into fully erased owner-declared B0/B1 AREA only; no erase',
@@ -113,14 +118,19 @@ def build(out, generation=1):
                                table=True, restore=True, restore_names='unique within selected bank',
                                store='S bank flash RAMfirst RAMlast [name]; YES; commit last, per-byte readback; AREA window required',
                                run='Explicit R without L; old program ABI not thereby qualified'),
-                  planned=['BATCH and AUTO T/S/R for flash and SSRAM PROGRAM',
+                  batch=dict(text_bytes=34,separator=';',empty_segments='refused before execution',
+                             command_allowlist='checked before execution: B, T, ?, HELP, EDU, bare SRAM/WORK',
+                             stop_on_error=True,cancel='Ctrl-C/ESC between commands or during Table',
+                             queue_is_console_input=False,nested_batch=False,
+                             completion='returning module commands only; full b35/core/apps parity remains open'),
+                  planned=['Full BATCH command/app parity and AUTO T/S/R for flash and SSRAM PROGRAM',
                            'APPS and maintenance/config/opaque routing',
                            'Source/ASM/DEBUG', 'WORKSPACE allocation review and separate append-only messages'],
                   build_passes=1, assembler_linker_invocations=len(logs),
                   branch_layout=branch_layout, CPU_simulations=0)
     (out/'manifest.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8', newline='\n')
     print(json.dumps(dict(filename=filename, bytes=len(image), linked_bytes=len(body),
-                          free_module_bytes=5118-len(body), sha256=sha(image),
+                          free_module_bytes=9214-len(body), sha256=sha(image),
                           status=report['status']), indent=2))
     return report
 

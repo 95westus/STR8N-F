@@ -1,5 +1,10 @@
 # MON A/B common contract (g6 core and WB1)
 
+This describes installed g6. The [g7/WB2 candidate contract](MON_AB_G7_WB2.md)
+adds a completion result and expanded temporary RAM module; it is built but not
+execution-qualified or installed. Its ABI/layout is deliberately versioned,
+and full 2.0b35 parity remains open.
+
 Foundation: exact N-F `v0.3.0`, F generation 00000001, BASE1 / PR05.
 F stays frozen. This contract is for a new independent monitor core, not a
 claim that g0034 images are compatible. [Checkpoint 1](MON_AB_COMPATIBILITY_REVIEW.md)

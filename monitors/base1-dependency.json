@@ -2,7 +2,7 @@
   "schema": 1,
   "component": "MON A/B development",
   "branch": "codex/mona-monb",
-  "status": "g6 bank prompt and WB1 g3 Store qualified on 2512; unplanned D rotation recovered and recorded; unreleased",
+  "status": "g6 remains installed/qualified on 2512; g7/WB2 g1 built once with result interface and bounded BATCH, not execution-qualified or installed",
   "foundation": {
     "repository": "https://github.com/95westus/STR8N-F",
     "tag": "v0.3.0",
@@ -41,7 +41,7 @@
   "command_manual": "docs/MONA_COMMANDS.md",
   "A_B_personalities": "Identical at owner request; distinct personalities deferred",
   "usability_plan": "docs/MONA_USABILITY_PLAN.md",
-  "next_checkpoint": "7: module/layout contract for full workbench, dual-backend AUTO T/S/R and APPS, then BATCH using checked command results",
+  "next_checkpoint": "7 RAM gate: g7/WB2 results, bounded BATCH, new memory boundary and preserving return; then AUTO T/S/R and APPS",
   "hardware_access": true,
   "flashing": true,
   "trial_monitor_erases": 4,
@@ -53,18 +53,18 @@
   "installed_default": "B",
   "latest_install_monitor_erases": 2,
   "latest_install_journal_appends": 6,
-  "next_candidate_manifest": "monitors/candidates/g00000006/manifest.json",
-  "next_workbench_manifest": "monitors/candidates/wb1-g00000003/manifest.json",
-  "next_candidate_execution_qualified": true,
-  "next_candidate_installed": true,
+  "next_candidate_manifest": "monitors/candidates/g00000007/manifest.json",
+  "next_workbench_manifest": "monitors/candidates/wb2-g00000001/manifest.json",
+  "next_candidate_execution_qualified": false,
+  "next_candidate_installed": false,
   "workbench_checkpoint": "docs/MONA_WORKBENCH_WB1.md",
-  "next_RAM_scope": "docs/MON_AB_G5_WB1_RAM_SCOPE.md",
+  "next_RAM_scope": "docs/MON_AB_G7_WB2_RAM_SCOPE.md",
   "EDU_SRAM_target": {
     "PROGRAM": "SS1 layout status qualified read-only; source/program writes remain planned",
     "WORKSPACE": "SS1 capacity qualified read-only; existing allocations and all writes remain unadmitted",
     "messages": "Planned separate append-only WORKSPACE allocation, outside PROGRAM and boot/wear C/D"
   },
-  "next_install_scope": "docs/MON_AB_G5_2512_INSTALL_SCOPE.md",
+  "next_install_scope": null,
   "current_workbench_manifest": "monitors/candidates/wb1-g00000003/manifest.json",
   "current_workbench_RAM_qualified": true,
   "current_workbench_flash_installed": false,
@@ -78,7 +78,7 @@
   "capacity_preflight": "tools/native_journal_room.py",
   "runtime_product": "STR8-N",
   "historical_product_name": "Mona (retired; immutable g1-g6 artifacts/receipts retain spelling)",
-  "source_naming_status": "New banners and build outputs renamed; not yet rebuilt or installed",
+  "source_naming_status": "STR8-N / MON A/B banners built in g7/WB2; installed g6 retains its historical name",
   "parity_baseline": "2.0b35; BUILD/v2-beta35-candidate; build SHA256 2f5319ab1d7bc751d61bc4b00af225466d83b983bc7e5806a33417940be68365",
   "parity_checklist": "docs/MON_B35_PARITY.md",
   "required_unfinished_gates": [
@@ -87,5 +87,7 @@
     "APPS and native/owner application launch",
     "Full 2.0b35 capability including source/ASM/DEBUG, maintenance/config/opaque/maps and rich status",
     "Separate append-only WORKSPACE messages"
-  ]
+  ],
+  "next_candidate_review": "docs/MON_AB_G7_WB2.md",
+  "next_workbench_interface": "WB2: temporary 4000-66FF reservation; application RAM 0200-3FFF while loaded; not full b35 memory parity"
 }

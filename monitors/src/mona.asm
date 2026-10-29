@@ -77,11 +77,11 @@ M_MODULE:
 M_MODULE_RAM:
         LDA #>(M_END+$FF)
 M_MODULE_FLOOR:
-        STA $6550
+        STA WB_CLIENT_FLOOR
         LDA M_BANK
         LDX #<M_LINE
         LDY #>M_LINE
-        JSR $5008
+        JSR WB_COMMAND
         BCC M_SYNTAX
         STA M_BANK
         JMP M_PROMPT
@@ -163,6 +163,8 @@ M_LOAD:
 M_BANK_COMMAND:
         JSR M_SKIP
         BEQ M_SHOW_BANK
+        CMP #'A'
+        BEQ M_MODULE
         SEC
         SBC #'0'
         CMP #4
@@ -378,9 +380,9 @@ M_EDIT_ZP:
         CMP #$E0
         BCS M_RANGE
 M_EDIT_READY:
-        ; Valid WB1 borrows 5000-66FF; ordinary Modify respects that range.
+        ; Valid WB2 borrows 4000-66FF; ordinary Modify respects that range.
         LDA M_LAST+1
-        CMP #$50
+        CMP #>WB_ORIGIN
         BCC M_EDIT_CANCEL
         JSR M_MODULE_CHECK
         BCS M_RANGE
@@ -702,7 +704,7 @@ M_TITLE:
 M_CPU_TEXT: DB "CPU $",0
 M_CAPS_TEXT: DB "  caps $",0
 M_OPTIONAL_TEXT:
-        DB "EDU/SSRAM: WB1 module commands",13,10,0
+        DB "EDU/SSRAM: WB2 module commands",13,10,0
 M_BATTERY_TEXT: DB "Battery: --*",13,10,0
 M_TIME_ERROR_TEXT: DB "RTCC read refused/failed $",0
 M_WEAR_TEXT: DB "Wear: ",0
@@ -715,14 +717,14 @@ M_HELP_TEXT:
         DB "? V TIME; B0..3; D addr [end]; G addr; L RAM BIN",13,10
         DB "M RAM / !M force: addr bytes (1-8); flash 1->0 only",13,10
         DB "B3:C/D/F protected; no erase; Q REC",13,10
-        DB "WB1: T R EDU SRAM WORK; load module via L",13,10,0
+        DB "WB2: BATCH S T R EDU SRAM WORK; L loads",13,10,0
 M_SYNTAX_TEXT: DB "REFUSED: syntax (use ?)",13,10,0
 M_INPUT_TEXT: DB "Input cancelled/rejected; no command executed.",13,10,0
 M_CANCEL_TEXT: DB "Dump cancelled.",13,10,0
 M_RANGE_TEXT: DB "REFUSED: range/entry",13,10,0
 M_VERIFY_TEXT: DB "RAM verify failed; edit may be partial.",13,10,0
 M_BAD_F_TEXT: DB "REFUSED: frozen BASE1 / PR05 required.",13,10,0
-M_MODULE_TEXT: DB "WB1 absent/invalid; load its RAM BIN with L",13,10,0
+M_MODULE_TEXT: DB "WB2 absent/invalid; load its RAM BIN with L",13,10,0
 M_END:
         ENDMOD
         END

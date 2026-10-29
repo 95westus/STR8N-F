@@ -1,14 +1,14 @@
-; WB1 RAM workbench. Store programs fresh SR01 bytes only; never erases.
-; ROM monitor bridge contract: validate immutable 5000-63FF first, A=data bank,
+; WB2 RAM workbench. Store programs fresh SR01 bytes only; never erases.
+; ROM monitor bridge contract: validate immutable 4000-63FF first, A=data bank,
 ; X/Y=40-byte NUL-terminated command. C=handled, A=resulting bank. D/DBR/PBR=0,
-; E=1, SEI/CLD. Existing g4 does not yet dispatch here; use the RAM shell.
+; E=1, SEI/CLD. WB2 adds the command result at 655F; g7 supplies the bridge.
         MODULE WORKBENCH
         INCLUDE "str8n-v2-public.inc"
         INCLUDE "workbench-layout.inc"
         INCLUDE "workbench-foundation.inc"
         CODE
 W_BEGIN:
-        DB "MW",1,$14,"PR05"
+        DB "MW",WB_FORMAT,WB_PAGES,"PR05"
         JMP W_DISPATCH
         JMP W_SHELL
 W_SHELL:
@@ -47,6 +47,7 @@ W_INPUT_BAD:
         JSR W_PUTS
         BRA W_PROMPT
 W_DISPATCH:
+        STZ W_RESULT
         CMP #4
         BCS W_UNHANDLED
         STA W_BANK
@@ -72,7 +73,7 @@ W_COMMAND_START:
         CMP #'?'
         BEQ W_HELP
         CMP #'B'
-        BEQ W_BANK_CMD
+        BEQ W_BANK_NAME
         CMP #'T'
         BEQ W_TABLE_CMD
         CMP #'R'
@@ -107,6 +108,9 @@ W_DEVICE_NAMES:
         JSR W_MATCH
         BCS W_WORK_CMD
 W_UNHANDLED:
+        LDA #WB_SYNTAX
+        STA W_RESULT
+        LDA W_BANK
         CLC
         RTS
 W_HANDLED:
@@ -122,6 +126,15 @@ W_HELP_ARGS:
         LDY #>W_HELP_TEXT
         JSR W_PUTS
         BRA W_HANDLED
+W_BANK_NAME:
+        LDA W_LINE+1,X
+        CMP #'A'
+        BNE W_BANK_CMD
+        LDX #<WB_WORD
+        LDY #>WB_WORD
+        JSR W_MATCH
+        BCS WB_BATCH
+        JMP W_UNHANDLED
 W_BANK_CMD:
         INX
         JSR W_SKIP
@@ -289,7 +302,7 @@ W_TABLE_END:
         JSR W_PUTS
         JMP W_HANDLED
 ; R [bank] name|address [L]. Names are unique within the selected bank.
-; Whole destination must be 0200-4FFF: the RAM workbench owns 5000-66FF.
+; Whole destination must be 0200-3FFF: the RAM workbench owns 4000-66FF.
 W_RESTORE_CMD:
         JSR W_RECORD_BANK
         JSR W_SKIP
@@ -403,7 +416,7 @@ W_RESTORE_SELECTED:
         LDA W_DEST+1
         ADC W_HEADER+7
         BCS W_RANGE
-        CMP #$50
+        CMP #>WB_ORIGIN
         BCC W_RESTORE_PREFLIGHT_OK
         BNE W_RANGE
         LDA W_VALUE
@@ -475,13 +488,21 @@ W_DUPLICATE:
         LDY #>W_DUPLICATE_TEXT
         BRA W_RECORD_ERROR
 W_PARTIAL:
+        LDA #WB_PARTIAL
+        STA W_RESULT
         LDX #<W_PARTIAL_TEXT
         LDY #>W_PARTIAL_TEXT
-        BRA W_RECORD_ERROR
+        BRA W_MESSAGE
 W_CANCELED:
+        LDA #WB_CANCELED
+        STA W_RESULT
         LDX #<W_CANCELED_TEXT
         LDY #>W_CANCELED_TEXT
+        BRA W_MESSAGE
 W_RECORD_ERROR:
+        LDA #WB_REFUSED
+        STA W_RESULT
+W_MESSAGE:
         JSR W_PUTS
         JMP W_HANDLED
 
@@ -701,6 +722,7 @@ W_CACHE_HIT:
 
         INCLUDE "workbench-store.inc"
         INCLUDE "workbench-sram.inc"
+        INCLUDE "workbench-batch.inc"
 
 W_CANCEL:
         PHX
@@ -850,15 +872,16 @@ W_CRC_NEXT:
         BNE W_CRC_BIT
         PLX
         RTS
-W_TITLE: DB 13,10,"STR8-N WORKBENCH WB1 gWB_GENERATION_TEXT / BASE1 PR05",13,10
-        DB "RAM 0200-4FFF; module borrows 5000-66FF",13,10
+W_TITLE: DB 13,10,"STR8-N WORKBENCH WB2 gWB_GENERATION_TEXT / BASE1 PR05",13,10
+        DB "RAM 0200-3FFF; module borrows 4000-66FF",13,10
         DB "EDU OFF (session); ? help; Q returns to monitor",13,10,0
 W_PROMPT_TEXT: DB "WORKBENCH> ",0
 W_SYNTAX_TEXT: DB "REFUSED: syntax, unavailable command or invalid line",13,10,0
 W_HELP_TEXT: DB "B0..3; T [bank]; R [bank] name|addr [L]",13,10
         DB "AREA bank first last; S bank flash RAMfirst RAMlast [name]",13,10
         DB "EDU [ON|OFF]; SRAM; SRAM PREP; WORK; Q monitor",13,10
-        DB "AREA alone clears; HELP",13,10,0
+        DB "AREA alone clears; HELP",13,10
+        DB "BATCH cmd;cmd (34 bytes): B T ? HELP EDU SRAM WORK",13,10,0
 W_BANK_TEXT: DB "Data bank B",0
 W_TABLE_TEXT: DB "SR01: + complete, ? pending; addr load length name (hex)",13,10,0
 W_TABLE_END_TEXT: DB "Scan ended. SR01 has no payload checksum.",13,10,0

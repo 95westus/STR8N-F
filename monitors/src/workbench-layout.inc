@@ -1,4 +1,5 @@
-; WB1 borrows owner RAM only while explicitly loaded. No owner ZP allocation.
+; WB2 borrows owner RAM only while explicitly loaded. No owner ZP allocation.
+        INCLUDE "workbench-interface.inc"
 W_STATE EQU $6400
 W_BANK EQU W_STATE
 W_LEN EQU W_STATE+1
@@ -52,6 +53,12 @@ W_STORE_NEXT EQU $6559
 W_STORE_LEFT EQU $655B
 W_STORE_INDEX EQU $655D
 W_STORE_GATE EQU $655E
+W_RESULT EQU WB_RESULT
+; BATCH queue/state are separate from command buffers and device state.
+W_BATCH_ACTIVE EQU $6560
+W_BATCH_SIZE EQU $6561
+W_BATCH_POS EQU $6562
+W_BATCH_QUEUE EQU $6580
 W_F_FLASH_PTR EQU $E4
 W_F_DATA EQU $F0
 W_F_NMI_GATE EQU $F4

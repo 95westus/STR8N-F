@@ -3,8 +3,9 @@
 The Mona name is retired. New runtime banners use **STR8-N / MON A or MON B**,
 with their own monitor version and generation. Historical filenames, branch
 spelling, g1-g6 binaries and receipts stay intact. The installed g6 still has
-the old banner; the source rename takes effect at the next functional build
-and install. No monitor binary is included in the published N-F 0.3.0 kit.
+the old banner. [g7/WB2](MON_AB_G7_WB2.md) has built the new name but is not yet
+live-qualified or installed. No monitor binary is included in the published
+N-F 0.3.0 kit.
 
 STR8N-F stays the frozen 4096-byte bootstrap/recovery foundation. MON A/B
 supplies the practical monitor, richer status, applications and workbench.

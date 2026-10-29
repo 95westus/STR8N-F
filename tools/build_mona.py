@@ -64,7 +64,8 @@ def build(out, generation):
     assert f.count(load_pattern) == 1
     private['MON_F_LOAD'] = 0xf000+f.index(load_pattern)
     crc = binascii.crc_hqx(f,0xffff)
-    core_sources=('mona.asm','adapter.inc','layout.inc','rtc-read.inc','force.inc')
+    core_sources=('mona.asm','adapter.inc','layout.inc','rtc-read.inc','force.inc',
+                  'workbench-interface.inc')
     inputs = {'monitors/src/'+name:sha((ROOT/'monitors/src'/name).read_bytes()) for name in core_sources}
     out.mkdir(parents=True)
     artifacts = {}
@@ -142,11 +143,12 @@ def build(out, generation):
                   prompt='B0> through B3> follows selected data bank; active A/B remains in banner',
                   status_rows=['EDU','SSRAM','RTCC','Battery','Wear'],
                   commands=['?','V','TIME','B[0-3]','D addr [end]','M addr byte...','!M addr byte...','G addr','L','Q',
-                            'WB1 module: S/T/R/AREA/HELP/EDU/SRAM/WORK'],
-                  workbench_bridge=dict(interface='WB1',module_RAM='5000-63FF',state_RAM='6400-66FF',
-                    admission='MW/01/14/PR05 and CRC16 zero residue over all 5120 bytes before every call',
+                            'WB2 module: BATCH/S/T/R/AREA/HELP/EDU/SRAM/WORK'],
+                  workbench_bridge=dict(interface='WB2',module_RAM='4000-63FF',state_RAM='6400-66FF',
+                    admission='MW/02/24/PR05 and CRC16 zero residue over all 9216 bytes before every call',
                     ordinary_Modify_respects_module=True,force_Modify_may_evict_module=True,
-                    module_required=False,missing_or_corrupt_module='refused; core D/M/G/Q remain available'),
+                    module_required=False,missing_or_corrupt_module='refused; core D/M/G/Q remain available',
+                    legacy_WB1_accepted=False,completion_result='655F; 0 OK, 1 syntax/unsupported, 2 refused, 3 canceled, 4 partial'),
                   raw_load=dict(ROM_only=True,tail_entry='Exact frozen F loader',framing='idle-terminated raw bytes',
                     first_byte_Ctrl_C='Frozen F semantics; cancellation goes to REC>',RAM_variant='L refused'),
                   branch_layout=branch_layout,

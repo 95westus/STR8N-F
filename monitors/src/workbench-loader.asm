@@ -27,7 +27,7 @@ WL_ABI:
         CMP #WB_F_CRC_HI
         BNE WL_BAD
         LDA #3
-        LDX #20
+        LDX #WB_PAGES
         JSR WL_CRC_PAGES
         LDA W_CRC
         ORA W_CRC+1
@@ -36,9 +36,9 @@ WL_ABI:
         STZ W_COPY
         LDA #3
         STA W_PTR+1
-        LDA #$50
+        LDA #>WB_ORIGIN
         STA W_COPY+1
-        LDX #20
+        LDX #WB_PAGES
         LDY #0
 WL_COPY:
         LDA (W_PTR),Y
@@ -49,7 +49,7 @@ WL_COPY:
         INC W_COPY+1
         DEX
         BNE WL_COPY
-        JMP $500B
+        JMP WB_SHELL
 WL_BAD:
         LDA #'!'
         JSR STR8V2_RAM_PUTC

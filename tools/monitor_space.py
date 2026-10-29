@@ -1,4 +1,6 @@
 """Verify existing F/monitor/WB1 binaries and report space; no build or board I/O."""
+import argparse
+import binascii
 import hashlib
 import json
 from pathlib import Path
@@ -33,7 +35,7 @@ def erased(body, first, end):
     return end-first
 
 
-def report():
+def report(monitor_manifest=None, workbench_manifest=None):
     dependency = read_json(ROOT/'monitors/base1-dependency.json')
     freeze = read_json(ROOT/'F_FREEZE.json')
     f = checked(ROOT/'firmware/payload/STR8N-F-BOOT-4096.bin', 4096, freeze['sha256'])
@@ -46,7 +48,7 @@ def report():
     rows = [dict(component='F (frozen)', total_bytes=4096, linked_bytes=f_end,
                  reserved_bytes=32, free_bytes=f_free, sha256=digest(f))]
 
-    manifest_path = ROOT/dependency['current_candidate_manifest']
+    manifest_path = ROOT/(monitor_manifest or dependency['current_candidate_manifest'])
     monitor = read_json(manifest_path)
     require(monitor['F_sha256'] == digest(f), 'Monitor foundation mismatch')
     variants = set()
@@ -67,17 +69,24 @@ def report():
                          free_bytes=erased(body, 128+linked, 4096), sha256=digest(body)))
     require(variants == {'A', 'B'}, 'Both monitor variants are required')
 
-    wb_path = ROOT/dependency['current_workbench_manifest']
+    wb_path = ROOT/(workbench_manifest or dependency['current_workbench_manifest'])
     workbench = read_json(wb_path)
     require(workbench['foundation_sha256'] == digest(f), 'WB1 foundation mismatch')
     artifact = workbench['artifact']
     loader = checked(wb_path.parent/artifact['filename'], artifact['bytes'], artifact['sha256'])
     module_info = workbench['module']
-    module = checked(wb_path.parent/'WB1-module-5000.bin', module_info['bytes'], module_info['sha256'])
-    require(len(module) == 5120 and loader[256:] == module, 'WB1 load image mismatch')
+    origin = int(module_info['origin'], 16)
+    filename = module_info.get('filename', 'WB1-module-5000.bin')
+    module = checked(wb_path.parent/filename, module_info['bytes'], module_info['sha256'])
+    version = {'WB1': 1, 'WB2': 2}[workbench['interface']]
+    require(origin in (0x4000, 0x5000) and origin+len(module) == 0x6400,
+            'Invalid module memory extent')
+    require(module[:8] == b'MW'+bytes((version, len(module)//256))+b'PR05', 'Module header mismatch')
+    require(binascii.crc_hqx(module, 0xffff) == 0, 'Module CRC mismatch')
+    require(loader[256:] == module, 'Module load image mismatch')
     linked = module_info['linked_bytes']
-    require(int(module_info['linked_end'], 16) == 0x5000+linked, 'WB1 linked end mismatch')
-    rows.append(dict(component=f'WB1 g{workbench["generation"]}', total_bytes=len(module),
+    require(int(module_info['linked_end'], 16) == origin+linked, 'Module linked end mismatch')
+    rows.append(dict(component=f'{workbench["interface"]} g{workbench["generation"]}', total_bytes=len(module),
                      linked_bytes=linked, reserved_bytes=2,
                      free_bytes=erased(module, linked, len(module)-2), sha256=digest(module)))
 
@@ -91,4 +100,8 @@ def report():
 
 
 if __name__ == '__main__':
-    print(json.dumps(report(), indent=2))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--monitor-manifest', type=Path)
+    parser.add_argument('--workbench-manifest', type=Path)
+    args = parser.parse_args()
+    print(json.dumps(report(args.monitor_manifest, args.workbench_manifest), indent=2))

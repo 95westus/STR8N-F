@@ -1,4 +1,5 @@
 ; MON A/B owns 6A00-6AFF. Never allocate into owner RAM or the F worker.
+        INCLUDE "workbench-interface.inc"
 M_STATE EQU $6A00
 M_BANK EQU M_STATE
 M_LEN EQU M_STATE+1

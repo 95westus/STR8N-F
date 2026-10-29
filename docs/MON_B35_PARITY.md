@@ -4,7 +4,8 @@ Updated 2026-10-29. A and B remain identical. Product naming is **STR8-N / MON
 A/B**, with a separate monitor version and generation. Mona is retired; old
 artifact filenames, hashes, installed g6 banners and acceptance receipts remain
 historical evidence. New build outputs use `STR8N-MON-...` and
-`STR8N-WORKBENCH-...`. This checkpoint changes source/planning, not hardware.
+`STR8N-WORKBENCH-...`. [g7/WB2 g1](MON_AB_G7_WB2.md) is built but not yet
+execution-qualified or installed. No hardware change is implied by this plan.
 
 ## Baseline and completion rule
 
@@ -36,7 +37,7 @@ the later acceptance receipt supplies execution evidence for those exact bytes.
 | `T` Table | WB1 lists selected-bank flash SR01 records | Bank/range listing and automatic discovery across admitted flash and SSRAM PROGRAM; show backend/location, pending/corrupt records and unambiguous identity |
 | `S` Store | Manual flash address in a declared B0/B1 AREA; erased-span preflight, YES, commit last; RAM trial qualified | AUTO placement in admitted flash record arenas and SSRAM PROGRAM; correct capacity/overlap checks, duplicate policy, readback and source/output SAVE integration |
 | `R` Restore/run | Selected-bank unique name or address, optional load-only L | Automatic resolution across admitted flash and SSRAM PROGRAM; explicit backend/location override, ambiguity refusal, checked load/run and return |
-| `BATCH cmd;cmd` | Not implemented | At least the legacy 34 text-byte queue; validate all separators before the first command; ESC cancellation, stop on failure/unsupported command, safe handling of prompts and app handoff |
+| `BATCH cmd;cmd` | WB2 g1 returning-module subset built, not live-qualified | Complete core/native-app parity: legacy 34 text-byte queue, separator checks before execution, ESC, failure stop and checked prompt/handoff behavior |
 | `APPS` and named launch | Old app/service images retained; no BASE1-compatible dispatcher yet | Discover/validate/list installed compatible apps and availability; named launch/return for native services and owner apps; do not list incompatible retained bytes as runnable |
 | SOURCE / ASM | Source and assembler assets retained | Edit, assemble, diagnostics, symbols/output ownership, Store/Restore/source SAVE/LOAD, run and return; no edits to PROGRAM by WORKSPACE logging |
 | DEBUG | Retained legacy component, incompatible private bindings | Disassembly, registers, memory, RAM breakpoints, step/continue and exit/hook restoration; mode-specific CPU qualification; no implicit flash breakpoint erase |
@@ -114,6 +115,9 @@ estimates and not application/owner storage availability.
 | WB1 g3 code block | 5120 | 5088 | 2 CRC trailer | **30** |
 
 F's space remains frozen. These remnants cannot hold full b35 parity; features
-must use reviewed modules/layout. Source naming changes are unbuilt: the next
-functional build gets a new generation, hashes and measured space. Qualified g6
-artifacts and their installed banner are not renamed or rewritten in place.
+must use reviewed modules/layout. The renamed g7/WB2 candidates have separate
+hashes and measured space: MON A/B each 36 bytes and WB2 3609 bytes. WB2 temporarily
+expands the module to 4000-63FF with application RAM 0200-3FFF while loaded. This
+does not close full workbench memory parity. Qualified g6 artifacts and their
+installed banner are not renamed or rewritten in place. See the
+[candidate checkpoint](MON_AB_G7_WB2.md).

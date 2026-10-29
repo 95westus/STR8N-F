@@ -280,3 +280,12 @@ G6 closes manual flash Store only. BATCH, AUTO T/S/R for flash and SSRAM
 PROGRAM, and APPS remain required and unimplemented. Follow the module/layout
 then storage/apps/BATCH checkpoints in [full parity](MON_B35_PARITY.md).
 The existing 43-byte slot and 30-byte WB1 tails are not a full-workbench budget.
+
+## G7 / WB2 build checkpoint
+
+[G7/WB2 g1](MON_AB_G7_WB2.md) has built the shared command result, a bounded
+returning-command BATCH subset and a temporary 4000-66FF module reservation.
+It is not execution-qualified or installed; g6 remains on 2512. The
+[RAM-only scope](MON_AB_G7_WB2_RAM_SCOPE.md) preserves every flash byte, boot
+setting and owner RAM/ZP. Automatic T/S/R for flash and SSRAM PROGRAM, APPS,
+complete BATCH and full b35 source/output RAM behavior still require integration.

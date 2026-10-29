@@ -42,20 +42,20 @@ M_F_FAIL:
 M_MODULE_CHECK:
         LDX #7
 M_MODULE_ID_BYTE:
-        LDA $5000,X
+        LDA WB_ORIGIN,X
         CMP M_MODULE_ID,X
         BNE M_F_FAIL
         DEX
         BPL M_MODULE_ID_BYTE
-        LDA #$50
-        LDX #20
+        LDA #>WB_ORIGIN
+        LDX #WB_PAGES
         JSR M_CRC_PAGES
         LDA M_CRC
         ORA M_CRC+1
         BNE M_F_FAIL
         SEC
         RTS
-M_MODULE_ID: DB "MW",1,$14,"PR05"
+M_MODULE_ID: DB "MW",WB_FORMAT,WB_PAGES,"PR05"
 M_CRC_PAGES:
         STZ M_PTR
         STA M_PTR+1

@@ -72,3 +72,9 @@ branch spelling and qualified bytes remain intact. BATCH, AUTO T/S/R on both
 flash and SSRAM PROGRAM, and APPS are required gates, not deferred polish.
 The 367/43/43-byte F/A/B free-space figures and 30-byte WB1 remainder require
 a module/layout checkpoint before those features can be added. F stays frozen.
+
+[G7/WB2 g1](MON_AB_G7_WB2.md) now implements the first module/layout increment:
+shared result codes, an expanded explicitly loaded RAM module and a bounded
+BATCH subset. Each component built once; no execution qualification or install.
+The [2512 RAM-only gate](MON_AB_G7_WB2_RAM_SCOPE.md) is prepared. AUTO flash/SSRAM
+T/S/R, APPS, complete BATCH and the full workbench RAM budget remain open.
