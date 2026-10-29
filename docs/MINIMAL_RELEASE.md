@@ -2,8 +2,10 @@
 
 Accepted direction: 2026-10-28. The reviewed 2512 cases now passed; see
 [closeout status](RELEASE_STATUS.md). This contract does not expand their scope.
-The 0.3.0-rc1 ZIP includes the Python serial terminal and migration hosts;
-testing migration from that extraction is the next pending gate.
+The 0.3.0 release includes the Python serial terminal and unchanged migration
+hosts. The rc1 existing-SNBT ZIP route passed on 2609; final-package live trials
+and other packaged routes remain untested. Mona is a planned optional image,
+not a new F dependency or ABI change.
 
 > Give me 4KB, I can give you 4 boards.
 

@@ -103,7 +103,7 @@ Private plans contain owner data and must not enter Git/public kits.
 The source CLI has an `execute` subcommand taking `--plan`, `--port`, `--out`,
 `--execute` and `--allow-unqualified`. Both explicit flags are required before
 opening the USB port; the port must match the capture's USB serial. Use the
-complete rc1 operator kit, which includes the host, prebuilt engine and wrapper
+complete 0.3.0 operator kit, which includes the host, prebuilt engine and wrapper
 dependency. Individual files copied into an older kit are insufficient.
 Original capture remains a separate operator precondition; see rc1 errata.
 

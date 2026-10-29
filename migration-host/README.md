@@ -1,10 +1,12 @@
-# N/F migration hosts — 0.3.0-rc1
+# N/F migration hosts — 0.3.0
 
 `nf_migrate.py` prepares and inspects an exact private migration plan. It has
 **no serial import, port-opening command, device execution, reset or flash
 operation**. The reviewed WDC and programmer-F paths passed on
 2512/65C02/FT245; see [release status](../docs/RELEASE_STATUS.md). Migration
-from the new extracted candidate ZIP remains NOT RUN. A plan's `installation_permitted` and
+through the extracted rc1 existing-SNBT upgrade also passed on 2609. The
+final ZIP has no additional live trial; packaged WDC/programmer-F provisioning
+remains NOT RUN. A plan's `installation_permitted` and
 `execution_qualified` fields stay false. The separate `nf_migrate_live.py`
 implements explicit WDC capture/execution; it refuses to open a port without
 `--allow-unqualified` for the broader platform/layout qualification limits.

@@ -9,11 +9,13 @@ for your own images and environments. Four bank environments share that RAM;
 hardware qualification is listed below. The raw-L application range is
 $0200-$64FF; preservation tools escrow $0200-$66FF and owner ZP $00-$DF.
 
-**Toolkit 0.3.0-rc1 is an unpublished migration-test candidate.** F remains
+**STR8N-F 0.3.0 is the scoped 4KB foundation release.** F remains
 **STR8N-F 0.3.0 g00000001 / BASE1 / PR05**, source and binary frozen.
 The reviewed 2512 cases and the [2609 extracted-ZIP existing-SNBT upgrade](docs/2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md)
-passed. Packaged WDC/first-provisioning routes remain untested; see the
-[rc1 workflow/documentation errata](docs/RC1_KNOWN_ISSUES.md). See
+passed. The final package retains the same runtime files and corrects rc1
+documentation; it has no additional live trial. Packaged WDC/programmer-F
+provisioning routes remain untested. See [release notes](docs/RELEASE_NOTES.md),
+[rc1 findings](docs/RC1_KNOWN_ISSUES.md),
 [closeout status](docs/RELEASE_STATUS.md) and [ZIP workflow](docs/RELEASE_WORKFLOW.md).
 
 ## Included
@@ -60,7 +62,9 @@ BASE1 / PR05
 ```
 
 F then offers its chooser and recovery. The running image supplies its own
-OS identity and EDU, RTC, SRAM or other service status.
+OS identity and EDU, RTC, SRAM or other service status. **Mona** is the
+name chosen for a future optional monitor/launcher; [it is planned](docs/MONA.md),
+with no Mona binary or expanded F ABI in this release.
 
 | Flash region | BASE1 role |
 | --- | --- |
@@ -86,8 +90,8 @@ route in [installation](docs/INSTALLATION.md):
 
 Damaged/conflicting or unsupported history is refused. Prior lifetime remains
 unknown; tracked evidence can carry forward. Zeros do not prove unused flash.
-Normal recovery assumes F stays golden. No further power-cut tests are part
-of the planned ZIP migration acceptance.
+Normal recovery assumes F stays golden. No hardware action or power-cut
+test is part of this release packaging.
 
 ## Qualification boundary
 

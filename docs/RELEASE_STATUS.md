@@ -1,17 +1,13 @@
-# STR8N-F BASE1 / PR05 closeout and release status
+# STR8N-F 0.3.0 — release scope and evidence
 
-Closeout: **October 28, 2026**. The reviewed **2512 / 65C02 / FT245 / Windows**
-source/hardware cases are closed. **0.3.0-rc1** is an unpublished candidate
-tested using only its extracted ZIP. That packaged
-existing-SNBT upgrade test has now [passed on 2609](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md).
-WDC/first-provisioning runs from this ZIP remain NOT RUN; public release is
-**NOT PUBLISHED**. See [rc1 workflow/documentation errata](RC1_KNOWN_ISSUES.md).
+Release preparation: **October 28, 2026**. F is **0.3.0 g00000001 / BASE1 /
+PR05**, exactly 4096 frozen bytes. The public ABI is unchanged. **Mona** is
+the planned optional monitor, with no binary included in this release.
 
 > Give me 4KB, I can give you 4 boards.
 
-With ~32KB RAM shared by four selectable bank environments.
-F stays **0.3.0 g00000001 / BASE1 / PR05**, exactly 4096 bytes. Toolkit and
-console versions do not alter F generation.
+With ~32KB RAM shared by four selectable bank environments. This describes
+the bank architecture; hardware qualification is limited to the receipts.
 
 ## Closed 2512 cases
 
@@ -34,24 +30,25 @@ and RAM/ZP verified. The later 2609 ZIP checkpoint is REC>, COM8 released,
 seq1024/11 records and C=78/D=47/F=31, with all ten old rows retained.
 2205 was not accessed; 2604 was excluded from the 2609 trial.
 
-## What remains
+## 0.3.0 package scope
+
+The final operator/source packages correct rc1 docs, update release metadata
+and include the 2609 receipt. Firmware, console, migration hosts and engines
+remain unchanged. The rc1 ZIP stays immutable; its live result belongs to its
+exact hash. A static equivalence check does not claim another hardware trial.
 
 | Item | Status |
 | --- | --- |
-| Fresh operator/source ZIP, terminal and migration dependencies | [Passed](BASE1_RC1_PACKAGE_CHECKPOINT.md): one package pass, fresh extraction, manifests/dependencies/links and CLI checks; F unchanged |
-| Migration and terminal core from the exact rc1 ZIP | [2609 existing-SNBT route passed](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md), 65C816 emulation/FT245; native GUI keys not repeated here. WDC and first-provisioning ZIP routes remain untested |
-| Public release/tag/upload | **NOT PUBLISHED** |
-| Other CPU modes/adapters/hosts and occupied layouts | Unqualified; no four-board hardware pass inferred |
-| Electrical mid-pulse failures, arbitrary corrupted history and interrupted provisioning | Outside this candidate's accepted happy paths |
-| Interrupted F installation/explicit F upgrade | Unqualified maintenance boundary; normal runtime keeps F golden |
+| Existing-SNBT upgrade from extracted rc1 | [2609 passed](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md), 65C816 emulation/FT245; terminal core checked, native GUI keys not repeated |
+| Final 0.3.0 package live trial | NOT RUN; unchanged runtime files, new docs/metadata |
+| WDC and programmer-F package routes | NOT RUN from an extraction; reviewed 2512 source/hardware cases passed |
+| Python terminal | Included; native keys/dialogs passed on 2512, core cancellation/load passed on 2609 |
+| Original captures for b15 upgrade | Operator precondition; no standalone automated capture CLI |
+| Mona / expanded service ABI | Planned, outside this release |
+| Other CPU modes/adapters/hosts and occupied layouts | Unqualified |
+| Interrupted F installation, electrical mid-pulse failures, arbitrary damaged history | Outside qualified scope |
 
-Use the [release workflow](RELEASE_WORKFLOW.md) for package contents and
-additional ZIP route acceptance. The terminal is included, not a future download requirement
-apart from Python/Tk and pinned pyserial. Migration remains a separate CLI;
-F-keys load RAM tools and do not start migration.
-
-No further firmware optimization or routine rebuild/simulation is needed
-for packaging. F defects require a reviewed new generation. This docs/package
-step performs no board actions, power cuts or publication. Future test scope
-must identify its board and writes; keep 2205 excluded and use no deliberate
-power-off-during-programming tests.
+See [release notes](RELEASE_NOTES.md), [installation](INSTALLATION.md),
+[rc1 findings](RC1_KNOWN_ISSUES.md) and [packaging workflow](RELEASE_WORKFLOW.md).
+Normal runtime recovery keeps F golden. Packaging performs no board actions,
+power cuts, firmware builds or CPU simulations. 2205 remains excluded.

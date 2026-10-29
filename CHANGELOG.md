@@ -1,3 +1,17 @@
+# 0.3.0 — the 4KB foundation
+
+- Release frozen STR8N-F 0.3.0 g00000001 / BASE1 / PR05 without ABI changes.
+- Include Python Serial Console 0.1.0, function keys, five matching RAM tools,
+  verbose migration/provisioning/upgrade hosts and prebuilt engines.
+- Record the extracted rc1 existing-journal upgrade pass on 2609 in addition
+  to the reviewed 2512 hardware cases; preserve the immutable rc1 archive.
+- Correct rc1 layout/upgrade wording; retain the manual-capture precondition
+  and distinguish untested final-package/WDC/programmer-F package routes.
+- Name the future optional monitor Mona; no Mona payload is included.
+- Package existing runtime bytes; no firmware rebuild, simulation or board access.
+
+The historical candidate and source checkpoints follow.
+
 # 0.3.0-rc1 — BASE1 migration-test candidate
 
 > Give me 4KB, I can give you 4 boards.

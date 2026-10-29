@@ -1,4 +1,4 @@
-"""BASE1 candidate packaging entry; firmware is copied without rebuilding."""
+"""BASE1 packaging entry; firmware is copied without rebuilding."""
 import argparse
 from pathlib import Path
 from package_release_candidate import package

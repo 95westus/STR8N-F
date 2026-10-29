@@ -1,4 +1,4 @@
-"""Package existing tested files once; no assembly, models, ports or publication."""
+"""Package existing frozen files once; no assembly, models, ports or publication."""
 import argparse
 import hashlib
 import json
@@ -11,11 +11,12 @@ from verify_release_kit import verify as verify_kit
 
 ROOT=Path(__file__).resolve().parents[1]
 sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
-read=lambda path:json.loads(path.read_text())
+read=lambda path:json.loads(path.read_text(encoding='utf-8'))
 EVIDENCE=(
     'validation/console-2512-hardware.json','validation/2512-upgrade-base1-acceptance.json',
     'validation/2512-b0-powercut-acceptance.json','validation/2512-cd-recovery-acceptance.json',
-    'validation/2512-wdc-migration-acceptance.json','validation/2512-programmer-f-cd-acceptance.json')
+    'validation/2512-wdc-migration-acceptance.json','validation/2512-programmer-f-cd-acceptance.json',
+    'validation/2609-rc1-zip-upgrade-acceptance.json')
 RUNTIME=(
     'README.md','LICENSE','CHANGELOG.md','layout.json','release.json','checkpoint.json',
     'identity.json','F_FREEZE.json','profiles.json','requirements-console.txt','firmware/minimal-manifest.json',
@@ -38,12 +39,14 @@ def manifest(root,kind,release,commit):
     files={path.relative_to(root).as_posix():dict(bytes=path.stat().st_size,sha256=sha(path))
            for path in sorted(root.rglob('*')) if path.is_file()}
     body=dict(schema=1,project='STR8N-F',profile='BASE1',artifact_type=kind,
-        toolkit_version=release['version'],status='unpublished-candidate-ZIP-migration-pending',
+        toolkit_version=release['version'],status=release['status'],
         source_commit=commit,release_line=release['release_line'],RAM='~32KB shared physical RAM',
         F_bytes=4096,F_sha256=sha(ROOT/'firmware/payload/STR8N-F-BOOT-4096.bin'),
         F_version='0.3.0',F_generation='00000001',host_console_version='0.1.0',
-        hardware_qualified=False,qualified_scope='Reviewed 2512 / 65C02 / FT245 cases only',
+        hardware_qualified=False,qualified_scope=release['qualified_scope'],
         hardware_evidence=list(EVIDENCE),packaged_migration_test='NOT_RUN',
+        prior_packaged_migration_test=release.get('prior_packaged_migration_test'),
+        prior_tested_operator_ZIP_sha256=release.get('prior_tested_operator_ZIP_sha256'),
         firmware_builds_for_packaging=0,CPU_simulations=0,serial_access=False,
         board_2205_accessed=False,published=False,files=files)
     (root/'MANIFEST.json').write_text(json.dumps(body,indent=2)+'\n',encoding='utf-8')
@@ -103,11 +106,13 @@ def package(out):
         path.with_suffix(path.suffix+'.sha256').write_text(sha(path)+'  '+path.name+'\n',encoding='ascii')
     (out/'SHA256SUMS.txt').write_text(''.join(record['sha256']+'  '+name+'\n' for name,record in records.items()),encoding='ascii')
     receipt=dict(schema=1,source_commit=commit,toolkit_version=release['version'],assets=records,
-        hardware_cases='Reviewed 2512 cases passed before packaging',packaged_migration_test='NOT_RUN',
+        hardware_cases=release['qualified_scope'],packaged_migration_test='NOT_RUN',
+        prior_packaged_migration_test=release.get('prior_packaged_migration_test'),
+        prior_tested_operator_ZIP_sha256=release.get('prior_tested_operator_ZIP_sha256'),
         Python_serial_terminal_included=True,firmware_builds=0,CPU_simulations=0,serial_access=False,
         board_2205_accessed=False,published=False)
     (out/'PACKAGE_RECEIPT.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
-    print('Saved fresh operator/source ZIPs, Python terminal and exact 4K F; extracted-ZIP migration remains NOT RUN')
+    print('Saved operator/source ZIPs, Python terminal and exact frozen 4K F; this new ZIP has no live trial')
     return receipt
 
 

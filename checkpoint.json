@@ -1,5 +1,5 @@
 {
-  "stage": "2512 source cases and 2609 extracted-rc1 SNBT upgrade passed; other packaged routes untested",
+  "stage": "0.3.0 scoped release preparation; F and runtime unchanged; Mona planned",
   "profile": "BASE1",
   "identity": {
     "product": "STR8N-F",
@@ -35,6 +35,7 @@
   ],
   "board_2205_touched": false,
   "published": false,
+  "publication_state_note": "Packaging-time snapshot; external publication receipt and GitHub release record later publication",
   "execution_qualified": false,
   "local_git_branch": "codex/str8nf-base1",
   "artifacts": {
@@ -85,9 +86,9 @@
   "address_proof": "validation/pr05-address-proof.json",
   "independent_helpers_rebuilt": false,
   "remaining": [
-    "rc1 manual-capture precondition and immutable-archive documentation errata",
-    "Other packaged routes and broader CPU/mode/adapter/layout qualification",
-    "Public release/tag/upload after selected release scope is finalized"
+    "Publication of the final scoped 0.3.0 assets",
+    "Additional package routes and broader platforms remain separately unqualified",
+    "Mona and additional service ABI are follow-on work"
   ],
   "canonical_text": "LF; source hashes survive Git normalization",
   "host_console": {
@@ -104,7 +105,7 @@
     "evidence_in_candidate_kit": true,
     "qualified_scope": "Windows / 2512 / FT245 only"
   },
-  "candidate_checkpoint": "base1-rc1",
+  "candidate_checkpoint": "base1-0.3.0-release",
   "release_checklist": "docs/RELEASE_STATUS.md",
   "boards_accessed": [
     "2512",
@@ -206,7 +207,7 @@
     "tests/test_console.py": "58ddaba49964abfd2b687fd69e47be5db33ae97b74b5dce67494470d5167c20f",
     "tests/console_tk_smoke.py": "2c6ff55f2c8a41cdbc66218d1668f3eaccb3729857b3cd86b57fb933b753423e"
   },
-  "toolkit_version": "0.3.0-rc1",
+  "toolkit_version": "0.3.0",
   "source_snapshot_note": "initial_build_sources records the historical initial build; current packaging files are bound by MANIFEST/source commit",
   "included_hardware_evidence": [
     "validation/console-2512-hardware.json",
@@ -214,9 +215,10 @@
     "validation/2512-b0-powercut-acceptance.json",
     "validation/2512-cd-recovery-acceptance.json",
     "validation/2512-wdc-migration-acceptance.json",
-    "validation/2512-programmer-f-cd-acceptance.json"
+    "validation/2512-programmer-f-cd-acceptance.json",
+    "validation/2609-rc1-zip-upgrade-acceptance.json"
   ],
-  "packaged_migration_test": "PASSED_2609_EXISTING_SNBT_UPGRADE",
+  "packaged_migration_test": "NOT_RUN",
   "packaging": {
     "firmware_builds": 0,
     "CPU_simulations": 0,
@@ -224,12 +226,18 @@
     "boards_modified": [],
     "Python_serial_terminal_included": true
   },
-  "tested_operator_ZIP_sha256": "ed9e87ef34323b0504c355bd6b35e0a5095ecd0665d6e67166bd9178c29bddb2",
   "packaged_migration_evidence": "validation/2609-rc1-zip-upgrade-acceptance.json",
   "rc1_known_issues": "docs/RC1_KNOWN_ISSUES.md",
   "pending_packaged_routes": [
     "WDC first provisioning",
     "Programmer-installed-F C/D provisioning"
   ],
-  "board_2604_touched_by_2609_trial": false
+  "board_2604_touched_by_2609_trial": false,
+  "prior_packaged_migration_test": "PASSED_2609_EXISTING_SNBT_UPGRADE",
+  "prior_tested_operator_ZIP_sha256": "ed9e87ef34323b0504c355bd6b35e0a5095ecd0665d6e67166bd9178c29bddb2",
+  "optional_monitor": {
+    "name": "Mona",
+    "status": "PLANNED",
+    "included": false
+  }
 }

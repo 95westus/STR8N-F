@@ -21,8 +21,10 @@ scoped result or qualify the other migration routes.
    with no MON payload. Existing owner images still require inventory and
    compatibility checks before use.
 
-The source guides are corrected after the test for a future candidate. This
-errata and the hardware receipt are outside the immutable tested archive.
+The 0.3.0 guides correct those paragraphs and include this errata and the
+hardware receipt. The original-capture precondition remains. Runtime files
+are unchanged; the final package has no additional live trial. These updates
+do not alter the immutable tested rc1 archive.
 Its packaging-time NOT_RUN field remains historical. New WDC first-provisioning
 or programmer-F tests must use their own reviewed scope and exact artifact hash.
 No deliberate power-cut testing or access to 2205/2604 is included.
