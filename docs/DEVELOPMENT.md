@@ -3,7 +3,8 @@
 `main` is the integration branch for the current released STR8N-F foundation
 and its documentation. Release tags pin exact source checkpoints; tags and
 published artifacts are not moved or silently replaced by later source edits.
-The public 0.3.0 release is available while its source promotion is reviewed.
+The public 0.3.0 release is pinned independently of later main updates.
+See the [release closeout](RELEASE_CLOSEOUT.md).
 
 Use short `codex/...` feature branches and pull requests into `main` for new
 work. A permanent development branch is not needed for the present project.
