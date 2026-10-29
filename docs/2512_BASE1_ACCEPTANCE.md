@@ -78,7 +78,9 @@ legacy-image execution compatibility and WDC migration remain separate.
 All console button aliases were not individually clicked.
 
 Both recorded BASE1 physical entries had one leading FF byte before WAIT.
-The raw bytes were retained; the cause is not established. Exact following
+The saved pre-upgrade b15 physical entry has the same leading FF, so this
+observation predates the upgrade. Raw bytes were retained; the cause is not
+established. Exact following
 identity/recovery, binary transfer, CRC and complete-bank/RAM checks passed.
 No F change was made to address a reset-prefix observation.
 
