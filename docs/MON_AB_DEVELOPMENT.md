@@ -40,3 +40,18 @@ boot settings and owner RAM/ZP were restored; old records remain intact. The boa
 ends at REC> with COM4 released and no Mona image left installed.
 Optional EDU/SSRAM/RTCC/battery adapters remain checkpoint 5 work.
 No F rebuild or CPU simulation occurred. Original checkpoints remain in Git history.
+
+## Current increment: generation 2
+
+The owner chose to keep A and B identical. Both now include the same explicit
+`T` RTCC sampler; `V` shows its last sample, with no automatic startup read and
+no inferred time zone. [Adapter details and limits](MON_AB_RTCC_ADAPTER.md)
+cover idle-pin admission, bounded I2C, restored DDRA, input-latch limits and
+the distinction between register-pointer writes and RTC data writes.
+
+G2 A/B/RAM candidates are built and stored separately under
+`monitors/candidates/g00000002/`. The [g2 RAM trial passed](MON_AB_G2_RAM_ACCEPTANCE.md)
+on 2512: two coherent RTCC samples, retained V display and unchanged flash/history,
+with original owner RAM/ZP restored and COM4 released. No monitor ROM was installed.
+G2 A/B ROM startup remains untested; g1's receipt does not qualify changed bytes.
+EDU/SSRAM/battery adapters and the limited remaining slot space need the next review.

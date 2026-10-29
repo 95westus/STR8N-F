@@ -1,4 +1,4 @@
-# Checkpoint 2: Mona common contract, revision 1
+# Mona common contract, revision 2 (g2 RTCC increment)
 
 Foundation: exact N-F `v0.3.0`, F generation 00000001, BASE1 / PR05.
 F stays frozen. This contract is for a new independent monitor core, not a
@@ -7,7 +7,9 @@ records why the old entry shim and private bindings cannot be retained.
 
 ## Images and entry
 
-The first candidate is **Mona 0.1.0-dev g00000001**. Both slot builds have
+The first qualified candidate is **Mona 0.1.0-dev g00000001**. The current
+increment is **g00000002**, whose explicit RTCC reader passed a RAM trial on
+2512; g2 A/B ROM startup is untested. Both slot builds have
 the same commands and implementation. The banner identifies MON A or MON B;
 an optional RAM smoke image identifies itself as RAM. No monitor is yet released.
 
@@ -75,6 +77,7 @@ monitor; neither is substituted for Q's deliberate recovery path.
 | --- | --- |
 | `?` | Help |
 | `V` | Mona/slot/F identity, CPU and console/capability flags; no optional-device probing |
+| `T` (g2) | Explicit EDU Rev D RTCC sample; reads no RTC data automatically at startup; V later shows the retained sample |
 | `B` / `B 0` through `B 3` | Inspect/set the volatile data bank; no boot setting is saved |
 | `D address [end]` | Hex inspection, default 16 bytes, maximum 256 bytes, fully preflighted before reads |
 | `G address` | Explicit application handoff using the selected bank and allowed entry; no implicit default boot |
@@ -101,15 +104,17 @@ variant may refuse G because it has no installed monitor return slot.
 No E extension, B2 utility provider, RTC/SPI service, EDU add-on, debugger,
 filesystem, assembler or automatic startup program is required. Startup and V
 always retain **EDU, SSRAM, RTCC, Battery and Wear** status rows. Compatible
-optional adapters will populate EDU/SSRAM/RTCC/battery data; until then the
+optional adapters will populate EDU/SSRAM/battery data; until then the
 rows use `--` rather than fabricating values. Wear can report the boot-selected,
 fully CRC-checked journal page's maximum tracked count without a provider.
+G2's [RTCC adapter](MON_AB_RTCC_ADAPTER.md) populates RTCC only after explicit T.
+It uses the existing Mona state allocation and no legacy provider or owner RAM.
 
 Battery and wear rows carry the console-safe `*` symbol. One shared legend
 states that physical battery condition/prior flash wear are unverified and
 counts are tracked attempts only. Do not repeat "unknown" on those rows.
 The status display does not claim a physical battery test or lifetime wear.
-Both variants initially behave alike; personalities are checkpoint 5.
+Both variants remain alike at the owner's request; personalities are deferred.
 CONFIG/OPAQUE remain separate tools rather than hidden write commands.
 
 Hardware execution is checkpoint 4; the [scoped 2512 result](MON_AB_2512_ACCEPTANCE.md)

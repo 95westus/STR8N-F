@@ -13,8 +13,11 @@ MON A and MON B can provide different personalities. The current A/B boot
 path requires the existing monitor image header, CRC and PR05 contract;
 the labels do not make an arbitrary opaque image monitor-compatible.
 Ordinary opaque images boot through a configured bank entry. The retained
-g0034 monitor's ABI and provider dependencies still need review before it
-can be used under BASE1.
+g0034 monitor's [compatibility review](MON_AB_COMPATIBILITY_REVIEW.md) found it
+incompatible unchanged. A new common Mona core instead passed a scoped 2512
+trial. [Generation 2's RTCC adapter](MON_AB_RTCC_ADAPTER.md) passed its RAM trial
+on 2512; g2 A/B ROM startup remains untested. A and B stay identical for now at
+the owner's request.
 
 Trees such as Applications / Hardware / Maintenance belong in Mona or another
 optional image. LED, buzzer, SPI workspace/message services and additional

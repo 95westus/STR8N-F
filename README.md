@@ -2,10 +2,12 @@
 
 **MON A/B development branch:** [five-checkpoint plan](docs/MON_AB_PLAN.md)
 and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
-Mona A/B and RAM candidates were built once and passed the
+Mona generation 1 A/B and RAM candidates were built once and passed the
 [scoped 2512 trial](docs/MON_AB_2512_ACCEPTANCE.md). Original images and owner RAM
-are restored. Optional status adapters and personalities are next; Mona remains
-unreleased and N-F v0.3.0 remains the frozen foundation.
+are restored. [Generation 2 adds an explicit RTCC reader](docs/MON_AB_RTCC_ADAPTER.md)
+whose [RAM trial passed on 2512](docs/MON_AB_G2_RAM_ACCEPTANCE.md); g2 A/B ROM
+startup remains untested. A/B remain identical at the owner's
+request. Mona remains unreleased and N-F v0.3.0 remains the frozen foundation.
 
 > Give me 4KB, I can give you 4 boards.
 

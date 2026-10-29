@@ -44,6 +44,8 @@ M_PROMPT:
         BEQ M_HELP
         CMP #'V'
         BEQ M_VERSION
+        CMP #'T'
+        BEQ M_TIME_COMMAND
         CMP #'B'
         BEQ M_BANK_COMMAND
         CMP #'D'
@@ -70,6 +72,21 @@ M_HELP:
 M_VERSION:
         JSR M_END_ARGS
         BCC M_SYNTAX
+        JSR M_STATUS
+        JMP M_PROMPT
+M_TIME_COMMAND:
+        JSR M_END_ARGS
+        BCC M_SYNTAX
+        JSR MR_SAMPLE
+        STA MR_RESULT
+        BEQ M_TIME_SHOW
+        LDX #<M_TIME_ERROR_TEXT
+        LDY #>M_TIME_ERROR_TEXT
+        JSR M_PUTS
+        LDA MR_RESULT
+        JSR STR8V2_RAM_HEX_OUT
+        JSR STR8V2_RAM_NEWLINE
+M_TIME_SHOW:
         JSR M_STATUS
         JMP M_PROMPT
 M_QUIT:
@@ -410,6 +427,10 @@ M_STATUS:
         LDX #<M_OPTIONAL_TEXT
         LDY #>M_OPTIONAL_TEXT
         JSR M_PUTS
+        JSR MR_DISPLAY
+        LDX #<M_BATTERY_TEXT
+        LDY #>M_BATTERY_TEXT
+        JSR M_PUTS
         JSR M_WEAR
         LDX #<M_LIMIT_TEXT
         LDY #>M_LIMIT_TEXT
@@ -484,27 +505,31 @@ M_UNSUPPORTED:
         CLC
         RTS
 
+        INCLUDE "rtc-read.inc"
         INCLUDE "adapter.inc"
 M_RA: DB "RA",1,13
 M_HEX_DIGITS: DB "0123456789ABCDEF"
 M_PROMPT_TEXT: DB "Mona",MON_SLOT_CHAR,"> ",0
 M_TITLE:
-        DB 13,10,"Mona 0.1.0-dev g00000001 / ",MON_SLOT_LABEL,13,10
+        DB 13,10,"Mona 0.1.0-dev gMON_GENERATION_TEXT / ",MON_SLOT_LABEL,13,10
         DB "N-F 0.3.0 g00000001 / BASE1 / PR05",13,10,0
 M_CPU_TEXT: DB "CPU $",0
 M_FLAGS_TEXT: DB "  console flags $",0
 M_CAPS_TEXT: DB "  caps $",0
 M_OPTIONAL_TEXT:
-        DB "EDU: --   SSRAM: --   RTCC: --",13,10,"Battery: --*",13,10,0
+        DB "EDU: --   SSRAM: --",13,10,0
+M_BATTERY_TEXT: DB "Battery: --*",13,10,0
+M_TIME_ERROR_TEXT: DB "RTCC read refused/failed $",0
 M_WEAR_TEXT: DB "Wear: ",0
 M_MAX_TEXT: DB " tracked max $",0
 M_NO_WEAR_TEXT: DB "--*",13,10,0
 M_LIMIT_TEXT:
-        DB "-- no reported data; optional status adapters not loaded.",13,10
+        DB "-- no reported data; T explicitly reads EDU Rev D RTCC.",13,10
         DB "* Battery condition/prior flash wear unverified; counts are tracked attempts.",13,10,0
 M_BANK_TEXT: DB "Data bank B",0
 M_HELP_TEXT:
         DB "? help; V status; B [0-3] data bank",13,10
+        DB "T sample EDU Rev D RTCC; idle PA0/PA7 inputs required",13,10
         DB "D addr [end] inspect 1-256 bytes; G addr application handoff",13,10
         DB "Q recovery; hex addresses; no flash/config writes",13,10,0
 M_SYNTAX_TEXT: DB "REFUSED: syntax (use ?)",13,10,0

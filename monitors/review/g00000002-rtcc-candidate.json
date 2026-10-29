@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "component": "Mona RTCC adapter",
+  "generation": "00000002",
+  "status": "BUILT_NOT_EXECUTION_QUALIFIED",
+  "A_B_personalities": "Identical at owner request",
+  "candidate_manifest": "monitors/candidates/g00000002/manifest.json",
+  "source_sha256": {
+    "monitors/src/adapter.inc": "ffebdeab2566bdddc2c8bc853a8b846f3fd7bee33b56bd05134686a1299982c0",
+    "monitors/src/layout.inc": "0290c832af0ff95600ebeb731cba20b74bf1cb48b6a701e0846d902c9a147804",
+    "monitors/src/mona.asm": "d59554bc698ea9728b7c42f16d417970a0ccc8fc31e5b973f8016ea7299564eb",
+    "monitors/src/rtc-read.inc": "4d1875acd1f634cdf53a6ba80c9b8c4c65e3bc6a6c37aa02a7f3e064d7a00b05"
+  },
+  "builder_sha256": "0d828a6a13cdf48941a6da77bd701f2a402aeb44d611049fee317d22c72b68e1",
+  "local_reference_sha256": {
+    "C:\\SRC\\STR8-N\\BUILD\\rtc-ram-0200-20261026\\s\\collector\\collector.asm": "43b23d69c1bbb48253bf0abd5eaedae61eb9827693fe62573ada4239f61ea803",
+    "C:\\SRC\\STR8-N\\src\\current\\status\\storage-status.asm": "ca9cd09ff488f839ab7fa03f4acbf1fef4f971b67f6c98254eaae1597ccc86ad",
+    "C:\\SRC\\STR8-N\\src\\current\\mode\\status-mode-init.asm": "519edf9c9b703ab985505131f12c1548f3bfc752a33686298c370868b750cf49",
+    "C:\\SRC\\STR8-N\\src\\current\\include\\rtc-api.inc": "311ada2752047afc3430fb7ebd6209d6af96efb5d38d4d7fb8c74823dc656332"
+  },
+  "protocol_reference": "https://ww1.microchip.com/downloads/aemDocuments/documents/MPD/ProductDocuments/DataSheets/MCP79410-MCP79411-MCP79412-Battery-Backed-I2C-RTCC-DS20002266.pdf",
+  "attempted_build_invocations": 3,
+  "successful_complete_builds": 1,
+  "assembly_link_tool_invocations": 9,
+  "stopped_attempts": [
+    "r1: generated branch labels contained the rtc-read filename hyphen; assembler stopped",
+    "r2: descriptor adjacency assertion stopped after A linked; moved the new include before the exact-F adapter"
+  ],
+  "build_logs_sha256": {
+    "build\\mona-0.1.0-dev-g00000002-r1\\build-log.json": "ab1bbade3abbf8ebddf7ae5dc493524dae1cbae099ffd648080b1b19e2634de8",
+    "build\\mona-0.1.0-dev-g00000002-r2\\build-log.json": "f645a6020058be480d55412eb0d04917e1175b4a8b565747a967a036254ea21f",
+    "build\\mona-0.1.0-dev-g00000002-r3\\build-log.json": "cdc82e75c923973efb342300fec92ddb28d490f4e584acb5be072407711d15ee"
+  },
+  "hardware_access": false,
+  "flashing": false,
+  "CPU_simulations": 0,
+  "F_rebuilt": false,
+  "previously_qualified_generation_1_artifacts_unchanged": true,
+  "pending": "RAM-only trial of exact g2 candidate; no new A/B installation authorized"
+}

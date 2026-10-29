@@ -12,7 +12,7 @@ Branch: `codex/mona-monb`. Foundation: immutable N-F `v0.3.0`,
 | 2 | Define the shared monitor contract: entry/reentry, identity, console, parsing, bank selection, RAM/scratch, application launch and deliberate recovery return | Written interface and memory allocation; minimal command set and optional-provider behavior defined; no F changes | [Revision 1 defined](MON_AB_CONTRACT.md) |
 | 3 | Implement the minimal shared Mona core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | A/B/RAM candidates built once; exact hashes qualified on 2512 in checkpoint 4 |
 | 4 | Qualify A and B as independent occupants using the same core | Correct slot/header/CRC/private binding and separate identity; authorized real-board entry, commands, handoff/return and preservation checks pass for both | [2512 acceptance passed](MON_AB_2512_ACCEPTANCE.md); originals and owner RAM restored |
-| 5 | Add useful personalities through command tables/modules | Launcher/status and maintenance features added as individually reviewed increments while common behavior stays shared | Follow-on |
+| 5 | Add optional status adapters and later command modules | Useful status and maintenance features added as individually reviewed increments while common behavior stays shared | [G2 RTCC RAM trial passed](MON_AB_G2_RAM_ACCEPTANCE.md); g2 ROM trial pending; owner requests A/B remain identical |
 
 Checkpoint 4 is the usable A/B foundation. Checkpoint 5 is incremental; it
 does not block that foundation or N-F 0.3.0. Similar A/B candidates are useful
@@ -47,5 +47,6 @@ gateway also overlap BASE1 worker RAM, and several private call addresses moved.
 The common public RAM facade remains available at the same addresses.
 
 That review led to the shared BASE1 contract and new core qualified in checkpoints
-2-4. Next is checkpoint 5: separately ported optional status adapters and useful
-personalities, retaining the common behavior and frozen F dependency.
+2-4. Checkpoint 5 has begun with an explicit read-only RTCC adapter. At the owner's
+request, A/B remain identical; separate personalities are deferred. EDU mode,
+SSRAM layout and battery policy adapters remain planned. F stays frozen.

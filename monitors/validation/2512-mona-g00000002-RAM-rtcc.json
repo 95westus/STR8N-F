@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "passed": true,
+  "qualification": "RAM RTCC adapter only; A/B ROM startup NOT qualified for g2",
+  "date": "2026-10-29",
+  "board": "2512",
+  "CPU": "65C02",
+  "console": "FT245 / COM4",
+  "version": "0.1.0-dev",
+  "generation": "00000002",
+  "foundation": {
+    "repository": "https://github.com/95westus/STR8N-F",
+    "tag": "v0.3.0",
+    "commit": "a5f1d83f6a7017eb30e6268c6e0b1fd12fce6a8d",
+    "product": "STR8N-F",
+    "version": "0.3.0",
+    "generation": "00000001",
+    "profile": "BASE1",
+    "private_contract": "PR05",
+    "public_ABI_major": 2,
+    "F_bytes": 4096,
+    "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+    "F_frozen": true
+  },
+  "artifact": {
+    "bytes": 3695,
+    "sha256": "43d26db41be05f12a153aa31a7b628ce210a18795db5b3fdcd538e840b324a4c",
+    "variant": "RAM",
+    "destination": "RAM:0200; smoke candidate borrows owner RAM",
+    "linked_bytes": 3695,
+    "entry": "0200",
+    "linked_end": "106F",
+    "status": "NOT_EXECUTION_QUALIFIED"
+  },
+  "source_sha256": {
+    "monitors/src/adapter.inc": "ffebdeab2566bdddc2c8bc853a8b846f3fd7bee33b56bd05134686a1299982c0",
+    "monitors/src/layout.inc": "0290c832af0ff95600ebeb731cba20b74bf1cb48b6a701e0846d902c9a147804",
+    "monitors/src/mona.asm": "d59554bc698ea9728b7c42f16d417970a0ccc8fc31e5b973f8016ea7299564eb",
+    "monitors/src/rtc-read.inc": "4d1875acd1f634cdf53a6ba80c9b8c4c65e3bc6a6c37aa02a7f3e064d7a00b05"
+  },
+  "checks": [
+    "initial-RTC-state",
+    "T-bad-arguments",
+    "after-bad-T-state",
+    "help",
+    "V-before-T",
+    "T-first",
+    "first-RTC-state",
+    "V-retained-sample",
+    "retained-RTC-state",
+    "T-refresh",
+    "second-RTC-state",
+    "bank0",
+    "dump-bank0",
+    "Ctrl-C",
+    "ESC",
+    "Q-REC"
+  ],
+  "device_samples": [
+    {
+      "device_time": "2026-10-29T17:25:11",
+      "flags": "28",
+      "raw_hex": "9125172c291026",
+      "time_text": "2026-10-29 17:25:11"
+    },
+    {
+      "device_time": "2026-10-29T17:25:14",
+      "flags": "28",
+      "raw_hex": "9425172c291026",
+      "time_text": "2026-10-29 17:25:14"
+    }
+  ],
+  "device_time_zone": "unspecified; no UTC/local offset or clock-accuracy qualification",
+  "RTC_data_writes": 0,
+  "RTC_address_pointer_changes": true,
+  "RTC_flags_unchanged_between_samples": true,
+  "flash_writes": 0,
+  "F_writes": 0,
+  "journal_writes": 0,
+  "power_cuts": 0,
+  "CPU_simulations": 0,
+  "other_boards_accessed": false,
+  "images_boot_settings_wear_history_unchanged": true,
+  "original_owner_RAM_ZP_restored": true,
+  "owner_restore": {
+    "owner_RAM_restored": true,
+    "owner_ZP_restored": true,
+    "RAM_sha256": "1e1e8f62ac65a68206d8936ce9ce65c871e0428b5114193c65b3ba0c2838dda4",
+    "ZP_sha256": "30b1c0333c3e83a73c1abce7bd3e1fb200edf07207f485910d45cae46f816978",
+    "stopped_at_REC": true
+  },
+  "RAM_escrow_authority": "C:\\SRC\\STR8-N\\output\\qualification\\2512-mona-monab-20261029-r1\\final-receipt.json",
+  "before_bank_sha256": [
+    "5b72e8041c01f1fab145f8926a01b2be02ba807c654525bc04eed450a48c245f",
+    "b0d5ae540af9a7616df44dd5d3496e7668af3db98bc2905b8142d07353ad5f05",
+    "ad9b27a129ff0904b0fa3d2dfb5316c02967d28b827c77b64715826d8b5f87ea",
+    "4fa0eabe10f73b7808e542884c236e11a7937afa920d6ac74165861e2e5f2059"
+  ],
+  "after_bank_sha256": [
+    "5b72e8041c01f1fab145f8926a01b2be02ba807c654525bc04eed450a48c245f",
+    "b0d5ae540af9a7616df44dd5d3496e7668af3db98bc2905b8142d07353ad5f05",
+    "ad9b27a129ff0904b0fa3d2dfb5316c02967d28b827c77b64715826d8b5f87ea",
+    "4fa0eabe10f73b7808e542884c236e11a7937afa920d6ac74165861e2e5f2059"
+  ],
+  "COM4_released": true,
+  "final_context": "REC>",
+  "Mona_left_installed": false,
+  "evidence_limits": [
+    "A/B ROM startup and handoff not exercised for g2",
+    "No 65C816 or alternate console qualification",
+    "Only normal 24-hour RTC samples observed",
+    "No RTC fault injection, forced 12-hour mode, invalid dates or busy-bus test",
+    "RTC PF/VBATEN compared across reads; no independent physical battery test",
+    "VIA restoration follows source path; no independent post-read register instrumentation",
+    "Prior VIA input-pin output-latch values are not readable and are not preserved byte-for-byte"
+  ],
+  "evidence_sha256": {
+    "authorization.json": "9138fa4b9ff564e7a0eac7e12bbb329120e35edd9ed20a6e2a20e0276ac72253",
+    "authorized-scope.md": "e3c37881cbc3332e0788b931431445c573dc1694338f612e310668e23f9b94bc",
+    "serial.jsonl": "b1329aca899890f6fae0f56227136475b8c8da926417f0174e27b67d062af730",
+    "state.json": "658c87f1395d15064347eb545ff32e03778b075c3e5b6f0efd803885c316b362",
+    "startup.txt": "3d5fe3996ff6f79bcf077f3b6e3ef8c1a5482b8bf9d6446ac76f8773f01cda54",
+    "initial-RTC-state.txt": "91f407d7426c611b652e667a580aaed4c34a3b337fd02865e13afd9db16e264d",
+    "T-bad-arguments.txt": "9d4f66d87508e149ae74741b835f79867ffc4b3f1c651eae756c1c65dca244f5",
+    "after-bad-T-state.txt": "91f407d7426c611b652e667a580aaed4c34a3b337fd02865e13afd9db16e264d",
+    "help.txt": "274b124494e980db699ebca5f9591fec1c1c8de0632e9c9416e7bdaa9a0070fb",
+    "V-before-T.txt": "03b6f1ecd9c4da17bd3c2c3fce5b9c12ced972852609cea703792d95a59e5dfc",
+    "T-first.txt": "40fac727f4c20df220aef29810fe81de0d658a8aa725d0de6d6eb279f9d8160a",
+    "first-RTC-state.txt": "b992c154a0e2459b121e9e771ff52aa7e509de902f6e3a6c3dd7cd33f057d896",
+    "V-retained-sample.txt": "f4bc1cc7b558e21d35e0ad076c0e9b0344b24e25c6b16cd59e0603555edcdc69",
+    "retained-RTC-state.txt": "b992c154a0e2459b121e9e771ff52aa7e509de902f6e3a6c3dd7cd33f057d896",
+    "T-refresh.txt": "f35f81185cf4b51a074f143633d1cb6fa3ce92c30d21087fb06b1194699e4cec",
+    "second-RTC-state.txt": "d1156d45713ebaab2f67a1df44c8a35fde610168ea0b3c95b200781e912b2740",
+    "bank0.txt": "1f948caa1ea8dffd2fb1b788bcaad620a8e88389068820420fe7a28144057737",
+    "dump-bank0.txt": "07a9b991b49ee94906966e8807350d94de5a2dbe252fca9d5807eb4fcbe1a7dc",
+    "Ctrl-C.txt": "a751623fae085d442be538e6c3fa9fcb8771eba0ea09a5035bf9a1b7af0e0a9f",
+    "ESC.txt": "a751623fae085d442be538e6c3fa9fcb8771eba0ea09a5035bf9a1b7af0e0a9f",
+    "Q-REC.txt": "9ea09c1601f1bd06399097dbd764d95623ef57565a12b6016a352df78d301646"
+  }
+}

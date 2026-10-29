@@ -1,4 +1,4 @@
-"""Build the initial Mona A/B and RAM candidates once; never rebuild F or access a port."""
+"""Build one Mona A/B/RAM generation; never rebuild F or access a port."""
 import argparse
 import binascii
 import hashlib
@@ -32,7 +32,10 @@ def cells(path):
     return found
 
 
-def build(out):
+def build(out, generation):
+    if not 1 <= generation <= 0xffffffff:
+        raise ValueError('Generation must be 1..FFFFFFFF')
+    generation_text = f'{generation:08X}'
     out = Path(out).resolve()
     if out.exists():
         raise ValueError('Use a fresh build directory; previous outputs are preserved')
@@ -61,11 +64,12 @@ def build(out):
         stage = out/variant
         stage.mkdir()
         origin = page*256+0x80 if page else 0x0200
-        for filename in ('mona.asm','adapter.inc','layout.inc'):
+        for filename in ('mona.asm','adapter.inc','layout.inc','rtc-read.inc'):
             body = (ROOT/'monitors/src'/filename).read_text(encoding='utf-8')
             body = body.replace('MON_SLOT_LABEL', '"'+label+'"')
+            body = body.replace('MON_GENERATION_TEXT', generation_text)
             if filename != 'layout.inc':
-                body = long_branches(body, prefix='M_LONG_'+variant+'_'+filename.replace('.','_')+'_')
+                body = long_branches(body, prefix='M_LONG_'+variant+'_'+re.sub(r'\W','_',filename)+'_')
             (stage/filename).write_text(body,encoding='utf-8',newline='\n')
         shutil.copyfile(ROOT/'src/include/str8n-v2-public.inc', stage/'str8n-v2-public.inc')
         declarations = dict(private, MON_SLOT_PAGE=page,
@@ -76,7 +80,7 @@ def build(out):
         (stage/'entry.inc').write_text(entry,encoding='ascii',newline='\n')
         for command in ([assembler,'-G','-L','-S','-W','mona.asm'],
                         [linker,'-g','-s','-t',f'-c{origin:04X}','-hm19','-j','-o','mona.s19','mona.obj']):
-            done = subprocess.run(command,cwd=stage,capture_output=True,text=True)
+            done = subprocess.run(command,cwd=stage,capture_output=True,text=True,encoding='utf-8')
             logs.append(dict(variant=variant,command=command,returncode=done.returncode,
                              stdout=done.stdout,stderr=done.stderr))
             (out/'build-log.json').write_text(json.dumps(logs,indent=2)+'\n',encoding='utf-8',newline='\n')
@@ -93,7 +97,7 @@ def build(out):
             assert body[:4] == b'SN\x02\0' and body[4] == body[7] == 0x4c
             image = bytearray(b'\xff'*4096)
             image[:8] = b'MI\x01'+bytes((page,3,1,0,0))
-            image[8:12] = (1).to_bytes(4,'little')
+            image[8:12] = generation.to_bytes(4,'little')
             for offset,value in ((12,len(body)),(14,origin+4),(16,origin+7)):
                 image[offset:offset+2] = value.to_bytes(2,'little')
             image[20:24] = b'PR05'
@@ -102,11 +106,11 @@ def build(out):
                 image[offset:offset+2] = sy['M_UNSUPPORTED'].to_bytes(2,'little')
             image[128:128+len(body)] = body
             image[18:20] = binascii.crc_hqx(image[:18]+image[32:],0xffff).to_bytes(2,'little')
-            filename = 'MONA-0.1.0-dev-g00000001-'+variant+'.bin'
+            filename = 'MONA-0.1.0-dev-g'+generation_text+'-'+variant+'.bin'
             destination = f'B3:{page*256:04X}'
         else:
             image = body
-            filename = 'MONA-0.1.0-dev-g00000001-RAM.bin'
+            filename = 'MONA-0.1.0-dev-g'+generation_text+'-RAM.bin'
             destination = 'RAM:0200; smoke candidate borrows owner RAM'
         (out/filename).write_bytes(image)
         artifacts[filename] = dict(bytes=len(image),sha256=sha(image),variant=variant,
@@ -114,13 +118,17 @@ def build(out):
                                    entry=f'{origin+4 if page else origin:04X}',
                                    linked_end=f'{sy["M_END"]:04X}',status='NOT_EXECUTION_QUALIFIED')
         print(filename, len(image),'bytes; linked',len(body),'bytes',flush=True)
-    report = dict(schema=1,component='Mona',version='0.1.0-dev',generation='00000001',
+    report = dict(schema=1,component='Mona',version='0.1.0-dev',generation=generation_text,
                   build_passes=1,assembly_tool_invocations=len(logs),F_rebuilt=False,
                   F_sha256=sha(f),F_CRC16=f'{crc:04X}',private_adapter=private,
                   foundation=dependency['foundation'],source_sha256=inputs,artifacts=artifacts,
                   monitor_RAM='6A00-6AFF',owner_RAM_ROM_startup='0200-66FF unchanged',
                   status_rows=['EDU','SSRAM','RTCC','Battery','Wear'],
-                  status_limits='-- no reported provider data; * physical battery condition/prior wear unverified',
+                  status_limits='-- no reported data; explicit T samples EDU Rev D MCP79411; cached sample has no zone; * no physical battery/prior wear certification',
+                  personalities='A and B identical commands; only slot identity differs',
+                  RTCC_adapter=dict(trigger='Explicit T only; V never probes',profile='WDC EDU Rev D / MCP79411 / VIA1 PA0 SCL, PA7 SDA',
+                    automatic_startup=False,RTC_data_writes=False,EEPROM_or_SRAM_access=False,
+                    max_snapshot_attempts=3,SCL_wait_polls=255,owner_RAM_borrowed=False),
                   journal_access='Read selected page and verify full record CRC; no writer installed',
                   CPU_simulations=0,hardware_access=False,flashing=False,execution_qualified=False)
     (out/'manifest.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')
@@ -130,4 +138,6 @@ def build(out):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out',type=Path,required=True)
-    build(parser.parse_args().out)
+    parser.add_argument('--generation',type=lambda value:int(value,0),required=True)
+    args=parser.parse_args()
+    build(args.out,args.generation)
