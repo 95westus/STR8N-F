@@ -55,3 +55,14 @@ on 2512: two coherent RTCC samples, retained V display and unchanged flash/histo
 with original owner RAM/ZP restored and COM4 released. No monitor ROM was installed.
 G2 A/B ROM startup remains untested; g1's receipt does not qualify changed bytes.
 EDU/SSRAM/battery adapters and the limited remaining slot space need the next review.
+
+## Product direction: usable monitor
+
+The owner expects familiar Dump/Modify, loading, rich board/startup status and
+potential debugging. The [usability plan](MONA_USABILITY_PLAN.md) now maps that
+command set to implemented versus planned behavior and supersedes a status-only
+next increment. D/M/G/L/Q usability comes next; A/B stay identical. DEBUG belongs
+at the monitor layer with its own workspace and hook/return contract. Only F
+must remain the frozen 4KB foundation; larger features can use optional modules
+without assuming any owner sector free. No new build or board action accompanies
+this design checkpoint.

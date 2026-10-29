@@ -8,6 +8,9 @@ are restored. [Generation 2 adds an explicit RTCC reader](docs/MON_AB_RTCC_ADAPT
 whose [RAM trial passed on 2512](docs/MON_AB_G2_RAM_ACCEPTANCE.md); g2 A/B ROM
 startup remains untested. A/B remain identical at the owner's
 request. Mona remains unreleased and N-F v0.3.0 remains the frozen foundation.
+The [usable-monitor target](docs/MONA_USABILITY_PLAN.md) prioritizes Dump/Modify,
+RAM loading, familiar startup status and an optional debugger; those extensions
+are planned, not implied by the small-core acceptance.
 
 > Give me 4KB, I can give you 4 boards.
 

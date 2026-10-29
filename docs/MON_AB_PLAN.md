@@ -9,13 +9,14 @@ Branch: `codex/mona-monb`. Foundation: immutable N-F `v0.3.0`,
 | # | Work and deliverable | Exit condition | Current status |
 | --- | --- | --- | --- |
 | 1 | Review g0034 compatibility: identify exact A/B reference images, public/private calls, providers, entry shims and RAM ownership | A source-backed reuse/replace decision, named incompatibilities and an evidence inventory; no claim of execution compatibility | Initial review complete; [findings](MON_AB_COMPATIBILITY_REVIEW.md) |
-| 2 | Define the shared monitor contract: entry/reentry, identity, console, parsing, bank selection, RAM/scratch, application launch and deliberate recovery return | Written interface and memory allocation; minimal command set and optional-provider behavior defined; no F changes | [Revision 1 defined](MON_AB_CONTRACT.md) |
+| 2 | Define the shared monitor contract: entry/reentry, identity, console, parsing, bank selection, RAM/scratch, application launch and deliberate recovery return | Written interface and memory allocation; minimal command set and optional-provider behavior defined; no F changes | [G2 contract recorded](MON_AB_CONTRACT.md); expanded usability target specified separately |
 | 3 | Implement the minimal shared Mona core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | A/B/RAM candidates built once; exact hashes qualified on 2512 in checkpoint 4 |
 | 4 | Qualify A and B as independent occupants using the same core | Correct slot/header/CRC/private binding and separate identity; authorized real-board entry, commands, handoff/return and preservation checks pass for both | [2512 acceptance passed](MON_AB_2512_ACCEPTANCE.md); originals and owner RAM restored |
-| 5 | Add optional status adapters and later command modules | Useful status and maintenance features added as individually reviewed increments while common behavior stays shared | [G2 RTCC RAM trial passed](MON_AB_G2_RAM_ACCEPTANCE.md); g2 ROM trial pending; owner requests A/B remain identical |
+| 5 | Complete the practical common monitor, rich startup and optional debugger/services | D/M/G/L/Q usability, familiar commands/status and compatible optional modules; A/B remain identical | [Usability plan](MONA_USABILITY_PLAN.md) now prioritizes Dump/Modify/loading; g2 RTCC RAM passed but the full monitor is unfinished |
 
-Checkpoint 4 is the usable A/B foundation. Checkpoint 5 is incremental; it
-does not block that foundation or N-F 0.3.0. Similar A/B candidates are useful
+Checkpoint 4 proves the small A/B foundation; it is not acceptance of the full
+usable monitor. Checkpoint 5 is incremental and does not change N-F 0.3.0.
+Similar A/B candidates are useful
 during development so one known-good image can be retained. Different roles
 do not require unrelated codebases.
 
@@ -31,6 +32,10 @@ do not require unrelated codebases.
   layout, RTC, EDU/SPI initialization, storage formatting or startup application.
 - Begin with inspection rather than flash/config mutation commands. Existing
   CONFIG/OPAQUE tools remain separate until an explicit integration is designed.
+- The practical monitor target includes intentional RAM Modify, loading, rich
+  startup and an optional debugger. Prioritize D/M/G/L/Q next; keep both slots
+  alike. The 264 remaining g2 slot bytes do not bound the entire feature suite:
+  separately admitted modules may supply larger features without changing F.
 - No CPU model, offline regression group, reproduction build or speculative
   second build. Build only when the implementation is ready or changed code
   makes it necessary. File/source evidence checks remain part of this review.
@@ -47,6 +52,8 @@ gateway also overlap BASE1 worker RAM, and several private call addresses moved.
 The common public RAM facade remains available at the same addresses.
 
 That review led to the shared BASE1 contract and new core qualified in checkpoints
-2-4. Checkpoint 5 has begun with an explicit read-only RTCC adapter. At the owner's
-request, A/B remain identical; separate personalities are deferred. EDU mode,
-SSRAM layout and battery policy adapters remain planned. F stays frozen.
+2-4. Checkpoint 5 began with an explicit read-only RTCC adapter. The owner has
+clarified the goal as a highly usable monitor resembling the familiar command
+and startup experience. The [revised delivery order](MONA_USABILITY_PLAN.md)
+puts basic Dump/Modify/loading first, followed by rich startup and DEBUG.
+A/B remain identical; separate personalities are deferred. F stays frozen.

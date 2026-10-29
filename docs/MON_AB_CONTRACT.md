@@ -117,6 +117,12 @@ The status display does not claim a physical battery test or lifetime wear.
 Both variants remain alike at the owner's request; personalities are deferred.
 CONFIG/OPAQUE remain separate tools rather than hidden write commands.
 
+The [expanded usability target](MONA_USABILITY_PLAN.md) adds planned RAM Modify,
+loading, richer startup/maps and an optional debugger. This document describes
+the implemented g1/g2 contract; those planned commands are not working g2
+features. TIME/record-T naming, editable ranges, debugger context ownership and
+module placement must be settled in the next implementation contract.
+
 Hardware execution is checkpoint 4; the [scoped 2512 result](MON_AB_2512_ACCEPTANCE.md)
 now records the first pass. Further trials still require concrete candidate hashes, exact
 allowed monitor sectors, fresh image/history/settings backups and original RAM
