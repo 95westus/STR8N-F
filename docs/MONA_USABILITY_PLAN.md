@@ -1,10 +1,18 @@
-# Mona: usable monitor target
+# MON A/B: usable monitor target
 
-Direction clarified 2026-10-29: Mona should provide the familiar practical monitor
+Direction clarified 2026-10-29: MON A/B should provide the familiar practical monitor
 experience, including Dump/Modify and useful startup status. A and B remain
 identical. The small g1/g2 cores are implementation checkpoints, not the final
 feature target. The next increment prioritizes everyday monitor commands over
 adding more isolated status fields.
+
+## Current acceptance: full 2.0b35 parity
+
+The [full parity checklist](MON_B35_PARITY.md) is the current completion gate.
+It explicitly requires BATCH, AUTO T/S/R across flash and SSRAM PROGRAM, APPS,
+source/ASM/DEBUG and every baseline workflow. The older incremental sections
+below record delivery history; they do not reduce that scope. The Mona name
+is retired; existing built artifacts retain their historical names.
 
 ## Full workbench is the completion target
 
@@ -24,7 +32,7 @@ preservation outside the replaced A/B images and appended C/D records:
 | Assembler | B1:E AP/01/01 application and continuation in F retained | Review BASE1 host calls, entry/return and source/output ownership; integrate ASM |
 | Debugger | B1:A DG/01/01 component retained | Port its private bindings/context/traps; integrate DEBUG |
 | Apps and maintenance services | B2 UX utilities and B3:8/9/E service/extension images retained | Compatible discovery, dispatch and return; no blind legacy entry |
-| CONFIG/OPAQUE/MAP | Matching host RAM BINs remain available from REC> | Provide coherent Mona launch/menu access and preservation rules |
+| CONFIG/OPAQUE/MAP | Matching host RAM BINs remain available from REC> | Provide coherent MON A/B launch/menu access and preservation rules |
 | EDU / SPI SRAM | PROGRAM/WORKSPACE formats and source retained; g4 install issued no SPI writes | WB1 builds a guarded read-only SS2 adapter; qualify, then reconnect source/program storage and separate WORKSPACE messages |
 
 These are retention/source-inventory findings, not new execution qualification
@@ -33,7 +41,7 @@ Only the monitor sectors were replaced; the full old command dispatcher was
 not automatically ported with the preserved services.
 
 The completion workflow is **edit source -> assemble -> Store -> Table ->
-Restore -> run -> debug -> return to Mona**, with apps and maintenance/config
+Restore -> run -> debug -> return to MON A/B**, with apps and maintenance/config
 accessible from the same environment. Keep both A/B interfaces alike and F
 frozen. Next prioritize the command/module bridge, R/T/S and app/maintenance
 access, then complete source/ASM and DBG integration. Further standalone D/M
@@ -63,10 +71,10 @@ manifest. F, C/D and existing owner images remain protected.
 ## Familiar command set
 
 This table is a target and porting inventory, not a list of already working
-Mona commands. G2 hardware evidence covers its RAM candidate only; g1 has the
+MON A/B commands. G2 hardware evidence covers its RAM candidate only; g1 has the
 separate A/B startup trial.
 
-| User command | Intended behavior | Current Mona state / next action |
+| User command | Intended behavior | Current MON A/B state / next action |
 | --- | --- | --- |
 | `?` | Concise grouped help; advertise installed commands and identify unavailable modules | Basic help exists; expand as commands land |
 | `B0`-`B3` | Select the data/inspection bank; no boot-policy save | Existing parser accepts adjacent or spaced bank digit; retain both forms |
@@ -74,7 +82,7 @@ separate A/B startup trial.
 | `M addr byte...` | Modify ordinary application RAM, with complete preflight and displayed readback | G4 implements inline 1-8-byte owner ZP/RAM edits; interactive editing remains planned |
 | `!M addr byte...` | Explicit force to ZP/stack/RAM/I/O and allowed flash, no erase | G4 implements it; owner chose B3:C/D/F protection; dangerous active-system edits are not qualification tests |
 | `G addr` | Explicit application entry with a documented monitor-return convention | Basic admitted one-way launch exists; owner-application return still needs qualification |
-| `L` | Receive a host RAM BIN using the matching console workflow | Available in REC>, not yet integrated at the Mona prompt |
+| `L` | Receive a host RAM BIN using the matching console workflow | Available in REC>, not yet integrated at the MON A/B prompt |
 | `TIME` | Fresh bounded RTCC read/display through an admitted device profile | G4 uses TIME; g2's temporary T alias is removed and T is reserved for records |
 | `V` | Refresh the monitor's overall status display | Exists; g2 RTCC is a labelled retained sample, not an automatic new read |
 | `M`, `M1`, `M2`, `M3` | Summary/grid, ranges/reservations, tracked wear view | Existing RAM MAP tool is separate; map forms need a monitor adapter |
@@ -82,10 +90,10 @@ separate A/B startup trial.
 | `F addr byte...`, `I start end` | Explicit journaled flash edit/erase with confirmation and protected-region checks | Matching OPAQUE exists separately; do not copy the old private flash worker calls |
 | `C ...`, `P A\|B` | Inspect/save boot policy and choose the saved monitor default | Matching CONFIG exists separately; integrate through its reviewed journal path |
 | `J0`-`J3` | Familiar explicit bank boot/recovery navigation | Port only after documenting configured-entry versus reset-vector behavior under BASE1 |
-| `U A\|B` | Replace a monitor through an admitted, backed-up, journaled update | Separate installation tools exist; no Mona update command yet |
+| `U A\|B` | Replace a monitor through an admitted, backed-up, journaled update | Separate installation tools exist; no MON A/B update command yet |
 | `S ...`, `R ...`, `T ...` | Named flash-record save/load/list, as in the familiar monitor | Legacy record/provider dependency review and port required; these are not boot/wear journal messages |
 | `MAINT`, `SRAM`, `WORK`, `EDU` | Useful hardware/storage pages and explicit configuration | Legacy providers are not compatible merely because their signatures exist; port as optional modules |
-| `BATCH ...` | Bounded complete-command sequences with ESC cancellation | Planned after individual commands and their failure/confirmation behavior are settled |
+| `BATCH ...` | Bounded complete-command sequences with ESC cancellation | Required parity gate: legacy bounded queue, ESC, failure stop and checked command-result/confirmation behavior |
 | `DEBUG` | Enter disassembly/register/breakpoint/step tools | Planned monitor module; details below |
 | `ASM` / source editor | Edit, assemble, retain/restore source and run generated output | Legacy B1 components retained; compatible integration is a required full-workbench deliverable |
 | `Q` | Deliberately return to REC>, regardless of the saved default | Implemented; retain |
@@ -127,12 +135,12 @@ from a rejected RAM-edit address.
 
 ## Rich startup display
 
-The user's example is the target level of usability. Keep Mona's own name,
+The user's example is the target level of usability. Keep MON A/B's own name,
 version and generation, with the frozen N-F identity separate. Do not print the
-old STR8-N 2.0b35 identity on a new Mona implementation.
+old STR8-N 2.0b35 identity on a new MON A/B implementation.
 
 The exact old pre-monitor A/B VALID/chooser transcript is not in frozen BASE1.
-F's chooser remains unchanged. After entry, Mona can report validated A/B
+F's chooser remains unchanged. After entry, MON A/B can report validated A/B
 headers/generations and the saved default, followed by the richer status.
 An additional pre-entry selector would be a separate boot image, not an excuse
 to edit golden F or silently add a second countdown.
@@ -140,7 +148,7 @@ to edit golden F or silently add a second countdown.
 Illustrative desired monitor portion, **planned, not captured output**:
 
 ```text
-Mona <version> g<generation> MON A / B3 / 65C02
+STR8-N <version> g<generation> / MON A / B3 / 65C02
 Foundation: STR8N-F 0.3.0 g00000001 / BASE1 / PR05
 ABI 65C02 | 816E | 816N-VEC
 MONITOR A gen <validated generation> VALID
@@ -199,7 +207,7 @@ the BASE1 worker, as the earlier compatibility review records.
 
 Before porting, assign a new explicit workspace, review bank-safe execution
 and trap entry, preserve original hook pointers, and define enable/disable and
-exit restoration. Keep normal Mona entry separate from a debugger prompt that
+exit restoration. Keep normal MON A/B entry separate from a debugger prompt that
 must retain an application's captured stack/register state. No old gateway or
 shim may overwrite `$7800-$7BE7`.
 
@@ -218,8 +226,8 @@ such execution/step paths remain unsupported.
 3. Integrate source editor/ASM and the complete edit/assemble/store/restore/run
    workflow with declared source/output/workspace ownership.
 4. Integrate DEBUG: disassembly/registers, then reviewed RAM trap/step/continue
-   and reliable return to Mona.
-5. Complete rich startup, maps/wear views and storage/batch pages through the
+   and reliable return to MON A/B.
+5. Complete rich startup, maps/wear views and storage pages through the
    same admitted modules. Preserve all of these in the full-workbench target.
 
 The order can overlap source reviews, but write-capable features get separate
@@ -265,3 +273,10 @@ flash-record Store port; no allocator or payload checksum is implied.
 its exact-history restoration and retained extra wear count. Future zero-erase
 plans must use the native capacity check before writing. Next: apps/maintenance
 routing, source/ASM/DEBUG and WORKSPACE allocation before persistent messages.
+
+## Current next increment
+
+G6 closes manual flash Store only. BATCH, AUTO T/S/R for flash and SSRAM
+PROGRAM, and APPS remain required and unimplemented. Follow the module/layout
+then storage/apps/BATCH checkpoints in [full parity](MON_B35_PARITY.md).
+The existing 43-byte slot and 30-byte WB1 tails are not a full-workbench budget.

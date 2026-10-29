@@ -1,6 +1,6 @@
-# Mona g00000006: bank prompt and WB1 commands
+# MON A/B g00000006: bank prompt and WB1 commands
 
-Mona **0.1.0-dev g00000006** provides the same commands in A and B, on frozen
+MON A/B **0.1.0-dev g00000006** provides the same commands in A and B, on frozen
 N-F 0.3.0 / BASE1 / PR05. This is a development monitor, not a replacement N-F
 release. The [g6 / WB1 acceptance](MON_AB_G6_2512_ACCEPTANCE.md) covers installed
 2512 A/B and the physical B default. G4's force evidence is retained in its
@@ -16,6 +16,11 @@ stays in the banner. A monitor restart/HOLD starts with data bank3 again.
 The g6 trial had one unplanned D rotation; its raw history was restored and the
 extra erase retained in the count. See the acceptance/incident record above.
 
+The Mona product name is retired. This manual describes the exact existing g6
+bytes, whose banner and filenames still use that historical name. New source
+identity is STR8-N / MON A/B. [Full 2.0b35 parity](MON_B35_PARITY.md), including
+BATCH, AUTO flash/SSRAM T/S/R and APPS, remains unfinished.
+
 ## Commands
 
 | Command | Function |
@@ -28,7 +33,7 @@ extra erase retained in the count. See the acceptance/incident record above.
 | `TIME` | Fresh bounded EDU Rev D RTCC sample; no clock-setting or flag clearing |
 | `V` | Status, including the last labelled RTCC sample and tracked wear maximum |
 | `G addr` | Explicit application entry; public HOLD restarts the active monitor |
-| `L` | ROM Mona: enter frozen F's raw RAM BIN loader; Ctrl-C before payload returns REC> |
+| `L` | ROM MON A/B: enter frozen F's raw RAM BIN loader; Ctrl-C before payload returns REC> |
 | `T [bank]`, `R [bank] name\|address [L]` | Loaded WB1: Table/Restore; suffix L loads only |
 | `AREA bank first last`, `AREA` | Loaded WB1 g3: declare/close a B0/B1 owner flash window; no flash write |
 | `S bank flash RAMfirst RAMlast [name]` | Loaded WB1 g3: Store fresh SR01 bytes after YES, no erase |

@@ -1,5 +1,5 @@
-; Shared Mona core: explicit owner-RAM Modify; no flash/config writers.
-        MODULE MONA
+; Shared MON A/B core: explicit owner-RAM Modify and guarded force writes.
+        MODULE MONITOR
         INCLUDE "str8n-v2-public.inc"
         INCLUDE "layout.inc"
         INCLUDE "foundation.inc"
@@ -69,7 +69,7 @@ M_PROMPT:
 M_MODULE:
         JSR M_MODULE_CHECK
         BCC M_MODULE_MISSING
-        ; A RAM-loaded Mona must not be overwritten by a module Restore.
+        ; A RAM-loaded monitor must not be overwritten by a module Restore.
         LDA #MON_SLOT_PAGE
         BEQ M_MODULE_RAM
         LDA #2
@@ -697,7 +697,7 @@ M_HEX_DIGITS: DB "0123456789ABCDEF"
 M_TIME_SUFFIX: DB "IME"
 M_PROMPT_TEXT: DB "> ",0
 M_TITLE:
-        DB 13,10,"Mona 0.1.0-dev gMON_GENERATION_TEXT / ",MON_SLOT_LABEL,13,10
+        DB 13,10,"STR8-N 0.1.0-dev gMON_GENERATION_TEXT / ",MON_SLOT_LABEL,13,10
         DB "N-F 0.3.0 g00000001 / BASE1 / PR05",13,10,0
 M_CPU_TEXT: DB "CPU $",0
 M_CAPS_TEXT: DB "  caps $",0

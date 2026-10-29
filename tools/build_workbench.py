@@ -83,22 +83,22 @@ def build(out, generation=1):
     assert len(module) == 5120 and binascii.crc_hqx(module, 0xffff) == 0
     image = loader+b'\xff'*(256-len(loader))+module
     assert len(image) == 5376 and 0x0200+len(image) == 0x1700
-    filename = 'MONA-WORKBENCH-WB1-g'+generation_text+'-RAM.bin'
+    filename = 'STR8N-WORKBENCH-WB1-g'+generation_text+'-RAM.bin'
     (out/filename).write_bytes(image)
     (out/'WB1-module-5000.bin').write_bytes(module)
-    report = dict(schema=1, component='Mona RAM workbench', interface='WB1',
+    report = dict(schema=1, component='STR8-N RAM workbench', interface='WB1',
                   generation=generation_text, status='BUILD_ONLY_NOT_EXECUTION_QUALIFIED',
                   artifact=dict(filename=filename, bytes=len(image), sha256=sha(image)),
                   module=dict(origin='5000', bytes=5120, linked_bytes=len(body),
                               linked_end=f'{symbols["W_CODE_END"]:04X}',
                               sha256=sha(module), crc='CCITT FFFF; big-endian trailer; residue zero',
                               header='MW 01 14 PR05', command_entry='5008', shell_entry='500B'),
-                  bridge_client_RAM_floor='6550: lowest destination page; Mona RAM declares code end rounded up',
+                  bridge_client_RAM_floor='6550: lowest destination page; RAM monitor declares code end rounded up',
                   foundation_sha256=sha(f), private_adapter=private,
                   loader_bytes=len(loader), sources=source_hashes,
                   RAM_borrowed=['0200-16FF transfer staging', '5000-63FF module', '6400-66FF state'],
                   application_RAM_while_loaded='0200-4FFF', system_ZP=['E0-E1', 'E2-E3', 'E6-E7', 'EA'],
-                  entry='REC> L raw RAM BIN; existing Mona g4 has no L/module dispatch',
+                  entry='REC> L or ROM monitor L raw RAM BIN; g5+ supports module dispatch',
                   return_path='Q -> public RAM HOLD -> active monitor, or recovery if unavailable',
                   monitor_A_B_changed=False, F_rebuilt=False, hardware_access=False,
                   flash_writes='Explicit S into fully erased owner-declared B0/B1 AREA only; no erase',
@@ -113,7 +113,8 @@ def build(out, generation=1):
                                table=True, restore=True, restore_names='unique within selected bank',
                                store='S bank flash RAMfirst RAMlast [name]; YES; commit last, per-byte readback; AREA window required',
                                run='Explicit R without L; old program ABI not thereby qualified'),
-                  planned=['APPS and maintenance/config/opaque routing',
+                  planned=['BATCH and AUTO T/S/R for flash and SSRAM PROGRAM',
+                           'APPS and maintenance/config/opaque routing',
                            'Source/ASM/DEBUG', 'WORKSPACE allocation review and separate append-only messages'],
                   build_passes=1, assembler_linker_invocations=len(logs),
                   branch_layout=branch_layout, CPU_simulations=0)

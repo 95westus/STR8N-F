@@ -17,7 +17,7 @@
     "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
     "F_frozen": true
   },
-  "optional_monitor_name": "Mona",
+  "optional_monitor_name": "MON A/B",
   "legacy_g0034_compatibility": "Incompatible unchanged: private boot contract, entry-shim RAM conflicts and moved private calls",
   "plan": "docs/MON_AB_PLAN.md",
   "compatibility_review": "docs/MON_AB_COMPATIBILITY_REVIEW.md",
@@ -41,7 +41,7 @@
   "command_manual": "docs/MONA_COMMANDS.md",
   "A_B_personalities": "Identical at owner request; distinct personalities deferred",
   "usability_plan": "docs/MONA_USABILITY_PLAN.md",
-  "next_checkpoint": "7: apps/maintenance/config/opaque routing and source/ASM/DEBUG; inspect WORKSPACE allocation before message writer",
+  "next_checkpoint": "7: module/layout contract for full workbench, dual-backend AUTO T/S/R and APPS, then BATCH using checked command results",
   "hardware_access": true,
   "flashing": true,
   "trial_monitor_erases": 4,
@@ -75,5 +75,17 @@
   "current_command_manual": "docs/MONA_COMMANDS.md",
   "Store_manual": "docs/MONA_STORE.md",
   "scope_deviation": "docs/G6_D_ROTATION_REMEDIATION.md",
-  "capacity_preflight": "tools/native_journal_room.py"
+  "capacity_preflight": "tools/native_journal_room.py",
+  "runtime_product": "STR8-N",
+  "historical_product_name": "Mona (retired; immutable g1-g6 artifacts/receipts retain spelling)",
+  "source_naming_status": "New banners and build outputs renamed; not yet rebuilt or installed",
+  "parity_baseline": "2.0b35; BUILD/v2-beta35-candidate; build SHA256 2f5319ab1d7bc751d61bc4b00af225466d83b983bc7e5806a33417940be68365",
+  "parity_checklist": "docs/MON_B35_PARITY.md",
+  "required_unfinished_gates": [
+    "BATCH",
+    "AUTO T/S/R: flash and SSRAM PROGRAM",
+    "APPS and native/owner application launch",
+    "Full 2.0b35 capability including source/ASM/DEBUG, maintenance/config/opaque/maps and rich status",
+    "Separate append-only WORKSPACE messages"
+  ]
 }

@@ -10,9 +10,9 @@ Branch: `codex/mona-monb`. Foundation: immutable N-F `v0.3.0`,
 | --- | --- | --- | --- |
 | 1 | Review g0034 compatibility: identify exact A/B reference images, public/private calls, providers, entry shims and RAM ownership | A source-backed reuse/replace decision, named incompatibilities and an evidence inventory; no claim of execution compatibility | Initial review complete; [findings](MON_AB_COMPATIBILITY_REVIEW.md) |
 | 2 | Define the shared monitor contract: entry/reentry, identity, console, parsing, bank selection, RAM/scratch, application launch and deliberate recovery return | Written interface and memory allocation; minimal command set and optional-provider behavior defined; no F changes | [G2 contract recorded](MON_AB_CONTRACT.md); expanded usability target specified separately |
-| 3 | Implement the minimal shared Mona core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | A/B/RAM candidates built once; exact hashes qualified on 2512 in checkpoint 4 |
+| 3 | Implement the minimal shared monitor core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | A/B/RAM candidates built once; exact hashes qualified on 2512 in checkpoint 4 |
 | 4 | Qualify A and B as independent occupants using the same core | Correct slot/header/CRC/private binding and separate identity; authorized real-board entry, commands, handoff/return and preservation checks pass for both | [2512 acceptance passed](MON_AB_2512_ACCEPTANCE.md); originals and owner RAM restored |
-| 5 | Complete the practical common monitor, rich startup and optional debugger/services | D/M/G/L/Q usability, familiar commands/status and compatible optional modules; A/B remain identical | [G4 installed on 2512](MON_AB_G4_2512_ACCEPTANCE.md): Dump/Modify/force, TIME and saved B boot pass; L/maps/rich startup/DEBUG remain unfinished |
+| 5 | Complete the full 2.0b35 workbench on BASE1 | Every row of the [parity checklist](MON_B35_PARITY.md), including BATCH, AUTO flash/SSRAM T/S/R, APPS, source/ASM/DEBUG and status; A/B identical | [G6 installed on 2512](MON_AB_G6_2512_ACCEPTANCE.md); manual flash S/T/R and read-only SRAM status qualified; full parity remains open |
 
 Checkpoint 4 proves the small A/B foundation; it is not acceptance of the full
 usable monitor. Checkpoint 5 is incremental and does not change N-F 0.3.0.
@@ -63,5 +63,12 @@ identical; separate personalities are deferred. F stays frozen.
 The owner's full-environment clarification makes R/T/S Restore/Table/Store,
 apps, MAINT/CONFIG/OPAQUE and integrated source/ASM/DBG the completion target.
 Their existing data/component images were retained; their old command interface
-is not yet restored in Mona. Follow the [workbench acceptance workflow](MONA_USABILITY_PLAN.md)
+is not yet restored in MON A/B. Follow the [workbench acceptance workflow](MONA_USABILITY_PLAN.md)
 and prioritize reconnecting these services over further standalone D/M polish.
+
+The owner retired the Mona name on 2026-10-29. Future runtime/artifact identity
+is STR8-N / MON A/B, with its own version and generation. Historical filenames,
+branch spelling and qualified bytes remain intact. BATCH, AUTO T/S/R on both
+flash and SSRAM PROGRAM, and APPS are required gates, not deferred polish.
+The 367/43/43-byte F/A/B free-space figures and 30-byte WB1 remainder require
+a module/layout checkpoint before those features can be added. F stays frozen.

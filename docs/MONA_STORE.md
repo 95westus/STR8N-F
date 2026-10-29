@@ -1,12 +1,12 @@
 # WB1 g3: Store, Table and Restore
 
 The Store implementation uses the existing SR01 flash-record format. It is a
-RAM-loaded WB1 module, available through Mona's shared module interface. It
+RAM-loaded WB1 module, available through MON A/B's shared module interface. It
 does not change the frozen F ABI or allocate flash automatically.
 
 | Command | Function |
 | --- | --- |
-| `HELP` | Full module help, including Store, from Mona or WORKBENCH |
+| `HELP` | Full module help, including Store, from MON A/B or WORKBENCH |
 | `AREA bank first last` | Declare an inclusive owner-controlled flash window in B0/B1, 8000-DFFF |
 | `AREA` | Close the current window |
 | `S bank flash RAMfirst RAMlast [name]` | Save an inclusive RAM range as a flash record; YES required |
@@ -45,7 +45,7 @@ OK
 B3>
 ```
 
-Select the BIN with F2 in the Python console, type L at Mona, then press F3
+Select the BIN with F2 in the Python console, type L at MON A/B, then press F3
 at SEND BIN. Loading WB1 borrows 0200-16FF and 5000-66FF. Its runtime protects
 5000-66FF against ordinary M. It is evicted when owner RAM is restored.
 

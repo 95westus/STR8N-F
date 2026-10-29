@@ -1,4 +1,4 @@
-# Mona g6 / WB1 g3: records and EDU/SRAM checkpoint
+# MON A/B g6 / WB1 g3: records and EDU/SRAM checkpoint
 
 2026-10-29. **G6 installed in A/B; WB1 g3 Store functionality passed, with a recovered scope deviation.**
 See [acceptance](MON_AB_G6_2512_ACCEPTANCE.md), including the unplanned D rotation
@@ -10,8 +10,8 @@ apps, maintenance/config/opaque, source/ASM/DEBUG and SRAM storage/messages.
 
 | Component | Candidate implementation | Status |
 | --- | --- | --- |
-| Mona g6 A/B | Identical commands; native L; checked WB1 dispatch; normal M respects module RAM | Qualified and installed on 2512 |
-| Mona g6 RAM | Same bridge; L/G refused; Restore protects this monitor's code pages | Qualified on 2512 |
+| MON A/B g6 A/B | Identical commands; native L; checked WB1 dispatch; normal M respects module RAM | Qualified and installed on 2512 |
+| MON A/B g6 RAM | Same bridge; L/G refused; Restore protects this monitor's code pages | Qualified on 2512 |
 | WB1 g3 RAM | AREA/Store/Table/Restore; session EDU control; guarded SRAM layout/capacity; Q to monitor | Qualified on 2512; reload after owner-RAM restoration |
 | Apps/maintenance routing | Still required | Planned |
 | Source editor/ASM/DEBUG | Retained legacy assets need compatible ports | Planned |
@@ -46,18 +46,18 @@ WORKBENCH> T 1
 WORKBENCH> EDU ON
 WORKBENCH> SRAM
 WORKBENCH> Q
-MonaB>
+MON A/BB>
 ```
 
 Q uses public RAM HOLD to return to the active monitor, or recovery if no valid
 active monitor exists. It does not save boot settings. The module remains in
 borrowed RAM until overwritten/restored.
 
-G5 ROM adds L at the Mona prompt, tail-entering the exact frozen F loader.
+G5 ROM adds L at the MON A/B prompt, tail-entering the exact frozen F loader.
 First-byte Ctrl-C cancellation still returns REC>. This is idle-terminated raw
 BIN with the existing limits, no length framing or whole-transfer checksum.
 WB1 separately CRC-checks its module block before copying/entering it; that CRC
-does not cover its raw loader. RAM-loaded Mona refuses L to avoid self-overwrite.
+does not cover its raw loader. RAM-loaded MON A/B refuses L to avoid self-overwrite.
 
 Older g4 has no L or module dispatch: use Q to REC> for loading there. The
 qualification loaded g5 RAM separately while retaining WB1 at 5000, before
@@ -67,7 +67,7 @@ installing either slot. Installed g5 now provides native L and module dispatch.
 
 | WB1 command | Function |
 | --- | --- |
-| `?` | Shell help; g5 Mona's own ? lists the WB1 group |
+| `?` | Shell help; g5 MON A/B's own ? lists the WB1 group |
 | `B0`-`B3` | Select the data/record bank, no boot save |
 | `T [bank]` | Bytewise cached SR/01 scan of selected bank 8000-DFFF |
 | `R [bank] name\|address [L]` | Restore complete record; L=load only, otherwise explicitly run its load address |
@@ -75,7 +75,7 @@ installing either slot. Installed g5 now provides native L and module dispatch.
 | `SRAM` | Explicit guarded SS/01 or SS/02 layout and PROGRAM/WORKSPACE capacity read |
 | `SRAM PREP` | Explicit disabled-CB flag acknowledgment after idle guard; no SPI clocks |
 | `WORK` | Same read-only layout/capacity status; no allocation changes |
-| `Q` | Shell: HOLD to active monitor; g5 Mona's own Q remains REC> |
+| `Q` | Shell: HOLD to active monitor; g5 MON A/B's own Q remains REC> |
 
 Numbers are hex. Commands are uppercase-normalized and bounded to 40 characters;
 malformed, overlong, cancelled or receive-error input is rejected as a whole.
@@ -181,7 +181,7 @@ source/ASM/DEBUG. Future candidates still require execution qualification.
 
 The first 2512 RAM runs read a committed legacy SS1 layout, not SS2. WB1 g1
 correctly refused it. The read-only g2 compatibility increment admits the
-existing SS1 format without changing a byte of PROGRAM/WORKSPACE. Mona g5
+existing SS1 format without changing a byte of PROGRAM/WORKSPACE. MON A/B g5
 A/B/RAM BINs were not rebuilt. Candidate manifests distinguish actual core
 assembly inputs from unrelated WB1 files previously inventoried alongside them.
 The host harness also now matches a prompt only at a line boundary, because

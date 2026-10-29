@@ -2,7 +2,7 @@
 
 **MON A/B development branch:** [development plan](docs/MON_AB_PLAN.md)
 and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
-Mona **0.1.0-dev g00000006** is [installed and tested on 2512](docs/MON_AB_G6_2512_ACCEPTANCE.md),
+MON A/B **0.1.0-dev g00000006** is [installed and tested on 2512](docs/MON_AB_G6_2512_ACCEPTANCE.md),
 with identical A/B commands: hex/ASCII Dump, RAM Modify/readback, explicit
 `!M` force, TIME, bank selection, G, native L and Q. The separately loaded
 [WB1 g3 RAM module](docs/MONA_STORE.md) adds explicit AREA/Store, Table/Restore and
@@ -17,7 +17,14 @@ See the [incident record](docs/G6_D_ROTATION_REMEDIATION.md).
 See the [command manual](docs/MONA_COMMANDS.md). Apps/maintenance routing,
 source/ASM/DEBUG, rich startup and persistent WORKSPACE messages remain the
 [full-workbench target](docs/MONA_USABILITY_PLAN.md).
-Mona is unreleased; these development artifacts do not change N-F v0.3.0 downloads.
+**Full 2.0b35 capability is required**, including **BATCH**, automatic **T/S/R
+for flash and SSRAM PROGRAM**, and **APPS**. These are unfinished gates in the
+[parity checklist](docs/MON_B35_PARITY.md), not features already supplied by g6.
+The Mona name is retired. New source banners/artifact names use STR8-N / MON A/B;
+installed g6 and its immutable evidence still carry the old name until the next
+functional build/install. MON A/B is unreleased; N-F v0.3.0 downloads are unchanged.
+Current built space: **F 367 bytes, MON A 43, MON B 43, WB1 30**; run
+`python tools/monitor_space.py` to verify the linked binaries without rebuilding.
 
 > Give me 4KB, I can give you 4 boards.
 
@@ -81,9 +88,9 @@ BASE1 / PR05
 ```
 
 F then offers its chooser and recovery. The running image supplies its own
-OS identity and EDU, RTC, SRAM or other service status. **Mona** is the
-name chosen for a future optional monitor/launcher; [it is planned](docs/MONA.md),
-with no Mona binary or expanded F ABI in this release.
+OS identity and EDU, RTC, SRAM or other service status. [MON A/B](docs/MONA.md)
+is the separately developed monitor/workbench; no monitor binary or expanded F
+ABI is included in the published 0.3.0 foundation kit.
 
 | Flash region | BASE1 role |
 | --- | --- |

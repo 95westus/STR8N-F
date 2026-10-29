@@ -1,4 +1,4 @@
-# Mona common contract, revision 3 (g4 Dump/Modify/force)
+# MON A/B common contract (g6 core and WB1)
 
 Foundation: exact N-F `v0.3.0`, F generation 00000001, BASE1 / PR05.
 F stays frozen. This contract is for a new independent monitor core, not a
@@ -7,9 +7,11 @@ records why the old entry shim and private bindings cannot be retained.
 
 ## Images and entry
 
-The first qualified candidate is **Mona 0.1.0-dev g00000001**. G2's RTCC reader
-passed a RAM trial. The current increment is **g00000004**, adding Dump/Modify
-and explicit force. See the [command manual](MONA_COMMANDS.md) and its exact-hash
+The first qualified candidate was **0.1.0-dev g00000001**. G2's RTCC reader
+passed a RAM trial; g4 added Dump/Modify and explicit force. The current built
+increment is **g00000006**, with bank prompts and WB1 g3 Store. New source
+banners use STR8-N / MON A/B; the retired name remains in existing qualified
+binaries. See the [command manual](MONA_COMMANDS.md) and its exact-hash
 installation receipt. Both slot builds have
 the same commands and implementation. The banner identifies MON A or MON B;
 an optional RAM smoke image identifies itself as RAM. No monitor is yet released.
@@ -31,8 +33,8 @@ An admission failure does not use private recovery or bank-switch helpers.
 
 | Range | Contract |
 | --- | --- |
-| 0200-66FF and ZP00-DF | Owner RAM; ordinary Mona startup and inspection do not write it |
-| 6A00-6AFF | Mona volatile state, bounded line buffer and display buffer |
+| 0200-66FF and ZP00-DF | Owner RAM; ordinary MON A/B startup and inspection do not write it |
+| 6A00-6AFF | MON A/B volatile state, bounded line buffer and display buffer |
 | 6B00-6B7F and 6D00-6D2A (g4) | Temporary force-write code, staged away from raw targets; outside owner escrow |
 | ZP E0-FF and stack 0100-01FF | System scratch; ABI/adapter clobbers permitted; no application resume state promised |
 | 6700-67FF frame | Borrow only for read-only journal status validation; no writer installed |
@@ -82,7 +84,7 @@ monitor; neither is substituted for Q's deliberate recovery path.
 | Command | Behavior |
 | --- | --- |
 | `?` | Help |
-| `V` | Mona/slot/F identity, CPU and console/capability flags; no optional-device probing |
+| `V` | MON A/B/slot/F identity, CPU and console/capability flags; no optional-device probing |
 | `TIME` (g4; g2 used T) | Explicit EDU Rev D RTCC sample; no automatic startup probe; V later shows the retained sample |
 | `B` / `B 0` through `B 3` | Inspect/set the volatile data bank; no boot setting is saved |
 | `D address [end]` | Hex/ASCII inspection, default 16 bytes, larger non-I/O ranges, fully preflighted before reads |
@@ -109,8 +111,9 @@ guarantee continued operation. Raw force uses unrolled absolute RAM stores and
 no target readback; forced flash preflights the complete unit's bit transitions,
 skips identical bytes, executes/polls in RAM and displays successful readback.
 Golden B3:F and C/D remain protected. See the manual for hardware programming
-limits, scratch ownership and failure behavior. Force is the only current Mona
-flash-write command; normal flash/config/update integration remains planned.
+limits, scratch ownership and failure behavior. Force is the core's flash-byte
+writer. Loaded WB1 g3 also supports explicit no-erase Store; journaled
+flash/config/update integration remains planned.
 
 G admits application RAM 0200-66FF or flash 8000-FFFF, excluding B3:C/D/F.
 The operator supplies a real entry point for their image; inspection does not
@@ -128,7 +131,7 @@ rows use `--` rather than fabricating values. Wear can report the boot-selected,
 fully CRC-checked journal page's maximum tracked count without a provider.
 The [RTCC adapter](MON_AB_RTCC_ADAPTER.md) populates RTCC only after an explicit
 sample (g2 T, g4 TIME).
-It uses the existing Mona state allocation and no legacy provider or owner RAM.
+It uses the existing MON A/B state allocation and no legacy provider or owner RAM.
 
 Battery and wear rows carry the console-safe `*` symbol. One shared legend
 states that physical battery condition/prior flash wear are unverified and

@@ -1,4 +1,8 @@
-"""Build one Mona A/B/RAM generation; never rebuild F or access a port."""
+"""Build one MON A/B/RAM generation; never rebuild F or access a port.
+
+The script/source filenames retain their historical spelling for existing callers.
+New artifacts and runtime banners use STR8-N / MON A/B.
+"""
 import argparse
 import binascii
 import hashlib
@@ -95,7 +99,7 @@ def build(out, generation):
                              stdout=done.stdout,stderr=done.stderr))
             (out/'build-log.json').write_text(json.dumps(logs,indent=2)+'\n',encoding='utf-8',newline='\n')
             if done.returncode:
-                raise RuntimeError('Mona build failed; inspect '+str(out/'build-log.json'))
+                raise RuntimeError('MON A/B build failed; inspect '+str(out/'build-log.json'))
         sy = {name:int(value,16) for value,name in re.findall(r'^\s*([0-9A-Fa-f]{8})\s+(\w+)\s*$',
               (stage/'mona.map').read_text(encoding='utf-8'),re.M)}
         memory = cells(stage/'mona.s19')
@@ -112,17 +116,17 @@ def build(out, generation):
             for offset,value in ((12,len(body)),(14,origin+4),(16,origin+7)):
                 image[offset:offset+2] = value.to_bytes(2,'little')
             image[20:24] = b'PR05'
-            image[24] = 0xFE  # Mona install-check byte; outside F's CRC/admission fields.
+            image[24] = 0xFE  # Monitor install-check byte; outside F's CRC/admission fields.
             image[31] = 0
             for offset in range(32,72,2):
                 image[offset:offset+2] = sy['M_UNSUPPORTED'].to_bytes(2,'little')
             image[128:128+len(body)] = body
             image[18:20] = binascii.crc_hqx(image[:18]+image[32:],0xffff).to_bytes(2,'little')
-            filename = 'MONA-0.1.0-dev-g'+generation_text+'-'+variant+'.bin'
+            filename = 'STR8N-MON-0.1.0-dev-g'+generation_text+'-'+variant+'.bin'
             destination = f'B3:{page*256:04X}'
         else:
             image = body
-            filename = 'MONA-0.1.0-dev-g'+generation_text+'-RAM.bin'
+            filename = 'STR8N-MON-0.1.0-dev-g'+generation_text+'-RAM.bin'
             destination = 'RAM:0200; smoke candidate borrows owner RAM'
         (out/filename).write_bytes(image)
         artifacts[filename] = dict(bytes=len(image),sha256=sha(image),variant=variant,
@@ -130,7 +134,7 @@ def build(out, generation):
                                    entry=f'{origin+4 if page else origin:04X}',
                                    linked_end=f'{sy["M_END"]:04X}',status='NOT_EXECUTION_QUALIFIED')
         print(filename, len(image),'bytes; linked',len(body),'bytes',flush=True)
-    report = dict(schema=1,component='Mona',version='0.1.0-dev',generation=generation_text,
+    report = dict(schema=1,component='MON A/B',version='0.1.0-dev',generation=generation_text,
                   build_passes=1,assembly_tool_invocations=len(logs),F_rebuilt=False,
                   F_sha256=sha(f),F_CRC16=f'{crc:04X}',private_adapter=private,
                   foundation=dependency['foundation'],source_sha256=inputs,artifacts=artifacts,
@@ -138,7 +142,7 @@ def build(out, generation):
                   prompt='B0> through B3> follows selected data bank; active A/B remains in banner',
                   status_rows=['EDU','SSRAM','RTCC','Battery','Wear'],
                   commands=['?','V','TIME','B[0-3]','D addr [end]','M addr byte...','!M addr byte...','G addr','L','Q',
-                            'WB1 module: T/R/EDU/SRAM/WORK'],
+                            'WB1 module: S/T/R/AREA/HELP/EDU/SRAM/WORK'],
                   workbench_bridge=dict(interface='WB1',module_RAM='5000-63FF',state_RAM='6400-66FF',
                     admission='MW/01/14/PR05 and CRC16 zero residue over all 5120 bytes before every call',
                     ordinary_Modify_respects_module=True,force_Modify_may_evict_module=True,
