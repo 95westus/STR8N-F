@@ -2,8 +2,10 @@
 
 **MON A/B development branch:** [five-checkpoint plan](docs/MON_AB_PLAN.md)
 and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
-Initial Mona A/B and RAM candidates are built once and await execution
-qualification; N-F v0.3.0 remains the frozen foundation.
+Mona A/B and RAM candidates were built once and passed the
+[scoped 2512 trial](docs/MON_AB_2512_ACCEPTANCE.md). Original images and owner RAM
+are restored. Optional status adapters and personalities are next; Mona remains
+unreleased and N-F v0.3.0 remains the frozen foundation.
 
 > Give me 4KB, I can give you 4 boards.
 

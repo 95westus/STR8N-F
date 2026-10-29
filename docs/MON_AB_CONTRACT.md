@@ -112,7 +112,8 @@ The status display does not claim a physical battery test or lifetime wear.
 Both variants initially behave alike; personalities are checkpoint 5.
 CONFIG/OPAQUE remain separate tools rather than hidden write commands.
 
-Hardware execution is checkpoint 4. Prepare concrete candidate hashes, exact
+Hardware execution is checkpoint 4; the [scoped 2512 result](MON_AB_2512_ACCEPTANCE.md)
+now records the first pass. Further trials still require concrete candidate hashes, exact
 allowed monitor sectors, fresh image/history/settings backups and original RAM
-escrow before flashing. Current authorization to continue development does not
-identify a disposable target or supersede other work using a serial port.
+escrow before flashing. Completing the 2512 trial does not authorize further
+writes or supersede other work using a serial port.

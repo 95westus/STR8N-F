@@ -10,8 +10,8 @@ Branch: `codex/mona-monb`. Foundation: immutable N-F `v0.3.0`,
 | --- | --- | --- | --- |
 | 1 | Review g0034 compatibility: identify exact A/B reference images, public/private calls, providers, entry shims and RAM ownership | A source-backed reuse/replace decision, named incompatibilities and an evidence inventory; no claim of execution compatibility | Initial review complete; [findings](MON_AB_COMPATIBILITY_REVIEW.md) |
 | 2 | Define the shared monitor contract: entry/reentry, identity, console, parsing, bank selection, RAM/scratch, application launch and deliberate recovery return | Written interface and memory allocation; minimal command set and optional-provider behavior defined; no F changes | [Revision 1 defined](MON_AB_CONTRACT.md) |
-| 3 | Implement the minimal shared Mona core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | Initial A/B/RAM candidates built once; NOT_EXECUTION_QUALIFIED |
-| 4 | Qualify A and B as independent occupants using the same core | Correct slot/header/CRC/private binding and separate identity; authorized real-board entry, commands, handoff/return and preservation checks pass for both | [2512 scope](MON_AB_2512_TRIAL_SCOPE.md) authorized; RAM smoke and fresh preflight precede flash |
+| 3 | Implement the minimal shared Mona core: prompt, help, memory inspection and recovery return | A bounded candidate with local parser and public RAM console calls; no required E/B2/EDU provider; slot images and manifest produced by one planned build invocation | A/B/RAM candidates built once; exact hashes qualified on 2512 in checkpoint 4 |
+| 4 | Qualify A and B as independent occupants using the same core | Correct slot/header/CRC/private binding and separate identity; authorized real-board entry, commands, handoff/return and preservation checks pass for both | [2512 acceptance passed](MON_AB_2512_ACCEPTANCE.md); originals and owner RAM restored |
 | 5 | Add useful personalities through command tables/modules | Launcher/status and maintenance features added as individually reviewed increments while common behavior stays shared | Follow-on |
 
 Checkpoint 4 is the usable A/B foundation. Checkpoint 5 is incremental; it
@@ -46,6 +46,6 @@ contract mismatch already blocks launch. Its entry shim and optional utility
 gateway also overlap BASE1 worker RAM, and several private call addresses moved.
 The common public RAM facade remains available at the same addresses.
 
-Proceed to checkpoint 2 by defining a small BASE1 monitor contract. Use selected
-g0034 parser/display logic as reference, replace its entry and private bindings,
-and treat rich service/status providers as separately ported optional modules.
+That review led to the shared BASE1 contract and new core qualified in checkpoints
+2-4. Next is checkpoint 5: separately ported optional status adapters and useful
+personalities, retaining the common behavior and frozen F dependency.

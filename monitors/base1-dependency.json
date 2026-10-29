@@ -2,7 +2,7 @@
   "schema": 1,
   "component": "MON A/B development",
   "branch": "codex/mona-monb",
-  "status": "checkpoint-3-candidate-built; execution-qualification-pending",
+  "status": "checkpoint-4-passed-on-2512; originals-and-owner-RAM-restored; unreleased",
   "foundation": {
     "repository": "https://github.com/95westus/STR8N-F",
     "tag": "v0.3.0",
@@ -24,7 +24,14 @@
   "compatibility_inventory": "monitors/review/g0034-base1-compatibility.json",
   "shared_contract": "docs/MON_AB_CONTRACT.md",
   "candidate_manifest": "monitors/payload/manifest.json",
-  "next_checkpoint": "4: authorized 2512 RAM smoke and A/B install/restore trial",
-  "hardware_access": false,
-  "flashing": false
+  "hardware_acceptance": "docs/MON_AB_2512_ACCEPTANCE.md",
+  "hardware_receipt": "monitors/validation/2512-mona-0.1.0-dev-g00000001.json",
+  "qualified_board": "2512 / 65C02 / FT245",
+  "next_checkpoint": "5: optional status adapters and useful personalities",
+  "hardware_access": true,
+  "flashing": true,
+  "trial_monitor_erases": 4,
+  "F_writes": 0,
+  "C_D_erases": 0,
+  "Mona_left_installed": false
 }

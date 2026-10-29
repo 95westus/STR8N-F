@@ -1,6 +1,8 @@
-# Proposed MON A/B trial: 2512, frozen BASE1
+# Reviewed MON A/B trial scope: 2512, frozen BASE1
 
-Authorized candidate scope, not a hardware result. After reviewing the exact
+This document retains the authorized pre-trial scope; the completed hardware
+result is recorded separately in [2512 acceptance](MON_AB_2512_ACCEPTANCE.md).
+After reviewing the exact
 four-erase A/B install/restore budget, the owner answered: "Use 2512; idle and
 COM4 free." The target is 2512/COM4 only. Fresh admission and RAM smoke still
 precede monitor writes. No device result is claimed by this document.
@@ -8,7 +10,7 @@ precede monitor writes. No device result is claimed by this document.
 ## Candidates
 
 Mona **0.1.0-dev g00000001**, built once from the shared core. All candidates
-are NOT_EXECUTION_QUALIFIED. The [contract](MON_AB_CONTRACT.md) and
+were NOT_EXECUTION_QUALIFIED at the build checkpoint. The [contract](MON_AB_CONTRACT.md) and
 [candidate manifest](../monitors/payload/manifest.json) define the interface.
 
 | Image | Destination | SHA-256 |
