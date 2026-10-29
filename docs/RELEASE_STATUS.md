@@ -34,7 +34,7 @@ and RAM/ZP verified. 2205 was not accessed.
 
 | Item | Status |
 | --- | --- |
-| Fresh operator/source ZIP, terminal and migration dependencies | Candidate packaging; integrity/extraction results belong in PACKAGE_RECEIPT.json and its extraction receipt |
+| Fresh operator/source ZIP, terminal and migration dependencies | [Passed](BASE1_RC1_PACKAGE_CHECKPOINT.md): one package pass, fresh extraction, manifests/dependencies/links and CLI checks; F unchanged |
 | Migration and terminal acceptance from that exact extracted ZIP | **NOT RUN**; next reviewed test, bind archive SHA-256 in the result |
 | Public release/tag/upload | **NOT PUBLISHED** |
 | Other CPUs/adapters/hosts and occupied layouts | Unqualified; no four-board hardware pass inferred |
