@@ -57,8 +57,33 @@ M_PROMPT:
         BEQ M_MODIFY
         CMP #'G'
         BEQ M_GO
+        CMP #'L'
+        BEQ M_LOAD
         CMP #'Q'
         BEQ M_QUIT
+M_MODULE:
+        JSR M_MODULE_CHECK
+        BCC M_MODULE_MISSING
+        ; A RAM-loaded Mona must not be overwritten by a module Restore.
+        LDA #MON_SLOT_PAGE
+        BEQ M_MODULE_RAM
+        LDA #2
+        BRA M_MODULE_FLOOR
+M_MODULE_RAM:
+        LDA #>(M_END+$FF)
+M_MODULE_FLOOR:
+        STA $6550
+        LDA M_BANK
+        LDX #<M_LINE
+        LDY #>M_LINE
+        JSR $5008
+        BCC M_SYNTAX
+        STA M_BANK
+        JMP M_PROMPT
+M_MODULE_MISSING:
+        LDX #<M_MODULE_TEXT
+        LDY #>M_MODULE_TEXT
+        JMP M_MESSAGE
 M_SYNTAX:
         LDX #<M_SYNTAX_TEXT
         LDY #>M_SYNTAX_TEXT
@@ -87,6 +112,9 @@ M_VERSION:
         JSR M_STATUS
         JMP M_PROMPT
 M_TIME_NAME:
+        LDA M_LINE,X
+        CMP #'I'
+        BNE M_MODULE
         LDY #0
 M_TIME_MATCH:
         LDA M_LINE,X
@@ -115,6 +143,18 @@ M_QUIT:
         JSR M_END_ARGS
         BCC M_SYNTAX
         JMP M_RECOVERY
+M_LOAD:
+        JSR M_END_ARGS
+        BCC M_SYNTAX
+        LDA #MON_SLOT_PAGE
+        BEQ M_RANGE
+        ; Tail-enter the exact frozen loader. Its optional-LF/owner handling
+        ; and first-byte Ctrl-C semantics remain intact. RAM smoke refuses L.
+        LDA M_SKIP_LF
+        STA F_DC_SKIP
+        LDX #$FF
+        TXS
+        JMP MON_F_LOAD
 M_BANK_COMMAND:
         JSR M_SKIP
         BEQ M_SHOW_BANK
@@ -333,6 +373,13 @@ M_EDIT_ZP:
         CMP #$E0
         BCS M_RANGE
 M_EDIT_READY:
+        ; Valid WB1 borrows 5000-66FF; ordinary Modify respects that range.
+        LDA M_LAST+1
+        CMP #$50
+        BCC M_EDIT_CANCEL
+        JSR M_MODULE_CHECK
+        BCS M_RANGE
+M_EDIT_CANCEL:
         JSR STR8V2_RAM_CHECK_CANCEL
         BCS M_INPUT_BAD
         LDA M_ADDR
@@ -391,9 +438,6 @@ M_GO_FLASH:
         CMP #$E0
         BCC M_RANGE
 M_GO_READY:
-        LDX #<M_GO_TEXT
-        LDY #>M_GO_TEXT
-        JSR M_PUTS
         JMP M_EXECUTE
 
 ; X indexes the bounded line. Carry set means a complete valid hex token.
@@ -411,6 +455,7 @@ M_END_ARGS:
         BNE M_END_BAD
         SEC
         RTS
+M_UNSUPPORTED:
 M_END_BAD:
         CLC
         RTS
@@ -552,18 +597,12 @@ M_STATUS:
         JSR M_PUTS
         JSR STR8V2_RAM_BOARD_QUERY
         STX M_CPU
-        STY M_FLAGS
         JSR STR8V2_RAM_CAPS_QUERY
         STX M_CAPS
         LDX #<M_CPU_TEXT
         LDY #>M_CPU_TEXT
         JSR M_PUTS
         LDA M_CPU
-        JSR STR8V2_RAM_HEX_OUT
-        LDX #<M_FLAGS_TEXT
-        LDY #>M_FLAGS_TEXT
-        JSR M_PUTS
-        LDA M_FLAGS
         JSR STR8V2_RAM_HEX_OUT
         LDX #<M_CAPS_TEXT
         LDY #>M_CAPS_TEXT
@@ -645,13 +684,6 @@ M_BAD_F:
         JSR M_PUTS
 M_LOCK:
         JMP M_LOCK
-M_UNSUPPORTED:
-        LDX #<M_UNSUPPORTED_TEXT
-        LDY #>M_UNSUPPORTED_TEXT
-        JSR M_PUTS
-        CLC
-        RTS
-
         INCLUDE "rtc-read.inc"
         INCLUDE "force.inc"
         INCLUDE "adapter.inc"
@@ -663,34 +695,29 @@ M_TITLE:
         DB 13,10,"Mona 0.1.0-dev gMON_GENERATION_TEXT / ",MON_SLOT_LABEL,13,10
         DB "N-F 0.3.0 g00000001 / BASE1 / PR05",13,10,0
 M_CPU_TEXT: DB "CPU $",0
-M_FLAGS_TEXT: DB "  console flags $",0
 M_CAPS_TEXT: DB "  caps $",0
 M_OPTIONAL_TEXT:
-        DB "EDU: --   SSRAM: --",13,10,0
+        DB "EDU/SSRAM: WB1 module commands",13,10,0
 M_BATTERY_TEXT: DB "Battery: --*",13,10,0
 M_TIME_ERROR_TEXT: DB "RTCC read refused/failed $",0
 M_WEAR_TEXT: DB "Wear: ",0
 M_MAX_TEXT: DB " tracked max $",0
 M_NO_WEAR_TEXT: DB "--*",13,10,0
 M_LIMIT_TEXT:
-        DB "-- unavailable; TIME reads EDU RTCC.",13,10
-        DB "* Battery condition/prior flash wear unverified; counts are tracked attempts.",13,10,0
+        DB "-- no data; * Battery health/prior wear unverified; counts track attempts.",13,10,0
 M_BANK_TEXT: DB "Data bank B",0
 M_HELP_TEXT:
-        DB "? help; V status; B [0-3] data bank",13,10
-        DB "TIME RTCC; EDU Rev D PA0/PA7 idle inputs",13,10
-        DB "D addr [end] hex/ASCII; G addr run",13,10
-        DB "M addr byte... RAM (1-8); readback",13,10
-        DB "!M addr byte... FORCE; B3:C/D/F protected",13,10
-        DB "Q REC; hex; !M flash 1->0 only, no erase",13,10,0
+        DB "? V TIME; B0..3; D addr [end]; G addr; L RAM BIN",13,10
+        DB "M RAM / !M force: addr bytes (1-8); flash 1->0 only",13,10
+        DB "B3:C/D/F protected; no erase; Q REC",13,10
+        DB "WB1: T R EDU SRAM WORK; load module via L",13,10,0
 M_SYNTAX_TEXT: DB "REFUSED: syntax (use ?)",13,10,0
 M_INPUT_TEXT: DB "Input cancelled/rejected; no command executed.",13,10,0
 M_CANCEL_TEXT: DB "Dump cancelled.",13,10,0
 M_RANGE_TEXT: DB "REFUSED: range/entry",13,10,0
-M_GO_TEXT: DB "Run; HOLD returns to monitor.",13,10,0
 M_VERIFY_TEXT: DB "RAM verify failed; edit may be partial.",13,10,0
 M_BAD_F_TEXT: DB "REFUSED: frozen BASE1 / PR05 required.",13,10,0
-M_UNSUPPORTED_TEXT: DB "Service unavailable",13,10,0
+M_MODULE_TEXT: DB "WB1 absent/invalid; load its RAM BIN with L",13,10,0
 M_END:
         ENDMOD
         END

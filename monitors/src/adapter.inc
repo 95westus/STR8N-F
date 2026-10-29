@@ -25,18 +25,9 @@ M_DESCRIPTOR_BYTE:
         BNE M_F_FAIL
         DEY
         BPL M_DESCRIPTOR_BYTE
-        JSR M_CRC_START
-        STZ M_PTR
         LDA #$F0
-        STA M_PTR+1
-        LDY #0
-M_F_CRC:
-        LDA (M_PTR),Y
-        JSR M_CRC_BYTE
-        INC M_PTR
-        BNE M_F_CRC
-        INC M_PTR+1
-        BNE M_F_CRC
+        LDX #16
+        JSR M_CRC_PAGES
         LDA M_CRC
         CMP #MON_F_CRC_LO
         BNE M_F_FAIL
@@ -47,6 +38,37 @@ M_F_CRC:
         RTS
 M_F_FAIL:
         CLC
+        RTS
+M_MODULE_CHECK:
+        LDX #7
+M_MODULE_ID_BYTE:
+        LDA $5000,X
+        CMP M_MODULE_ID,X
+        BNE M_F_FAIL
+        DEX
+        BPL M_MODULE_ID_BYTE
+        LDA #$50
+        LDX #20
+        JSR M_CRC_PAGES
+        LDA M_CRC
+        ORA M_CRC+1
+        BNE M_F_FAIL
+        SEC
+        RTS
+M_MODULE_ID: DB "MW",1,$14,"PR05"
+M_CRC_PAGES:
+        STZ M_PTR
+        STA M_PTR+1
+        JSR M_CRC_START
+        LDY #0
+M_PAGES_NEXT:
+        LDA (M_PTR),Y
+        JSR M_CRC_BYTE
+        INY
+        BNE M_PAGES_NEXT
+        INC M_PTR+1
+        DEX
+        BNE M_PAGES_NEXT
         RTS
 M_BIND:
         LDA #3

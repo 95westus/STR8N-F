@@ -25,6 +25,7 @@ preservation outside the replaced A/B images and appended C/D records:
 | Debugger | B1:A DG/01/01 component retained | Port its private bindings/context/traps; integrate DEBUG |
 | Apps and maintenance services | B2 UX utilities and B3:8/9/E service/extension images retained | Compatible discovery, dispatch and return; no blind legacy entry |
 | CONFIG/OPAQUE/MAP | Matching host RAM BINs remain available from REC> | Provide coherent Mona launch/menu access and preservation rules |
+| EDU / SPI SRAM | PROGRAM/WORKSPACE formats and source retained; g4 install issued no SPI writes | WB1 builds a guarded read-only SS2 adapter; qualify, then reconnect source/program storage and separate WORKSPACE messages |
 
 These are retention/source-inventory findings, not new execution qualification
 of old binaries under BASE1. The old A/B originals are backed up on the host.
@@ -227,3 +228,29 @@ the full expanded monitor remains unfinished. Subsequent g4 work implements
 Dump/Modify and force; see the [command manual](MONA_COMMANDS.md) and installation
 receipt. This original planning checkpoint itself made no build or board access.
 Published N-F downloads, 2205 and all other boards remain untouched.
+
+## G5 / WB1 build checkpoint (2026-10-29)
+
+[WB1](MONA_WORKBENCH_WB1.md) has built RAM candidates for T/R, session EDU
+control and read-only SRAM layout/capacity. G5 builds the shared load/module
+bridge and protects admitted module and RAM-monitor reservations. **Not yet
+live-qualified or installed:** 2512 still runs g4. Review the
+[RAM-only scope](MON_AB_G5_WB1_RAM_SCOPE.md) before a new trial.
+
+EDU/SRAM is required work: PROGRAM storage, source SAVE/LOAD and WORKSPACE.
+Persistent messages/metadata use an explicitly admitted append-only WORKSPACE
+allocation, outside PROGRAM and C/D. WB1 does not inspect/adopt existing
+WORKSPACE allocations or write SRAM. Store, app/maintenance routing, source/
+ASM and DEBUG remain open; this checkpoint does not close the full workbench.
+
+## G5 / WB1 hardware closeout (2026-10-29)
+
+[2512 acceptance](MON_AB_G5_2512_ACCEPTANCE.md) now closes the g5 RAM/ROM bridge
+and WB1 g2 read-only checkpoint. Identical A/B images remain installed, B is
+bound to generation5 and physical default boot passed. Fresh owner RAM/ZP was
+restored and verified afterward, evicting the RAM module deliberately. Reload
+WB1 through native L when needed. F and published downloads remain unchanged.
+The earlier build-only section above is historical; it is not the current
+qualification state. SS1 status is live-qualified; SS2/fallback remains a source
+implementation without positive hardware evidence here. Store, app/maintenance
+routing, source/ASM/DEBUG and WORKSPACE message allocation/writes remain open.

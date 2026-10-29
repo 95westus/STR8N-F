@@ -2,12 +2,16 @@
 
 **MON A/B development branch:** [five-checkpoint plan](docs/MON_AB_PLAN.md)
 and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
-Mona **0.1.0-dev g00000004** is [installed and tested on 2512](docs/MON_AB_G4_2512_ACCEPTANCE.md),
+Mona **0.1.0-dev g00000005** is [installed and tested on 2512](docs/MON_AB_G5_2512_ACCEPTANCE.md),
 with identical A/B commands: hex/ASCII Dump, RAM Modify/readback, explicit
-`!M` force, TIME, bank selection, G and Q. Saved default B boots g4 after RESET;
-owner RAM/ZP were restored and verified afterward. F remains frozen.
-See the [command manual](docs/MONA_COMMANDS.md). L, maps, rich profile-driven
-startup and DEBUG remain the [usability target](docs/MONA_USABILITY_PLAN.md).
+`!M` force, TIME, bank selection, G, native L and Q. The separately loaded
+[WB1 g2 RAM module](docs/MONA_WORKBENCH_WB1.md) adds Table/Restore and guarded
+EDU/SRAM status, including 2512's existing SS1 layout. Saved default B boots g5
+after RESET; owner RAM/ZP were restored and verified afterward. Restoring owner
+RAM evicts WB1; reload its BIN with L when needed. F remains frozen.
+See the [command manual](docs/MONA_COMMANDS.md). Store, apps/maintenance routing,
+source/ASM/DEBUG, rich startup and persistent WORKSPACE messages remain the
+[full-workbench target](docs/MONA_USABILITY_PLAN.md).
 Mona is unreleased; these development artifacts do not change N-F v0.3.0 downloads.
 
 > Give me 4KB, I can give you 4 boards.

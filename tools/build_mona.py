@@ -55,9 +55,13 @@ def build(out, generation):
                    MON_F_RECOVERY=bs['BOOT_RECOVERY'], MON_F_NO_SERVICE=bs['BOOT_NO_SERVICE'],
                    MON_F_BOOT_READ=bs['BOOT_READ_RECORD'],MON_F_SELECT=ws['V2W_SELECT'],
                    MON_F_BYTE=ws['V2W_BYTE']+2)
+    # Private raw-L entry found in the exact frozen F, never a new public ABI.
+    load_pattern = bytes.fromhex('9c697cad2a7c8d2b7c20577b')
+    assert f.count(load_pattern) == 1
+    private['MON_F_LOAD'] = 0xf000+f.index(load_pattern)
     crc = binascii.crc_hqx(f,0xffff)
-    inputs = {path.relative_to(ROOT).as_posix():sha(path.read_bytes())
-              for path in sorted((ROOT/'monitors/src').glob('*')) if path.is_file()}
+    core_sources=('mona.asm','adapter.inc','layout.inc','rtc-read.inc','force.inc')
+    inputs = {'monitors/src/'+name:sha((ROOT/'monitors/src'/name).read_bytes()) for name in core_sources}
     out.mkdir(parents=True)
     artifacts = {}
     logs = []
@@ -66,7 +70,7 @@ def build(out, generation):
         stage = out/variant
         stage.mkdir()
         origin = page*256+0x80 if page else 0x0200
-        for filename in ('mona.asm','adapter.inc','layout.inc','rtc-read.inc','force.inc'):
+        for filename in core_sources:
             body = (ROOT/'monitors/src'/filename).read_text(encoding='utf-8')
             body = body.replace('MON_SLOT_LABEL', '"'+label+'"')
             body = body.replace('MON_GENERATION_TEXT', generation_text)
@@ -132,7 +136,14 @@ def build(out, generation):
                   foundation=dependency['foundation'],source_sha256=inputs,artifacts=artifacts,
                   monitor_RAM='6A00-6AFF',owner_RAM_ROM_startup='0200-66FF unchanged',
                   status_rows=['EDU','SSRAM','RTCC','Battery','Wear'],
-                  commands=['?','V','TIME','B[0-3]','D addr [end]','M addr byte...','!M addr byte...','G addr','Q'],
+                  commands=['?','V','TIME','B[0-3]','D addr [end]','M addr byte...','!M addr byte...','G addr','L','Q',
+                            'WB1 module: T/R/EDU/SRAM/WORK'],
+                  workbench_bridge=dict(interface='WB1',module_RAM='5000-63FF',state_RAM='6400-66FF',
+                    admission='MW/01/14/PR05 and CRC16 zero residue over all 5120 bytes before every call',
+                    ordinary_Modify_respects_module=True,force_Modify_may_evict_module=True,
+                    module_required=False,missing_or_corrupt_module='refused; core D/M/G/Q remain available'),
+                  raw_load=dict(ROM_only=True,tail_entry='Exact frozen F loader',framing='idle-terminated raw bytes',
+                    first_byte_Ctrl_C='Frozen F semantics; cancellation goes to REC>',RAM_variant='L refused'),
                   branch_layout=branch_layout,
                   install_check=dict(offset=24,final_byte='FE',staging_byte='FF',
                     purpose='Native !M byte-program check after a fresh monitor-sector erase; no extra erase',

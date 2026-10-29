@@ -1,9 +1,15 @@
-# Mona g00000004: Dump and Modify
+# Mona g00000005: monitor and WB1 commands
 
-Mona **0.1.0-dev g00000004** provides the same commands in A and B, on frozen
+Mona **0.1.0-dev g00000005** provides the same commands in A and B, on frozen
 N-F 0.3.0 / BASE1 / PR05. This is a development monitor, not a replacement N-F
-release. The initial 2512 install/force result is in the
-[receipt](../monitors/validation/2512-mona-g00000004-install.json).
+release. The [g5 / WB1 acceptance](MON_AB_G5_2512_ACCEPTANCE.md) covers installed
+2512 A/B and the physical B default. G4's force evidence is retained in its
+[earlier receipt](../monitors/validation/2512-mona-g00000004-install.json).
+
+The [WB1 module](MONA_WORKBENCH_WB1.md) adds Table/Restore and explicit read-only
+EDU/SRAM status. WB1 g2 is RAM-qualified, not stored in flash. Load it with L
+when needed; restoring owner RAM evicts it. No persistent module sector has
+been allocated.
 
 ## Commands
 
@@ -17,6 +23,9 @@ release. The initial 2512 install/force result is in the
 | `TIME` | Fresh bounded EDU Rev D RTCC sample; no clock-setting or flag clearing |
 | `V` | Status, including the last labelled RTCC sample and tracked wear maximum |
 | `G addr` | Explicit application entry; public HOLD restarts the active monitor |
+| `L` | ROM Mona: enter frozen F's raw RAM BIN loader; Ctrl-C before payload returns REC> |
+| `T [bank]`, `R [bank] name\|address [L]` | Loaded WB1: Table/Restore; suffix L loads only |
+| `EDU [ON\|OFF]`, `SRAM`, `WORK` | Loaded WB1: explicit session EDU policy and read-only layout/capacity |
 | `Q` | Deliberately return to REC>, regardless of the saved default |
 
 Addresses and data are hexadecimal. Lowercase is accepted. Parse/overflow/
@@ -25,9 +34,10 @@ input and stop a dump between rows. An edit already being committed is not a
 transactional rollback operation. A RAM smoke image refuses G and ordinary M
 into its code pages.
 
-`TIME` replaces the development g2 clock command T. Bare T is reserved for a
-future record-list command and currently reports a syntax error. Maps, monitor
-L, DEBUG, interactive Modify and dump continuation/paging remain planned.
+`TIME` replaces the development g2 clock command T. T now dispatches to the
+loaded WB1 record table; missing/corrupt modules are refused. Maps, Store,
+apps/maintenance routing, source/ASM/DEBUG, interactive Modify and dump
+continuation/paging remain planned.
 Dump ranges are no longer limited to 256 bytes. A range intersecting $7F00-$7FFF
 is refused as a whole; ordinary D does not inspect I/O.
 
@@ -46,6 +56,10 @@ $0200-$66FF. Stack, system ZP, monitor/worker/vector state, I/O and all ROM are
 excluded from ordinary M. The monitor verifies each stored RAM byte and echoes
 an independently read hex/ASCII row. A hardware verify failure can leave a
 partial edit and reports that explicitly.
+
+G5 additionally reserves 5000-66FF against ordinary M while WB1 passes admission.
+The RAM smoke monitor declares its own code reservation to module Restore.
+Forced !M may deliberately evict the module; a bad module CRC blocks dispatch.
 
 Examples refused before any target write:
 
