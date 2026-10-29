@@ -2,7 +2,7 @@
   "schema": 1,
   "component": "MON A/B development",
   "branch": "codex/mona-monb",
-  "status": "development-scaffold; no new monitor binary",
+  "status": "checkpoint-1-initial-source-review-complete; no new monitor binary",
   "foundation": {
     "repository": "https://github.com/95westus/STR8N-F",
     "tag": "v0.3.0",
@@ -18,7 +18,11 @@
     "F_frozen": true
   },
   "optional_monitor_name": "Mona",
-  "legacy_g0034_compatibility": "ABI and provider dependency review required",
+  "legacy_g0034_compatibility": "Incompatible unchanged: private boot contract, entry-shim RAM conflicts and moved private calls",
+  "plan": "docs/MON_AB_PLAN.md",
+  "compatibility_review": "docs/MON_AB_COMPATIBILITY_REVIEW.md",
+  "compatibility_inventory": "monitors/review/g0034-base1-compatibility.json",
+  "next_checkpoint": "2: shared monitor contract and memory allocation",
   "hardware_access": false,
   "flashing": false
 }

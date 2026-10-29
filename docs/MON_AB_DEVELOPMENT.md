@@ -23,6 +23,11 @@ F remains frozen at exactly 4096 bytes. This branch does not expand F's ABI,
 move the release tag or change published downloads. C/D stay boot/wear journal
 space; A/B remain optional occupants of owner image space.
 
-This checkpoint creates the branch and dependency contract only. No new MON
-binary is built or qualified. No simulation, flashing or board access occurs;
-existing image, settings, history and owner-RAM preservation constraints remain.
+The [five-checkpoint plan](MON_AB_PLAN.md) is now recorded. Checkpoint 1's
+[initial compatibility review](MON_AB_COMPATIBILITY_REVIEW.md) identifies the
+exact g0034 pair, its private-call dependencies and RAM conflicts. It is not a
+BASE1-compatible binary; the next checkpoint defines a new shared contract.
+
+No new MON binary is built or qualified. No simulation, flashing or board
+access occurs; image, settings, history and owner-RAM preservation constraints
+remain. The original branch-creation checkpoint is retained in Git history.
