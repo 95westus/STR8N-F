@@ -1,8 +1,9 @@
 # STR8N-F 0.3.0 — the 4KB foundation
 
-> Give me 4KB, I can give you 4 boards.
+> 4KB of firmware. One board. Up to four boot environments.
 
-With ~32KB RAM shared by four selectable bank environments.
+Compatible, user-supplied images run one at a time, sharing the same CPU,
+approximately 32KB RAM on supported boards, and peripherals.
 
 STR8N-F supplies boot selection and recovery in **4096 bytes**, leaving
 116 KiB of flash for owner images. Boot configuration and conservative

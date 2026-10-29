@@ -25,7 +25,7 @@
     "validation/2512-programmer-f-cd-acceptance.json",
     "validation/2609-rc1-zip-upgrade-acceptance.json"
   ],
-  "release_line": "Give me 4KB, I can give you 4 boards.",
+  "release_line": "4KB of firmware. One board. Up to four boot environments.",
   "RAM_line": "With ~32KB RAM shared by four selectable bank environments.",
   "assembly_builds_for_packaging": 0,
   "F_rebuilt_for_packaging": false,

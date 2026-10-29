@@ -1,17 +1,24 @@
-# STR8N-F — BASE1 / PR05
+# STR8N-F 0.3.0 — BASE1 / PR05
 
-> Give me 4KB, I can give you 4 boards.
+> 4KB of firmware. One board. Up to four boot environments.
 
-*With ~32KB RAM shared by the selected bank environment.*
+Choose among compatible, user-supplied images in four selectable flash banks.
+One environment runs at a time on the same physical CPU, RAM (approximately
+32KB on the supported boards) and peripherals. Applications and operating
+environments are supplied separately; this kit provides boot/recovery tools.
 
-Start with the [user manual](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-0.3.0-MANUAL.md)
-and [4KB F.bin](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/F.bin).
-The complete operator ZIP includes the WDC RAM migration programs and Python
-serial terminal. These are additive release downloads; original ZIPs stay intact.
+**[Download 0.3.0](https://github.com/95westus/STR8N-F/releases/tag/v0.3.0)**:
+[4KB F.bin](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/F.bin),
+[operator kit](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-BASE1-0.3.0.zip),
+[source ZIP](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-BASE1-0.3.0-source.zip)
+and [checksums](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/SHA256SUMS.txt).
+Read the [user manual](docs/USER_MANUAL.md) for WDC migration, opaque-image
+installation and saving a bank as the default. The operator kit includes the
+WDC RAM migration programs and Python serial terminal. F.bin and the manual
+are additive release downloads; original ZIPs and the v0.3.0 tag stay intact.
 
-One 4096-byte bootstrap/recovery component opens four selectable flash banks
-for your own images and environments. Four bank environments share that RAM;
-hardware qualification is listed below. The raw-L application range is
+One 4096-byte bootstrap/recovery component selects among those flash banks.
+Hardware qualification is listed below. The raw-L application range is
 $0200-$64FF; preservation tools escrow $0200-$66FF and owner ZP $00-$DF.
 
 **STR8N-F 0.3.0 is the scoped 4KB foundation release.** F remains
@@ -115,3 +122,12 @@ independent. [F_FREEZE.json](F_FREEZE.json) and the
 Packaging copied verified existing firmware without rebuilding, simulation,
 board access or publication. The later 2609 upgrade is recorded separately;
 the tested rc1 ZIP remains immutable.
+
+## Source branches
+
+`main` is the integration branch for the current released foundation and
+documentation. The immutable `v0.3.0` tag identifies the released source;
+later documentation commits do not change the download archives. New work
+uses short `codex/...` feature branches and pull requests into `main`.
+Mona and proposed service/ABI extensions are follow-on work. See
+[development policy](docs/DEVELOPMENT.md).

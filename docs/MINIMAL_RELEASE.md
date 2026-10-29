@@ -7,9 +7,10 @@ hosts. The rc1 existing-SNBT ZIP route passed on 2609; final-package live trials
 and other packaged routes remain untested. Mona is a planned optional image,
 not a new F dependency or ABI change.
 
-> Give me 4KB, I can give you 4 boards.
+> 4KB of firmware. One board. Up to four boot environments.
 
-With ~32KB RAM shared by four selectable bank environments. Exact loader and
+Compatible, user-supplied images run one at a time on shared CPU/RAM/peripherals.
+Exact loader and
 owner-RAM preservation ranges remain defined by their separate protocols.
 
 ## Golden-F recovery boundary
