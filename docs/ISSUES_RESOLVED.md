@@ -1,60 +1,34 @@
-# BASE1 integration and remaining release issues
+# BASE1 closeout and remaining boundaries
 
-Resolved in this checkpoint:
+The component work and reviewed 2512/65C02/FT245 cases are closed. The
+[status matrix](RELEASE_STATUS.md) and individual receipts are authoritative.
 
-- STR8N-F / BASE1 / PR05 naming, F startup version/generation and a bounded,
-  CRC-protected identity descriptor.
-- Append-only F change preserving existing PR05 addresses, worker/vector
-  bytes and hardware vectors. No saved setting is rewritten.
-- Separate F generation, SNBT monitor generation, journal sequence and OS
-  identity. No board-service status work added to F.
-- Synchronized BASE1 OPAQUE/READBACK prompts, binary sizes and host SHA pins;
-  refreshed RAM MAP's exact-F CRC guard and immutable-image seal.
-- WDC resident recognition in RAM, with no whole-bank, EDU/SPI or bootability
-  inference. Only fingerprints/labels are included, never vendor code.
-- Corrected map roles: no assumed B0 backup, A/B monitor reservation or E
-  provider ownership. Only C/D/F are reserved in BASE1.
-- Fixed detailed-map sector output that used an ASCII parser instead of a
-  numeric nibble printer.
-- Restored compact M1/M2/M3 syntax alongside spaced M 1/2/3, retaining range
-  and trailing-input validation. Only MAP needed this follow-up rebuild.
-- Removed alternate F-building paths. The canonical builder reuses frozen F
-  and supports rebuilding only a selected RAM component.
-- Reused independent NFM1/NFA1 helpers without rebuilding. Older exact-F-bound
-  optional payloads remain reference-only, not matching BASE1 binaries.
+Resolved/implemented:
 
-Serial Console 0.1.0 now supplies file selection, prompt-gated RAM loading,
-MAP/CONFIG/OPAQUE/DEMO presets, explicit connection and optional host logging.
-One I/O owner keeps terminal input out of a BIN. Ctrl-C is limited to before
-payload, and disconnect waits for serial drain/idle. The console, requirements
-and operator guide are included by the candidate packager. The preserving 2512
-b15 serial trial passed, including cancellation and normal loading. Its receipt
-is included in the kit and bound to the tested console hashes. Native physical
-keys/dialogs and matching BASE1 hardware acceptance remain pending.
+- Frozen F name/version/generation and identity descriptor; OS/service status separate.
+- Matching BASE1 RAM tools/host markers and size/SHA bindings.
+- RAM MAP M1/M2/M3, WDC resident recognition, and C/D/F-only reserved layout.
+- Persistent bank enable/entry/default and conservative erase-attempt journal.
+- Python terminal F1-F12, native dialogs, initial Ctrl-C, normal BIN transfers
+  and disconnect deferral; tested console code is unchanged.
+- Known-b15 SNBT-preserving F upgrade, verbose WDC migration and programmer-F
+  C/D provisioning, each with its own tested 2512 scope.
+- Source-bound chip-idle C/D recovery lab cases and independently verified
+  image/settings/RAM restoration. Lab packets are not a generic repair utility.
+- Candidate packaging now includes the terminal, provisioning/upgrade hosts,
+  prebuilt engines and wrapper dependency under the same paths as tested.
 
-Remaining before a complete public migration release:
+Remaining:
 
-The later authorized [2512 BASE1 case](2512_BASE1_ACCEPTANCE.md) passed the
-journal-preserving F upgrade, repeated reset/recovery, normal BIN/cancellation,
-matching read-only RAM tools, native keys/dialogs, live disconnect deferral and
-full image/RAM/ZP preservation. This closes that scoped 65C02 case; the broader
-items below remain. Existing kit archives were not changed.
+1. **Test migration and operator use from the exact extracted 0.3.0-rc1 ZIP.**
+   Archive construction/integrity checks do not qualify that live route.
+2. Other CPUs/adapters/hosts, occupied layouts, legacy image execution and
+   vendor startup/peripheral effects beyond the recorded 2512 cases.
+3. Interrupted provisioning, arbitrary damaged/conflicting records and
+   electrical mid-pulse behavior. No further deliberate power cuts are planned.
+4. Public release/tag/upload after the chosen release gates close.
 
-1. Hardware acceptance on supported CPUs/USB: physical reset, banner, recovery,
-   first-byte Ctrl-C/normal BIN loading, journals, opaque operations and boot,
-   and independent preservation/restoration evidence.
-2. Existing-SNBT F upgrade interruption/other-platform acceptance. The known-b15
-   happy path on 2512 passed with a committed reservation before F erase and all
-   old history retained. The factory provisioner still refuses upgrades.
-   See JOURNAL_F_UPGRADE.md; existing kits remain unchanged.
-3. Generic live provisioning after programmer-installed F: source implementation
-   is complete in nf_provision_live.py with mandatory pre-helper escrow and
-   plan-only default. Hardware acceptance and future kit integration remain
-   pending; the existing kit was deliberately left unchanged.
-4. Qualified vendor-startup/peripheral behavior across the WDC reset boundary
-   and an explicitly admitted interrupted-migration recovery procedure.
-
-The [release checklist](RELEASE_STATUS.md) details scope and acceptance gates.
-2512 later received the explicitly authorized one-page reservation and frozen
-F update. 2205 was not accessed. The scoped 2512 pass does not mark the full
-BASE1 platform/write/failure matrix or WDC migration acceptance complete.
+Normal recovery assumes golden F. Interrupted-F runtime testing is excluded
+by the owner's scope decision, not represented as a hardware pass. The
+source migration commands retain --allow-unqualified for broader limits.
+Older kit ZIPs and 2205 remain untouched by current packaging.

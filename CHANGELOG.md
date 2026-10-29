@@ -1,4 +1,21 @@
-# BASE1 identity and RAM-map checkpoint
+# 0.3.0-rc1 — BASE1 migration-test candidate
+
+> Give me 4KB, I can give you 4 boards.
+
+With ~32KB RAM shared by four selectable bank environments.
+
+- Consolidate the reviewed 2512 hardware closeout and acceptance receipts.
+- Include Python Serial Console 0.1.0, function keys and pinned pyserial.
+- Package WDC migration, programmer-F C/D provisioning and known-b15 SNBT
+  upgrade commands with their unchanged prebuilt engines and wrapper dependency.
+- Add a portable manifest/dependency/link checker and extracted-ZIP test workflow.
+- Keep F frozen at 0.3.0 g00000001 / BASE1 / PR05, exactly 4096 bytes.
+- Leave migration from the extracted candidate **NOT RUN** and publication pending.
+- No firmware rebuild, simulation, port access or flashing during packaging.
+
+The earlier source/build and package changelog follows.
+
+## Historical BASE1 identity and RAM-map checkpoint
 
 - STR8N-F 0.3.0, F generation 00000001, BASE1 / PR05 startup identity.
 - Bounded public FI identity locator; existing PR05 call addresses preserved.

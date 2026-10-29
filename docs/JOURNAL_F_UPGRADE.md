@@ -7,12 +7,13 @@ Frozen BASE1 F 0.3.0 g00000001 and the factory NFM1 engine remain unchanged.
 The new RAM variant was assembled once without CPU/flash models. The later
 authorized [2512 hardware case](2512_BASE1_ACCEPTANCE.md) passed its known-b15
 upgrade with exact preservation. Interruption and other-platform acceptance
-remain pending; existing kit archives were not updated.
+remain pending. The 0.3.0-rc1 candidate now includes this command and prebuilt
+engine. Testing from that extracted ZIP is a separate pending gate.
 
 The accepted work order is existing-journal upgrade, BASE1 acceptance, then
 WDC migration acceptance. The one-reservation/F-only 2512 trial was later
 authorized and completed; additional writes/fault tests remain outside that
-scope. This source work does not update any release kit.
+scope. Packaging adds no new hardware authorization.
 Board 2205 remains excluded.
 
 The board-specific [2512 acceptance plan](2512_UPGRADE_BASE1_TEST_PLAN.md)

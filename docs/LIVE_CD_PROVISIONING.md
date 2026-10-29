@@ -11,10 +11,10 @@ paths on 65C02/FT245, with source-bound history import and independent owner
 preservation. The [C/D scope](2512_PROGRAMMER_F_CD_SCOPE_REVIEW.md) used four
 erases, zero F writes and no power cuts. Other layouts/platforms and interrupted
 provisioning remain unqualified; `--allow-unqualified` remains explicit.
-No CPU or flash model ran. The existing release kit has not been updated.
-This source command requires the complete source checkout, including
-`migrator/build.py` for the existing pure wrapper generator. Future kit
-integration is separate work; do not copy this file alone into an old kit.
+No CPU or flash model ran. The 0.3.0-rc1 operator ZIP includes the command,
+matching engines and `migrator/build.py` for its pure wrapper generator under
+their tested paths. No assembler is needed. Do not copy this file alone into
+an old kit. Live migration from the new extracted ZIP remains pending.
 
 ## Required original RAM escrow
 
@@ -139,4 +139,5 @@ The 2512 acceptance proves real F reset/loading, C/D commit and wear
 accounting, independent flash preservation and original-RAM restoration for
 the declared happy path. Power/interruption behavior, other occupied layouts
 and other supported platforms retain separate qualification limits.
-Board 2205 was excluded. No release kit was rebuilt or updated.
+Board 2205 was excluded from qualification. The candidate now packages these
+unchanged files and receipts; see [ZIP acceptance](RELEASE_WORKFLOW.md).

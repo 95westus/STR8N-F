@@ -49,7 +49,8 @@ it durably before loading, and restores/verifies it at completion. No implicit
 disposable-RAM path is supplied. Its reviewed
 [2512 hardware entry](2512_PROGRAMMER_F_CD_ACCEPTANCE.md) passed the no-op and
 occupied non-SNBT provisioning cases. Other platforms/layouts and interrupted
-provisioning remain unqualified; the existing release kit is unchanged.
+provisioning remain unqualified. The 0.3.0-rc1 kit includes the same tested
+public entry; acceptance from its extraction remains pending.
 
 The authorized [2512 BASE1 case](2512_BASE1_ACCEPTANCE.md) exercised this service
 on real 65C02 hardware: independent full-bank CRC/SHA checks, full RAM/ZP

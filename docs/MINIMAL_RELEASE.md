@@ -1,7 +1,14 @@
 # Minimal N/F release contract
 
-Accepted direction: 2026-10-28. This document describes the release being
-prepared; an implemented component is not hardware-qualified by this plan.
+Accepted direction: 2026-10-28. The reviewed 2512 cases now passed; see
+[closeout status](RELEASE_STATUS.md). This contract does not expand their scope.
+The 0.3.0-rc1 ZIP includes the Python serial terminal and migration hosts;
+testing migration from that extraction is the next pending gate.
+
+> Give me 4KB, I can give you 4 boards.
+
+With ~32KB RAM shared by four selectable bank environments. Exact loader and
+owner-RAM preservation ranges remain defined by their separate protocols.
 
 ## Golden-F recovery boundary
 

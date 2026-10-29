@@ -1,6 +1,6 @@
 # Quick start
 
-Start with a compatible b15 F already installed, or follow
+Start with matching frozen BASE1 / PR05 F already installed, or follow
 [explicit F-sector provisioning](INSTALLATION.md). Keep owner backups and saved
 wear history. The kit does not flash or reconfigure a board automatically.
 
@@ -51,5 +51,6 @@ payloads. The packet helper prepares separate header/payload files; it does
 not open a port or automatically install an image. Verify every image sector
 before enabling the entry. Preserve B0 if it contains a WDC backup.
 
-The optional BASE MON files are separate B3:A/B components. They are not raw L
-input and the ordinary opaque writer cannot install them. See installation.
+BASE1 requires no monitor. A/B sectors are owner space; optional monitor-shaped
+images have separate compatibility requirements. Old b15 MON/FLASH execution
+under BASE1 remains unqualified. See installation.

@@ -15,8 +15,8 @@ python tools/nf_console.py
 
 On Windows, `py` may replace `python`. On Linux, Tk may require your distribution's
 `python3-tk` package. Tk and a desktop display are required; pyserial 3.5 is the
-only pip dependency. Source is intended for Windows, Linux and macOS; physical
-serial and keyboard acceptance on those platforms remains pending.
+only pip dependency. Native serial/key/dialog acceptance passed on
+Windows/2512/FT245; other hosts/adapters remain unqualified.
 
 Select the board's port and baud rate (default 115200, 8N1), close any terminal
 already using that port, then press F10. You can preselect with
@@ -82,8 +82,9 @@ journals. Logging is off until requested.
 Function keys only connect, send terminal input or load RAM tools. They do not
 erase/program flash, save boot settings or run migration automatically.
 CONFIG and OPAQUE can write when you explicitly issue their commands. The
-verbose WDC migrator remains a separate, gated CLI; a migration shortcut is
-deferred until hardware acceptance. Leave board 2205 alone.
+verbose WDC migrator remains a separate CLI. Migration is not a function-key
+action. The candidate includes it and the programmer-F and SNBT-upgrade CLIs;
+disconnect the terminal before using their port. Leave board 2205 alone.
 
 Release acceptance must exercise physical keys/buttons, Ctrl-C before payload,
 normal BIN loading, disconnect deferral, and actual adapter timing on an
@@ -98,12 +99,15 @@ were issued. All four flash banks matched, owner RAM $0200-$66FF and ZP
 $00-$DF matched after restoration, and MON B/COM4 were returned/released.
 The harness was corrected after mistakenly waiting twice for SEND BIN on
 manual F3; the demo had already loaded and run normally. Raw captures and
-backups remain private. Native key presses/dialogs and BASE1 firmware on
-hardware remain pending; this does not qualify the complete BASE1 release.
+backups remain private. Native key presses/dialogs and BASE1 acceptance were
+pending at that earlier checkpoint; the later case below closed them on 2512.
 
 The later [2512 BASE1 acceptance](2512_BASE1_ACCEPTANCE.md) exercised real native
 F1-F12 keys/dialogs with matching BASE1 tools and a real-port disconnect request
 after the first payload chunk. All flash matched the approved upgrade postimage
 and original owner RAM/ZP were restored/read back. This closes the stated
 65C02/COM4 case, not other platforms, every button alias or destructive writes.
-Existing kit ZIPs were intentionally not updated with this later evidence.
+Those earlier kit ZIPs remain historical snapshots. The 0.3.0-rc1 candidate
+includes this later evidence and the unchanged Python console. Migration and
+operator acceptance from that exact extracted ZIP remain pending; see
+[the release workflow](RELEASE_WORKFLOW.md).

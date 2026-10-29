@@ -1,12 +1,14 @@
-# N/F migration host preparation checkpoint
+# N/F migration hosts — 0.3.0-rc1
 
 `nf_migrate.py` prepares and inspects an exact private migration plan. It has
 **no serial import, port-opening command, device execution, reset or flash
-operation**. The prepared RAM engine and the live migration path still need
-execution/hardware qualification. A plan's `installation_permitted` and
+operation**. The reviewed WDC and programmer-F paths passed on
+2512/65C02/FT245; see [release status](../docs/RELEASE_STATUS.md). Migration
+from the new extracted candidate ZIP remains NOT RUN. A plan's `installation_permitted` and
 `execution_qualified` fields stay false. The separate `nf_migrate_live.py`
 implements explicit WDC capture/execution; it refuses to open a port without
-`--allow-unqualified` while this checkpoint is unqualified.
+`--allow-unqualified` for the broader platform/layout qualification limits.
+The ZIP includes the Python terminal; disconnect it before a CLI owns its port.
 
 The public tool ships project code only. The operator's captured WDC firmware,
 RAM, wear-history records and per-run plans stay private. Nothing is copied to
@@ -50,7 +52,7 @@ Example `capture.json` fields:
 For the 65C816, declare `cpu` as `65c816` and `board_model` as `W65C816SXB`.
 `nf-recovery` is the separate preparation route for a programmer-installed,
 byte-identical F image; it does not require a WDC debugger identity. CPU/model
-fields are saved declarations. A future live executor must verify the real
+fields are saved declarations. The live executor verifies the real
 debugger identity, current source bytes and loaded RAM before execution.
 
 ## Prepare and inspect
@@ -100,10 +102,10 @@ STOP: no device opened; no flash written; execution/hardware qualification pendi
 - Clean existing SNBT plus identical F is a no-op: retain all settings/history.
   Reinitialization is refused. This factory executor also refuses existing-SNBT
   F upgrades; it has no onboard append-before-erase reservation operation.
-  A separate source-only NFU1 upgrade now implements that reservation for the
+  The separate NFU1 upgrade implements that reservation for the
   known b15 F and an available erased append page; it is not this factory path.
-  See [existing-journal F upgrade](../docs/JOURNAL_F_UPGRADE.md). Hardware acceptance
-  and future kit integration remain pending.
+  See [existing-journal F upgrade](../docs/JOURNAL_F_UPGRADE.md). Its known-b15
+  2512 case passed, and its prebuilt engine is included in 0.3.0-rc1.
 - New provisioning installs F first if needed, then D and C. The engine erases
   each listed destination, including a blank journal sector. Each attempt is
   reserved in the private host receipt. D's committed snapshot reserves C's
@@ -132,29 +134,31 @@ accidental corruption/stale preimages; it is not authentication. The self-check
 at 3FFC covers 2000-3FFB. This host tool does not claim RAM restoration or a
 physical-reset/recovery pass.
 
-## Necessary host checks
+## Source-development checks
 
 ```text
 python -m unittest -v test_nf_migrate
 ```
 
-These check admission, counter preservation/exhaustion, commit serialization,
+These are for the source ZIP when changing the host, not routine packaging.
+They check admission, counter preservation/exhaustion, commit serialization,
 scope and private-file tamper detection. They do not emulate a CPU, NOR device
 or serial link and do not qualify live flashing.
 
 
-## Explicit live path: source checkpoint, not hardware acceptance
+## Explicit live WDC path
 
-`nf_migrate_live.py migrate` supplies the concrete WDC USB path. It is not run
-by the source/build/check commands above. This implementation has not accessed
-a device. Its presence and fake-transport tests do not establish board acceptance.
+`nf_migrate_live.py migrate` supplies the concrete WDC USB path. The
+[2512 WDC acceptance](../docs/2512_WDC_MIGRATION_ACCEPTANCE.md) passed it on real
+hardware with independent preservation checks. Other CPUs/adapters/layouts and
+interruption remain unqualified. Packaging/check commands never run migration.
 
 The live command requires an explicit port/model, the built read-only archiver
 and its manifest, the frozen RAM engine template, the exact F BIN, the matching
 BASE1 READBACK image/component manifest, and new private capture/plan/run folders.
 It does not enumerate or select an owner's board automatically.
 
-Example arguments from this directory, for a later authorized trial:
+Example arguments from this directory, after reviewing the selected board's scope:
 
 ```powershell
 $nfArgs = @(
@@ -215,7 +219,10 @@ live F-recovery provisioning remain outside this WDC CLI. The latter is now
 implemented separately in `nf_provision_live.py`; see
 [live C/D provisioning](../docs/LIVE_CD_PROVISIONING.md). It requires original
 pre-helper RAM escrow and defaults to capture/plan/verify/restore without flash
-writes. Hardware qualification and integration into a future kit remain pending.
+writes. Its [2512 acceptance](../docs/2512_PROGRAMMER_F_CD_ACCEPTANCE.md) passed,
+and the command, engine and wrapper dependency are included under their tested
+paths. The next [ZIP test](../docs/RELEASE_WORKFLOW.md) must use only extracted
+files and retain the archive SHA-256 in its result.
 
 `recovery_callback(...)` and `execute_wdc(...)` also accept the already owned
 link and retain its private serial trace. No imported module opens a port.

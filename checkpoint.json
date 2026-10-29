@@ -1,5 +1,5 @@
 {
-  "stage": "BASE1 kit includes preserving 2512/b15 console result; BASE1 and migration acceptance open",
+  "stage": "Reviewed 2512 cases closed; 0.3.0-rc1 ZIP migration test NOT RUN",
   "profile": "BASE1",
   "identity": {
     "product": "STR8N-F",
@@ -29,7 +29,9 @@
   "WDC_recognition_in_F": false,
   "CPU_simulations": 0,
   "hardware_access": true,
-  "boards_modified": [],
+  "boards_modified": [
+    "2512"
+  ],
   "board_2205_touched": false,
   "published": false,
   "execution_qualified": false,
@@ -82,13 +84,33 @@
   "address_proof": "validation/pr05-address-proof.json",
   "independent_helpers_rebuilt": false,
   "remaining": [
-    "Frozen BASE1 hardware acceptance on supported CPUs/adapters",
-    "End-to-end WDC migration/reset and interrupted-migration repair qualification",
-    "Generic live provisioning after programmer-installed F",
-    "History-preserving existing-SNBT F upgrade: implement or explicitly exclude",
-    "Native console key/button/dialog and disconnect/timing acceptance"
+    "Live migration/operator acceptance from exact extracted candidate ZIP",
+    "Broader CPUs/adapters/hosts/layouts and interruption boundaries remain unqualified",
+    "Public release/tag/upload after selected candidate acceptance"
   ],
-  "sources": {
+  "canonical_text": "LF; source hashes survive Git normalization",
+  "host_console": {
+    "version": "0.1.0",
+    "checks": "validation/console-host-checks.json",
+    "host_tests_passed": 19,
+    "hidden_Tk_smoke_passed": true,
+    "hardware_qualified": true,
+    "firmware_rebuilds": 0,
+    "serial_trial": "validation/2512-upgrade-base1-acceptance.json",
+    "b15_serial_trial_passed": true,
+    "physical_keypresses_verified": true,
+    "BASE1_firmware_qualified": true,
+    "evidence_in_candidate_kit": true,
+    "qualified_scope": "Windows / 2512 / FT245 only"
+  },
+  "candidate_checkpoint": "base1-rc1",
+  "release_checklist": "docs/RELEASE_STATUS.md",
+  "boards_accessed": [
+    "2512"
+  ],
+  "flash_written": true,
+  "hardware_access_scope": "Historical authorized 2512 upgrade/BASE1/console/opaque/WDC/programmer-F/C-D cases; not packaging actions",
+  "initial_build_sources": {
     "src/core/app-fixed-symbols.inc": "8bfcd87e9f7bc98cedeb2999b770624b5536bb06060b31923a1fd9b78387ab0c",
     "src/core/bank-monitor-apply.inc": "c54721726436e38c17f3c3a6480c7a2732a86e042395cc76f7f0fd5b42495d2d",
     "src/core/bank-monitor-crc.inc": "59970f790de66e22fd7df7454d33eea121396a757c65fda851594f1a2c60e472",
@@ -182,25 +204,22 @@
     "tests/test_console.py": "58ddaba49964abfd2b687fd69e47be5db33ae97b74b5dce67494470d5167c20f",
     "tests/console_tk_smoke.py": "2c6ff55f2c8a41cdbc66218d1668f3eaccb3729857b3cd86b57fb933b753423e"
   },
-  "canonical_text": "LF; source hashes survive Git normalization",
-  "host_console": {
-    "version": "0.1.0",
-    "checks": "validation/console-host-checks.json",
-    "host_tests_passed": 19,
-    "hidden_Tk_smoke_passed": true,
-    "hardware_qualified": false,
-    "firmware_rebuilds": 0,
-    "serial_trial": "validation/console-2512-hardware.json",
-    "b15_serial_trial_passed": true,
-    "physical_keypresses_verified": false,
-    "BASE1_firmware_qualified": false,
-    "evidence_in_candidate_kit": true
-  },
-  "candidate_checkpoint": "base1-2512-results-r1",
-  "release_checklist": "docs/RELEASE_STATUS.md",
-  "boards_accessed": [
-    "2512"
+  "toolkit_version": "0.3.0-rc1",
+  "source_snapshot_note": "initial_build_sources records the historical initial build; current packaging files are bound by MANIFEST/source commit",
+  "included_hardware_evidence": [
+    "validation/console-2512-hardware.json",
+    "validation/2512-upgrade-base1-acceptance.json",
+    "validation/2512-b0-powercut-acceptance.json",
+    "validation/2512-cd-recovery-acceptance.json",
+    "validation/2512-wdc-migration-acceptance.json",
+    "validation/2512-programmer-f-cd-acceptance.json"
   ],
-  "flash_written": false,
-  "hardware_access_scope": "Legacy b15 serial-console trial only; frozen BASE1 firmware not installed or qualified"
+  "packaged_migration_test": "NOT_RUN",
+  "packaging": {
+    "firmware_builds": 0,
+    "CPU_simulations": 0,
+    "serial_access": false,
+    "boards_modified": [],
+    "Python_serial_terminal_included": true
+  }
 }
