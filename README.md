@@ -4,6 +4,11 @@
 
 *With ~32KB RAM shared by the selected bank environment.*
 
+Start with the [user manual](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-0.3.0-MANUAL.md)
+and [4KB F.bin](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/F.bin).
+The complete operator ZIP includes the WDC RAM migration programs and Python
+serial terminal. These are additive release downloads; original ZIPs stay intact.
+
 One 4096-byte bootstrap/recovery component opens four selectable flash banks
 for your own images and environments. Four bank environments share that RAM;
 hardware qualification is listed below. The raw-L application range is
