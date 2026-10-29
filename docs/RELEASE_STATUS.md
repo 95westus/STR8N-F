@@ -2,8 +2,10 @@
 
 Closeout: **October 28, 2026**. The reviewed **2512 / 65C02 / FT245 / Windows**
 source/hardware cases are closed. **0.3.0-rc1** is an unpublished candidate
-for the next migration test using only its extracted ZIP. That packaged
-migration test is **NOT RUN**; public release is **NOT PUBLISHED**.
+tested using only its extracted ZIP. That packaged
+existing-SNBT upgrade test has now [passed on 2609](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md).
+WDC/first-provisioning runs from this ZIP remain NOT RUN; public release is
+**NOT PUBLISHED**. See [rc1 workflow/documentation errata](RC1_KNOWN_ISSUES.md).
 
 > Give me 4KB, I can give you 4 boards.
 
@@ -26,23 +28,25 @@ console versions do not alter F generation.
 
 All passes are limited to their receipts. The WDC and programmer-F conversions
 explicitly archived replaced raw history on the host while importing latest
-tracked counts. The last board checkpoint is REC>, COM4 released, latest
+tracked counts. The 2512 checkpoint is REC>, COM4 released, latest
 sequence 1000, three records, C=52/D=32/F=24; original owner images, settings
-and RAM/ZP verified. 2205 was not accessed.
+and RAM/ZP verified. The later 2609 ZIP checkpoint is REC>, COM8 released,
+seq1024/11 records and C=78/D=47/F=31, with all ten old rows retained.
+2205 was not accessed; 2604 was excluded from the 2609 trial.
 
 ## What remains
 
 | Item | Status |
 | --- | --- |
 | Fresh operator/source ZIP, terminal and migration dependencies | [Passed](BASE1_RC1_PACKAGE_CHECKPOINT.md): one package pass, fresh extraction, manifests/dependencies/links and CLI checks; F unchanged |
-| Migration and terminal acceptance from that exact extracted ZIP | **NOT RUN**; next reviewed test, bind archive SHA-256 in the result |
+| Migration and terminal core from the exact rc1 ZIP | [2609 existing-SNBT route passed](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md), 65C816 emulation/FT245; native GUI keys not repeated here. WDC and first-provisioning ZIP routes remain untested |
 | Public release/tag/upload | **NOT PUBLISHED** |
-| Other CPUs/adapters/hosts and occupied layouts | Unqualified; no four-board hardware pass inferred |
+| Other CPU modes/adapters/hosts and occupied layouts | Unqualified; no four-board hardware pass inferred |
 | Electrical mid-pulse failures, arbitrary corrupted history and interrupted provisioning | Outside this candidate's accepted happy paths |
 | Interrupted F installation/explicit F upgrade | Unqualified maintenance boundary; normal runtime keeps F golden |
 
-Use the [release workflow](RELEASE_WORKFLOW.md) for package contents and the
-pending ZIP test. The terminal is included, not a future download requirement
+Use the [release workflow](RELEASE_WORKFLOW.md) for package contents and
+additional ZIP route acceptance. The terminal is included, not a future download requirement
 apart from Python/Tk and pinned pyserial. Migration remains a separate CLI;
 F-keys load RAM tools and do not start migration.
 

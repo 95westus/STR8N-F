@@ -1,9 +1,11 @@
 # Candidate ZIP and migration acceptance
 
-The reviewed 2512 source/hardware cases are closed. The next acceptance uses
-the extracted **STR8N-F-BASE1-0.3.0-rc1.zip**, without development-checkout
-fallback. That live ZIP migration test is **NOT RUN**. Building/checking an
-archive does not close it or publish a final release.
+The reviewed 2512 source/hardware cases are closed. Acceptance uses the
+extracted **STR8N-F-BASE1-0.3.0-rc1.zip**, without development-checkout
+fallback. The [2609 existing-SNBT route](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md)
+passed from that extraction. Packaged WDC and programmer-F provisioning runs remain NOT RUN.
+Building/checking an archive alone does not qualify its live routes or publish
+a final release. See [rc1 errata](RC1_KNOWN_ISSUES.md).
 
 ## Required contents
 
@@ -51,7 +53,7 @@ Install Python 3.11+ with Tk and the pinned requirements on the operator host.
 Run the bundled terminal from the extraction. Its existing native-key
 acceptance covers Windows/2512, not every host/adapter.
 
-## Live ZIP migration test — pending
+## Live ZIP migration procedure — additional routes pending
 
 1. Identify the board and exact allowed footprint; leave 2205 excluded. Use
    no deliberate power cuts and keep F's golden-runtime boundary.
@@ -69,6 +71,7 @@ acceptance covers Windows/2512, not every host/adapter.
    board/CPU/adapter, exact writes/counts, preservation results and limits.
    Only that evidence can mark packaged migration PASSED.
 
-The candidate is ready for that reviewed next test. Other platforms/layouts,
+The existing-SNBT route passed on 2609; additional routes need their own review.
+Other platforms/layouts,
 interrupted provisioning and external programmer operation remain outside
 the scoped happy-path evidence. See [status](RELEASE_STATUS.md).

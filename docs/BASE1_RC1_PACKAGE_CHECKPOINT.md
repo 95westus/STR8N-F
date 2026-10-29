@@ -3,7 +3,9 @@
 October 28, 2026. Operator and source ZIPs were assembled once from source
 commit `1f5db7a94a176c4ad50f47c39653943590d97a21`. This post-package record does not alter
 either archive. The reviewed 2512 hardware cases and package construction/
-extraction checks are closed; **live migration from this ZIP remains NOT RUN**.
+extraction checks are closed. At packaging live migration was NOT RUN; the
+later [2609 existing-SNBT ZIP upgrade](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md) passed
+without changing these archives. Other packaged routes remain untested.
 
 > Give me 4KB, I can give you 4 boards.
 

@@ -3,10 +3,10 @@
   "version": "0.3.0-rc1",
   "tag": "unpublished-base1-rc1",
   "prerelease": true,
-  "status": "candidate-ZIP-migration-test-pending",
+  "status": "candidate-2609-ZIP-upgrade-passed-scoped",
   "firmware_lineage": "STR8N-F 0.3.0 / F g00000001 / BASE1 / PR05",
   "repository": "https://github.com/95westus/STR8N-F",
-  "release_scope": "Reviewed 2512 source/hardware closeout; complete operator ZIP for pending extracted-ZIP migration test",
+  "release_scope": "Reviewed 2512 source/hardware cases and 2609 existing-SNBT upgrade from the exact extracted rc1 operator ZIP; other packaged routes untested",
   "CPU_simulations_for_this_release": 0,
   "main_asset": "STR8N-F-BASE1-0.3.0-rc1.zip",
   "source_asset": "STR8N-F-BASE1-0.3.0-rc1-source.zip",
@@ -32,9 +32,9 @@
   "serial_access_for_packaging": false,
   "board_2205_accessed": false,
   "published": false,
-  "packaged_migration_test": "NOT_RUN",
+  "packaged_migration_test": "PASSED_2609_EXISTING_SNBT_UPGRADE",
   "hardware_qualified": false,
-  "qualified_scope": "Reviewed 2512 / 65C02 / FT245 / Windows cases only",
+  "qualified_scope": "Reviewed 2512 / 65C02 cases and 2609 / 65C816 emulation existing-SNBT ZIP upgrade; FT245 / Windows only",
   "host_console_included": true,
   "host_console_serial_trial": {
     "board": "2512",
@@ -44,5 +44,12 @@
     "live_disconnect_deferral": true,
     "evidence": "validation/2512-upgrade-base1-acceptance.json"
   },
-  "next_acceptance": "docs/RELEASE_WORKFLOW.md"
+  "next_acceptance": "docs/RELEASE_WORKFLOW.md",
+  "tested_operator_ZIP_sha256": "ed9e87ef34323b0504c355bd6b35e0a5095ecd0665d6e67166bd9178c29bddb2",
+  "packaged_migration_evidence": "validation/2609-rc1-zip-upgrade-acceptance.json",
+  "rc1_known_issues": "docs/RC1_KNOWN_ISSUES.md",
+  "pending_packaged_routes": [
+    "WDC first provisioning",
+    "Programmer-installed-F C/D provisioning"
+  ]
 }

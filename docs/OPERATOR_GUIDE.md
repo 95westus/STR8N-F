@@ -44,7 +44,7 @@ For a reversible default exercise on an already provisioned board, first inspect
 
 ## Install an opaque image
 
-Use the matching OPAQUE RAM tool and [OIP1 protocol](OPAQUE_PROTOCOL.md). Read and save each target sector before replacing it. The normal installer admits all sectors of B0–B2 and B3:8/9/E. It reserves B3:A/B for monitor slots, C/D for journals and F for the bootstrap. A provider in an otherwise allowed sector is still owner data: target selection must come from the actual board inventory.
+Use the matching OPAQUE RAM tool and [OIP1 protocol](OPAQUE_PROTOCOL.md). Read and save each target sector before replacing it. The BASE1 installer admits B0–B2 and B3:8/9/A/B/E. Only B3:C/D journals and F recovery are protected; A/B monitor-shaped images are optional owner occupants. A provider in an otherwise allowed sector is still owner data: target selection must come from the actual board inventory.
 
 Install every required sector and verify the complete application's image before enabling its boot entry. A bank may contain code, data, a menu, multiple applications or unused sectors; F does not infer which bytes belong together. Reset into recovery after an unsuccessful transfer and compare the sector with both the saved preimage and intended payload before deciding how to recover.
 
@@ -52,8 +52,9 @@ Install every required sector and verify the complete application's image before
 
 Applications own their application behavior and must match the board hardware. F's resident RAM service entries and reserved work areas are defined in [str8n-v2-public.inc](../src/include/str8n-v2-public.inc) and [str8n-v2-eq.inc](../src/include/str8n-v2-eq.inc). Calls require IRQ disabled and decimal mode clear; on 65C816 use emulation mode, D=0, DBR=0 and PBR=0. Bank-independent calls use the RAM facade after checking its signature. Calling F ROM routines requires B3 visible.
 
-The operator kit supplies CONFIG, OPAQUE, DEMO, READBACK and optional BASE MONs.
-BASE MON is a compact inspection/launch shell. Full-system M1 maps, WORK/EDU,
+The operator kit supplies frozen F and CONFIG, OPAQUE, DEMO, READBACK and MAP
+RAM tools. It supplies no mandatory MON payload. A compatible optional monitor
+can be a separate inspection/launch image. Full-system M1 maps, WORK/EDU,
 RTC status and richer interfaces are separate optional applications. Legacy
 compatibility commands may report unavailable; their presence in old help does
 not install the corresponding full-system provider. The source package retains

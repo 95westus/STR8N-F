@@ -1,5 +1,5 @@
 {
-  "stage": "Reviewed 2512 cases closed; 0.3.0-rc1 ZIP migration test NOT RUN",
+  "stage": "2512 source cases and 2609 extracted-rc1 SNBT upgrade passed; other packaged routes untested",
   "profile": "BASE1",
   "identity": {
     "product": "STR8N-F",
@@ -30,7 +30,8 @@
   "CPU_simulations": 0,
   "hardware_access": true,
   "boards_modified": [
-    "2512"
+    "2512",
+    "2609"
   ],
   "board_2205_touched": false,
   "published": false,
@@ -84,9 +85,9 @@
   "address_proof": "validation/pr05-address-proof.json",
   "independent_helpers_rebuilt": false,
   "remaining": [
-    "Live migration/operator acceptance from exact extracted candidate ZIP",
-    "Broader CPUs/adapters/hosts/layouts and interruption boundaries remain unqualified",
-    "Public release/tag/upload after selected candidate acceptance"
+    "rc1 manual-capture precondition and immutable-archive documentation errata",
+    "Other packaged routes and broader CPU/mode/adapter/layout qualification",
+    "Public release/tag/upload after selected release scope is finalized"
   ],
   "canonical_text": "LF; source hashes survive Git normalization",
   "host_console": {
@@ -106,10 +107,11 @@
   "candidate_checkpoint": "base1-rc1",
   "release_checklist": "docs/RELEASE_STATUS.md",
   "boards_accessed": [
-    "2512"
+    "2512",
+    "2609"
   ],
   "flash_written": true,
-  "hardware_access_scope": "Historical authorized 2512 upgrade/BASE1/console/opaque/WDC/programmer-F/C-D cases; not packaging actions",
+  "hardware_access_scope": "Authorized 2512 upgrade/BASE1/console/opaque/WDC/programmer-F/C-D cases and 2609 extracted-rc1 existing-SNBT upgrade; not packaging actions",
   "initial_build_sources": {
     "src/core/app-fixed-symbols.inc": "8bfcd87e9f7bc98cedeb2999b770624b5536bb06060b31923a1fd9b78387ab0c",
     "src/core/bank-monitor-apply.inc": "c54721726436e38c17f3c3a6480c7a2732a86e042395cc76f7f0fd5b42495d2d",
@@ -214,12 +216,20 @@
     "validation/2512-wdc-migration-acceptance.json",
     "validation/2512-programmer-f-cd-acceptance.json"
   ],
-  "packaged_migration_test": "NOT_RUN",
+  "packaged_migration_test": "PASSED_2609_EXISTING_SNBT_UPGRADE",
   "packaging": {
     "firmware_builds": 0,
     "CPU_simulations": 0,
     "serial_access": false,
     "boards_modified": [],
     "Python_serial_terminal_included": true
-  }
+  },
+  "tested_operator_ZIP_sha256": "ed9e87ef34323b0504c355bd6b35e0a5095ecd0665d6e67166bd9178c29bddb2",
+  "packaged_migration_evidence": "validation/2609-rc1-zip-upgrade-acceptance.json",
+  "rc1_known_issues": "docs/RC1_KNOWN_ISSUES.md",
+  "pending_packaged_routes": [
+    "WDC first provisioning",
+    "Programmer-installed-F C/D provisioning"
+  ],
+  "board_2604_touched_by_2609_trial": false
 }

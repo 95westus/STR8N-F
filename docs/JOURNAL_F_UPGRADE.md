@@ -8,7 +8,8 @@ The new RAM variant was assembled once without CPU/flash models. The later
 authorized [2512 hardware case](2512_BASE1_ACCEPTANCE.md) passed its known-b15
 upgrade with exact preservation. Interruption and other-platform acceptance
 remain pending. The 0.3.0-rc1 candidate now includes this command and prebuilt
-engine. Testing from that extracted ZIP is a separate pending gate.
+engine. The [2609 extracted-ZIP test](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md)
+passed the same existing-SNBT path on 65C816 emulation/FT245.
 
 The accepted work order is existing-journal upgrade, BASE1 acceptance, then
 WDC migration acceptance. The one-reservation/F-only 2512 trial was later
@@ -97,13 +98,14 @@ The output binds the exact target F, all original captures, reservation frame,
 complete final-bank images, sealed NFU1 engine and descending-copy raw-L wrapper.
 Private plans contain owner data and must not enter Git/public kits.
 
-## Future authorized live acceptance
+## Execution from the complete operator kit
 
 The source CLI has an `execute` subcommand taking `--plan`, `--port`, `--out`,
 `--execute` and `--allow-unqualified`. Both explicit flags are required before
-opening the USB port; the port must match the capture's USB serial. No execution
-is authorized by this checkpoint. Use the complete source checkout, not an
-existing kit that lacks this tool/engine.
+opening the USB port; the port must match the capture's USB serial. Use the
+complete rc1 operator kit, which includes the host, prebuilt engine and wrapper
+dependency. Individual files copied into an older kit are insufficient.
+Original capture remains a separate operator precondition; see rc1 errata.
 
 The host saves durable phases before Y and before providing F bytes. Missing
 reservation proof means no F payload is sent. No flash or RAM retry, automatic

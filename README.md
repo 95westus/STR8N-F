@@ -11,8 +11,9 @@ $0200-$64FF; preservation tools escrow $0200-$66FF and owner ZP $00-$DF.
 
 **Toolkit 0.3.0-rc1 is an unpublished migration-test candidate.** F remains
 **STR8N-F 0.3.0 g00000001 / BASE1 / PR05**, source and binary frozen.
-The reviewed 2512/65C02/FT245 hardware cases passed. Migration using this
-freshly extracted ZIP is the next gate and has not run. See
+The reviewed 2512 cases and the [2609 extracted-ZIP existing-SNBT upgrade](docs/2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md)
+passed. Packaged WDC/first-provisioning routes remain untested; see the
+[rc1 workflow/documentation errata](docs/RC1_KNOWN_ISSUES.md). See
 [closeout status](docs/RELEASE_STATUS.md) and [ZIP workflow](docs/RELEASE_WORKFLOW.md).
 
 ## Included
@@ -92,7 +93,9 @@ of the planned ZIP migration acceptance.
 
 2512 evidence covers BASE1 reset/recovery, native console keys/dialogs, Ctrl-C
 and BIN loading, CONFIG/opaque write-and-boot, reviewed chip-idle C/D recovery,
-WDC migration and programmer-F provisioning. Other CPUs, adapters, occupied
+WDC migration and programmer-F provisioning. The extracted rc1 existing-SNBT
+upgrade and terminal core checks also passed on 2609/65C816 emulation/FT245.
+Other CPU modes, adapters, occupied
 layouts and electrical interruptions remain unqualified. 2205 stays excluded.
 The explicit --allow-unqualified switch remains for those broader limits.
 
@@ -100,5 +103,6 @@ F generation, toolkit version, console version and journal sequence are
 independent. [F_FREEZE.json](F_FREEZE.json) and the
 [identity contract](docs/F_IDENTITY.md) bind F. Its SHA-256 is
 `8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1`.
-Packaging copies verified existing firmware; it does not rebuild, simulate,
-flash, publish or run the pending ZIP migration test.
+Packaging copied verified existing firmware without rebuilding, simulation,
+board access or publication. The later 2609 upgrade is recorded separately;
+the tested rc1 ZIP remains immutable.

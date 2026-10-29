@@ -1,6 +1,8 @@
 # 2609 migration from extracted rc1: B3 scope review
 
-Prepared for review; no flash write authorized by this document alone.
+The owner approved this exact scope and the
+[2609 extracted-rc1 trial passed](2609_RC1_ZIP_UPGRADE_ACCEPTANCE.md).
+The tables below retain the reviewed write budget; actual evidence is separate.
 The owner requested 2609, original images/settings/wear history/owner RAM
 preserved, no power cuts, frozen F, and 2205 excluded. The immutable operator
 ZIP SHA-256 is
@@ -96,6 +98,7 @@ as restored application memory. No EDU/SPI/RTC commands are part of this trial.
 Private case: `output/qualification/2609-rc1-zip-migration-20261028-r1`.
 Fresh original capture and the packaged prepare/inspect path have now passed.
 All four banks were read independently twice; owner RAM/ZP remained exact.
-The complete source-bound live plan matches C900/1024/F31. Execution still
-awaits exact write-scope approval; no flash trial is claimed. Board 2205 and every other board remain excluded.
+The complete source-bound live plan matched C900/1024/F31. The owner then
+authorized execution; the packaged upgrade, terminal core checks and final
+image/history/settings/RAM preservation passed without changing the ZIP. Board 2205 and every other board remain excluded.
 The ZIP stays immutable; source review/results are recorded separately.
