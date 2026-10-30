@@ -5,6 +5,13 @@ Runtime components: MON A/B 0.1.0-dev g8, services g4, WB2 g5 and PROGRAM/SP1 g1
 MON B and installed tools passed the documented 2609/65C816 emulation checks.
 This preview does not claim complete b35/rc1 replacement.
 
+Subsequent [2512/65C02 installed acceptance](2512_SERVICES_G4_INSTALL_ACCEPTANCE.md)
+passed on the same services g4/WB5/SP1 bytes: physical saved-default B boot,
+native maps/wear/TIME, matching flash reload, CLOCK, PROGRAM query/Table,
+BATCH and AUTO/NO. Positive PROGRAM write/run remains a separately named
+CPU/backend scope. These later source receipts leave preview 1's published
+archive and Foundation downloads unchanged.
+
 ## Package and terminal
 
 The candidate contains an unchanged copy of the published N-F operator kit in

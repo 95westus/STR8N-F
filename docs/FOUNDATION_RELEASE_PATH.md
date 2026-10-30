@@ -67,9 +67,10 @@ The remaining CPU/backend qualification must match the advertised release
 scope. Existing Foundation and preview 1 downloads remain their original
 scoped releases.
 
-1. The current services-g4 RAM path [passed on 2512/65C02](2512_SERVICES_G4_RAM_ACCEPTANCE.md).
-   Matching board-flash reload remains the next gate under the separately
-   approved [five-erase installation scope](2512_SERVICES_G4_INSTALL_SCOPE.md).
+1. **Closed:** services-g4 RAM and matching board-flash reload
+   [passed on 2512/65C02](2512_SERVICES_G4_INSTALL_ACCEPTANCE.md), including
+   physical saved-default B boot and complete owner RAM/ZP preservation.
+   The approved five erases are complete; they grant no further write allowance.
 2. Qualify AP/02 named owner-app launch on 2609 only after a specific disposable
    flash sector and its restore/wear scope are reviewed. PROGRAM run/return
    does not qualify flash AP/02 launch.
@@ -84,3 +85,18 @@ A later monitor/tools candidate can add its new receipts and manual while
 carrying forward the same Foundation bytes. Promotion must state the tested
 CPU/backend combinations and remaining gaps; full b35 parity is a separate
 goal from the already released 4 KB Foundation.
+
+Current MON/tools evidence:
+
+| Scope | 2512 / 65C02 | 2609 / 65C816 emulation |
+| --- | --- | --- |
+| Installed MON B g8, current g4 maps/wear and TIME | Passed | Passed |
+| Matching flash MAINT LOAD, CLOCK, PROGRAM Table, BATCH and AUTO/NO | Passed | Passed |
+| Positive current SP1 SS1 Store/Restore/run and CRC refusal | Not repeated in this trial | Passed |
+| Positive AP/02 flash-app launch through current g4 | Not repeated in this trial | Pending reviewed target |
+| Resident ASM/DBG | Deferred; nonblocking | Deferred; nonblocking |
+
+The 2512 acceptance preserves its earlier Store/AUTO and application receipts
+as separate historical scopes; it does not turn query/cancel checks into new
+positive writes. No published archive, release tag or frozen F byte changes
+with these later source receipts.

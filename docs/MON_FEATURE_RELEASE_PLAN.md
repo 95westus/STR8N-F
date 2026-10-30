@@ -7,9 +7,10 @@ new F generation, historical-branch deletion or public-download replacement.
 ## Next feature increment
 
 Use hash-pinned MON/g8, services/g4, WB2/g5 and PROGRAM/SP1 artifacts.
-The new storage/APPS increment passed2512 RAM acceptance; its flash installation
-is still pending. Existing manifest build-only labels remain immutable; later
-hardware receipts state which exact variants passed.
+The current services and tools passed both RAM and matching installed-flash
+[acceptance on 2512/65C02](2512_SERVICES_G4_INSTALL_ACCEPTANCE.md), including
+physical saved-default B boot. Existing manifest build-only labels remain
+immutable; later hardware receipts state which exact variants passed.
 
 Current checkpoint: [2609 installed acceptance](2609_MON_FEATURE_ACCEPTANCE.md)
 passed. The original five replacements plus the separately approved D/E
@@ -20,7 +21,9 @@ Python terminal. Preview 1 is now published. Positive PROGRAM Store/Restore/run
 on 2609 [now passed](2609_PROGRAM_POSITIVE_ACCEPTANCE.md), with exact full-SRAM,
 owner RAM/ZP and flash preservation. Services g4 now also
 [passed RAM qualification on 2512/65C02](2512_SERVICES_G4_RAM_ACCEPTANCE.md);
-matching board-flash reload follows its separately approved installation scope.
+matching installed reload and physical boot also passed within the separately
+approved five-erase scope. Owner RAM/ZP, SRAM, boot policy and golden F are
+preserved; old C history is archived as approved and D records retained.
 SOURCE/ASM/DEBUG is follow-on implementation work. See the
 [Foundation release path](FOUNDATION_RELEASE_PATH.md) for the remaining package
 and CPU/backend qualification boundaries.
@@ -61,7 +64,8 @@ SRAM/WORK queries, PROGRAM Table, BATCH returning-command/precheck paths,
 missing-name Restore and Store/AUTO preview followed by NO. Never transmit
 YES, execute a Store commit, run a retained program, format, delete or reclaim.
 Record busy/unavailable refusals honestly; they do not qualify positive SRAM
-operation. The positive write/run receipts remain2512-only.
+operation. Those initial read/cancel checks added no positive PROGRAM
+write/run receipt; the later 2609 positive acceptance is recorded above.
 
 The first completed2609 scope trial preserved everything but found$01 on SRAM
 transfer: disabled VIA CB edge flags. A follow-up may use explicit `SRAM PREP`

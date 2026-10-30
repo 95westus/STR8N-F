@@ -40,3 +40,6 @@ Private raw captures remain under the parent project's
 `output/qualification/2512-services-g4-RAM-20261030-r2`; the public receipt
 contains hashes and results only. The paired install plan has a separate
 owner approval; this RAM acceptance grants no additional erase allowance.
+
+The subsequent [matching installed-tool and physical-boot gate](2512_SERVICES_G4_INSTALL_ACCEPTANCE.md)
+also passed. This original RAM receipt retains its narrower scope and hashes.

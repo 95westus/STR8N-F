@@ -7,6 +7,10 @@ capture. Execute only against identical admitted preimages, without retries
 or additional erases. No power cuts; other boards excluded.
 F remains exact STR8N-F v0.3.0 g00000001 / BASE1 / PR05.
 
+**Closed:** the [installed and physical-boot acceptance](2512_SERVICES_G4_INSTALL_ACCEPTANCE.md)
+passed within these five erases. This historical approval grants no additional
+erase, retry or storage-write allowance.
+
 Private plan: `output/qualification/2512-services-g4-install-scope-20261030-r1/plan.json`
 in the parent project. SHA256:
 `531d9981d535cd090d83fc12ad9f2a35bae59ee4fffcd05d739321154f67f9df`.

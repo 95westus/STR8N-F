@@ -21,14 +21,14 @@ Read the [preview manual](docs/MON_FEATURE_PREVIEW.md),
 [release plan](docs/MON_FEATURE_RELEASE_PLAN.md) and
 [full b35 parity checklist](docs/MON_B35_PARITY.md). SOURCE/ASM/DEBUG,
 advanced CLOCK, the 4KB FLASH editor and CONFIG integration remain unfinished.
-2512 retains its [earlier installed workbench](docs/MON_STORE_AUTO_2512_ACCEPTANCE.md);
-new PROGRAM/APPS passed its separate RAM tests. Current services g4 and WB5
-also [passed 2512/65C02 RAM qualification](docs/2512_SERVICES_G4_RAM_ACCEPTANCE.md);
-matching flash reload follows the separately reviewed installation.
+2512/65C02 now also has the [matching installed services g4 and WB5/SP1](docs/2512_SERVICES_G4_INSTALL_ACCEPTANCE.md).
+Native maps/wear, CLOCK, forced reload, PROGRAM Table, BATCH and AUTO/NO passed,
+including physical saved-default B boot and complete preservation checks.
+At B3>, `MAINT LOAD` loads the current tools over a valid older RAM cache.
 
 The [Foundation release path and next qualification](docs/FOUNDATION_RELEASE_PATH.md)
 separate the released 4 KB foundation from optional monitor features. The next
-release requires further qualification. Positive PROGRAM Store/Restore/run
+release must retain its stated CPU/backend limits. Positive PROGRAM Store/Restore/run
 [passed on 2609](docs/2609_PROGRAM_POSITIVE_ACCEPTANCE.md), with complete SRAM
 and owner-RAM restoration and zero flash writes.
 
