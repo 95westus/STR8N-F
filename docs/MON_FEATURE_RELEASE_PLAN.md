@@ -18,7 +18,9 @@ once. RTC collection was re-admitted with its unchanged instrument and retained
 history. The optional preview packages these exact bytes and the unchanged
 Python terminal. Preview 1 is now published. Positive PROGRAM Store/Restore/run
 on 2609 [now passed](2609_PROGRAM_POSITIVE_ACCEPTANCE.md), with exact full-SRAM,
-owner RAM/ZP and flash preservation. Retest services g4 on 65C02 separately.
+owner RAM/ZP and flash preservation. Services g4 now also
+[passed RAM qualification on 2512/65C02](2512_SERVICES_G4_RAM_ACCEPTANCE.md);
+matching board-flash reload follows its separately approved installation scope.
 SOURCE/ASM/DEBUG is follow-on implementation work. See the
 [Foundation release path](FOUNDATION_RELEASE_PATH.md) for the remaining package
 and CPU/backend qualification boundaries.

@@ -22,7 +22,9 @@ Read the [preview manual](docs/MON_FEATURE_PREVIEW.md),
 [full b35 parity checklist](docs/MON_B35_PARITY.md). SOURCE/ASM/DEBUG,
 advanced CLOCK, the 4KB FLASH editor and CONFIG integration remain unfinished.
 2512 retains its [earlier installed workbench](docs/MON_STORE_AUTO_2512_ACCEPTANCE.md);
-new PROGRAM/APPS passed its separate RAM tests.
+new PROGRAM/APPS passed its separate RAM tests. Current services g4 and WB5
+also [passed 2512/65C02 RAM qualification](docs/2512_SERVICES_G4_RAM_ACCEPTANCE.md);
+matching flash reload follows the separately reviewed installation.
 
 The [Foundation release path and next qualification](docs/FOUNDATION_RELEASE_PATH.md)
 separate the released 4 KB foundation from optional monitor features. The next

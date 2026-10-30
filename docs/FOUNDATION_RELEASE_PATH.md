@@ -67,8 +67,9 @@ The remaining CPU/backend qualification must match the advertised release
 scope. Existing Foundation and preview 1 downloads remain their original
 scoped releases.
 
-1. Retest the current services-g4 RAM path on 2512/65C02. Keep its older
-   installed tools until a separate installation scope is approved.
+1. The current services-g4 RAM path [passed on 2512/65C02](2512_SERVICES_G4_RAM_ACCEPTANCE.md).
+   Matching board-flash reload remains the next gate under the separately
+   approved [five-erase installation scope](2512_SERVICES_G4_INSTALL_SCOPE.md).
 2. Qualify AP/02 named owner-app launch on 2609 only after a specific disposable
    flash sector and its restore/wear scope are reviewed. PROGRAM run/return
    does not qualify flash AP/02 launch.
