@@ -36,6 +36,8 @@ their tags remain immutable. Adding the Foundation wording does not rebuild F.
 AUTO/NO. Positive Store/Restore/run retains 2512's earlier 65C02 RAM evidence.
 The next gate is the complete positive PROGRAM workflow on 2609/65C816
 emulation using its installed, byte-identical preview payloads.
+The [exact PROGRAM trial scope](2609_PROGRAM_POSITIVE_SCOPE.md) is prepared
+separately; preparing it does not authorize its temporary SRAM writes.
 
 First capture the complete 128 KiB SRAM twice through guarded reads, compare
 all flash banks, and restore/read back owner RAM/ZP. Admit temporary targets
