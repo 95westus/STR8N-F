@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "component": "Mona",
+  "version": "0.1.0-dev",
+  "generation": "00000004",
+  "build_passes": 1,
+  "assembly_tool_invocations": 6,
+  "F_rebuilt": false,
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "F_CRC16": "29ED",
+  "private_adapter": {
+    "MON_F_READ": 30768,
+    "MON_F_EXECUTE": 30760,
+    "MON_F_RECOVERY": 62127,
+    "MON_F_NO_SERVICE": 63139,
+    "MON_F_BOOT_READ": 62735,
+    "MON_F_SELECT": 30792,
+    "MON_F_BYTE": 31588
+  },
+  "foundation": {
+    "repository": "https://github.com/95westus/STR8N-F",
+    "tag": "v0.3.0",
+    "commit": "a5f1d83f6a7017eb30e6268c6e0b1fd12fce6a8d",
+    "product": "STR8N-F",
+    "version": "0.3.0",
+    "generation": "00000001",
+    "profile": "BASE1",
+    "private_contract": "PR05",
+    "public_ABI_major": 2,
+    "F_bytes": 4096,
+    "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+    "F_frozen": true
+  },
+  "source_sha256": {
+    "monitors/src/adapter.inc": "ffebdeab2566bdddc2c8bc853a8b846f3fd7bee33b56bd05134686a1299982c0",
+    "monitors/src/force.inc": "fe30913475c3ff4d8e6db63c170431dd6f6448eb8f8b99dde581214dc17ef7b1",
+    "monitors/src/layout.inc": "536a93f325c3c95f2ca74698a536b3ca67ccba2e7b0bd143affc0ea49da0942d",
+    "monitors/src/mona.asm": "76b4baa545dba45ddb55369f73a610e3385221ded39b7507bbd1ce905d84ec45",
+    "monitors/src/rtc-read.inc": "4d1875acd1f634cdf53a6ba80c9b8c4c65e3bc6a6c37aa02a7f3e064d7a00b05"
+  },
+  "artifacts": {
+    "MONA-0.1.0-dev-g00000004-A.bin": {
+      "bytes": 4096,
+      "sha256": "eb0eebc1b57997a407bfefc5a7113c7ebc42d42d5568df1131e0c9226ca4e3ee",
+      "variant": "A",
+      "destination": "B3:A000",
+      "linked_bytes": 3900,
+      "entry": "A084",
+      "linked_end": "AFBC",
+      "status": "NOT_EXECUTION_QUALIFIED"
+    },
+    "MONA-0.1.0-dev-g00000004-B.bin": {
+      "bytes": 4096,
+      "sha256": "a3c2768455a2cd2f5684441909c99779afcefccaeaae9ead5730bedf661ce71f",
+      "variant": "B",
+      "destination": "B3:B000",
+      "linked_bytes": 3900,
+      "entry": "B084",
+      "linked_end": "BFBC",
+      "status": "NOT_EXECUTION_QUALIFIED"
+    },
+    "MONA-0.1.0-dev-g00000004-RAM.bin": {
+      "bytes": 3891,
+      "sha256": "309936eed0896f9b3e3f7c5d40daa5e96228a0c9346a87daac9f7bc3bfa6d661",
+      "variant": "RAM",
+      "destination": "RAM:0200; smoke candidate borrows owner RAM",
+      "linked_bytes": 3891,
+      "entry": "0200",
+      "linked_end": "1133",
+      "status": "NOT_EXECUTION_QUALIFIED"
+    }
+  },
+  "monitor_RAM": "6A00-6AFF",
+  "owner_RAM_ROM_startup": "0200-66FF unchanged",
+  "status_rows": [
+    "EDU",
+    "SSRAM",
+    "RTCC",
+    "Battery",
+    "Wear"
+  ],
+  "commands": [
+    "?",
+    "V",
+    "TIME",
+    "B[0-3]",
+    "D addr [end]",
+    "M addr byte...",
+    "!M addr byte...",
+    "G addr",
+    "Q"
+  ],
+  "branch_layout": {
+    "A/mona.asm": {
+      "short_branches": 79,
+      "expanded_branches": 36,
+      "conservative_bytes": 2310
+    },
+    "A/adapter.inc": {
+      "short_branches": 27,
+      "expanded_branches": 4,
+      "conservative_bytes": 470
+    },
+    "A/rtc-read.inc": {
+      "short_branches": 63,
+      "expanded_branches": 0,
+      "conservative_bytes": 805
+    },
+    "A/force.inc": {
+      "short_branches": 21,
+      "expanded_branches": 2,
+      "conservative_bytes": 344
+    },
+    "B/mona.asm": {
+      "short_branches": 79,
+      "expanded_branches": 36,
+      "conservative_bytes": 2310
+    },
+    "B/adapter.inc": {
+      "short_branches": 27,
+      "expanded_branches": 4,
+      "conservative_bytes": 470
+    },
+    "B/rtc-read.inc": {
+      "short_branches": 63,
+      "expanded_branches": 0,
+      "conservative_bytes": 805
+    },
+    "B/force.inc": {
+      "short_branches": 21,
+      "expanded_branches": 2,
+      "conservative_bytes": 344
+    },
+    "RAM/mona.asm": {
+      "short_branches": 79,
+      "expanded_branches": 36,
+      "conservative_bytes": 2308
+    },
+    "RAM/adapter.inc": {
+      "short_branches": 27,
+      "expanded_branches": 4,
+      "conservative_bytes": 470
+    },
+    "RAM/rtc-read.inc": {
+      "short_branches": 63,
+      "expanded_branches": 0,
+      "conservative_bytes": 805
+    },
+    "RAM/force.inc": {
+      "short_branches": 21,
+      "expanded_branches": 2,
+      "conservative_bytes": 344
+    }
+  },
+  "force_modify": {
+    "max_bytes": 8,
+    "protected": [
+      "B3:C",
+      "B3:D",
+      "B3:F"
+    ],
+    "erase": false,
+    "flash_preflight": "Whole command must satisfy old AND new == new; identical bytes skipped",
+    "raw_IO_readback": false,
+    "RAM_kernels": [
+      "6B00-6B7F",
+      "6D00-6D2A"
+    ],
+    "may_halt_on_system_edits": true
+  },
+  "RAM_modify": {
+    "max_bytes": 8,
+    "ranges": [
+      "0000-00DF",
+      "0200-66FF"
+    ],
+    "complete_preflight": true,
+    "readback": true,
+    "RAM_candidate_code_pages_protected": true,
+    "flash_writes": false
+  },
+  "dump": {
+    "default_bytes": 16,
+    "max_bytes": "Entire valid non-I/O range",
+    "ASCII": true,
+    "cancel_between_rows": true
+  },
+  "status_limits": "-- no reported data; explicit TIME samples EDU Rev D MCP79411; cached sample has no zone; * no physical battery/prior wear certification",
+  "personalities": "A and B identical commands; only slot identity differs",
+  "RTCC_adapter": {
+    "trigger": "Explicit TIME only; V never probes",
+    "profile": "WDC EDU Rev D / MCP79411 / VIA1 PA0 SCL, PA7 SDA",
+    "automatic_startup": false,
+    "RTC_data_writes": false,
+    "EEPROM_or_SRAM_access": false,
+    "max_snapshot_attempts": 3,
+    "SCL_wait_polls": 255,
+    "owner_RAM_borrowed": false
+  },
+  "journal_access": "Read selected page and verify full record CRC; no writer installed",
+  "CPU_simulations": 0,
+  "hardware_access": false,
+  "flashing": false,
+  "execution_qualified": false,
+  "install_check": {
+    "offset": 24,
+    "final_byte": "FE",
+    "staging_byte": "FF",
+    "purpose": "Native !M byte-program check after fresh monitor-sector erase; no extra erase",
+    "excluded_from_F_CRC": true
+  },
+  "packaging_only_revision": {
+    "assembler_rerun": false,
+    "changes": [
+      {
+        "name": "MONA-0.1.0-dev-g00000004-A.bin",
+        "original_assembly_package_sha256": "1a1914e993ba64371c5345bfb0c2f4f5bfcd836c6eceb56b30bbda2877ce3063",
+        "final_sha256": "eb0eebc1b57997a407bfefc5a7113c7ebc42d42d5568df1131e0c9226ca4e3ee",
+        "changed_offsets": [
+          24
+        ]
+      },
+      {
+        "name": "MONA-0.1.0-dev-g00000004-B.bin",
+        "original_assembly_package_sha256": "246300ebe5340d82c48572bdd98eef9145e8d13ba8bb90ef71671619ffa68ac1",
+        "final_sha256": "a3c2768455a2cd2f5684441909c99779afcefccaeaae9ead5730bedf661ce71f",
+        "changed_offsets": [
+          24
+        ]
+      }
+    ],
+    "builder_sha256": "c8a7c9c06a0d8821884d57e4ea8fc61b2c6e6e41943eade878389a5cf002a65e"
+  }
+}

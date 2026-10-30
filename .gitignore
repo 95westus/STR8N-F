@@ -13,4 +13,15 @@ __pycache__/
 .env.*
 *.partial
 /logs/
+# Assembler staging stays local; candidate BINs/manifests remain reviewable.
+/monitors/candidates/*/A/
+/monitors/candidates/*/B/
+/monitors/candidates/*/RAM/
+/monitors/candidates/*/*.asm
+/monitors/candidates/*/*.inc
+/monitors/candidates/*/*.s19
+/monitors/candidates/*/build-log.json
+/monitors/candidates/*/staging/
+/apps/candidates/*/staging/
+/apps/candidates/*/build-log.json
 *.jsonl

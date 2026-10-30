@@ -1,7 +1,48 @@
-# STR8N-F v0.3.0 — BASE1 / PR05
+# STR8N-F v0.3.0 — Foundation / BASE1 / PR05
 
-> 4KB of firmware. One board. Up to four boot environments.
+**4K Foundation. Up to four banked environments.**
 
+A 4 KB foundation for your own environments.
+
+One board. Four selectable flash banks. Compatible boot environments of your
+own, running one at a time on shared CPU, RAM and peripherals. Foundation is
+the stable 4 KB F sector beneath those environments; C/D hold its persistent
+boot settings and tracked erase journal. The monitors and tools are optional
+layers above it. The frozen firmware identity remains BASE1 / PR05.
+
+**[Download optional MON/tools preview 1](https://github.com/95westus/STR8N-F/releases/tag/mon-g8-tools-preview1):**
+MON B 0.1.0-dev g8, services g4, WB2 g5 and
+PROGRAM/SP1 are [installed and accepted on 2609/65C816 emulation](docs/2609_MON_FEATURE_ACCEPTANCE.md).
+CLOCK, explicit reload, PROGRAM Table, bounded BATCH and AUTO/NO passed;
+RTC/NTP collection is re-admitted. 2604 remains the intact rc1 reference.
+The published N-F foundation and its downloads stay unchanged.
+
+Read the [preview manual](docs/MON_FEATURE_PREVIEW.md),
+[release plan](docs/MON_FEATURE_RELEASE_PLAN.md) and
+[full b35 parity checklist](docs/MON_B35_PARITY.md). SOURCE/ASM/DEBUG,
+advanced CLOCK, the 4KB FLASH editor and CONFIG integration remain unfinished.
+2512/65C02 now also has the [matching installed services g4 and WB5/SP1](docs/2512_SERVICES_G4_INSTALL_ACCEPTANCE.md).
+Native maps/wear, CLOCK, forced reload, PROGRAM Table, BATCH and AUTO/NO passed,
+including physical saved-default B boot and complete preservation checks.
+At B3>, `MAINT LOAD` loads the current tools over a valid older RAM cache.
+
+The [Foundation release path and next qualification](docs/FOUNDATION_RELEASE_PATH.md)
+separate the released 4 KB foundation from optional monitor features. The next
+release must retain its stated CPU/backend limits. Current PROGRAM Store/Restore/run
+passed on [2609](docs/2609_PROGRAM_POSITIVE_ACCEPTANCE.md) and
+[2512](docs/2512_PROGRAM_POSITIVE_ACCEPTANCE.md). The 2512 report discloses a
+host directory-slot planning error and its exact full-SRAM/RAM recovery.
+[AP/02 flash-app launch on 2609](docs/2609_AP02_ACCEPTANCE.md) also passed;
+the original WDC image was restored, wear history retained and RTC/NTP
+readmitted. These later source receipts leave published downloads unchanged.
+
+**Resident ASM and DBG are planned follow-on work and do not block the current
+MON/tools release.** Their [port and qualification plan](docs/MON_ASM_DBG_RELEASE_GATE.md)
+is retained; preview 1 and its published downloads remain unchanged.
+
+Preview free bytes within components: F367, MON A/B67 each, E82, WB2 g5 30,
+PROGRAM487. These are not declarations of free owner sectors. The historical
+branch spelling is retained; runtime naming is STR8-N / MON A/B.
 For WDC's **W65C02SXB** and **W65C816SXB** boards:
 
 | SXB board | N-F CPU mode | Optional matching EDU add-on |
@@ -85,9 +126,9 @@ BASE1 / PR05
 ```
 
 F then offers its chooser and recovery. The running image supplies its own
-OS identity and EDU, RTC, SRAM or other service status. **Mona** is the
-name chosen for a future optional monitor/launcher; [it is planned](docs/MONA.md),
-with no Mona binary or expanded F ABI in this release.
+OS identity and EDU, RTC, SRAM or other service status. [MON A/B](docs/MONA.md)
+is the separately developed monitor/workbench; no monitor binary or expanded F
+ABI is included in the published 0.3.0 foundation kit.
 
 | Flash region | BASE1 role |
 | --- | --- |
@@ -140,5 +181,5 @@ the tested rc1 ZIP remains immutable.
 documentation. The immutable `v0.3.0` tag identifies the released source;
 later documentation commits do not change the download archives. New work
 uses short `codex/...` feature branches and pull requests into `main`.
-Mona and proposed service/ABI extensions are follow-on work. See
+MON A/B and proposed service/ABI extensions are follow-on work. See
 [development policy](docs/DEVELOPMENT.md).

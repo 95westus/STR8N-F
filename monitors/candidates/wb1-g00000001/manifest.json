@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "component": "Mona RAM workbench",
+  "interface": "WB1",
+  "generation": "00000001",
+  "status": "BUILD_ONLY_NOT_EXECUTION_QUALIFIED",
+  "artifact": {
+    "filename": "MONA-WORKBENCH-WB1-g00000001-RAM.bin",
+    "bytes": 5376,
+    "sha256": "7bbcacdf36172fa54032d46d2a90708f712bc06e1f81419ca1a0ba6bf9838978"
+  },
+  "module": {
+    "origin": "5000",
+    "bytes": 5120,
+    "linked_bytes": 3887,
+    "linked_end": "5F2F",
+    "sha256": "1c7166d286fc05395b6e70e32aed2677b8e1497eebb648b447cce038dd405ef8",
+    "crc": "CCITT FFFF; big-endian trailer; residue zero",
+    "header": "MW 01 14 PR05",
+    "command_entry": "5008",
+    "shell_entry": "500B"
+  },
+  "bridge_client_RAM_floor": "6550: lowest destination page; Mona RAM declares code end rounded up",
+  "foundation_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "private_adapter": {
+    "WB_F_READ": 30768,
+    "WB_F_EXECUTE": 30760,
+    "WB_F_RECOVERY": 62127,
+    "WB_F_CRC_LO": 237,
+    "WB_F_CRC_HI": 41
+  },
+  "loader_bytes": 163,
+  "sources": {
+    "monitors/src/workbench.asm": "59151bf6ec7e371e2e6b3f5215add44dee80fd493e481014d0fd3ff6ca396d43",
+    "monitors/src/workbench-loader.asm": "3659c54d0fa09764f65c4a52e4cf17f93836baf7dcf9dc0435d3af7de25626fd",
+    "monitors/src/workbench-layout.inc": "8646e9e7b864e2402d8c288baa9075156af14e95d2f7c5851bbe4d1150bbb1f1",
+    "monitors/src/workbench-sram.inc": "478b82bdccc56bb6ede8f1efe0188b620b6d088119ef6d4039d27f6d6abbcbff"
+  },
+  "RAM_borrowed": [
+    "0200-16FF transfer staging",
+    "5000-63FF module",
+    "6400-66FF state"
+  ],
+  "application_RAM_while_loaded": "0200-4FFF",
+  "system_ZP": [
+    "E0-E1",
+    "E2-E3",
+    "E6-E7",
+    "EA"
+  ],
+  "entry": "REC> L raw RAM BIN; existing Mona g4 has no L/module dispatch",
+  "return_path": "Q -> public RAM HOLD -> active monitor, or recovery if unavailable",
+  "monitor_A_B_changed": false,
+  "F_rebuilt": false,
+  "hardware_access": false,
+  "flash_writes": false,
+  "journal_writes": false,
+  "SRAM_writes": false,
+  "EDU": "Explicit session OFF/ON; ON is a wiring selection, not presence proof",
+  "SPI": {
+    "profile": "EDU Rev D PB0 SCK/PB1 MOSI/PB2 SRAM CS/PB5 MISO; PB3 CS kept high",
+    "opcodes": [
+      "05 RDMR",
+      "03 READ"
+    ],
+    "automatic_probe": false,
+    "layout": "SS/02/08 CRC + commit + canonical reserved fields; fallback is labelled",
+    "PREP": "Explicit disabled-CB flag acknowledgment; not automatic",
+    "prior_input_pin_output_latch": "Unreadable: sampled ORB restoration only"
+  },
+  "records": {
+    "format": "SR/01; no payload checksum",
+    "scan": "bytewise 8000-DFFF, selected bank",
+    "table": true,
+    "restore": true,
+    "restore_names": "unique within selected bank",
+    "store": false,
+    "run": "Explicit R without L; old program ABI not thereby qualified"
+  },
+  "planned": [
+    "Mona core dispatch and native L",
+    "Store",
+    "APPS and maintenance/config/opaque routing",
+    "Source/ASM/DEBUG",
+    "WORKSPACE allocation review and separate append-only messages"
+  ],
+  "build_passes": 1,
+  "assembler_linker_invocations": 4,
+  "branch_layout": {
+    "workbench.asm": {
+      "short_branches": 128,
+      "expanded_branches": 27,
+      "conservative_bytes": 2486
+    },
+    "workbench-loader.asm": {
+      "short_branches": 12,
+      "expanded_branches": 0,
+      "conservative_bytes": 172
+    },
+    "workbench-sram.inc": {
+      "short_branches": 33,
+      "expanded_branches": 21,
+      "conservative_bytes": 1423
+    }
+  },
+  "CPU_simulations": 0
+}

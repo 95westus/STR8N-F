@@ -1,22 +1,28 @@
-# Mona: optional monitor direction
+# MON A/B: monitor and workbench on BASE1
 
-Mona is the chosen name for a future BASE1-compatible monitor or launcher.
-It is separate from STR8N-F, and no Mona binary is included in 0.3.0.
+The Mona name is retired. New runtime banners use **STR8-N / MON A or MON B**,
+with their own monitor version and generation. Historical filenames, branch
+spelling, g1-g6 binaries and receipts stay intact. Both installed g8 slots use
+the new banner. [G8 acceptance](MON_AB_G8_2512_ACCEPTANCE.md) records the direct
+map/wear services, board-stored WB2 and read-only CLOCK. No monitor binary is included in the published
+N-F 0.3.0 kit.
 
-STR8N-F stays the frozen 4096-byte bootstrap/recovery foundation. Mona may
-show richer board/service status, offer application and subsystem menus,
-hand over to an application, or deliberately return to recovery. Missing
-optional hardware must be reported as unavailable. Mona owns its own name,
-version and generation; these do not change F's identity or journal sequence.
+STR8N-F stays the frozen 4096-byte bootstrap/recovery foundation. MON A/B
+supplies the practical monitor, richer status, applications and workbench.
+**A and B remain identical.** Full [2.0b35 capability](MON_B35_PARITY.md) is the
+completion target, including BATCH, AUTO T/S/R on flash and SSRAM PROGRAM,
+APPS, source/ASM/DEBUG, maintenance/config/opaque access and EDU/SRAM/WORK.
 
-MON A and MON B can provide different personalities. The current A/B boot
-path requires the existing monitor image header, CRC and PR05 contract;
-the labels do not make an arbitrary opaque image monitor-compatible.
-Ordinary opaque images boot through a configured bank entry. The retained
-g0034 monitor's ABI and provider dependencies still need review before it
-can be used under BASE1.
+[G8 acceptance](MON_AB_G8_2512_ACCEPTANCE.md) records the current 2512
+state; see the [command manual](MONA_COMMANDS.md) for implemented commands.
+Full parity remains unfinished. Retained legacy images are not automatically
+BASE1-compatible; the [compatibility review](MON_AB_COMPATIBILITY_REVIEW.md)
+records the entry/private-call conflicts.
 
-Trees such as Applications / Hardware / Maintenance belong in Mona or another
-optional image. LED, buzzer, SPI workspace/message services and additional
-service discovery remain proposed extensions, not additions to the 0.3.0
-F ABI. Implementations must be qualified separately.
+The A/B boot path requires the monitor image header, CRC and PR05 contract.
+Ordinary opaque images use a configured bank entry. Hardware/service status
+and subsystem menus belong in these images, independent of frozen F. Missing
+optional hardware returns an explicit error. Persistent messages/metadata use
+an admitted append-only WORKSPACE allocation, separate from PROGRAM and the
+C/D boot/wear journal. LED/buzzer and other service extensions remain proposed;
+they do not expand F's 0.3.0 ABI.

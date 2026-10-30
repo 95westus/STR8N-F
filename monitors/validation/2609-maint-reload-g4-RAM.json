@@ -1,0 +1,28 @@
+{
+  "board": "2609",
+  "passed": true,
+  "RAM_packet_sha256": "c6bffaf44306489415d67b8f10b14c7a785b3be8836221b649d13b1b948463ce",
+  "F_writes": 0,
+  "flash_writes": 0,
+  "journal_writes": 0,
+  "SRAM_data_writes": 0,
+  "RTC_SET": 0,
+  "trim_writes": 0,
+  "PF_ACK": 0,
+  "checks": [
+    "cold-explicit-reload",
+    "warm-explicit-reload",
+    "leading-trailing-spaces",
+    "extra-argument-refused-before-load",
+    "bare-MAINT-retained"
+  ],
+  "all_postimages_unchanged": true,
+  "owner_RAM_restored": true,
+  "owner_ZP_restored": true,
+  "COM8_released": true,
+  "final_context": "REC> ",
+  "CPU": "65C816 emulation",
+  "service_generation": "00000004",
+  "source_manifest": "monitors/candidates/services-g00000004/manifest.json",
+  "source_report_sha256": "a2bca9007d6bcde7b128d40e47b7c965b4cf809296eccd65cf4639b30d2f5aaf"
+}

@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "component": "Mona",
+  "version": "0.1.0-dev",
+  "generation": "00000002",
+  "build_passes": 1,
+  "assembly_tool_invocations": 6,
+  "F_rebuilt": false,
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "F_CRC16": "29ED",
+  "private_adapter": {
+    "MON_F_READ": 30768,
+    "MON_F_EXECUTE": 30760,
+    "MON_F_RECOVERY": 62127,
+    "MON_F_NO_SERVICE": 63139,
+    "MON_F_BOOT_READ": 62735
+  },
+  "foundation": {
+    "repository": "https://github.com/95westus/STR8N-F",
+    "tag": "v0.3.0",
+    "commit": "a5f1d83f6a7017eb30e6268c6e0b1fd12fce6a8d",
+    "product": "STR8N-F",
+    "version": "0.3.0",
+    "generation": "00000001",
+    "profile": "BASE1",
+    "private_contract": "PR05",
+    "public_ABI_major": 2,
+    "F_bytes": 4096,
+    "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+    "F_frozen": true
+  },
+  "source_sha256": {
+    "monitors/src/adapter.inc": "ffebdeab2566bdddc2c8bc853a8b846f3fd7bee33b56bd05134686a1299982c0",
+    "monitors/src/layout.inc": "0290c832af0ff95600ebeb731cba20b74bf1cb48b6a701e0846d902c9a147804",
+    "monitors/src/mona.asm": "d59554bc698ea9728b7c42f16d417970a0ccc8fc31e5b973f8016ea7299564eb",
+    "monitors/src/rtc-read.inc": "4d1875acd1f634cdf53a6ba80c9b8c4c65e3bc6a6c37aa02a7f3e064d7a00b05"
+  },
+  "artifacts": {
+    "MONA-0.1.0-dev-g00000002-A.bin": {
+      "bytes": 4096,
+      "sha256": "8b8285d17efc8e309afdbfdbd42059f84dea25f499b6ba66ca17d3c206f4cab0",
+      "variant": "A",
+      "destination": "B3:A000",
+      "linked_bytes": 3704,
+      "entry": "A084",
+      "linked_end": "AEF8",
+      "status": "NOT_EXECUTION_QUALIFIED"
+    },
+    "MONA-0.1.0-dev-g00000002-B.bin": {
+      "bytes": 4096,
+      "sha256": "f9fdb83d7bdfc98ee6365a2817e34807cfb7be672cf56d94e413987d76ce4b4e",
+      "variant": "B",
+      "destination": "B3:B000",
+      "linked_bytes": 3704,
+      "entry": "B084",
+      "linked_end": "BEF8",
+      "status": "NOT_EXECUTION_QUALIFIED"
+    },
+    "MONA-0.1.0-dev-g00000002-RAM.bin": {
+      "bytes": 3695,
+      "sha256": "43d26db41be05f12a153aa31a7b628ce210a18795db5b3fdcd538e840b324a4c",
+      "variant": "RAM",
+      "destination": "RAM:0200; smoke candidate borrows owner RAM",
+      "linked_bytes": 3695,
+      "entry": "0200",
+      "linked_end": "106F",
+      "status": "NOT_EXECUTION_QUALIFIED"
+    }
+  },
+  "monitor_RAM": "6A00-6AFF",
+  "owner_RAM_ROM_startup": "0200-66FF unchanged",
+  "status_rows": [
+    "EDU",
+    "SSRAM",
+    "RTCC",
+    "Battery",
+    "Wear"
+  ],
+  "status_limits": "-- no reported data; explicit T samples EDU Rev D MCP79411; cached sample has no zone; * no physical battery/prior wear certification",
+  "personalities": "A and B identical commands; only slot identity differs",
+  "RTCC_adapter": {
+    "trigger": "Explicit T only; V never probes",
+    "profile": "WDC EDU Rev D / MCP79411 / VIA1 PA0 SCL, PA7 SDA",
+    "automatic_startup": false,
+    "RTC_data_writes": false,
+    "EEPROM_or_SRAM_access": false,
+    "max_snapshot_attempts": 3,
+    "SCL_wait_polls": 255,
+    "owner_RAM_borrowed": false
+  },
+  "journal_access": "Read selected page and verify full record CRC; no writer installed",
+  "CPU_simulations": 0,
+  "hardware_access": false,
+  "flashing": false,
+  "execution_qualified": false
+}

@@ -1,10 +1,12 @@
 # STR8N-F 0.3.0 — release scope and evidence
 
 Release preparation: **October 28, 2026**. F is **0.3.0 g00000001 / BASE1 /
-PR05**, exactly 4096 frozen bytes. The public ABI is unchanged. **Mona** is
-the planned optional monitor, with no binary included in this release.
+PR05**, exactly 4096 frozen bytes. The public ABI is unchanged. MON A/B is
+the separate optional monitor, with no binary included in this Foundation
+release. The later [MON/tools preview](MON_PREVIEW1_RELEASE_STATUS.md) has its
+own scope and receipts; see the [next qualification](FOUNDATION_RELEASE_PATH.md).
 
-> 4KB of firmware. One board. Up to four boot environments.
+> 4K Foundation. Up to four banked environments.
 
 Compatible, user-supplied images run one at a time on shared CPU/RAM/peripherals.
 This describes the bank architecture; hardware qualification is limited to
@@ -45,7 +47,7 @@ exact hash. A static equivalence check does not claim another hardware trial.
 | WDC and programmer-F package routes | NOT RUN from an extraction; reviewed 2512 source/hardware cases passed |
 | Python terminal | Included; native keys/dialogs passed on 2512, core cancellation/load passed on 2609 |
 | Original captures for b15 upgrade | Operator precondition; no standalone automated capture CLI |
-| Mona / expanded service ABI | Planned, outside this release |
+| MON A/B / expanded service ABI | Outside this Foundation release; optional MON preview documented separately, F ABI unchanged |
 | Other CPU modes/adapters/hosts and occupied layouts | Unqualified |
 | Interrupted F installation, electrical mid-pulse failures, arbitrary damaged history | Outside qualified scope |
 

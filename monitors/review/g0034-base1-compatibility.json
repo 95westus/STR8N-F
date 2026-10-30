@@ -1,0 +1,6117 @@
+{
+  "schema": 1,
+  "review": "MON A/B checkpoint 1: saved-file compatibility inventory",
+  "scope": "Source/header/link-file inspection only; no target instructions executed",
+  "artifact_validation_passed": true,
+  "binary_compatible": false,
+  "g0034_fixture_sha256": "c1a813ad58aa62f49d23858698d2f526d86431ce9fea36507aa480bd53bc839f",
+  "g0034_firmware_sha256": "0df4a802d618c0df5e658dcf2cd05037f0a892a209abaeac6bca0d595c468945",
+  "foundation": {
+    "tag": "v0.3.0",
+    "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+    "profile": "BASE1",
+    "contract": "PR05"
+  },
+  "g0034_contract": "52313032 / little-endian bytes 32 30 31 52 (201R)",
+  "slots": {
+    "a0": {
+      "artifact": "str8n-v2-recovery-slot-a0.bin",
+      "sha256": "dead579f351dd09e77c8160517cf2f5537604329c8e3598fff3ac2c6ebc9f674",
+      "generation": "00000034",
+      "private_contract_hex": "32303152",
+      "private_contract_ascii": "201R",
+      "payload_bytes": 3463,
+      "BASE1_admitted": false,
+      "refusal_reasons": [
+        "PR05 private contract"
+      ],
+      "linked_code_bytes": 3463,
+      "linked_end": "AE07",
+      "S19_matches_sector": true,
+      "entry_shim": {
+        "address": "A048",
+        "copy_bytes": 15,
+        "destination": "7B81-7B8F",
+        "overlaps_BASE1_worker": true
+      }
+    },
+    "b0": {
+      "artifact": "str8n-v2-recovery-slot-b0.bin",
+      "sha256": "cecce80957b3a7e7d0738afc325cc22c18bf7fd761c121c7b14e65be3c92a29e",
+      "generation": "00000034",
+      "private_contract_hex": "32303152",
+      "private_contract_ascii": "201R",
+      "payload_bytes": 3463,
+      "BASE1_admitted": false,
+      "refusal_reasons": [
+        "PR05 private contract"
+      ],
+      "linked_code_bytes": 3463,
+      "linked_end": "BE07",
+      "S19_matches_sector": true,
+      "entry_shim": {
+        "address": "B048",
+        "copy_bytes": 15,
+        "destination": "7B81-7B8F",
+        "overlaps_BASE1_worker": true
+      }
+    }
+  },
+  "public_RAM_addresses_equal": {
+    "STR8V2_RAM_SIGNATURE": "7E60",
+    "STR8V2_RAM_RESET": "7E64",
+    "STR8V2_RAM_HOLD": "7E67",
+    "STR8V2_RAM_CON_INIT": "7E6A",
+    "STR8V2_RAM_PUTC": "7E6D",
+    "STR8V2_RAM_GETC": "7E70",
+    "STR8V2_RAM_RAW_POLL": "7E73",
+    "STR8V2_RAM_CHECK_CANCEL": "7E76",
+    "STR8V2_RAM_RX_RESET": "7E79",
+    "STR8V2_RAM_HEX_OUT": "7E7C",
+    "STR8V2_RAM_NEWLINE": "7E7F",
+    "STR8V2_RAM_HEX_NIBBLE": "7E82",
+    "STR8V2_RAM_CAPS_QUERY": "7E85",
+    "STR8V2_RAM_BOARD_QUERY": "7E88"
+  },
+  "private_worker_symbols_changed": {
+    "V2W_END": {
+      "g0034": "7B81",
+      "BASE1": "7BE8"
+    },
+    "V2W_BOOT_DELAY": {
+      "g0034": "7AF8",
+      "BASE1": "7B57"
+    },
+    "V2W_PROGRAM": {
+      "g0034": "78D7",
+      "BASE1": "78E1"
+    },
+    "V2W_PROGRAM_NEXT": {
+      "g0034": "78F8",
+      "BASE1": "7902"
+    },
+    "V2W_VERIFY": {
+      "g0034": "7900",
+      "BASE1": "790A"
+    },
+    "V2W_VERIFY_FAIL": {
+      "g0034": "790D",
+      "BASE1": "7917"
+    },
+    "V2W_FINISH": {
+      "g0034": "7911",
+      "BASE1": "791B"
+    },
+    "V2W_SEND": {
+      "g0034": "7985",
+      "BASE1": "792F"
+    },
+    "V2W_ACIA_SEND": {
+      "g0034": "799D",
+      "BASE1": "7947"
+    },
+    "V2W_ACIA_DELAY_OUTER": {
+      "g0034": "79A3",
+      "BASE1": "794D"
+    },
+    "V2W_ACIA_DELAY_INNER": {
+      "g0034": "79A5",
+      "BASE1": "794F"
+    },
+    "V2W_UNLOCK": {
+      "g0034": "79AD",
+      "BASE1": "7957"
+    },
+    "V2W_WAIT": {
+      "g0034": "79C1",
+      "BASE1": "796B"
+    },
+    "V2W_POLL": {
+      "g0034": "79C6",
+      "BASE1": "7970"
+    },
+    "V2W_TIMEOUT": {
+      "g0034": "79DD",
+      "BASE1": "7987"
+    },
+    "V2W_POLL_OK": {
+      "g0034": "79E3",
+      "BASE1": "798D"
+    },
+    "V2W_RX_RESET": {
+      "g0034": "79E5",
+      "BASE1": "798F"
+    },
+    "V2W_RX_SERVICE": {
+      "g0034": "79F2",
+      "BASE1": "79A3"
+    },
+    "V2W_GETC": {
+      "g0034": "7A3E",
+      "BASE1": "7A21"
+    },
+    "V2W_GETC_WAIT": {
+      "g0034": "7A3F",
+      "BASE1": "7A21"
+    },
+    "V2W_PUTC": {
+      "g0034": "7ACB",
+      "BASE1": "7B13"
+    },
+    "V2W_TX_WAIT": {
+      "g0034": "7ADA",
+      "BASE1": "7B13"
+    },
+    "V2W_BOOT_DELAY_OUTER": {
+      "g0034": "7AFA",
+      "BASE1": "7B59"
+    },
+    "V2W_BOOT_DELAY_MIDDLE": {
+      "g0034": "7AFA",
+      "BASE1": "7B59"
+    },
+    "V2W_BOOT_DELAY_INNER": {
+      "g0034": "7AFC",
+      "BASE1": "7B5B"
+    },
+    "V2W_BOOT_DELAY_DONE": {
+      "g0034": "7B02",
+      "BASE1": "7B61"
+    },
+    "V2W_BYTE": {
+      "g0034": "7B03",
+      "BASE1": "7B62"
+    },
+    "V2W_ERASE_RAW": {
+      "g0034": "7B1E",
+      "BASE1": "7B7D"
+    },
+    "V2W_ACCOUNT": {
+      "g0034": "7B40",
+      "BASE1": "7B9F"
+    },
+    "V2W_ACCOUNT_OK": {
+      "g0034": "7B6B",
+      "BASE1": "7BCA"
+    },
+    "V2W_READY": {
+      "g0034": "7B6C",
+      "BASE1": "7BCB"
+    },
+    "V2W_READY_OK": {
+      "g0034": "7B80",
+      "BASE1": "7BDF"
+    }
+  },
+  "private_CRC_symbols": {
+    "J_CRC_INIT": {
+      "g0034": "FAB4",
+      "BASE1": "F8D4"
+    },
+    "J_CRC_BYTE": {
+      "g0034": "FABD",
+      "BASE1": "F8DD"
+    }
+  },
+  "saved_source_files": {
+    "core/monitor-a0.asm": {
+      "sha256": "a759c6cfbf1934137da99962573bd4f6cfec8a682dd04ede194405af9ae83b46",
+      "lines": 599
+    },
+    "core/str8n-v2-eq.inc": {
+      "sha256": "90c6376ecb7226da1d631fe48dc2d8fb8daf96609da3c0e2e99cb8dc33833b5b",
+      "lines": 1
+    },
+    "include/str8n-v2-eq.inc": {
+      "sha256": "0a56f0c9ec8a27741bf7e7b376e03a03e7290caf11f170fd6c7c864f69df9467",
+      "lines": 99
+    },
+    "include/service-eq.inc": {
+      "sha256": "95aeb4ae77a04bd8d17836e9648b454d8a8244e3070fb4002081c504c80ab12a",
+      "lines": 16
+    },
+    "core/str8n-v2-public.inc": {
+      "sha256": "92f6ed5d55939e9bbeb95fef22eb9ea5c08769396d8922628d8df2fb7c04a16c",
+      "lines": 1
+    },
+    "include/str8n-v2-public.inc": {
+      "sha256": "6f1884eb2dd0895f6a07a61db3486ca71ea59b9f26db459de57d2e1abe5b6ae5",
+      "lines": 100
+    },
+    "core/vectors-symbols.inc": {
+      "sha256": "5bc6913eb9afdc034a1170559b621dc932d401f6418b1069208642d0e8ad7816",
+      "lines": 123
+    },
+    "core/text-ids.inc": {
+      "sha256": "6432b7ba652c5bf2d1ec16baabc757aa95b791109924d3b16b49e87dd860689c",
+      "lines": 36
+    },
+    "core/boot-symbols.inc": {
+      "sha256": "f9be3f6f5f44c0b9923aa23d537bb2b0788b014daf27717da21636028a197d8f",
+      "lines": 125
+    },
+    "core/app-fixed-symbols.inc": {
+      "sha256": "95f154ed92569321e4e1a9232f38405227a980b2da6d3335e98e12a6801238cb",
+      "lines": 3
+    },
+    "core/str8n-v2-monitor.inc": {
+      "sha256": "f550f15c8c38fda99cc9069763729c1a221300cb0050bab7efc6332b8025a33c",
+      "lines": 309
+    },
+    "core/str8n-v2-load.inc": {
+      "sha256": "61693e7f69dce0897ca1cdfc0d14bb304ed73d1b4b43b12d27f9600fca29e5ba",
+      "lines": 218
+    },
+    "core/str8n-v2-flash.inc": {
+      "sha256": "1f8f9d887e7c0ef1336ae14e6f6662fa65f6c3d514da6e083aa5d8c787594c45",
+      "lines": 364
+    },
+    "core/str8n-v2-config.inc": {
+      "sha256": "cb7a1a8aad13220c698f11dea9dbd2f6934c425aa9233fe4028125cd072272ba",
+      "lines": 273
+    },
+    "core/text-image.inc": {
+      "sha256": "93506ba6d8d45e983e018e10776fe851bca5db6dbd7c182bfd8322631ca2e6c6",
+      "lines": 22
+    },
+    "core/batch-gate.inc": {
+      "sha256": "bb669bbc998b0ff0241fd88ca39572a5284daeda665ceacc9f302f97a6bbbbfe",
+      "lines": 6
+    },
+    "core/monitor-b0.asm": {
+      "sha256": "10012e49c6cbcd3a7e39741040be0522988dc4c0ae2805cd94da52ba7987af51",
+      "lines": 599
+    }
+  },
+  "call_site_counts": {
+    "own ROM image": 438,
+    "private RAM worker/vector/gateway": 168,
+    "optional B3:E provider": 10,
+    "indirect; inspect guard/owner": 6,
+    "private F entry/helper": 20
+  },
+  "call_sites": [
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 48,
+      "operation": "JMP",
+      "target": "V2_IMAGE_PAGE*$100+$48",
+      "address": "A048",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 49,
+      "operation": "JMP",
+      "target": "V2_IMAGE_PAGE*$100+$7B",
+      "address": "A07B",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 50,
+      "operation": "JMP",
+      "target": "V2_CON_INIT",
+      "address": "7A72",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 51,
+      "operation": "JMP",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 52,
+      "operation": "JMP",
+      "target": "V2_GETC",
+      "address": "7A3E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 53,
+      "operation": "JMP",
+      "target": "V2_RAW_POLL",
+      "address": "7A9B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 54,
+      "operation": "JMP",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 55,
+      "operation": "JMP",
+      "target": "V2_RX_RESET",
+      "address": "79E5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 56,
+      "operation": "JMP",
+      "target": "V2_RESERVED",
+      "address": "A0B4",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 57,
+      "operation": "JMP",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 58,
+      "operation": "JMP",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 59,
+      "operation": "JMP",
+      "target": "V2_HEX_NIBBLE",
+      "address": "7E9D",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 60,
+      "operation": "JMP",
+      "target": "V2_CAPS_QUERY",
+      "address": "7E58",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 61,
+      "operation": "JMP",
+      "target": "V2_BOARD_QUERY",
+      "address": "7ED4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 62,
+      "operation": "JMP",
+      "target": "V2_RESERVED",
+      "address": "A0B4",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 63,
+      "operation": "JMP",
+      "target": "V2_RESERVED",
+      "address": "A0B4",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 72,
+      "operation": "JMP",
+      "target": "V2_ENTER",
+      "address": "A0D0",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 81,
+      "operation": "JSR",
+      "target": "V2_CAPTURE_BANK",
+      "address": "AAD3",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 93,
+      "operation": "JSR",
+      "target": "B29_CHECK_PROVIDER",
+      "address": "AD43",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 106,
+      "operation": "JSR",
+      "target": "AP_CHECK",
+      "address": "A240",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 108,
+      "operation": "JSR",
+      "target": "$E014",
+      "address": "E014",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 110,
+      "operation": "JSR",
+      "target": "V2_RX_RESET",
+      "address": "79E5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 128,
+      "operation": "JSR",
+      "target": "V2_CONFIG_READ",
+      "address": "A8CB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 132,
+      "operation": "JSR",
+      "target": "V2_AUTO_HEADLESS",
+      "address": "A96A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 135,
+      "operation": "JSR",
+      "target": "V2_CON_INIT",
+      "address": "7A72",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 139,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 142,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 148,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 150,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 153,
+      "operation": "JSR",
+      "target": "V2_CLOCK_BANNER",
+      "address": "AD40",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 159,
+      "operation": "JMP",
+      "target": "($7DFA)",
+      "classification": "indirect; inspect guard/owner"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 164,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 165,
+      "operation": "JSR",
+      "target": "$7C90",
+      "address": "7C90",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 169,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 175,
+      "operation": "JMP",
+      "target": "V2_LINE_LONG",
+      "address": "A1F4",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 178,
+      "operation": "JSR",
+      "target": "$EF03",
+      "address": "EF03",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 180,
+      "operation": "JSR",
+      "target": "AP_TRY",
+      "address": "A231",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 189,
+      "operation": "JMP",
+      "target": "V2_UNKNOWN",
+      "address": "A1FE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 193,
+      "operation": "JMP",
+      "target": "(V2_COMMAND_TABLE,X)",
+      "classification": "indirect; inspect guard/owner"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 197,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 198,
+      "operation": "JSR",
+      "target": "V2_PARSE_BANK",
+      "address": "A21E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 201,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 204,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 207,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "A168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 209,
+      "operation": "JSR",
+      "target": "V2_PARSE_BANK",
+      "address": "A21E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 212,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 215,
+      "operation": "JSR",
+      "target": "V2_WORKER",
+      "address": "7800",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 217,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 219,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 221,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 223,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 228,
+      "operation": "JSR",
+      "target": "$7C98",
+      "address": "7C98",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 231,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 233,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 234,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "A168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 236,
+      "operation": "JSR",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 238,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 259,
+      "operation": "JSR",
+      "target": "AP_CHECK",
+      "address": "A240",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 261,
+      "operation": "JMP",
+      "target": "$E008",
+      "address": "E008",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 277,
+      "operation": "JSR",
+      "target": "AP_CRC_INIT",
+      "address": "FAB4",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 283,
+      "operation": "JSR",
+      "target": "AP_CRC_BYTE",
+      "address": "FABD",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 298,
+      "operation": "JSR",
+      "target": "AP_CHECK",
+      "address": "A240",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 300,
+      "operation": "JMP",
+      "target": "$E00B",
+      "address": "E00B",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 301,
+      "operation": "JSR",
+      "target": "AP_CHECK",
+      "address": "A240",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 303,
+      "operation": "JMP",
+      "target": "$E00E",
+      "address": "E00E",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 305,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 314,
+      "operation": "JMP",
+      "target": "V2_UNKNOWN",
+      "address": "A1FE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 316,
+      "operation": "JSR",
+      "target": "BOOT_API_W",
+      "address": "F0BB",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 317,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "A168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 321,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 322,
+      "operation": "JMP",
+      "target": "BOOT_API_UPDATE",
+      "address": "F0BE",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 326,
+      "operation": "JSR",
+      "target": "V2_CONFIG_READ",
+      "address": "A8CB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 328,
+      "operation": "JMP",
+      "target": "V2_P_NO_CONFIG",
+      "address": "AACE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 331,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 338,
+      "operation": "JMP",
+      "target": "V2_P_TARGET",
+      "address": "AA5C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 342,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 347,
+      "operation": "JSR",
+      "target": "BOOT_SLOT_CHECK",
+      "address": "F30D",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 359,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SUM",
+      "address": "A91A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 364,
+      "operation": "JSR",
+      "target": "BOOT_API_PROMOTE",
+      "address": "F039",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 370,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 379,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 381,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 384,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 387,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "A168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 388,
+      "operation": "JMP",
+      "target": "V2_BAD_RANGE",
+      "address": "A29D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 389,
+      "operation": "JMP",
+      "target": "V2_FLASH_FAILED",
+      "address": "A679",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 391,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 414,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 417,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 419,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 421,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 430,
+      "operation": "JSR",
+      "target": "V2_GETC",
+      "address": "7A3E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 439,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "AB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 444,
+      "operation": "JMP",
+      "target": "V2_LINE_END",
+      "address": "AB88",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 472,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 473,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "AB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 475,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "AB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 477,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "AB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 482,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 484,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 486,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 487,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "AB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 491,
+      "operation": "JSR",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 519,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 525,
+      "operation": "JMP",
+      "target": "V2_PRINT_NEXT",
+      "address": "ABB2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 539,
+      "operation": "JMP",
+      "target": "(SVC_BANNER_PTR)",
+      "classification": "indirect; inspect guard/owner"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 551,
+      "operation": "JSR",
+      "target": "V2W_READ",
+      "address": "7830",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 559,
+      "operation": "JSR",
+      "target": "$FAB4",
+      "address": "FAB4",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 564,
+      "operation": "JSR",
+      "target": "$FABD",
+      "address": "FABD",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/monitor-a0.asm",
+      "line": 578,
+      "operation": "JSR",
+      "target": "V2W_READ",
+      "address": "7830",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 4,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 6,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 8,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 11,
+      "operation": "JSR",
+      "target": "V2_HEX_WORD",
+      "address": "A43D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 22,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "A2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 24,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "A298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 26,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 28,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "A298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 32,
+      "operation": "JMP",
+      "target": "V2_G_GO",
+      "address": "A2DA",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 34,
+      "operation": "JSR",
+      "target": "V2_APPLICATION_ADDRESS",
+      "address": "A3F8",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 36,
+      "operation": "JMP",
+      "target": "V2_PROTECTED",
+      "address": "A2A2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 38,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 40,
+      "operation": "JMP",
+      "target": "V2_G_READY",
+      "address": "A2E5",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 42,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 43,
+      "operation": "JMP",
+      "target": "V2W_EXECUTE",
+      "address": "7828",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 45,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "A2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 48,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 52,
+      "operation": "JSR",
+      "target": "V2_HEX_WORD",
+      "address": "A43D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 55,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 75,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 78,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 101,
+      "operation": "JSR",
+      "target": "V2W_READ",
+      "address": "7830",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 102,
+      "operation": "JSR",
+      "target": "V2_PRINT_ADDR",
+      "address": "A694",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 104,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 107,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 114,
+      "operation": "JMP",
+      "target": "V2_D_OUTPUT",
+      "address": "A358",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 118,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 123,
+      "operation": "JSR",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 127,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 144,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "A168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 146,
+      "operation": "JMP",
+      "target": "V2_MAP_REQUEST",
+      "address": "A28B",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 147,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "A2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 150,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "A298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 153,
+      "operation": "JSR",
+      "target": "V2_HEX_BYTE",
+      "address": "A442",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 156,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "A298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 165,
+      "operation": "JMP",
+      "target": "V2_F_CROSS",
+      "address": "A5E9",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 166,
+      "operation": "JSR",
+      "target": "V2_MODIFIABLE_ADDRESS",
+      "address": "A41A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 169,
+      "operation": "JMP",
+      "target": "V2_PROTECTED",
+      "address": "A2A2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 178,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 183,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 186,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 190,
+      "operation": "JMP",
+      "target": "V2_F_SNAPSHOT",
+      "address": "A5EE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 197,
+      "operation": "JSR",
+      "target": "V2_COPY_BYTES",
+      "address": "A3E5",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 198,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "A168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 233,
+      "operation": "JMP",
+      "target": "V2_ADDRESS_YES",
+      "address": "A418",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 246,
+      "operation": "JSR",
+      "target": "V2_APPLICATION_ADDRESS",
+      "address": "A3F8",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 266,
+      "operation": "JMP",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 273,
+      "operation": "JMP",
+      "target": "V2_HEX_PARSE",
+      "address": "A444",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 278,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 290,
+      "operation": "JSR",
+      "target": "V2_HEX_NIBBLE",
+      "address": "7E9D",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 304,
+      "operation": "JMP",
+      "target": "V2_HEX_NEXT",
+      "address": "A44F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 4,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 7,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "A298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 9,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 10,
+      "operation": "JSR",
+      "target": "V2_SREC",
+      "address": "A4FB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 23,
+      "operation": "JSR",
+      "target": "V2_RECORD_END",
+      "address": "A4F0",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 37,
+      "operation": "JSR",
+      "target": "V2_COPY_BYTES",
+      "address": "A3E5",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 38,
+      "operation": "JMP",
+      "target": "V2_LOAD_NEXT",
+      "address": "A485",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 40,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 41,
+      "operation": "JSR",
+      "target": "V2_PRINT_ADDR",
+      "address": "A694",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 42,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "A168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 45,
+      "operation": "JSR",
+      "target": "V2_LOAD_DRAIN",
+      "address": "A4D2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 50,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 53,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 57,
+      "operation": "JSR",
+      "target": "V2_RX_RESET",
+      "address": "79E5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 61,
+      "operation": "JSR",
+      "target": "V2_RAW_POLL",
+      "address": "7A9B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 63,
+      "operation": "JMP",
+      "target": "V2_DRAIN_RESTART",
+      "address": "A4D7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 67,
+      "operation": "JMP",
+      "target": "V2_DRAIN_POLL",
+      "address": "A4DB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 71,
+      "operation": "JMP",
+      "target": "V2_DRAIN_POLL",
+      "address": "A4DB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 86,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "A58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 101,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "A58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 113,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "A59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 130,
+      "operation": "JMP",
+      "target": "V2_SREC_ADDRESS",
+      "address": "A542",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 134,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "A59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 138,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "A59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 146,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "A59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 151,
+      "operation": "JMP",
+      "target": "V2_SREC_DATA",
+      "address": "A552",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 152,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "A59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 159,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "A58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 182,
+      "operation": "JSR",
+      "target": "V2_GETC",
+      "address": "7A3E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 194,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "A58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 197,
+      "operation": "JSR",
+      "target": "V2_HEX_NIBBLE",
+      "address": "7E9D",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 205,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "A58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 208,
+      "operation": "JSR",
+      "target": "V2_HEX_NIBBLE",
+      "address": "7E9D",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 2,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "A2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 5,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "A298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 9,
+      "operation": "JMP",
+      "target": "V2_PROTECTED",
+      "address": "A2A2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 24,
+      "operation": "JMP",
+      "target": "V2_EDIT_BEGIN",
+      "address": "A391",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 26,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 27,
+      "operation": "JSR",
+      "target": "V2W_SNAPSHOT",
+      "address": "787A",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 28,
+      "operation": "JSR",
+      "target": "V2_FLASH_BANK",
+      "address": "A685",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 40,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 46,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 57,
+      "operation": "JSR",
+      "target": "V2_PRINT_ADDR",
+      "address": "A694",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 59,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 61,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 63,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 66,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 67,
+      "operation": "JSR",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 78,
+      "operation": "JSR",
+      "target": "V2W_ANALYZE",
+      "address": "788B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 79,
+      "operation": "JSR",
+      "target": "V2_FLASH_MODE",
+      "address": "A821",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 80,
+      "operation": "JSR",
+      "target": "V2_CONFIRM",
+      "address": "A69E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 83,
+      "operation": "JSR",
+      "target": "V2_F_RISK_CONFIRM",
+      "address": "A6BD",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 87,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 88,
+      "operation": "JSR",
+      "target": "V2W_MUTATE",
+      "address": "78A5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 92,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 95,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 97,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 104,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 107,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 110,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 111,
+      "operation": "JMP",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 113,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 115,
+      "operation": "JMP",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 117,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 118,
+      "operation": "JSR",
+      "target": "V2_READ_LINE",
+      "address": "AB08",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 128,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 148,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 149,
+      "operation": "JSR",
+      "target": "V2_BANK_READ_LINE",
+      "address": "AAF2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 172,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "A2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 175,
+      "operation": "JSR",
+      "target": "V2_HEX_WORD",
+      "address": "A43D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 178,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 228,
+      "operation": "JSR",
+      "target": "V2_FLASH_BANK",
+      "address": "A685",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 229,
+      "operation": "JSR",
+      "target": "V2_PRINT_ADDR",
+      "address": "A694",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 231,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 233,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 235,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 237,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 238,
+      "operation": "JSR",
+      "target": "V2_CONFIRM",
+      "address": "A69E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 241,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 242,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "A298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 243,
+      "operation": "JMP",
+      "target": "V2_BAD_RANGE",
+      "address": "A29D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 244,
+      "operation": "JMP",
+      "target": "V2_PROTECTED",
+      "address": "A2A2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 247,
+      "operation": "JSR",
+      "target": "V2_I_BUFFER",
+      "address": "A80C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 249,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 250,
+      "operation": "JSR",
+      "target": "V2_SREC",
+      "address": "A4FB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 253,
+      "operation": "JMP",
+      "target": "V2_LOAD_ERROR",
+      "address": "A4BF",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 255,
+      "operation": "JMP",
+      "target": "V2_I_ERROR",
+      "address": "A77A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 265,
+      "operation": "JMP",
+      "target": "V2_FLASH_DONE",
+      "address": "A674",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 277,
+      "operation": "JSR",
+      "target": "V2_RECORD_END",
+      "address": "A4F0",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 303,
+      "operation": "JSR",
+      "target": "V2_I_CANCEL_POLL",
+      "address": "A816",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 308,
+      "operation": "JMP",
+      "target": "V2_LOAD_ERROR",
+      "address": "A4BF",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 310,
+      "operation": "JSR",
+      "target": "V2W_ANALYZE",
+      "address": "788B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 311,
+      "operation": "JSR",
+      "target": "V2W_MUTATE",
+      "address": "78A5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 315,
+      "operation": "JSR",
+      "target": "V2_LOAD_DRAIN",
+      "address": "A4D2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 316,
+      "operation": "JMP",
+      "target": "V2_FLASH_FAILED",
+      "address": "A679",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 318,
+      "operation": "JSR",
+      "target": "V2_I_CANCEL_POLL",
+      "address": "A816",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 323,
+      "operation": "JMP",
+      "target": "V2_LOAD_ERROR",
+      "address": "A4BF",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 334,
+      "operation": "JSR",
+      "target": "V2_I_BUFFER",
+      "address": "A80C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 336,
+      "operation": "JMP",
+      "target": "V2_I_NEXT_BYTE",
+      "address": "A804",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 342,
+      "operation": "JMP",
+      "target": "V2_I_RECORD",
+      "address": "A775",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 343,
+      "operation": "JSR",
+      "target": "V2W_SNAPSHOT",
+      "address": "787A",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 353,
+      "operation": "JMP",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 364,
+      "operation": "JMP",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 4,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 7,
+      "operation": "JSR",
+      "target": "V2_CONFIG_READ",
+      "address": "A8CB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 11,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "A200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 12,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SHOW",
+      "address": "A933",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 13,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "A168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 23,
+      "operation": "JSR",
+      "target": "V2_HEX_BYTE",
+      "address": "A442",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 28,
+      "operation": "JSR",
+      "target": "V2_HEX_BYTE",
+      "address": "A442",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 33,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 37,
+      "operation": "JSR",
+      "target": "V2_HEX_WORD",
+      "address": "A43D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 44,
+      "operation": "JMP",
+      "target": "V2_C_DELAY",
+      "address": "A88E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 52,
+      "operation": "JSR",
+      "target": "V2_HEX_BYTE",
+      "address": "A442",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 57,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "A42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 60,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SUM",
+      "address": "A91A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 65,
+      "operation": "JSR",
+      "target": "V2_CONFIG_CHECK",
+      "address": "A8D0",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 68,
+      "operation": "JMP",
+      "target": "V2_BAD_RANGE",
+      "address": "A29D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 69,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "A298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 70,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SHOW",
+      "address": "A933",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 71,
+      "operation": "JSR",
+      "target": "V2_CONFIRM",
+      "address": "A69E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 74,
+      "operation": "JSR",
+      "target": "BOOT_API_CFG",
+      "address": "F0B5",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 77,
+      "operation": "JMP",
+      "target": "V2_FLASH_FAILED",
+      "address": "A679",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 78,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "A214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 79,
+      "operation": "JMP",
+      "target": "V2_FLASH_COMPLETE",
+      "address": "A66C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 81,
+      "operation": "JSR",
+      "target": "BOOT_API_READ",
+      "address": "F0B2",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 113,
+      "operation": "JSR",
+      "target": "V2_APPLICATION_ADDRESS",
+      "address": "A3F8",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 116,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SUM",
+      "address": "A91A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 145,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 148,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 157,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 159,
+      "operation": "JMP",
+      "target": "V2_CONFIG_NEXT",
+      "address": "A963",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 162,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 165,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 171,
+      "operation": "JMP",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 182,
+      "operation": "JMP",
+      "target": "V2_AUTO_DOT",
+      "address": "A986",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 187,
+      "operation": "JMP",
+      "target": "V2_AUTO_TICK_READY",
+      "address": "A997",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 194,
+      "operation": "JMP",
+      "target": "V2_AUTO_TICK_READY",
+      "address": "A997",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 197,
+      "operation": "JSR",
+      "target": "V2W_SEND",
+      "address": "7985",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 200,
+      "operation": "JSR",
+      "target": "V2_AUTO_KEY",
+      "address": "A9E7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 202,
+      "operation": "JMP",
+      "target": "V2_AUTO_STOP",
+      "address": "A9DE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 206,
+      "operation": "JMP",
+      "target": "V2_AUTO_POLL",
+      "address": "A999",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 210,
+      "operation": "JMP",
+      "target": "V2_AUTO_POLL",
+      "address": "A999",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 214,
+      "operation": "JMP",
+      "target": "V2_AUTO_TICK",
+      "address": "A96F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 216,
+      "operation": "JSR",
+      "target": "V2_AUTO_KEY",
+      "address": "A9E7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 218,
+      "operation": "JMP",
+      "target": "V2_AUTO_STOP",
+      "address": "A9DE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 222,
+      "operation": "JMP",
+      "target": "V2_AUTO_ADDRESS",
+      "address": "A9CC",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 226,
+      "operation": "JMP",
+      "target": "V2_J_READY",
+      "address": "A1E7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 233,
+      "operation": "JMP",
+      "target": "V2W_EXECUTE",
+      "address": "7828",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 234,
+      "operation": "JSR",
+      "target": "V2_RX_RESET",
+      "address": "79E5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 236,
+      "operation": "JMP",
+      "target": "V2_PRINT",
+      "address": "AB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 242,
+      "operation": "JMP",
+      "target": "V2_AUTO_NO_KEY",
+      "address": "AA21",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 247,
+      "operation": "JMP",
+      "target": "V2_AUTO_YES",
+      "address": "AA1F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 251,
+      "operation": "JMP",
+      "target": "V2_AUTO_RAW",
+      "address": "AA05",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 253,
+      "operation": "JSR",
+      "target": "V2_GETC",
+      "address": "7A3E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 254,
+      "operation": "JMP",
+      "target": "V2_AUTO_CHAR",
+      "address": "AA0D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 255,
+      "operation": "JSR",
+      "target": "V2_RAW_POLL",
+      "address": "7A9B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 257,
+      "operation": "JMP",
+      "target": "V2_AUTO_RETURN",
+      "address": "A9E6",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 261,
+      "operation": "JMP",
+      "target": "V2_AUTO_YES",
+      "address": "AA1F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "a0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 266,
+      "operation": "JMP",
+      "target": "V2_AUTO_YES",
+      "address": "AA1F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 48,
+      "operation": "JMP",
+      "target": "V2_IMAGE_PAGE*$100+$48",
+      "address": "B048",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 49,
+      "operation": "JMP",
+      "target": "V2_IMAGE_PAGE*$100+$7B",
+      "address": "B07B",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 50,
+      "operation": "JMP",
+      "target": "V2_CON_INIT",
+      "address": "7A72",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 51,
+      "operation": "JMP",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 52,
+      "operation": "JMP",
+      "target": "V2_GETC",
+      "address": "7A3E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 53,
+      "operation": "JMP",
+      "target": "V2_RAW_POLL",
+      "address": "7A9B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 54,
+      "operation": "JMP",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 55,
+      "operation": "JMP",
+      "target": "V2_RX_RESET",
+      "address": "79E5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 56,
+      "operation": "JMP",
+      "target": "V2_RESERVED",
+      "address": "B0B4",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 57,
+      "operation": "JMP",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 58,
+      "operation": "JMP",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 59,
+      "operation": "JMP",
+      "target": "V2_HEX_NIBBLE",
+      "address": "7E9D",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 60,
+      "operation": "JMP",
+      "target": "V2_CAPS_QUERY",
+      "address": "7E58",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 61,
+      "operation": "JMP",
+      "target": "V2_BOARD_QUERY",
+      "address": "7ED4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 62,
+      "operation": "JMP",
+      "target": "V2_RESERVED",
+      "address": "B0B4",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 63,
+      "operation": "JMP",
+      "target": "V2_RESERVED",
+      "address": "B0B4",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 72,
+      "operation": "JMP",
+      "target": "V2_ENTER",
+      "address": "B0D0",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 81,
+      "operation": "JSR",
+      "target": "V2_CAPTURE_BANK",
+      "address": "BAD3",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 93,
+      "operation": "JSR",
+      "target": "B29_CHECK_PROVIDER",
+      "address": "BD43",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 106,
+      "operation": "JSR",
+      "target": "AP_CHECK",
+      "address": "B240",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 108,
+      "operation": "JSR",
+      "target": "$E014",
+      "address": "E014",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 110,
+      "operation": "JSR",
+      "target": "V2_RX_RESET",
+      "address": "79E5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 128,
+      "operation": "JSR",
+      "target": "V2_CONFIG_READ",
+      "address": "B8CB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 132,
+      "operation": "JSR",
+      "target": "V2_AUTO_HEADLESS",
+      "address": "B96A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 135,
+      "operation": "JSR",
+      "target": "V2_CON_INIT",
+      "address": "7A72",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 139,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 142,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 148,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 150,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 153,
+      "operation": "JSR",
+      "target": "V2_CLOCK_BANNER",
+      "address": "BD40",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 159,
+      "operation": "JMP",
+      "target": "($7DFA)",
+      "classification": "indirect; inspect guard/owner"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 164,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 165,
+      "operation": "JSR",
+      "target": "$7C90",
+      "address": "7C90",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 169,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 175,
+      "operation": "JMP",
+      "target": "V2_LINE_LONG",
+      "address": "B1F4",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 178,
+      "operation": "JSR",
+      "target": "$EF03",
+      "address": "EF03",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 180,
+      "operation": "JSR",
+      "target": "AP_TRY",
+      "address": "B231",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 189,
+      "operation": "JMP",
+      "target": "V2_UNKNOWN",
+      "address": "B1FE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 193,
+      "operation": "JMP",
+      "target": "(V2_COMMAND_TABLE,X)",
+      "classification": "indirect; inspect guard/owner"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 197,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 198,
+      "operation": "JSR",
+      "target": "V2_PARSE_BANK",
+      "address": "B21E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 201,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 204,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 207,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "B168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 209,
+      "operation": "JSR",
+      "target": "V2_PARSE_BANK",
+      "address": "B21E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 212,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 215,
+      "operation": "JSR",
+      "target": "V2_WORKER",
+      "address": "7800",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 217,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 219,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 221,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 223,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 228,
+      "operation": "JSR",
+      "target": "$7C98",
+      "address": "7C98",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 231,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 233,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 234,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "B168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 236,
+      "operation": "JSR",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 238,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 259,
+      "operation": "JSR",
+      "target": "AP_CHECK",
+      "address": "B240",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 261,
+      "operation": "JMP",
+      "target": "$E008",
+      "address": "E008",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 277,
+      "operation": "JSR",
+      "target": "AP_CRC_INIT",
+      "address": "FAB4",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 283,
+      "operation": "JSR",
+      "target": "AP_CRC_BYTE",
+      "address": "FABD",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 298,
+      "operation": "JSR",
+      "target": "AP_CHECK",
+      "address": "B240",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 300,
+      "operation": "JMP",
+      "target": "$E00B",
+      "address": "E00B",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 301,
+      "operation": "JSR",
+      "target": "AP_CHECK",
+      "address": "B240",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 303,
+      "operation": "JMP",
+      "target": "$E00E",
+      "address": "E00E",
+      "classification": "optional B3:E provider"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 305,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 314,
+      "operation": "JMP",
+      "target": "V2_UNKNOWN",
+      "address": "B1FE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 316,
+      "operation": "JSR",
+      "target": "BOOT_API_W",
+      "address": "F0BB",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 317,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "B168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 321,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 322,
+      "operation": "JMP",
+      "target": "BOOT_API_UPDATE",
+      "address": "F0BE",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 326,
+      "operation": "JSR",
+      "target": "V2_CONFIG_READ",
+      "address": "B8CB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 328,
+      "operation": "JMP",
+      "target": "V2_P_NO_CONFIG",
+      "address": "BACE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 331,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 338,
+      "operation": "JMP",
+      "target": "V2_P_TARGET",
+      "address": "BA5C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 342,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 347,
+      "operation": "JSR",
+      "target": "BOOT_SLOT_CHECK",
+      "address": "F30D",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 359,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SUM",
+      "address": "B91A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 364,
+      "operation": "JSR",
+      "target": "BOOT_API_PROMOTE",
+      "address": "F039",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 370,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 379,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 381,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 384,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 387,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "B168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 388,
+      "operation": "JMP",
+      "target": "V2_BAD_RANGE",
+      "address": "B29D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 389,
+      "operation": "JMP",
+      "target": "V2_FLASH_FAILED",
+      "address": "B679",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 391,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 414,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 417,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 419,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 421,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 430,
+      "operation": "JSR",
+      "target": "V2_GETC",
+      "address": "7A3E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 439,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "BB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 444,
+      "operation": "JMP",
+      "target": "V2_LINE_END",
+      "address": "BB88",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 472,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 473,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "BB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 475,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "BB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 477,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "BB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 482,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 484,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 486,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 487,
+      "operation": "JMP",
+      "target": "V2_LINE_BYTE",
+      "address": "BB0C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 491,
+      "operation": "JSR",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 519,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 525,
+      "operation": "JMP",
+      "target": "V2_PRINT_NEXT",
+      "address": "BBB2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 539,
+      "operation": "JMP",
+      "target": "(SVC_BANNER_PTR)",
+      "classification": "indirect; inspect guard/owner"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 551,
+      "operation": "JSR",
+      "target": "V2W_READ",
+      "address": "7830",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 559,
+      "operation": "JSR",
+      "target": "$FAB4",
+      "address": "FAB4",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 564,
+      "operation": "JSR",
+      "target": "$FABD",
+      "address": "FABD",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/monitor-b0.asm",
+      "line": 578,
+      "operation": "JSR",
+      "target": "V2W_READ",
+      "address": "7830",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 4,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 6,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 8,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 11,
+      "operation": "JSR",
+      "target": "V2_HEX_WORD",
+      "address": "B43D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 22,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "B2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 24,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "B298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 26,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 28,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "B298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 32,
+      "operation": "JMP",
+      "target": "V2_G_GO",
+      "address": "B2DA",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 34,
+      "operation": "JSR",
+      "target": "V2_APPLICATION_ADDRESS",
+      "address": "B3F8",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 36,
+      "operation": "JMP",
+      "target": "V2_PROTECTED",
+      "address": "B2A2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 38,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 40,
+      "operation": "JMP",
+      "target": "V2_G_READY",
+      "address": "B2E5",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 42,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 43,
+      "operation": "JMP",
+      "target": "V2W_EXECUTE",
+      "address": "7828",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 45,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "B2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 48,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 52,
+      "operation": "JSR",
+      "target": "V2_HEX_WORD",
+      "address": "B43D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 55,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 75,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 78,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 101,
+      "operation": "JSR",
+      "target": "V2W_READ",
+      "address": "7830",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 102,
+      "operation": "JSR",
+      "target": "V2_PRINT_ADDR",
+      "address": "B694",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 104,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 107,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 114,
+      "operation": "JMP",
+      "target": "V2_D_OUTPUT",
+      "address": "B358",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 118,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 123,
+      "operation": "JSR",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 127,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 144,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "B168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 146,
+      "operation": "JMP",
+      "target": "V2_MAP_REQUEST",
+      "address": "B28B",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 147,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "B2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 150,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "B298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 153,
+      "operation": "JSR",
+      "target": "V2_HEX_BYTE",
+      "address": "B442",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 156,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "B298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 165,
+      "operation": "JMP",
+      "target": "V2_F_CROSS",
+      "address": "B5E9",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 166,
+      "operation": "JSR",
+      "target": "V2_MODIFIABLE_ADDRESS",
+      "address": "B41A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 169,
+      "operation": "JMP",
+      "target": "V2_PROTECTED",
+      "address": "B2A2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 178,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 183,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 186,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 190,
+      "operation": "JMP",
+      "target": "V2_F_SNAPSHOT",
+      "address": "B5EE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 197,
+      "operation": "JSR",
+      "target": "V2_COPY_BYTES",
+      "address": "B3E5",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 198,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "B168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 233,
+      "operation": "JMP",
+      "target": "V2_ADDRESS_YES",
+      "address": "B418",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 246,
+      "operation": "JSR",
+      "target": "V2_APPLICATION_ADDRESS",
+      "address": "B3F8",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 266,
+      "operation": "JMP",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 273,
+      "operation": "JMP",
+      "target": "V2_HEX_PARSE",
+      "address": "B444",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 278,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 290,
+      "operation": "JSR",
+      "target": "V2_HEX_NIBBLE",
+      "address": "7E9D",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-monitor.inc",
+      "line": 304,
+      "operation": "JMP",
+      "target": "V2_HEX_NEXT",
+      "address": "B44F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 4,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 7,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "B298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 9,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 10,
+      "operation": "JSR",
+      "target": "V2_SREC",
+      "address": "B4FB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 23,
+      "operation": "JSR",
+      "target": "V2_RECORD_END",
+      "address": "B4F0",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 37,
+      "operation": "JSR",
+      "target": "V2_COPY_BYTES",
+      "address": "B3E5",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 38,
+      "operation": "JMP",
+      "target": "V2_LOAD_NEXT",
+      "address": "B485",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 40,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 41,
+      "operation": "JSR",
+      "target": "V2_PRINT_ADDR",
+      "address": "B694",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 42,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "B168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 45,
+      "operation": "JSR",
+      "target": "V2_LOAD_DRAIN",
+      "address": "B4D2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 50,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 53,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 57,
+      "operation": "JSR",
+      "target": "V2_RX_RESET",
+      "address": "79E5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 61,
+      "operation": "JSR",
+      "target": "V2_RAW_POLL",
+      "address": "7A9B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 63,
+      "operation": "JMP",
+      "target": "V2_DRAIN_RESTART",
+      "address": "B4D7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 67,
+      "operation": "JMP",
+      "target": "V2_DRAIN_POLL",
+      "address": "B4DB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 71,
+      "operation": "JMP",
+      "target": "V2_DRAIN_POLL",
+      "address": "B4DB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 86,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "B58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 101,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "B58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 113,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "B59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 130,
+      "operation": "JMP",
+      "target": "V2_SREC_ADDRESS",
+      "address": "B542",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 134,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "B59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 138,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "B59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 146,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "B59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 151,
+      "operation": "JMP",
+      "target": "V2_SREC_DATA",
+      "address": "B552",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 152,
+      "operation": "JSR",
+      "target": "V2_SREC_BYTE",
+      "address": "B59E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 159,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "B58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 182,
+      "operation": "JSR",
+      "target": "V2_GETC",
+      "address": "7A3E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 194,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "B58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 197,
+      "operation": "JSR",
+      "target": "V2_HEX_NIBBLE",
+      "address": "7E9D",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 205,
+      "operation": "JSR",
+      "target": "V2_SREC_CHAR",
+      "address": "B58F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-load.inc",
+      "line": 208,
+      "operation": "JSR",
+      "target": "V2_HEX_NIBBLE",
+      "address": "7E9D",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 2,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "B2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 5,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "B298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 9,
+      "operation": "JMP",
+      "target": "V2_PROTECTED",
+      "address": "B2A2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 24,
+      "operation": "JMP",
+      "target": "V2_EDIT_BEGIN",
+      "address": "B391",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 26,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 27,
+      "operation": "JSR",
+      "target": "V2W_SNAPSHOT",
+      "address": "787A",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 28,
+      "operation": "JSR",
+      "target": "V2_FLASH_BANK",
+      "address": "B685",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 40,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 46,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 57,
+      "operation": "JSR",
+      "target": "V2_PRINT_ADDR",
+      "address": "B694",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 59,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 61,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 63,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 66,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 67,
+      "operation": "JSR",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 78,
+      "operation": "JSR",
+      "target": "V2W_ANALYZE",
+      "address": "788B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 79,
+      "operation": "JSR",
+      "target": "V2_FLASH_MODE",
+      "address": "B821",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 80,
+      "operation": "JSR",
+      "target": "V2_CONFIRM",
+      "address": "B69E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 83,
+      "operation": "JSR",
+      "target": "V2_F_RISK_CONFIRM",
+      "address": "B6BD",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 87,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 88,
+      "operation": "JSR",
+      "target": "V2W_MUTATE",
+      "address": "78A5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 92,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 95,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 97,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 104,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 107,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 110,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 111,
+      "operation": "JMP",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 113,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 115,
+      "operation": "JMP",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 117,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 118,
+      "operation": "JSR",
+      "target": "V2_READ_LINE",
+      "address": "BB08",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 128,
+      "operation": "JSR",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 148,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 149,
+      "operation": "JSR",
+      "target": "V2_BANK_READ_LINE",
+      "address": "BAF2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 172,
+      "operation": "JSR",
+      "target": "V2_GET_ADDRESS",
+      "address": "B2A7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 175,
+      "operation": "JSR",
+      "target": "V2_HEX_WORD",
+      "address": "B43D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 178,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 228,
+      "operation": "JSR",
+      "target": "V2_FLASH_BANK",
+      "address": "B685",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 229,
+      "operation": "JSR",
+      "target": "V2_PRINT_ADDR",
+      "address": "B694",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 231,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 233,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 235,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 237,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 238,
+      "operation": "JSR",
+      "target": "V2_CONFIRM",
+      "address": "B69E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 241,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 242,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "B298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 243,
+      "operation": "JMP",
+      "target": "V2_BAD_RANGE",
+      "address": "B29D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 244,
+      "operation": "JMP",
+      "target": "V2_PROTECTED",
+      "address": "B2A2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 247,
+      "operation": "JSR",
+      "target": "V2_I_BUFFER",
+      "address": "B80C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 249,
+      "operation": "JSR",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 250,
+      "operation": "JSR",
+      "target": "V2_SREC",
+      "address": "B4FB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 253,
+      "operation": "JMP",
+      "target": "V2_LOAD_ERROR",
+      "address": "B4BF",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 255,
+      "operation": "JMP",
+      "target": "V2_I_ERROR",
+      "address": "B77A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 265,
+      "operation": "JMP",
+      "target": "V2_FLASH_DONE",
+      "address": "B674",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 277,
+      "operation": "JSR",
+      "target": "V2_RECORD_END",
+      "address": "B4F0",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 303,
+      "operation": "JSR",
+      "target": "V2_I_CANCEL_POLL",
+      "address": "B816",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 308,
+      "operation": "JMP",
+      "target": "V2_LOAD_ERROR",
+      "address": "B4BF",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 310,
+      "operation": "JSR",
+      "target": "V2W_ANALYZE",
+      "address": "788B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 311,
+      "operation": "JSR",
+      "target": "V2W_MUTATE",
+      "address": "78A5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 315,
+      "operation": "JSR",
+      "target": "V2_LOAD_DRAIN",
+      "address": "B4D2",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 316,
+      "operation": "JMP",
+      "target": "V2_FLASH_FAILED",
+      "address": "B679",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 318,
+      "operation": "JSR",
+      "target": "V2_I_CANCEL_POLL",
+      "address": "B816",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 323,
+      "operation": "JMP",
+      "target": "V2_LOAD_ERROR",
+      "address": "B4BF",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 334,
+      "operation": "JSR",
+      "target": "V2_I_BUFFER",
+      "address": "B80C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 336,
+      "operation": "JMP",
+      "target": "V2_I_NEXT_BYTE",
+      "address": "B804",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 342,
+      "operation": "JMP",
+      "target": "V2_I_RECORD",
+      "address": "B775",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 343,
+      "operation": "JSR",
+      "target": "V2W_SNAPSHOT",
+      "address": "787A",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 353,
+      "operation": "JMP",
+      "target": "V2_CHECK_CANCEL",
+      "address": "7A5E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-flash.inc",
+      "line": 364,
+      "operation": "JMP",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 4,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 7,
+      "operation": "JSR",
+      "target": "V2_CONFIG_READ",
+      "address": "B8CB",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 11,
+      "operation": "JMP",
+      "target": "V2_MESSAGE",
+      "address": "B200",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 12,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SHOW",
+      "address": "B933",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 13,
+      "operation": "JMP",
+      "target": "V2_PROMPT",
+      "address": "B168",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 23,
+      "operation": "JSR",
+      "target": "V2_HEX_BYTE",
+      "address": "B442",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 28,
+      "operation": "JSR",
+      "target": "V2_HEX_BYTE",
+      "address": "B442",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 33,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 37,
+      "operation": "JSR",
+      "target": "V2_HEX_WORD",
+      "address": "B43D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 44,
+      "operation": "JMP",
+      "target": "V2_C_DELAY",
+      "address": "B88E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 52,
+      "operation": "JSR",
+      "target": "V2_HEX_BYTE",
+      "address": "B442",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 57,
+      "operation": "JSR",
+      "target": "V2_SKIP_SPACES",
+      "address": "B42F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 60,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SUM",
+      "address": "B91A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 65,
+      "operation": "JSR",
+      "target": "V2_CONFIG_CHECK",
+      "address": "B8D0",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 68,
+      "operation": "JMP",
+      "target": "V2_BAD_RANGE",
+      "address": "B29D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 69,
+      "operation": "JMP",
+      "target": "V2_BAD_HEX",
+      "address": "B298",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 70,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SHOW",
+      "address": "B933",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 71,
+      "operation": "JSR",
+      "target": "V2_CONFIRM",
+      "address": "B69E",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 74,
+      "operation": "JSR",
+      "target": "BOOT_API_CFG",
+      "address": "F0B5",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 77,
+      "operation": "JMP",
+      "target": "V2_FLASH_FAILED",
+      "address": "B679",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 78,
+      "operation": "JMP",
+      "target": "V2_CANCELLED",
+      "address": "B214",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 79,
+      "operation": "JMP",
+      "target": "V2_FLASH_COMPLETE",
+      "address": "B66C",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 81,
+      "operation": "JSR",
+      "target": "BOOT_API_READ",
+      "address": "F0B2",
+      "classification": "private F entry/helper"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 113,
+      "operation": "JSR",
+      "target": "V2_APPLICATION_ADDRESS",
+      "address": "B3F8",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 116,
+      "operation": "JSR",
+      "target": "V2_CONFIG_SUM",
+      "address": "B91A",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 145,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 148,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 157,
+      "operation": "JSR",
+      "target": "V2_PUTC",
+      "address": "7ACB",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 159,
+      "operation": "JMP",
+      "target": "V2_CONFIG_NEXT",
+      "address": "B963",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 162,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 165,
+      "operation": "JSR",
+      "target": "V2_HEX_OUT",
+      "address": "7EB4",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 171,
+      "operation": "JMP",
+      "target": "V2_NEWLINE",
+      "address": "7ECA",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 182,
+      "operation": "JMP",
+      "target": "V2_AUTO_DOT",
+      "address": "B986",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 187,
+      "operation": "JMP",
+      "target": "V2_AUTO_TICK_READY",
+      "address": "B997",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 194,
+      "operation": "JMP",
+      "target": "V2_AUTO_TICK_READY",
+      "address": "B997",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 197,
+      "operation": "JSR",
+      "target": "V2W_SEND",
+      "address": "7985",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 200,
+      "operation": "JSR",
+      "target": "V2_AUTO_KEY",
+      "address": "B9E7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 202,
+      "operation": "JMP",
+      "target": "V2_AUTO_STOP",
+      "address": "B9DE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 206,
+      "operation": "JMP",
+      "target": "V2_AUTO_POLL",
+      "address": "B999",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 210,
+      "operation": "JMP",
+      "target": "V2_AUTO_POLL",
+      "address": "B999",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 214,
+      "operation": "JMP",
+      "target": "V2_AUTO_TICK",
+      "address": "B96F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 216,
+      "operation": "JSR",
+      "target": "V2_AUTO_KEY",
+      "address": "B9E7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 218,
+      "operation": "JMP",
+      "target": "V2_AUTO_STOP",
+      "address": "B9DE",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 222,
+      "operation": "JMP",
+      "target": "V2_AUTO_ADDRESS",
+      "address": "B9CC",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 226,
+      "operation": "JMP",
+      "target": "V2_J_READY",
+      "address": "B1E7",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 233,
+      "operation": "JMP",
+      "target": "V2W_EXECUTE",
+      "address": "7828",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 234,
+      "operation": "JSR",
+      "target": "V2_RX_RESET",
+      "address": "79E5",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 236,
+      "operation": "JMP",
+      "target": "V2_PRINT",
+      "address": "BB96",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 242,
+      "operation": "JMP",
+      "target": "V2_AUTO_NO_KEY",
+      "address": "BA21",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 247,
+      "operation": "JMP",
+      "target": "V2_AUTO_YES",
+      "address": "BA1F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 251,
+      "operation": "JMP",
+      "target": "V2_AUTO_RAW",
+      "address": "BA05",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 253,
+      "operation": "JSR",
+      "target": "V2_GETC",
+      "address": "7A3E",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 254,
+      "operation": "JMP",
+      "target": "V2_AUTO_CHAR",
+      "address": "BA0D",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 255,
+      "operation": "JSR",
+      "target": "V2_RAW_POLL",
+      "address": "7A9B",
+      "classification": "private RAM worker/vector/gateway"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 257,
+      "operation": "JMP",
+      "target": "V2_AUTO_RETURN",
+      "address": "B9E6",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 261,
+      "operation": "JMP",
+      "target": "V2_AUTO_YES",
+      "address": "BA1F",
+      "classification": "own ROM image"
+    },
+    {
+      "slot": "b0",
+      "file": "core/str8n-v2-config.inc",
+      "line": 266,
+      "operation": "JMP",
+      "target": "V2_AUTO_YES",
+      "address": "BA1F",
+      "classification": "own ROM image"
+    }
+  ],
+  "manually_reviewed_provider_sources": {
+    "core/launcher.asm": {
+      "sha256": "4378b58ccbdd44acc0a4bdc02a8a15d94700441273d7ac123a04bebf45e23e07",
+      "lines": 597
+    },
+    "core/service-kernel.inc": {
+      "sha256": "df6fe69be35a193b5ca2b5bf7e64d1bb1a8b3e2295cd9ba0fcd32e9630c3f1f7",
+      "lines": 138
+    },
+    "banner/rtc-banner.asm": {
+      "sha256": "a6d7ddc3142ead2b623f3c831e96872df4e0c55f10894b12a0c140c34f9996f2",
+      "lines": 468
+    },
+    "xip/utilities.asm": {
+      "sha256": "40e026868e68da69f4b0d4ba5092e8f2ecd4287e054d5f15e3777f53a8622a6c",
+      "lines": 24
+    },
+    "xip/system.inc": {
+      "sha256": "151e049c5ed779a9edc2858fb4845bfdff21ee4e2e41a00b5d4a6ad7266d5caf",
+      "lines": 240
+    },
+    "xip/gate.asm": {
+      "sha256": "efeaaccd50e395c733ca461d0f370800af25992a2ef87e701f68f80df6fb395d",
+      "lines": 50
+    },
+    "xip/work-stub.asm": {
+      "sha256": "95b603e0ea9fe2082ee6bfb0591816e11f63ef9aa6e8862ad9faf6270bb88e07",
+      "lines": 40
+    }
+  },
+  "RAM_conflicts": [
+    {
+      "owner": "g0034 header debugger hook",
+      "range": "7B81-7B8F",
+      "BASE1_owner": "RAM worker 7800-7BE7",
+      "observed": "literal header copy loop"
+    },
+    {
+      "owner": "g0034 optional XIP utility gateway",
+      "range": "7B90-7BD3",
+      "BASE1_owner": "RAM worker 7800-7BE7",
+      "observed": "saved gateway link address and code length"
+    }
+  ],
+  "call_inventory_limit": "Textual JSR/JMP sites; DB-encoded RAM gateways and provider internals require manual review",
+  "recommendation": "New BASE1 monitor core using public RAM facade; port selected g0034 logic, not its sector bytes",
+  "board_access": false,
+  "flashing": false,
+  "firmware_builds": 0,
+  "CPU_simulations": 0
+}

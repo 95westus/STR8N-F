@@ -1,0 +1,113 @@
+{
+  "schema": 1,
+  "component": "Mona RAM workbench",
+  "interface": "WB1",
+  "generation": "00000003",
+  "status": "BUILD_ONLY_NOT_EXECUTION_QUALIFIED",
+  "artifact": {
+    "filename": "MONA-WORKBENCH-WB1-g00000003-RAM.bin",
+    "bytes": 5376,
+    "sha256": "08b3bb7828933ebced2f410bac38b2a79071cda214df31c66dc3c295e960224d"
+  },
+  "module": {
+    "origin": "5000",
+    "bytes": 5120,
+    "linked_bytes": 5088,
+    "linked_end": "63E0",
+    "sha256": "16dc5d0a6d004d0c9272f9686aa0b3179999b7d66254a2ec926cfe704d42d5ea",
+    "crc": "CCITT FFFF; big-endian trailer; residue zero",
+    "header": "MW 01 14 PR05",
+    "command_entry": "5008",
+    "shell_entry": "500B"
+  },
+  "bridge_client_RAM_floor": "6550: lowest destination page; Mona RAM declares code end rounded up",
+  "foundation_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "private_adapter": {
+    "WB_F_READ": 30768,
+    "WB_F_EXECUTE": 30760,
+    "WB_F_SELECT": 30792,
+    "WB_F_BYTE": 31588,
+    "WB_F_RECOVERY": 62127,
+    "WB_F_CRC_LO": 237,
+    "WB_F_CRC_HI": 41
+  },
+  "loader_bytes": 163,
+  "sources": {
+    "monitors/src/workbench.asm": "53736e4a5a5bd8e7a94bcc8cc8aff1f84a48e4410a70814eb5bbf831737a3e34",
+    "monitors/src/workbench-loader.asm": "3659c54d0fa09764f65c4a52e4cf17f93836baf7dcf9dc0435d3af7de25626fd",
+    "monitors/src/workbench-layout.inc": "260a27a104186fd832c66b4ce49dc2bc23251e91903ff531bbadcd8a96b6e2ef",
+    "monitors/src/workbench-sram.inc": "cbae856a3a511fe28360c64b6dde3d2b60765669af038d0a7a536e0958735fda",
+    "monitors/src/workbench-store.inc": "de2138036aec4775061e93049d1e3799aba8aa0facb7064b886cc7190179af71"
+  },
+  "RAM_borrowed": [
+    "0200-16FF transfer staging",
+    "5000-63FF module",
+    "6400-66FF state"
+  ],
+  "application_RAM_while_loaded": "0200-4FFF",
+  "system_ZP": [
+    "E0-E1",
+    "E2-E3",
+    "E6-E7",
+    "EA"
+  ],
+  "entry": "REC> L raw RAM BIN; existing Mona g4 has no L/module dispatch",
+  "return_path": "Q -> public RAM HOLD -> active monitor, or recovery if unavailable",
+  "monitor_A_B_changed": false,
+  "F_rebuilt": false,
+  "hardware_access": false,
+  "flash_writes": "Explicit S into fully erased owner-declared B0/B1 AREA only; no erase",
+  "journal_writes": false,
+  "SRAM_writes": false,
+  "EDU": "Explicit session OFF/ON; ON is a wiring selection, not presence proof",
+  "SPI": {
+    "profile": "EDU Rev D PB0 SCK/PB1 MOSI/PB2 SRAM CS/PB5 MISO; PB3 CS kept high",
+    "opcodes": [
+      "05 RDMR",
+      "03 READ"
+    ],
+    "automatic_probe": false,
+    "layout": "SS/01/08 primary fixed 64KiB zero-generation; SS/02/08 nonzero generation and labelled fallback; CRC/commit/reserved fields required",
+    "PREP": "Explicit disabled-CB flag acknowledgment; not automatic",
+    "prior_input_pin_output_latch": "Unreadable: sampled ORB restoration only"
+  },
+  "records": {
+    "format": "SR/01; no payload checksum",
+    "scan": "bytewise 8000-DFFF, selected bank",
+    "table": true,
+    "restore": true,
+    "restore_names": "unique within selected bank",
+    "store": "S bank flash RAMfirst RAMlast [name]; YES; commit last, per-byte readback; AREA window required",
+    "run": "Explicit R without L; old program ABI not thereby qualified"
+  },
+  "planned": [
+    "APPS and maintenance/config/opaque routing",
+    "Source/ASM/DEBUG",
+    "WORKSPACE allocation review and separate append-only messages"
+  ],
+  "build_passes": 1,
+  "assembler_linker_invocations": 4,
+  "branch_layout": {
+    "workbench.asm": {
+      "short_branches": 128,
+      "expanded_branches": 32,
+      "conservative_bytes": 2565
+    },
+    "workbench-loader.asm": {
+      "short_branches": 12,
+      "expanded_branches": 0,
+      "conservative_bytes": 172
+    },
+    "workbench-sram.inc": {
+      "short_branches": 36,
+      "expanded_branches": 25,
+      "conservative_bytes": 1533
+    },
+    "workbench-store.inc": {
+      "short_branches": 24,
+      "expanded_branches": 31,
+      "conservative_bytes": 1022
+    }
+  },
+  "CPU_simulations": 0
+}
