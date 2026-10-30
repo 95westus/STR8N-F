@@ -139,5 +139,6 @@ including exact full-SRAM/owner-RAM restoration and zero flash writes. That
 later receipt adds evidence to the existing binaries; it does not replace the
 published preview 1 ZIP or its original manual snapshot.
 
-The owner requires [resident ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md) in the
-next MON/tools release. Their BASE1 port and live qualification are open.
+The owner has deferred [resident ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md)
+as follow-on work. Their BASE1 port and live qualification are open, without
+blocking the current MON/tools release.

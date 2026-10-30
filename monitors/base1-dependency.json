@@ -41,7 +41,7 @@
   "command_manual": "docs/MONA_COMMANDS.md",
   "A_B_personalities": "Identical at owner request; distinct personalities deferred",
   "usability_plan": "docs/MONA_USABILITY_PLAN.md",
-  "next_checkpoint": "Resident ASM/DBG port and live qualification required for next MON/tools release; remaining CPU/backend gates stay explicit",
+  "next_checkpoint": "Close out the scoped MON/tools release with existing qualified features; ASM/DBG are nonblocking follow-on work",
   "hardware_access": true,
   "flashing": true,
   "trial_monitor_erases": 2,
@@ -138,12 +138,15 @@
     "PROGRAM_816E_positive_qualified": true,
     "PROGRAM_positive_receipt": "monitors/validation/2609-program-positive.json",
     "PROGRAM_positive_acceptance": "docs/2609_PROGRAM_POSITIVE_ACCEPTANCE.md",
-    "next_release_required_components": [
+    "next_release_required_components": [],
+    "next_release_gate": "docs/FOUNDATION_RELEASE_PATH.md",
+    "ASM_DBG_source_reference": "monitors/devtools/legacy-reference/provenance.json",
+    "next_release_ready": false,
+    "planned_follow_on_components": [
       "ASM",
       "DBG"
     ],
-    "next_release_gate": "docs/MON_ASM_DBG_RELEASE_GATE.md",
-    "ASM_DBG_source_reference": "monitors/devtools/legacy-reference/provenance.json",
-    "next_release_ready": false
+    "ASM_DBG_release_blocking": false,
+    "ASM_DBG_follow_on_plan": "docs/MON_ASM_DBG_RELEASE_GATE.md"
   }
 }

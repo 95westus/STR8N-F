@@ -30,5 +30,6 @@ closeout. The tagged source and uploaded artifacts remain immutable snapshots.
 
 Later source checkpoint: the same installed tools passed
 [positive PROGRAM qualification on 2609](2609_PROGRAM_POSITIVE_ACCEPTANCE.md).
-The next monitor/tools release now requires [resident ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md);
-source import/review is started, with no BASE1 ASM/DBG execution pass yet.
+[Resident ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md) are deferred follow-on work
+and do not block the current monitor/tools release. Source import/review is
+started, with no BASE1 ASM/DBG execution pass yet.

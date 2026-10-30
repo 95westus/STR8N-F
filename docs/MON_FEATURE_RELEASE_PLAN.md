@@ -18,14 +18,16 @@ once. RTC collection was re-admitted with its unchanged instrument and retained
 history. The optional preview packages these exact bytes and the unchanged
 Python terminal. Preview 1 is now published. Positive PROGRAM Store/Restore/run
 on 2609 [now passed](2609_PROGRAM_POSITIVE_ACCEPTANCE.md), with exact full-SRAM,
-owner RAM/ZP and flash preservation. Retest services g4 on 65C02 separately. SOURCE/ASM/DEBUG is
-the next implementation increment. See the
+owner RAM/ZP and flash preservation. Retest services g4 on 65C02 separately.
+SOURCE/ASM/DEBUG is follow-on implementation work. See the
 [Foundation release path](FOUNDATION_RELEASE_PATH.md) for the remaining package
 and CPU/backend qualification boundaries.
 
-Owner update, October 30: **resident ASM and DBG are mandatory in the next
-monitor/tools release**. Follow the [explicit release gate](MON_ASM_DBG_RELEASE_GATE.md);
-the published preview is historical and does not satisfy that new requirement.
+Latest owner update, October 30: **resident ASM and DBG are follow-on work
+and do not block the current monitor/tools release**. Retain the
+[port/qualification plan](MON_ASM_DBG_RELEASE_GATE.md). Finish the current
+qualified tool scope and package/verify a new candidate when authorized;
+published Foundation and preview downloads stay unchanged.
 
 Deliver one optional monitor/tools preview, separate from frozen N-Fv0.3.0:
 Dump/Modify/force guards, map/wear, TIME/CLOCK, flash and PROGRAM Table/Restore,

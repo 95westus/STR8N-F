@@ -65,7 +65,7 @@ include hashes and results, with no captured owner bytes.
 
 ## Release boundary
 
-**PROGRAM gate closed; next MON/tools release still open.** The owner requires
-resident [ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md) in that release. Their
-BASE1 port and live qualification remain required; this pass cannot substitute
-for either. Existing Foundation v0.3.0 and preview 1 archives stay unchanged.
+**PROGRAM gate closed.** Resident [ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md)
+are now deferred follow-on work and do not block the current MON/tools
+release. Their future inclusion still requires a BASE1 port and live
+qualification. Existing Foundation v0.3.0 and preview 1 archives stay unchanged.

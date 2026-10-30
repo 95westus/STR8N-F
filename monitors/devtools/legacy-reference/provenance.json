@@ -3,10 +3,6 @@
   "role": "Unmodified reference source for BASE1 ASM/DBG port",
   "status": "REFERENCE_ONLY_NOT_BASE1_EXECUTION_QUALIFIED",
   "installable": false,
-  "required_next_release_components": [
-    "ASM",
-    "DBG"
-  ],
   "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
   "source_files": {
     "assembler/asm-app.asm": {
@@ -89,5 +85,14 @@
   "original_tree_modified": false,
   "builds": 0,
   "hardware_access": false,
-  "release_gate": "docs/MON_ASM_DBG_RELEASE_GATE.md"
+  "import_time_required_components": [
+    "ASM",
+    "DBG"
+  ],
+  "planned_follow_on_components": [
+    "ASM",
+    "DBG"
+  ],
+  "current_release_blocking": false,
+  "follow_on_plan": "docs/MON_ASM_DBG_RELEASE_GATE.md"
 }

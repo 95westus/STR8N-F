@@ -61,10 +61,11 @@ build is required. This document grants no storage-write permission.
 
 ## Following checkpoints
 
-The owner has made [resident ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md)
-mandatory for the next monitor/tools release. Completing PROGRAM alone does
-not close that release goal. The existing Foundation and preview 1 downloads
-remain their original scoped releases.
+The owner has deferred [resident ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md)
+as follow-on work; they no longer block the current monitor/tools release.
+The remaining CPU/backend qualification must match the advertised release
+scope. Existing Foundation and preview 1 downloads remain their original
+scoped releases.
 
 1. Retest the current services-g4 RAM path on 2512/65C02. Keep its older
    installed tools until a separate installation scope is approved.

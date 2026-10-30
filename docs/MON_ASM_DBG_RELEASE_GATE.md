@@ -1,8 +1,11 @@
-# ASM and DBG are required for the next MON/tools release
+# ASM and DBG: deferred development plan
 
-Owner direction, October 30, 2026: **include ASM and DBG in this release**.
-This is a release requirement for the next monitor/tools kit. Published
-Foundation v0.3.0 and MON/tools preview 1 remain immutable historical releases.
+Owner direction, October 30, 2026: initially include ASM and DBG in this
+release; subsequently allow the release to proceed without blocking on them.
+**ASM/DBG are follow-on work, not a current release gate.** Their source and
+technical plan remain preserved. Published Foundation v0.3.0 and MON/tools
+preview 1 remain immutable historical releases. The filename retains the
+earlier gate name so existing references continue to work.
 
 **4K Foundation. Up to four banked environments.** Foundation remains the
 exact 4096-byte F image, g00000001 / BASE1 / PR05. The resident development
@@ -12,7 +15,7 @@ required by this plan.
 
 ## Required operator workflows
 
-| Tool | Required before the next release |
+| Tool | Required when that future feature is included |
 | --- | --- |
 | ASM | Deliberate launch; numbered insert/replace/delete, NEW/LIST/PASTE and cancellation; existing line editing; labels/local labels/EQU, the supported 65C02 instruction set and directives; ASM, LST, SYMS and useful source diagnostics; DUMP/S19; checked output bounds, run and return |
 | Source persistence | Preserve the existing AS/1 capsule semantics; named SAVE/LOAD with explicit flash/PROGRAM backend, source validation, CRC and unsaved-edit confirmation; source and output ownership reported; no implicit owner-sector or WORKSPACE allocation |
@@ -73,15 +76,15 @@ Keep public RAM console calls; pin any necessary private adapter to frozen F.
 6. After RAM gates pass, review exact component sectors, native journal room,
    preservation and erase history before installation. A development-bank
    layout is an optional image allocation, not a Foundation reservation.
-7. Build a new candidate kit with the qualified ASM/DBG payloads, examples,
+7. When these features pass, build a later kit with the qualified ASM/DBG payloads, examples,
    terminal, manual and receipts. Test the extracted kit. The current frozen
    release downloads and tags are not replaced.
 
 ## Release status
 
-**Open — blocks the next monitor/tools release.** Source import/review is
-preparation; no BASE1 ASM or DBG execution pass is claimed yet. Positive
-PROGRAM qualification is a separate gate and cannot substitute for ASM/DBG.
-The next candidate must carry both required components and their exact live
-receipts before it can be described as meeting this release goal. Full b35
-parity remains tracked in [the parity checklist](MON_B35_PARITY.md).
+**Deferred — does not block the current monitor/tools release.** Source
+import/review is preparation; no BASE1 ASM or DBG execution pass is claimed
+yet. A release that includes these features must carry their exact payloads
+and live receipts. The current release can state its existing qualified
+feature/CPU scope and leave ASM/DBG on this roadmap. Full b35 parity remains
+tracked in [the parity checklist](MON_B35_PARITY.md).
