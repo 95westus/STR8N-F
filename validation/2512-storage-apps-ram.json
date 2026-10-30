@@ -1,0 +1,30 @@
+{
+  "board": "2512",
+  "APPS_RAM_passed": true,
+  "APP_format": "AP/02 public PR05, 65C02",
+  "header_and_payload_CRC_refusal": true,
+  "named_launch_help_public_Q_return": true,
+  "readonly_owner_RAM_ZP_preserved": true,
+  "flash_PROGRAM_ambiguity_refused": true,
+  "explicit_backend_restore": true,
+  "B0_fixture_restored": true,
+  "sector_erases": 1,
+  "journal_appends": 1,
+  "old_raw_journal_rows_retained": true,
+  "final_journal_sequence": 1028,
+  "F_writes": 0,
+  "C_D_erases": 0,
+  "owner_RAM_ZP_restored_verified": true,
+  "COM4_released": true,
+  "installed": false,
+  "final_bank_sha256": [
+    "5b72e8041c01f1fab145f8926a01b2be02ba807c654525bc04eed450a48c245f",
+    "b0d5ae540af9a7616df44dd5d3496e7668af3db98bc2905b8142d07353ad5f05",
+    "17e3b1da5625302aa1d9381be72fe5d0277fd979a2baee09a13412ea33a5e71d",
+    "394d4929b44ee18aa919b5259a881b696b740c327b81c36164caf82f5edb88b7"
+  ],
+  "tools_manifest": "monitors/candidates/services-g00000003-r5/manifest.json",
+  "example_manifest": "apps/candidates/appdemo-ap02-g1/manifest.json",
+  "host_handshake_correction": "First eight header bytes verified after host success-text assertion; resumed only fresh cells; no extra erase.",
+  "pending": "Explicit expanded installation scope approval: B2:8/9/A, E, one native C rotation; F frozen."
+}

@@ -11,7 +11,7 @@ from build_mona import ROOT,cells,equs,sha
 from mona_branches import conservative_branches
 
 
-def build(out, generation, workbench_manifest, monitor_manifest, reuse_support=None):
+def build(out, generation, workbench_manifest, monitor_manifest, reuse_support=None, program_manifest=None):
     out=Path(out).resolve()
     if out.exists():raise ValueError('Use a fresh directory; preserve previous outputs')
     if not 1<=generation<=0xffffffff:raise ValueError('Generation outside1..FFFFFFFF')
@@ -27,13 +27,18 @@ def build(out, generation, workbench_manifest, monitor_manifest, reuse_support=N
     module=(wbpath.parent/wb['module']['filename']).read_bytes()
     assert sha(module)==wb['module']['sha256'] and len(module)==7168
     assert binascii.crc_hqx(module,0xffff)==0
+    if program_manifest is None:raise ValueError('Current bundle requires a PROGRAM provider manifest')
+    pvpath=Path(program_manifest).resolve();pv=json.loads(pvpath.read_text())
+    provider=(pvpath.parent/pv['artifact']['filename']).read_bytes()
+    assert len(provider)==3328 and sha(provider)==pv['artifact']['sha256'] and binascii.crc_hqx(provider,65535)==0
+    for name,digest in pv['source_sha256'].items():assert sha((ROOT/name).read_bytes())==digest,name
     bs=equs(ROOT/'src/core/boot-symbols.inc');ws=equs(ROOT/'src/core/worker-public-symbols.inc')
     crc=binascii.crc_hqx(f,0xffff)
-    bindings=dict(SB_F_SELECT=ws['V2W_SELECT'],SB_F_READ=ws['V2W_READ'],
+    bindings=dict(SB_F_SELECT=ws['V2W_SELECT'],SB_F_READ=ws['V2W_READ'],SB_F_EXECUTE=ws['V2W_EXECUTE'],
                   SB_F_BOOT_READ=bs['BOOT_READ_RECORD'],SB_F_RECOVERY=bs['BOOT_RECOVERY'],
                   SB_F_CRC_LO=crc&255,SB_F_CRC_HI=crc>>8)
     inputs=('services.asm','service-layout.inc','service-map.inc','service-wear.inc',
-            'service-interface.inc','service-load.asm','service-bundle-boot.asm','workbench-interface.inc')
+            'service-interface.inc','service-load.asm','service-bundle-boot.asm','workbench-interface.inc','service-apps.inc')
     sources={'monitors/src/'+name:sha((ROOT/'monitors/src'/name).read_bytes()) for name in inputs}
     sources['src/core/map-wdc-catalog.inc']=sha((ROOT/'src/core/map-wdc-catalog.inc').read_bytes())
     out.mkdir(parents=True);logs=[];layouts={}
@@ -42,6 +47,8 @@ def build(out, generation, workbench_manifest, monitor_manifest, reuse_support=N
         for name in inputs:
             text=(ROOT/'monitors/src'/name).read_text()
             text=text.replace('"SERVICE_GENERATION_BYTES"',','.join(f'${v:02X}' for v in generation.to_bytes(4,'little')))
+            if label=='raw' and name=='service-bundle-boot.asm':
+                text=text.replace('$8100','$0300').replace('$8200','$0400').replace('#>SB_MODULE_SOURCE','#5')
             if not name.endswith('interface.inc') and name!='service-layout.inc':
                 text,info=conservative_branches(text,'S_LONG_'+label+'_'+name.replace('.','_').replace('-','_')+'_')
                 layouts[label+'/'+name]=info
@@ -51,7 +58,7 @@ def build(out, generation, workbench_manifest, monitor_manifest, reuse_support=N
         private=dict(bindings,SB_RAM_PROVIDER=int(ram))
         (stage/'service-foundation.inc').write_text(''.join(f'{k} EQU ${v:04X}\n' for k,v in private.items()),encoding='ascii',newline='\n')
         if loader is not None:
-            body=loader.ljust(256,b'\xff')
+            body=loader.ljust(512,b'\xff')
             (stage/'service-load-image.inc').write_text(''.join('        DB '+','.join(f'${x:02X}' for x in body[i:i+16])+'\n' for i in range(0,len(body),16)),encoding='ascii',newline='\n')
         for command in ([assembler,'-G','-L','-S','-W',stem+'.asm'],
                         [linker,'-g','-s','-t',f'-c{origin:04X}','-hm19','-j','-o',stem+'.s19',stem+'.obj']):
@@ -71,12 +78,16 @@ def build(out, generation, workbench_manifest, monitor_manifest, reuse_support=N
             assert sources[key]==previous['source_sha256'][key],key
         old_name,old_info=next((n,a) for n,a in previous['artifacts'].items() if a['variant']=='B2 bundle')
         old_bundle=(previous_path.parent/old_name).read_bytes()
-        assert sha(old_bundle)==old_info['sha256'] and old_bundle[512:7680]==module
+        assert sha(old_bundle)==old_info['sha256'] and old_bundle[768:776]==module[:8] and old_bundle[7936:11264]==provider
         loader=old_bundle[256:256+old_info['loader_bytes']]
         prefix=old_bundle[:old_info['prefix_bytes']]
+        old_raw_name,old_raw_info=next((n,a) for n,a in previous['artifacts'].items() if a['variant']=='Full tool RAM packet')
+        old_raw=(previous_path.parent/old_raw_name).read_bytes();assert sha(old_raw)==old_raw_info['sha256']
+        raw_prefix=old_raw[:old_info['prefix_bytes']]
     else:
-        loader,_=assemble('loader','service-load',0x7000,'SL_END')
-    assert len(loader)<=256 and 0x7000+len(loader)<0x7800
+        loader,ls=assemble('loader','service-load',0x6900,'SL_END')
+        assert ls['SL_RECOVERY']<0x6a00
+    assert len(loader)<=512 and 0x6900+len(loader)<=0x6b00
     artifacts={}
     images={}
     for variant,origin,ram in (('E',0xE000,False),('RAM',0x2000,True)):
@@ -89,11 +100,15 @@ def build(out, generation, workbench_manifest, monitor_manifest, reuse_support=N
         artifacts[name]=dict(variant=variant,bytes=4096,sha256=sha(image),linked_bytes=len(body),free_bytes=4094-len(body),origin=f'{origin:04X}',command_entry=f'{origin+8:04X}')
     if reuse_support is None:
         prefix,_=assemble('bundle','service-bundle-boot',0x8000,'SBB_END')
-    assert len(prefix)<=256 and prefix[3:11]==b'WF\x02\x1cPR05'
-    bundle=(prefix.ljust(256,b'\xff')+loader.ljust(256,b'\xff')+module).ljust(8192,b'\xff')
-    assert len(bundle)==8192 and bundle[512:512+7168]==module
+    assert len(prefix)<=256 and prefix[3:11]==b'WF\x03\x1cPR05'
+    bundle=(prefix.ljust(256,b'\xff')+loader.ljust(512,b'\xff')+module+provider).ljust(12288,b'\xff')
+    assert len(bundle)==12288 and bundle[768:768+7168]==module and bundle[7936:11264]==provider
     name=f'STR8N-SERVICES-g{generation:08X}-B2-8000.bin';(out/name).write_bytes(bundle)
-    artifacts[name]=dict(variant='B2 bundle',bytes=8192,sha256=sha(bundle),sectors=['B2:8','B2:9'],module_origin='8200',boot_entry='8000',loader_bytes=len(loader),prefix_bytes=len(prefix),free_flash_tail_bytes=512)
+    artifacts[name]=dict(variant='B2 bundle',bytes=12288,sha256=sha(bundle),sectors=['B2:8','B2:9','B2:A'],module_origin='8300',provider_origin='9F00',boot_entry='8000',loader_bytes=len(loader),prefix_bytes=len(prefix),free_flash_tail_bytes=1024)
+    if reuse_support is None:raw_prefix,_=assemble('raw','service-bundle-boot',0x0200,'SBB_END')
+    raw=raw_prefix.ljust(256,b'\xff')+loader.ljust(512,b'\xff')+module+provider
+    name=f'STR8N-TOOLS-WB2-SP1-g{generation:08X}-RAM.bin';(out/name).write_bytes(raw)
+    artifacts[name]=dict(variant='Full tool RAM packet',bytes=len(raw),sha256=sha(raw),load_address='0200',module_RAM='4800-66FF',provider_RAM='6B00-77FF',temporary_6A_saved_restored=True)
     ram_item=next((name,item) for name,item in mon['artifacts'].items() if item['variant']=='RAM')
     core=(monpath.parent/ram_item[0]).read_bytes();assert sha(core)==ram_item[1]['sha256']
     assert len(core)<=0x1e00
@@ -104,9 +119,9 @@ def build(out, generation, workbench_manifest, monitor_manifest, reuse_support=N
                 status='BUILD_ONLY_NOT_EXECUTION_QUALIFIED',F_sha256=sha(f),source_sha256=sources,
                 private_adapter=bindings,artifacts=artifacts,build_passes=1,assembler_linker_invocations=len(logs),
                 bundle_generation=int.from_bytes(bundle[11:15],'little'),
-                workbench_manifest=str(wbpath.relative_to(ROOT)),monitor_manifest=str(monpath.relative_to(ROOT)),
+                workbench_manifest=str(wbpath.relative_to(ROOT)),monitor_manifest=str(monpath.relative_to(ROOT)),program_manifest=str(pvpath.relative_to(ROOT)),
                 readonly_commands=['M1','M2','M3','W','APPS'],readonly_RAM='6700-69FF; no owner RAM/ZP writes',
-                explicit_workbench_commands=['MAINT','FLASH','CLOCK'],module_RAM='4800-66FF',
+                explicit_workbench_commands=['MAINT','MAINT LOAD','FLASH','CLOCK'],module_RAM='4800-66FF',provider_RAM='6B00-77FF',
                 CLOCK='bounded read-only MCP79411; advanced administration remains planned',
                 FLASH='workbench entry only; full sector buffer/editor and journaled erase/copy remain planned',
                 BATCH='returning WB2 subset; no loader/flash write/application handoff',
@@ -144,6 +159,54 @@ def repackage_monitor(out, source_manifest, monitor_manifest):
     return report
 
 
+def repackage_program(out, source_manifest, program_manifest):
+    """Keep service, loader and MW bytes; replace only the SP/01 provider."""
+    out=Path(out).resolve();oldpath=Path(source_manifest).resolve();pvpath=Path(program_manifest).resolve()
+    if out.exists():raise ValueError('Fresh output directory required')
+    old=json.loads(oldpath.read_text());pv=json.loads(pvpath.read_text())
+    assert old['F_sha256']==json.loads((ROOT/'F_FREEZE.json').read_text())['sha256']
+    for name,digest in old['source_sha256'].items():assert sha((ROOT/name).read_bytes())==digest,name
+    for name,digest in pv['source_sha256'].items():assert sha((ROOT/name).read_bytes())==digest,name
+    provider=(pvpath.parent/pv['artifact']['filename']).read_bytes()
+    assert sha(provider)==pv['artifact']['sha256'] and len(provider)==3328
+    assert provider[:8]==b'SP\x01\x0dPR05' and binascii.crc_hqx(provider,65535)==0
+    report=json.loads(json.dumps(old));out.mkdir(parents=True)
+    for name,item in old['artifacts'].items():
+        body=(oldpath.parent/name).read_bytes();assert sha(body)==item['sha256']
+        if item['variant'] in ('B2 bundle','Full tool RAM packet'):
+            assert body[3:11]==b'WF\x03\x1cPR05' and body[7936:7944]==provider[:8]
+            body=body[:7936]+provider+body[11264:]
+            report['artifacts'][name]['sha256']=sha(body)
+        (out/name).write_bytes(body)
+    report.update(program_manifest=str(pvpath.relative_to(ROOT)),build_passes=0,assembler_linker_invocations=0,
+                  reused_service_images_from=str(oldpath.relative_to(ROOT)),program_payload_replaced=True,branch_layout={})
+    (out/'manifest.json').write_text(json.dumps(report,indent=2)+'\n')
+    print('Reused support and main; replaced only SP/01 provider',pv['artifact']['sha256']);return report
+
+
+def repackage_main_module(out, source_manifest, workbench_manifest):
+    """Reuse qualified support bytes; update only the main MW/02 image."""
+    out=Path(out).resolve();oldpath=Path(source_manifest).resolve();wbpath=Path(workbench_manifest).resolve()
+    if out.exists():raise ValueError('Fresh output directory required')
+    old=json.loads(oldpath.read_text());wb=json.loads(wbpath.read_text())
+    assert old['F_sha256']==wb['foundation_sha256']
+    for name,digest in old['source_sha256'].items():assert sha((ROOT/name).read_bytes())==digest,name
+    module=(wbpath.parent/wb['module']['filename']).read_bytes()
+    assert sha(module)==wb['module']['sha256'] and len(module)==7168 and binascii.crc_hqx(module,65535)==0
+    report=json.loads(json.dumps(old));out.mkdir(parents=True)
+    for name,item in old['artifacts'].items():
+        body=(oldpath.parent/name).read_bytes();assert sha(body)==item['sha256']
+        if item['variant'] in ('B2 bundle','Full tool RAM packet'):
+            assert body[768:776]==module[:8] and body[3:11]==b'WF\x03\x1cPR05'
+            body=body[:768]+module+body[7936:]
+            report['artifacts'][name]['sha256']=sha(body)
+        (out/name).write_bytes(body)
+    report.update(workbench_manifest=str(wbpath.relative_to(ROOT)),build_passes=0,assembler_linker_invocations=0,
+                  reused_service_images_from=str(oldpath.relative_to(ROOT)),module_payload_replaced=True,branch_layout={})
+    (out/'manifest.json').write_text(json.dumps(report,indent=2)+'\n')
+    print('Reused all support; replaced only main MW/02 payload',wb['generation']);return report
+
+
 def repackage_workbench(out, source_manifest, workbench_manifest, generation, bundle_generation=None):
     """Keep dispatcher/loader code; replace the versioned module payload only."""
     out=Path(out).resolve();source_path=Path(source_manifest).resolve()
@@ -178,4 +241,5 @@ if __name__=='__main__':
     p.add_argument('--out',type=Path,required=True);p.add_argument('--generation',type=lambda s:int(s,0),required=True)
     p.add_argument('--workbench-manifest',type=Path,required=True);p.add_argument('--monitor-manifest',type=Path,required=True)
     p.add_argument('--reuse-support',type=Path)
-    a=p.parse_args();build(a.out,a.generation,a.workbench_manifest,a.monitor_manifest,a.reuse_support)
+    p.add_argument('--program-manifest',type=Path,required=True)
+    a=p.parse_args();build(a.out,a.generation,a.workbench_manifest,a.monitor_manifest,a.reuse_support,a.program_manifest)

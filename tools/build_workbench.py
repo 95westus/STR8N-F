@@ -42,12 +42,13 @@ def build(out, generation=1, reuse_loader=None):
     branch_layout = {}
     for filename in ('workbench.asm', 'workbench-loader.asm', 'workbench-interface.inc',
                      'workbench-layout.inc', 'workbench-sram.inc', 'workbench-store.inc',
-                     'workbench-batch.inc', 'workbench-clock.inc'):
+                     'workbench-batch.inc', 'workbench-clock.inc',
+                     'workbench-program.inc', 'program-layout.inc'):
         path = ROOT/'monitors/src'/filename
         body = path.read_text(encoding='utf-8')
         body = body.replace('WB_GENERATION_TEXT',generation_text)
         source_hashes[path.relative_to(ROOT).as_posix()] = sha(path.read_bytes())
-        if filename != 'workbench-layout.inc':
+        if filename not in ('workbench-layout.inc','program-layout.inc'):
             body, info = conservative_branches(body, 'WB_LONG_'+re.sub(r'\W', '_', filename)+'_')
             branch_layout[filename] = info
         (out/filename).write_text(body, encoding='utf-8', newline='\n')
@@ -143,8 +144,9 @@ def build(out, generation=1, reuse_loader=None):
                              stop_on_error=True,cancel='Ctrl-C/ESC between commands or during Table',
                              queue_is_console_input=False,nested_batch=False,
                              completion='returning module commands only; full b35/core/apps parity remains open'),
-                  planned=['Full CLOCK administration and FLASH sector editor', 'Full BATCH command/app parity and AUTO T/S/R for flash and SSRAM PROGRAM',
-                           'APPS and maintenance/config/opaque routing',
+                  companion_PROGRAM='SP/01 provider at6B00-77FF required for PROGRAM; full RAM packet supplied by services manifest',
+                  planned=['Full CLOCK administration and FLASH sector editor', 'Full BATCH command/app parity',
+                           'Merged maintenance/config/opaque routing',
                            'Source/ASM/DEBUG', 'WORKSPACE allocation review and separate append-only messages'],
                   build_passes=1, assembler_linker_invocations=len(logs),
                   reused_loader_from=str(Path(reuse_loader).resolve().relative_to(ROOT)) if reuse_loader else None,

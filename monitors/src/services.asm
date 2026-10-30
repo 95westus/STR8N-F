@@ -74,15 +74,17 @@ S_NAMES:
         BCC S_MODULE_NAMES
         JSR S_END_ARGS
         BCC S_UNHANDLED
-        LDX #<S_APPS_TEXT
-        LDY #>S_APPS_TEXT
-        JMP S_MESSAGE
+        JMP AP_LIST
 S_MODULE_NAMES:
+        LDX #<S_APP_WORD
+        LDY #>S_APP_WORD
+        JSR S_MATCH
+        BCS AP_LAUNCH
         STZ S_LOADER_REQUEST
         LDX #<S_MAINT_WORD
         LDY #>S_MAINT_WORD
         JSR S_MATCH
-        BCS S_REQUEST_LOAD
+        BCS S_MAINT_ARGS
         LDX #<S_FLASH_WORD
         LDY #>S_FLASH_WORD
         JSR S_MATCH
@@ -91,29 +93,62 @@ S_MODULE_NAMES:
         LDY #>S_CLOCK_WORD
         JSR S_MATCH
         BCC S_MODULE
+        BRA S_REQUEST_LOAD
+S_MAINT_ARGS:
+        JSR S_SKIP
+        BEQ S_REQUEST_LOAD
+        LDY #0
+S_FORCE_WORD:
+        LDA S_LINE,X
+        CMP S_LOAD_WORD,Y
+        BNE S_UNHANDLED
+        INX
+        INY
+        CPY #4
+        BCC S_FORCE_WORD
+        JSR S_END_ARGS
+        BCC S_UNHANDLED
+        LDA #2
+        STA S_LOADER_REQUEST
+        BRA S_MODULE
 S_REQUEST_LOAD:
         JSR S_END_ARGS
         BCC S_UNHANDLED
         INC S_LOADER_REQUEST
 S_MODULE:
+        LDA S_LOADER_REQUEST
+        CMP #2
+        BEQ S_FORCE_LOAD
         JSR S_CHECK_WB
         BCS S_CALL_WB
         LDA S_LOADER_REQUEST
         BEQ S_NO_MODULE
-        LDA #SB_RAM_PROVIDER
-        BNE S_NO_MODULE
+S_FORCE_LOAD:
         LDX #<S_LOADING_TEXT
         LDY #>S_LOADING_TEXT
         JSR S_PUTS
+        LDA SB_CLIENT_FLOOR
+        STA S_HAVE_WB
+        LDX #0
+S_SAVE_MON:
+        LDA $6A00,X
+        STA $6700,X
+        INX
+        BNE S_SAVE_MON
         LDX #0
 S_LOAD_COPY:
         LDA S_LOAD_IMAGE,X
         STA SB_LOAD_RAM,X
+        LDA S_LOAD_IMAGE+256,X
+        STA SB_LOAD_RAM+256,X
         INX
         BNE S_LOAD_COPY
-        STZ SB_ENTRY_MODE
+        STZ $68F1
+        LDA #>SB_MODULE_SOURCE
         JSR SB_LOAD_RAM
         BCC S_LOAD_FAILED
+        LDA S_HAVE_WB
+        STA SB_CLIENT_FLOOR
 S_CALL_WB:
         LDA SB_CLIENT_FLOOR
         STA WB_CLIENT_FLOOR
@@ -265,20 +300,19 @@ S_PUTS_END:
         RTS
         INCLUDE "service-map.inc"
         INCLUDE "service-wear.inc"
+        INCLUDE "service-apps.inc"
 S_WB_MAGIC: DB "MW",WB_FORMAT,WB_PAGES,"PR05"
 S_APPS_WORD: DB "APPS",0
+S_APP_WORD: DB "APP",0
 S_MAINT_WORD: DB "MAINT",0
+S_LOAD_WORD: DB "LOAD"
 S_FLASH_WORD: DB "FLASH",0
 S_CLOCK_WORD: DB "CLOCK",0
-S_APPS_TEXT: DB "BASE1 services in B2 bundle; checked on load:",13,10
-        DB "CLOCK read-only; MAINT/FLASH workbench; BATCH returning subset",13,10
-        DB "M1/M2/M3/W: read-only, no workbench RAM needed",13,10
-        DB "Legacy apps retained; advanced CLOCK/FLASH/ASM/DEBUG ports open.",13,10,0
 S_RANGES_TEXT: DB "B0/B1: owner images/records retained. Erased != available.",13,10
-        DB "B2:8/9 service bundle; other B2 assets retained, legacy calls disabled.",13,10
+        DB "B2:8-A tool bundle; other B2 assets retained; legacy calls disabled.",13,10
         DB "B3:A/B MON; C/D boot/wear; E services; F frozen recovery.",13,10
-        DB "MAINT loads WB2 in4800-66FF; FLASH buffer/editor planned.",13,10,0
-S_LOADING_TEXT: DB "Load flash WB2: borrows RAM4800-66FF",13,10,0
+        DB "MAINT LOAD: WB4800-66FF + PROGRAM6B00-77FF.",13,10,0
+S_LOADING_TEXT: DB "Load flash WB2/PROGRAM: 4800-66FF +6B00-77FF",13,10,0
 S_NO_MODULE_TEXT: DB "WB2 absent/invalid. MAINT/CLOCK load the flash bundle.",13,10,0
 S_LOAD_FAILED_TEXT: DB "REFUSED: bundle/header/CRC failed; workbench not called",13,10,0
 S_LOAD_IMAGE:

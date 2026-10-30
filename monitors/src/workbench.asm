@@ -6,6 +6,13 @@
         INCLUDE "str8n-v2-public.inc"
         INCLUDE "workbench-layout.inc"
         INCLUDE "workbench-foundation.inc"
+        INCLUDE "program-layout.inc"
+SP_BASE EQU $6B00
+SP_API_ENTRY EQU SP_BASE+8
+SP_READ_ENTRY EQU SP_BASE+11
+SP_GUARD_ENTRY EQU SP_BASE+14
+WP_MODE EQU $6563
+W_EXPLICIT EQU $6564
         CODE
 W_BEGIN:
         DB "MW",WB_FORMAT,WB_PAGES,"PR05"
@@ -277,6 +284,7 @@ W_HEX_DONE:
 
 ; Optional single-digit bank. Otherwise use the selected data bank.
 W_RECORD_BANK:
+        STZ W_EXPLICIT
         INX
         JSR W_SKIP
         CMP #'0'
@@ -289,12 +297,15 @@ W_RECORD_BANK:
         CPY #0
         BNE W_RECORD_BANK_DONE
 W_RECORD_BANK_SET:
+        INC W_EXPLICIT
         AND #3
         STA W_BANK
         INX
 W_RECORD_BANK_DONE:
         RTS
 W_TABLE_CMD:
+        JSR W_PROGRAM_ARGUMENT
+        BCS WP_TABLE_CMD
         JSR W_RECORD_BANK
         JSR W_END_ARGS
         BCC W_UNHANDLED
@@ -314,6 +325,11 @@ W_TABLE_NEXT:
 W_TABLE_END:
         LDA W_BAD
         BNE W_CANCELED
+        LDA W_EXPLICIT
+        BNE W_TABLE_FINISH
+        LDA W_EDU
+        BNE WP_TABLE
+W_TABLE_FINISH:
         LDX #<W_TABLE_END_TEXT
         LDY #>W_TABLE_END_TEXT
         JSR W_PUTS
@@ -321,7 +337,19 @@ W_TABLE_END:
 ; R [bank] name|address [L]. Names are unique within the selected bank.
 ; Whole destination must be 0200-47FF: the RAM workbench owns 4800-66FF.
 W_RESTORE_CMD:
+        STZ WP_MODE
+        JSR W_PROGRAM_ARGUMENT
+        BCC W_RESTORE_FLASH
+        LDA #1
+        STA WP_MODE
+        BRA W_RESTORE_NAME_ARGS
+W_RESTORE_FLASH:
         JSR W_RECORD_BANK
+        LDA W_EXPLICIT
+        BNE W_RESTORE_NAME_ARGS
+        LDA #2
+        STA WP_MODE
+W_RESTORE_NAME_ARGS:
         JSR W_SKIP
         BEQ W_UNHANDLED
         STX W_IX
@@ -340,6 +368,15 @@ W_NAME_COPY:
         INX
         BRA W_NAME_COPY
 W_NAME_END:
+        LDY W_NAME_LEN
+        LDA #0
+W_NAME_PAD:
+        CPY #16
+        BCS W_NAME_PAD_DONE
+        STA W_NAME,Y
+        INY
+        BRA W_NAME_PAD
+W_NAME_PAD_DONE:
         JSR W_SKIP
         BEQ W_RESTORE_ARGS
         CMP #'L'
@@ -349,6 +386,9 @@ W_NAME_END:
         BCC W_UNHANDLED
         INC W_ONLY
 W_RESTORE_ARGS:
+        LDA WP_MODE
+        CMP #1
+        BEQ WP_RESTORE
         ; All-hex names are addresses, as in the legacy numeric form.
         LDX W_IX
         JSR W_HEX_WORD
@@ -409,6 +449,20 @@ W_RESTORE_SEARCH_NEXT:
 W_RESTORE_SEARCH_END:
         LDA W_BAD
         BNE W_CANCELED
+        LDA WP_MODE
+        CMP #2
+        BNE W_RESTORE_POST_PROGRAM
+        LDA W_EDU
+        BEQ W_RESTORE_POST_PROGRAM
+        JSR WP_LOOKUP
+        BCC W_RESTORE_PROGRAM_MISS
+        LDA W_FOUND
+        BNE W_DUPLICATE
+        JMP WP_RESTORE
+W_RESTORE_PROGRAM_MISS:
+        CMP #$42
+        BNE WP_ERROR
+W_RESTORE_POST_PROGRAM:
         LDA W_FOUND
         BEQ W_NOT_FOUND
         LDA W_RECORD
@@ -744,6 +798,7 @@ W_CACHE_HIT:
 
         INCLUDE "workbench-store.inc"
         INCLUDE "workbench-sram.inc"
+        INCLUDE "workbench-program.inc"
         INCLUDE "workbench-batch.inc"
         INCLUDE "workbench-clock.inc"
         INCLUDE "workbench-clock-read.inc"
@@ -790,6 +845,8 @@ W_PUTS_BYTE:
         BEQ W_PUTS_END
         JSR STR8V2_RAM_PUTC
         INY
+        BNE W_PUTS_BYTE
+        INC W_PTR+1
         BRA W_PUTS_BYTE
 W_PUTS_END:
         RTS
@@ -922,11 +979,11 @@ W_TITLE: DB 13,10,"STR8-N WORKBENCH WB2 gWB_GENERATION_TEXT / BASE1 PR05",13,10
         DB "RAM 0200-47FF; module borrows 4800-66FF",13,10
         DB "EDU OFF (session); ? help; Q returns to monitor",13,10,0
 W_PROMPT_TEXT: DB "WORKBENCH> ",0
-W_SYNTAX_TEXT: DB "REFUSED: syntax, unavailable command or invalid line",13,10,0
-W_HELP_TEXT: DB "B0..3; T [bank]; R [bank] name|addr [L]",13,10
-        DB "AREA bank first last; S bank flash RAMfirst RAMlast [name]",13,10
-        DB "EDU ON|OFF; SRAM [PREP]; WORK; Q monitor",13,10
-        DB "S address or AUTO; AREA closes; HELP",13,10
+W_SYNTAX_TEXT: DB "REFUSED: syntax/command/input",13,10,0
+W_HELP_TEXT: DB "B0..3; T [bank|P]; R [bank|P] name|addr [L]",13,10
+        DB "AREA bank first last; S bank|P addr|AUTO RAMfirst RAMlast [name]",13,10
+        DB "EDU ON|OFF; SRAM [PREP|READ half addr]; WORK; Q",13,10
+        DB "AREA closes",13,10
         DB "CLOCK read-only; Q -> Bx> for M1/W/D/M/!M",13,10
         DB "BATCH cmd;cmd (34 bytes): B T ? HELP EDU SRAM WORK",13,10,0
 W_BANK_TEXT: DB "Data bank B",0
@@ -935,7 +992,7 @@ W_TABLE_END_TEXT: DB "Scan ended. SR01 has no payload checksum.",13,10,0
 W_LOADED_TEXT: DB "Loaded; RAM readback matched source. SR01 has no payload CRC.",13,10,0
 W_RANGE_TEXT: DB "REFUSED: record bounds or reserved destination RAM",13,10,0
 W_NOT_FOUND_TEXT: DB "No complete SR01 record at that address/name",13,10,0
-W_DUPLICATE_TEXT: DB "REFUSED: duplicate name in selected bank; use address",13,10,0
+W_DUPLICATE_TEXT: DB "REFUSED: ambiguous name; select bank/P/address",13,10,0
 W_PARTIAL_TEXT: DB "Stopped: destination RAM may be partially loaded",13,10,0
 W_CANCELED_TEXT: DB "Canceled; no restore started",13,10,0
 W_CODE_END:

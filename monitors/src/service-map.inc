@@ -219,15 +219,22 @@ SM_NOT_WDC:
         CMP #'F'
         BNE SM_NOT_BUNDLE
         LDA S_HEADER+5
-        CMP #WB_FORMAT
+        CMP #2
+        BEQ SM_BUNDLE_V2
+        CMP #3
         BNE SM_NOT_BUNDLE
-        INC S_HAVE_WB
+        LDA #$B0
+        BRA SM_BUNDLE_END
+SM_BUNDLE_V2:
+        LDA #$A0
+SM_BUNDLE_END:
+        STA S_HAVE_WB
 SM_BUNDLE_NEXT:
-        LDA S_ROW_PAGE
-        CMP #$A0
-        BCS SM_NOT_BUNDLE
         LDA S_HAVE_WB
         BEQ SM_NOT_BUNDLE
+        LDA S_ROW_PAGE
+        CMP S_HAVE_WB
+        BCS SM_NOT_BUNDLE
         LDX #<SM_BUNDLE_TAG
         LDY #>SM_BUNDLE_TAG
         RTS

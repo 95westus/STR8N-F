@@ -17,8 +17,18 @@ WORK dispatch and positive BATCH ESC/Ctrl-C cancellation also passed the
 service repair. The installed tools use STR8-N / MON A/B; Mona is retired. F and published
 N-F v0.3.0 downloads remain unchanged.
 
+A later [storage/APPS checkpoint](docs/STORAGE_APPS_COMMANDS.md) has passed
+2512 RAM qualification: PROGRAM Store/AUTO, shared Table/Restore, CRC-checked
+APPS launch and public return. Its expanded flash installation awaits the
+[reviewed B2:A and C-journal rotation scope](docs/STORAGE_APPS_2512_SCOPE_REVIEW.md).
+One explicitly approved superseded SRAM CLK entry was retired after confirming
+an identical retained payload, freeing11264 PROGRAM bytes; distinct builds
+remain. The new [current-time host collector](docs/TIME_SAMPLES.md) passed
+on-demand and periodic live tests without a BIN or board-storage write.
+These development results do not change the installed version or published kit.
+
 **Full 2.0b35 capability remains the completion target**, including SSRAM
-PROGRAM Store/AUTO and separate cross-backend Table/Restore discovery, full APPS/source/ASM/DEBUG, CLOCK administration,
+PROGRAM Store/AUTO and cross-backend discovery installation, full source/ASM/DEBUG, CLOCK administration,
 the 4KB FLASH editor and the merged MAINT/CONFIG pages. See the
 [command manual](docs/MONA_COMMANDS.md), [accepted services design](docs/MON_BOARD_SERVICES_PLAN.md)
 and [parity checklist](docs/MON_B35_PARITY.md). These planned features are not

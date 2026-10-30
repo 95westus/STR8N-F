@@ -71,6 +71,9 @@ WS_AREA_MESSAGE:
         JMP W_MESSAGE
 
 WS_STORE:
+        STZ WP_MODE
+        JSR W_PROGRAM_ARGUMENT
+        BCS WP_STORE
         INX
         JSR WS_BANK_ARG
         BCC W_UNHANDLED
@@ -178,6 +181,8 @@ WS_NAME_END:
         STA W_HEADER+2
         LDA #$FF
         STA W_HEADER+3
+        LDA WP_MODE
+        BNE WP_STORE_READY
         JSR W_CHECK_HEADER
         BCC W_RANGE
         LDA W_AREA_END+1
@@ -214,6 +219,7 @@ WS_BLANK_NEXT:
         JSR W_PUTS
         JSR W_SHOW_LOCATION
         JSR STR8V2_RAM_NEWLINE
+WS_CONFIRM_DIALOG:
         LDX #<WS_CONFIRM_TEXT
         LDY #>WS_CONFIRM_TEXT
         JSR W_PUTS
@@ -234,6 +240,8 @@ WS_BLANK_NEXT:
         BCC WS_CANCEL
         JSR W_CANCEL
         BCS WS_CANCEL
+        LDA WP_MODE
+        BNE WP_STORE_COMMIT
         ; Suppress the foundation NMI path while the chip can be busy. An
         ; arbitrary owner NMI/DMA agent is outside this foreground contract.
         LDA W_F_NMI_GATE

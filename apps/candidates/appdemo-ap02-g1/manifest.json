@@ -1,0 +1,24 @@
+{
+  "component": "AP/02 public-ABI example",
+  "name": "APPDEMO",
+  "bank": 0,
+  "base": "9000",
+  "entry": "9020",
+  "bytes": 120,
+  "image": {
+    "filename": "STR8N-APPDEMO-AP02-B0-9000.bin",
+    "sha256": "a9f4842a1ec2b1554b321281f2b2f79ccf15c29dcdcaceef3acff047934854cf"
+  },
+  "sector": {
+    "filename": "STR8N-APPDEMO-AP02-B0-9-SECTOR.bin",
+    "sha256": "3d364e26db8bd91741f3627808d81e2bfcdfd76cd0092492adeceab70be33967"
+  },
+  "source_sha256": {
+    "apps/examples/appdemo.asm": "901d717614c7d4239b4973daba7c40ef64ef069707267314aa7942e2db81946c"
+  },
+  "build_passes": 1,
+  "assembler_linker_invocations": 2,
+  "status": "BUILD_ONLY_NOT_EXECUTION_QUALIFIED",
+  "F_rebuilt": false,
+  "CPU_simulations": 0
+}

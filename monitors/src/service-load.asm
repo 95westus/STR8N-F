@@ -1,5 +1,5 @@
-; RAM bank-safe loader for the explicitly requested flash workbench.
-; Linked at7000, below the frozen 7800 worker. Never writes flash or SPI SRAM.
+; Three-sector tool loader, linked6900. Caller preserves6A at6700 before copy.
+; Fixed sources05 (raw RAM) or83 (B2). Destinations4800-63FF and6B00-77FF.
         MODULE SERVICE_LOAD
         INCLUDE "str8n-v2-public.inc"
         INCLUDE "workbench-interface.inc"
@@ -7,20 +7,43 @@
         INCLUDE "service-foundation.inc"
 SL_PTR EQU $E0
 SL_COPY EQU $E6
-SL_CRC EQU $69F8
+SL_SOURCE EQU $68F0
+SL_MODE EQU $68F1
+SL_CRC EQU $68F2
+SL_RESULT EQU $68F4
         CODE
 SL_START:
-        SEI
-        CLD
-        LDX #3
-SL_RA_CHECK:
-        LDA STR8V2_RAM_SIGNATURE,X
-        CMP SL_RA,X
-        BNE SL_LOCK
-        DEX
-        BPL SL_RA_CHECK
+        STA SL_SOURCE
+        JMP SL_WORK
+; This entire finish routine must remain below6A00, which it restores.
+SL_FINISH:
         LDA #3
         JSR SB_F_SELECT
+        LDX #0
+SL_RESTORE:
+        LDA $6700,X
+        STA $6A00,X
+        INX
+        BNE SL_RESTORE
+        LDA SL_RESULT
+        BNE SL_FAILED
+        JSR WB_INIT
+        LDA SL_MODE
+        BNE SL_BOOT
+        SEC
+        RTS
+SL_BOOT:
+        JMP WB_SHELL
+SL_FAILED:
+        LDA SL_MODE
+        BNE SL_RECOVERY
+        CLC
+        RTS
+SL_RECOVERY:
+        JMP SB_F_RECOVERY
+SL_WORK:
+        SEI
+        CLD
         LDA #$F0
         LDX #16
         JSR SL_CRC_PAGES
@@ -30,22 +53,66 @@ SL_RA_CHECK:
         LDA SL_CRC+1
         CMP #SB_F_CRC_HI
         BNE SL_LOCK
+        LDA SL_SOURCE
+        CMP #5
+        BEQ SL_COPY_START
+        CMP #$83
+        BNE SL_FAIL
         LDA #2
         JSR SB_F_SELECT
         LDX #7
 SL_BUNDLE_CHECK:
         LDA $8003,X
         CMP SL_BUNDLE,X
-        BNE SL_FAIL_BANK
+        BNE SL_FAIL
         DEX
         BPL SL_BUNDLE_CHECK
+SL_COPY_START:
         STZ SL_PTR
         STZ SL_COPY
-        LDA #>SB_MODULE_SOURCE
+        LDA SL_SOURCE
         STA SL_PTR+1
-        LDA #>WB_ORIGIN
+        LDA #$48
         STA SL_COPY+1
-        LDX #WB_PAGES
+        LDX #28
+        JSR SL_COPY_PAGES
+        LDA #$6B
+        STA SL_COPY+1
+        LDX #13
+        JSR SL_COPY_PAGES
+        LDA #3
+        JSR SB_F_SELECT
+        LDX #7
+SL_HEADERS:
+        LDA $4800,X
+        CMP SL_MODULE,X
+        BNE SL_FAIL
+        LDA $6B00,X
+        CMP SL_PROGRAM,X
+        BNE SL_FAIL
+        DEX
+        BPL SL_HEADERS
+        LDA #$48
+        LDX #28
+        JSR SL_CRC_PAGES
+        LDA SL_CRC
+        ORA SL_CRC+1
+        BNE SL_FAIL
+        LDA #$6B
+        LDX #13
+        JSR SL_CRC_PAGES
+        LDA SL_CRC
+        ORA SL_CRC+1
+        BNE SL_FAIL
+        STZ SL_RESULT
+        JMP SL_FINISH
+SL_FAIL:
+        LDA #1
+        STA SL_RESULT
+        JMP SL_FINISH
+SL_LOCK:
+        BRA SL_LOCK
+SL_COPY_PAGES:
         LDY #0
 SL_COPY_BYTE:
         LDA (SL_PTR),Y
@@ -56,40 +123,7 @@ SL_COPY_BYTE:
         INC SL_COPY+1
         DEX
         BNE SL_COPY_BYTE
-        LDA #3
-        JSR SB_F_SELECT
-        LDX #7
-SL_MODULE_CHECK:
-        LDA WB_ORIGIN,X
-        CMP SL_MODULE,X
-        BNE SL_FAIL
-        DEX
-        BPL SL_MODULE_CHECK
-        LDA #>WB_ORIGIN
-        LDX #WB_PAGES
-        JSR SL_CRC_PAGES
-        LDA SL_CRC
-        ORA SL_CRC+1
-        BNE SL_FAIL
-        JSR WB_INIT
-        LDA SB_ENTRY_MODE
-        BNE SL_BOOT
-        SEC
         RTS
-SL_BOOT:
-        JMP WB_SHELL
-SL_FAIL_BANK:
-        LDA #3
-        JSR SB_F_SELECT
-SL_FAIL:
-        LDA SB_ENTRY_MODE
-        BNE SL_RECOVERY
-        CLC
-        RTS
-SL_RECOVERY:
-        JMP SB_F_RECOVERY
-SL_LOCK:
-        BRA SL_LOCK
 SL_CRC_PAGES:
         STZ SL_PTR
         STA SL_PTR+1
@@ -123,9 +157,9 @@ SL_CRC_NEXT:
         DEX
         BNE SL_CRC_BYTE
         RTS
-SL_RA: DB "RA",1,13
-SL_BUNDLE: DB "WF",WB_FORMAT,WB_PAGES,"PR05"
-SL_MODULE: DB "MW",WB_FORMAT,WB_PAGES,"PR05"
+SL_BUNDLE: DB "WF",3,28,"PR05"
+SL_MODULE: DB "MW",2,28,"PR05"
+SL_PROGRAM: DB "SP",1,13,"PR05"
 SL_END:
         ENDMOD
         END
