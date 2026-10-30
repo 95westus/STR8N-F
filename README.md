@@ -1,4 +1,14 @@
-# STR8N-F v0.3.0 — BASE1 / PR05
+# STR8N-F v0.3.0 — Foundation / BASE1 / PR05
+
+**4K Foundation. Up to four banked environments.**
+
+A 4 KB foundation for your own environments.
+
+One board. Four selectable flash banks. Compatible boot environments of your
+own, running one at a time on shared CPU, RAM and peripherals. Foundation is
+the stable 4 KB F sector beneath those environments; C/D hold its persistent
+boot settings and tracked erase journal. The monitors and tools are optional
+layers above it. The frozen firmware identity remains BASE1 / PR05.
 
 **[Download optional MON/tools preview 1](https://github.com/95westus/STR8N-F/releases/tag/mon-g8-tools-preview1):**
 MON B 0.1.0-dev g8, services g4, WB2 g5 and
@@ -14,13 +24,14 @@ advanced CLOCK, the 4KB FLASH editor and CONFIG integration remain unfinished.
 2512 retains its [earlier installed workbench](docs/MON_STORE_AUTO_2512_ACCEPTANCE.md);
 new PROGRAM/APPS passed its separate RAM tests.
 
+The [Foundation release path and next qualification](docs/FOUNDATION_RELEASE_PATH.md)
+separate the released 4 KB foundation from optional monitor features. The next
+live gate is positive PROGRAM Store/Restore/run on 2609, with exact temporary
+SRAM restoration and no flash writes.
+
 Preview free bytes within components: F367, MON A/B67 each, E82, WB2 g5 30,
 PROGRAM487. These are not declarations of free owner sectors. The historical
 branch spelling is retained; runtime naming is STR8-N / MON A/B.
-
-
-> 4KB of firmware. One board. Up to four boot environments.
-
 For WDC's **W65C02SXB** and **W65C816SXB** boards:
 
 | SXB board | N-F CPU mode | Optional matching EDU add-on |
@@ -159,5 +170,5 @@ the tested rc1 ZIP remains immutable.
 documentation. The immutable `v0.3.0` tag identifies the released source;
 later documentation commits do not change the download archives. New work
 uses short `codex/...` feature branches and pull requests into `main`.
-Mona and proposed service/ABI extensions are follow-on work. See
+MON A/B and proposed service/ABI extensions are follow-on work. See
 [development policy](docs/DEVELOPMENT.md).

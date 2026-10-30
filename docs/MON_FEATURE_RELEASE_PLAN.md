@@ -16,7 +16,12 @@ passed. The original five replacements plus the separately approved D/E
 dispatcher repair are closed. Only the narrow dispatcher repair was rebuilt,
 once. RTC collection was re-admitted with its unchanged instrument and retained
 history. The optional preview packages these exact bytes and the unchanged
-Python terminal; SOURCE/ASM/DEBUG is the next feature increment.
+Python terminal. Preview 1 is now published. The next qualification closes
+positive PROGRAM Store/Restore/run on 2609; the current 816 evidence is query
+and cancel-only. Retest services g4 on 65C02 separately. SOURCE/ASM/DEBUG is
+the next implementation increment. See the
+[Foundation release path](FOUNDATION_RELEASE_PATH.md) for the remaining package
+and CPU/backend qualification boundaries.
 
 Deliver one optional monitor/tools preview, separate from frozen N-Fv0.3.0:
 Dump/Modify/force guards, map/wear, TIME/CLOCK, flash and PROGRAM Table/Restore,
