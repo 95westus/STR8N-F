@@ -1,6 +1,7 @@
 # STR8N-F v0.3.0 — BASE1 / PR05
 
-**Optional MON/tools preview:** MON B 0.1.0-dev g8, services g4, WB2 g5 and
+**[Download optional MON/tools preview 1](https://github.com/95westus/STR8N-F/releases/tag/mon-g8-tools-preview1):**
+MON B 0.1.0-dev g8, services g4, WB2 g5 and
 PROGRAM/SP1 are [installed and accepted on 2609/65C816 emulation](docs/2609_MON_FEATURE_ACCEPTANCE.md).
 CLOCK, explicit reload, PROGRAM Table, bounded BATCH and AUTO/NO passed;
 RTC/NTP collection is re-admitted. 2604 remains the intact rc1 reference.

@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "passed": true,
+  "release": "mon-g8-tools-preview1",
+  "release_url": "https://github.com/95westus/STR8N-F/releases/tag/mon-g8-tools-preview1",
+  "prerelease": true,
+  "draft": false,
+  "marked_latest": false,
+  "latest_stable": "v0.3.0",
+  "tag_commit": "94ef0696dbaa3cb8d66f6355db480fba093b3d60",
+  "source_review": "https://github.com/95westus/STR8N-F/pull/5",
+  "assets": [
+    {
+      "name": "STR8N-MON-g8-tools-preview1.zip",
+      "bytes": 1340150,
+      "sha256": "7060d12593215ff9bef9c5425cba298d0042b8a7fa9e1eb89f056f58524591cf",
+      "server_digest_matched": true
+    },
+    {
+      "name": "STR8N-MON-94ef069-source.zip",
+      "bytes": 1159143,
+      "sha256": "923f7022a0a84e2da2f5c55cf3953e41d1359aba5b81112cb8cab22a7ef7c848",
+      "server_digest_matched": true
+    },
+    {
+      "name": "MONITOR-MANUAL.md",
+      "bytes": 6771,
+      "sha256": "22c3750fe3235371d127782825ad205727944fed4caa2f7696838528e0ffdde9",
+      "server_digest_matched": true
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 277,
+      "sha256": "248d7e70a8a0a70d214b5525dd462e3fccc6feae0e7716b6e86bf09a074b5a07",
+      "server_digest_matched": true
+    }
+  ],
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "all_foundation_members_identical_to_original_published_operator_ZIP": true,
+  "existing_downloads_changed": false,
+  "main_changed": false,
+  "extracted_kit_manifests_and_console_help_passed": true,
+  "firmware_rebuilt_for_packaging": false,
+  "owner_vendor_captures_included": false
+}
