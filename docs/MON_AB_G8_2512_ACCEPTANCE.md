@@ -1,5 +1,9 @@
 # 2512 g8: direct M1/W and board-stored CLOCK/MAINT
 
+This records the g8 / WB2 g2-g3 service checkpoint. The later
+[WB2 g4 AUTO acceptance](MON_STORE_AUTO_2512_ACCEPTANCE.md) records current
+flash Store, final counts, RAM-cache behavior and the 63-byte module remainder.
+
 **Installed and passed on 2026-10-29: 65C02 / FT245 / 2512 only.**
 [Current receipt](../monitors/validation/2512-mon-g8-services-repair.json),
 [initial receipt](../monitors/validation/2512-mon-g8-services.json),

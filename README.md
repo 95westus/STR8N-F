@@ -5,9 +5,11 @@ and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
 MON A/B **0.1.0-dev g00000008** is [installed and tested on 2512](docs/MON_AB_G8_2512_ACCEPTANCE.md),
 with identical A/B commands and the familiar B0> through B3> prompt.
 **M1/M2/M3 and W are back**, using the optional B3:E dispatcher without borrowing
-owner RAM. **CLOCK** opens a bounded read-only RTC page. **MAINT/FLASH** load the
-board-stored workbench from B2:8/9; no host BIN is needed. The module has
-Table/Restore, explicit AREA/Store, EDU/SRAM status and the bounded BATCH subset.
+owner RAM. **CLOCK** opens a bounded read-only RTC page. **MAINT/FLASH** enter
+an admitted cached workbench, loading B2:8/9 if absent/invalid. No host BIN is
+needed. The module has
+Table/Restore, AREA/Store with [AUTO flash start-address selection](docs/MON_STORE_AUTO.md),
+EDU/SRAM status and the bounded BATCH subset.
 
 The saved B default boots g8. All original boot/wear rows, other images and
 owner RAM/ZP were preserved and verified after physical RESET; COM4 is released.
@@ -15,18 +17,20 @@ WORK dispatch and positive BATCH ESC/Ctrl-C cancellation also passed the
 service repair. The installed tools use STR8-N / MON A/B; Mona is retired. F and published
 N-F v0.3.0 downloads remain unchanged.
 
-**Full 2.0b35 capability remains the completion target**, including AUTO T/S/R
-for flash and SSRAM PROGRAM, full APPS/source/ASM/DEBUG, CLOCK administration,
+**Full 2.0b35 capability remains the completion target**, including SSRAM
+PROGRAM Store/AUTO and separate cross-backend Table/Restore discovery, full APPS/source/ASM/DEBUG, CLOCK administration,
 the 4KB FLASH editor and the merged MAINT/CONFIG pages. See the
 [command manual](docs/MONA_COMMANDS.md), [accepted services design](docs/MON_BOARD_SERVICES_PLAN.md)
 and [parity checklist](docs/MON_B35_PARITY.md). These planned features are not
 implied by the current command names.
 
-Free bytes: **F 367; MON A/B 67 each; E 981; WB2 273**. Explicit MAINT/CLOCK loads
+Free bytes: **F 367; MON A/B 67 each; E 981; WB2 63**. Explicit MAINT/CLOCK loads
 borrow RAM 4800-66FF; application RAM while loaded is 0200-47FF. M1/W do not load
 that module. The refined layout saves 2KB RAM and one flash sector against the
-earlier 9KB prototype. Restoring owner RAM evicts WB2; explicit commands reload
-it from flash. See the acceptance record for measured sizes and qualification.
+earlier 9KB prototype. Owner restoration reinstated valid cached WB2 g3 on2512.
+To use current flash **g4**, select **B2**, then **G 8000**; Q returns to MON B.
+See [AUTO acceptance](docs/MON_STORE_AUTO_2512_ACCEPTANCE.md) for exact scope,
+preservation, measured sizes and the remaining one-append journal capacity.
 
 > Give me 4KB, I can give you 4 boards.
 

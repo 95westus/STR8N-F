@@ -363,17 +363,17 @@ W_WORK_WORD: DB "WORK",0
 W_PREP_WORD: DB "PREP"
 W_LAYOUT_EXPECTED: DB "SS",2,8
 W_EDU_OFF_TEXT: DB "EDU OFF (session; no bus access)",13,10,0
-W_EDU_ON_TEXT: DB "EDU ON (session; Rev D profile selected, not presence proof)",13,10,0
-W_EDU_REQUIRED_TEXT: DB "EDU OFF; use EDU ON for the Rev D SPI profile",13,10,0
+W_EDU_ON_TEXT: DB "EDU ON (Rev D profile; not presence proof)",13,10,0
+W_EDU_REQUIRED_TEXT: DB "EDU OFF; use EDU ON (Rev D)",13,10,0
 W_PREP_TEXT: DB "Disabled CB flags acknowledged; no SPI clocks",13,10,0
 W_PIN_BUSY_TEXT: DB "SSRAM: pins/CB flags busy; no SPI transaction",13,10,0
-W_LAYOUT_INVALID_TEXT: DB "SSRAM: no valid SS1/SS2 layout; absent, unformatted or unsupported; no repair",13,10,0
+W_LAYOUT_INVALID_TEXT: DB "SSRAM: no valid SS1/SS2 layout; no repair",13,10,0
 W_LAYOUT_V1_TEXT: DB "SSRAM: legacy SS1 layout (read only)",13,10,0
 W_SRAM_UNAVAILABLE_TEXT: DB "SSRAM: unavailable (mode response rejected)",13,10,0
-W_FALLBACK_TEXT: DB "SSRAM: fallback SS2 layout; primary needs review; read only",13,10,0
+W_FALLBACK_TEXT: DB "SSRAM: fallback SS2; review primary; read only",13,10,0
 W_PROGRAM_TEXT: DB "SSRAM: PROGRAM payload ",0
 W_WORK_TEXT: DB " bytes",13,10,0
-W_WORK_GUARD_TEXT: DB "WORKSPACE allocation not inspected; messages/source writes disabled",13,10,0
+W_WORK_GUARD_TEXT: DB "WORKSPACE unmounted; messages/source writes disabled",13,10,0
 W_CAP16: DB "14336 bytes; WORKSPACE 114656",0
 W_CAP32: DB "30720 bytes; WORKSPACE 98272",0
 W_CAP48: DB "47104 bytes; WORKSPACE 81888",0

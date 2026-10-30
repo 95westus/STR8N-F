@@ -1,5 +1,10 @@
 # WB1 g3: Store, Table and Restore
 
+Historical WB1 checkpoint. Current MON A/B uses WB2 at 4800-66FF, with source
+RAM 0200-47FF. See [AUTO Store](MON_STORE_AUTO.md) for the new start-address
+selection increment and its live qualification status. The WB1 addresses and
+loading example below describe the earlier immutable artifacts.
+
 The Store implementation uses the existing SR01 flash-record format. It is a
 RAM-loaded WB1 module, available through MON A/B's shared module interface. It
 does not change the frozen F ABI or allocate flash automatically.

@@ -76,8 +76,8 @@ WC_Q_WORD: DB "Q",0
 WC_R_WORD: DB "R",0
 WC_TIME_WORD: DB "TIME",0
 WC_HELP_WORD: DB "?",0
-WC_UI_TITLE: DB "CLOCK BASE1 / PR05 - read-only Rev D MCP79411",13,10
-        DB "R/TIME refresh; Q return; ? help. Zone unconfigured.",13,10
-        DB "* Flags observed; battery health unverified. SET/history planned.",13,10,0
+WC_UI_TITLE: DB "CLOCK BASE1 / PR05 - read-only",13,10
+        DB "Rev D MCP79411; R/TIME refresh; Q return; ? help; zone --.",13,10
+        DB "* Health unverified. SET/history planned.",13,10,0
 WC_PROMPT: DB "CLOCK> ",0
 WC_ERROR_TEXT: DB "RTC read refused/failed $",0

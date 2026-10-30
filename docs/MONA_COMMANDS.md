@@ -6,11 +6,12 @@ slot checks, physical saved-default B boot and exact owner RAM/ZP restoration.
 The prompt B0> through B3> shows the selected data bank; slot identity stays
 in the banner. Q/reentry starts with data bank 3 again.
 
-M1/W use the optional E dispatcher without borrowing owner RAM. MAINT or CLOCK
-explicitly loads WB2 g3 from the B2:8/9 flash bundle; no host BIN is needed.
-It borrows RAM 4800-66FF, leaving application RAM 0200-47FF while loaded. Owner
-restoration evicts it; the next explicit tool load retrieves it from flash.
-Use MAINT then Q to load it before ordinary T/S/R/BATCH commands if absent.
+M1/W use the optional E dispatcher without borrowing owner RAM. WB2 g4 is stored
+in B2:8/9; it borrows 4800-66FF and leaves application RAM 0200-47FF while loaded.
+MAINT/CLOCK accepts a valid compatible RAM module and loads flash only if it is
+absent/invalid. Owner restoration reinstated cached g3 on2512. To explicitly
+load current flash g4, use **B2**, then **G 8000**; Q returns to MON B. No host
+BIN is needed. See [AUTO acceptance](MON_STORE_AUTO_2512_ACCEPTANCE.md).
 
 CLOCK is a read-only page. FLASH currently aliases the workbench. Advanced
 CLOCK, the full sector editor/erase/copy, merged CONFIG menu and complete
@@ -25,8 +26,8 @@ and immutable qualification artifacts retain their historical spelling.
 | `M`, `M1`, `M2`, `M3` | Sector-format grid, layout notes, or wear counters; read-only |
 | `W` | All32 tracked erase counts in hex; shared prior-wear caveat |
 | `APPS` | Native service catalogue; compatible owner-app discovery remains planned |
-| `CLOCK` | Load from flash, read/refresh RTC, Q back to caller; no SET/history administration |
-| `MAINT`, `FLASH` | Explicitly load/enter the workbench; Q returns to the active monitor |
+| `CLOCK` | Use cached module or load flash if absent; read/refresh RTC, Q back; no SET/history administration |
+| `MAINT`, `FLASH` | Enter cached module or load flash if absent; Q returns to the active monitor |
 | `BATCH cmd;cmd` | Loaded WB2 returning-command subset, 34 text bytes; full core/app parity open |
 | `B0`-`B3` or `B 0`-`B 3` | Select the flash data bank; RAM is common to all banks |
 | `D addr [end]` | Hex/ASCII dump; default 16 bytes; explicit larger ranges allowed |
@@ -37,8 +38,8 @@ and immutable qualification artifacts retain their historical spelling.
 | `G addr` | Explicit application entry; public HOLD restarts the active monitor |
 | `L` | ROM MON A/B: enter frozen F's raw RAM BIN loader; Ctrl-C before payload returns REC> |
 | `T [bank]`, `R [bank] name\|address [L]` | Loaded WB2: Table/Restore; suffix L loads only |
-| `AREA bank first last`, `AREA` | Loaded WB2 g3: declare/close a B0/B1 owner flash window; no flash write |
-| `S bank flash RAMfirst RAMlast [name]` | Loaded WB2 g3: Store fresh SR01 bytes after YES, no erase |
+| `AREA bank first last`, `AREA` | Loaded WB2 g4: declare/close a B0/B1 owner flash window; no flash write |
+| `S bank address\|AUTO RAMfirst RAMlast [name]` | Loaded WB2 g4: explicit or automatically determined flash start; YES, no erase; [details](MON_STORE_AUTO.md) |
 | `HELP` | Full loaded-module help |
 | `EDU [ON\|OFF]`, `SRAM`, `WORK` | Loaded WB2: explicit session EDU policy and read-only layout/capacity |
 | `Q` | Deliberately return to REC>, regardless of the saved default |

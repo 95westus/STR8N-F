@@ -1,4 +1,4 @@
-; AREA is an explicit owner allocation window in B0/B1, not free-space inference.
+; AREA admits a B0/B1 record arena. AUTO finds its append tail, never FF payload.
 ; S commits only fresh bytes. All code stays in RAM; F, C/D and SRAM never written.
 WS_BANK_ARG:
         JSR W_SKIP
@@ -80,6 +80,34 @@ WS_STORE:
         CMP W_AREA_BANK
         BNE WS_NO_AREA
         STA W_BANK
+        JSR W_SKIP
+        CMP #'A'
+        BNE WS_EXPLICIT
+        LDA W_LINE+1,X
+        CMP #'U'
+        BNE WS_EXPLICIT
+        LDY #0
+WS_AUTO_TOKEN:
+        LDA W_LINE,X
+        CMP WS_AUTO_WORD,Y
+        BNE W_UNHANDLED
+        INX
+        INY
+        CPY #4
+        BCC WS_AUTO_TOKEN
+        LDA W_LINE,X
+        CMP #' '
+        BNE W_UNHANDLED
+        PHX
+        JSR WS_AUTO_TAIL
+        PLX
+        BCS WS_FIRST_OK
+        LDA W_BAD
+        BNE WS_CANCEL
+        LDX #<WS_AUTO_BAD_TEXT
+        LDY #>WS_AUTO_BAD_TEXT
+        JMP W_RECORD_ERROR
+WS_EXPLICIT:
         JSR W_HEX_WORD
         BCC W_UNHANDLED
         LDA W_VALUE
@@ -177,6 +205,15 @@ WS_BLANK_NEXT:
         LDA W_ADDR
         CMP W_END
         BNE WS_BLANK_BYTE
+        LDA W_STORE_FIRST
+        STA W_ADDR
+        LDA W_STORE_FIRST+1
+        STA W_ADDR+1
+        LDX #<WS_TARGET_TEXT
+        LDY #>WS_TARGET_TEXT
+        JSR W_PUTS
+        JSR W_SHOW_LOCATION
+        JSR STR8V2_RAM_NEWLINE
         LDX #<WS_CONFIRM_TEXT
         LDY #>WS_CONFIRM_TEXT
         JSR W_PUTS
@@ -298,6 +335,92 @@ WS_FAILED:
         STA W_LED
 WS_HALT:
         BRA WS_HALT
+
+; Scan from8000 so an AREA beginning inside a structural record is refused.
+; Outside AREA, unknown bytes are ignored. Inside, only FF and valid SR01
+; complete/pending records are admitted. Gaps are not reclaimed automatically.
+; Called before building the new header: the validator may use W_HEADER.
+WS_AUTO_TAIL:
+        LDA W_AREA_FIRST
+        STA W_STORE_FIRST
+        LDA W_AREA_FIRST+1
+        STA W_STORE_FIRST+1
+        STZ W_ADDR
+        LDA #$80
+        STA W_ADDR+1
+        STZ W_CACHE_VALID
+WS_AUTO_SCAN:
+        JSR W_CANCEL
+        BCS WS_AUTO_BAD
+        LDA W_ADDR+1
+        CMP W_AREA_END+1
+        BCC WS_AUTO_BYTE
+        BNE WS_AUTO_DONE
+        LDA W_ADDR
+        CMP W_AREA_END
+        BCS WS_AUTO_DONE
+WS_AUTO_BYTE:
+        JSR W_FLASH_BYTE
+        CMP #$FF
+        BEQ WS_AUTO_ADVANCE
+        CMP #'S'
+        BNE WS_AUTO_UNKNOWN
+        JSR W_VALIDATE_RECORD
+        BCC WS_AUTO_UNKNOWN
+        ; A record ending before AREA does not occupy the admitted arena.
+        LDA W_END+1
+        CMP W_AREA_FIRST+1
+        BCC WS_AUTO_SKIP
+        BNE WS_AUTO_OVERLAP
+        LDA W_END
+        CMP W_AREA_FIRST
+        BCC WS_AUTO_SKIP
+        BEQ WS_AUTO_SKIP
+WS_AUTO_OVERLAP:
+        ; Crossing either AREA boundary is unsafe, even with erased payload.
+        JSR WS_AUTO_IN_AREA
+        BCC WS_AUTO_BAD
+        LDA W_AREA_END+1
+        CMP W_END+1
+        BCC WS_AUTO_BAD
+        BNE WS_AUTO_TAIL_SET
+        LDA W_AREA_END
+        CMP W_END
+        BCC WS_AUTO_BAD
+WS_AUTO_TAIL_SET:
+        LDA W_END
+        STA W_STORE_FIRST
+        LDA W_END+1
+        STA W_STORE_FIRST+1
+WS_AUTO_SKIP:
+        JSR W_SKIP_RECORD
+        BRA WS_AUTO_SCAN
+WS_AUTO_UNKNOWN:
+        JSR WS_AUTO_IN_AREA
+        BCS WS_AUTO_BAD
+WS_AUTO_ADVANCE:
+        INC W_ADDR
+        BNE WS_AUTO_SCAN
+        INC W_ADDR+1
+        BRA WS_AUTO_SCAN
+WS_AUTO_DONE:
+        LDA W_STORE_FIRST
+        STA W_ADDR
+        LDA W_STORE_FIRST+1
+        STA W_ADDR+1
+        SEC
+        RTS
+WS_AUTO_IN_AREA:
+        LDA W_ADDR+1
+        CMP W_AREA_FIRST+1
+        BNE WS_AUTO_RETURN
+        LDA W_ADDR
+        CMP W_AREA_FIRST
+WS_AUTO_RETURN:
+        RTS
+WS_AUTO_BAD:
+        CLC
+        RTS
 WS_NO_AREA:
         LDX #<WS_NO_AREA_TEXT
         LDY #>WS_NO_AREA_TEXT
@@ -315,6 +438,9 @@ WS_CANCEL:
 WS_AREA_WORD: DB "AREA",0
 WS_HELP_WORD: DB "HELP",0
 WS_YES_WORD: DB "YES",0
+WS_AUTO_WORD: DB "AUTO"
+WS_AUTO_BAD_TEXT: DB "REFUSED: AREA overlap/corrupt",13,10,0
+WS_TARGET_TEXT: DB "Target ",0
 WS_AREA_TEXT: DB "AREA updated (RAM only)",13,10,0
 WS_NO_AREA_TEXT: DB "REFUSED: declare AREA bank first last (B0/B1)",13,10,0
 WS_OCCUPIED_TEXT: DB "REFUSED: target not entirely erased",13,10,0

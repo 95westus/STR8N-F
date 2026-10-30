@@ -1,5 +1,5 @@
 ; WB2 RAM workbench. Store programs fresh SR01 bytes only; never erases.
-; ROM monitor bridge contract: validate immutable 4000-63FF first, A=data bank,
+; ROM monitor bridge contract: validate immutable 4800-63FF first, A=data bank,
 ; X/Y=40-byte NUL-terminated command. C=handled, A=resulting bank. D/DBR/PBR=0,
 ; E=1, SEI/CLD. WB2 adds the command result at 655F; g7 supplies the bridge.
         MODULE WORKBENCH
@@ -319,7 +319,7 @@ W_TABLE_END:
         JSR W_PUTS
         JMP W_HANDLED
 ; R [bank] name|address [L]. Names are unique within the selected bank.
-; Whole destination must be 0200-3FFF: the RAM workbench owns 4000-66FF.
+; Whole destination must be 0200-47FF: the RAM workbench owns 4800-66FF.
 W_RESTORE_CMD:
         JSR W_RECORD_BANK
         JSR W_SKIP
@@ -647,6 +647,9 @@ W_SKIP_RECORD:
         STA W_ADDR+1
         RTS
 W_SHOW_RECORD:
+        JSR W_SHOW_LOCATION
+        BRA W_SHOW_FIELDS
+W_SHOW_LOCATION:
         LDA #'B'
         JSR STR8V2_RAM_PUTC
         LDA W_BANK
@@ -658,6 +661,8 @@ W_SHOW_RECORD:
         JSR STR8V2_RAM_HEX_OUT
         LDA W_ADDR
         JSR STR8V2_RAM_HEX_OUT
+        RTS
+W_SHOW_FIELDS:
         LDA #' '
         JSR STR8V2_RAM_PUTC
         LDA #'+'
@@ -920,7 +925,8 @@ W_PROMPT_TEXT: DB "WORKBENCH> ",0
 W_SYNTAX_TEXT: DB "REFUSED: syntax, unavailable command or invalid line",13,10,0
 W_HELP_TEXT: DB "B0..3; T [bank]; R [bank] name|addr [L]",13,10
         DB "AREA bank first last; S bank flash RAMfirst RAMlast [name]",13,10
-        DB "EDU [ON|OFF]; SRAM; SRAM PREP; WORK; Q monitor",13,10
+        DB "EDU ON|OFF; SRAM [PREP]; WORK; Q monitor",13,10
+        DB "S address or AUTO; AREA closes; HELP",13,10
         DB "CLOCK read-only; Q -> Bx> for M1/W/D/M/!M",13,10
         DB "BATCH cmd;cmd (34 bytes): B T ? HELP EDU SRAM WORK",13,10,0
 W_BANK_TEXT: DB "Data bank B",0

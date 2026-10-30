@@ -33,15 +33,15 @@
   "current_candidate_qualification_by_variant": {
     "RAM": "Fresh escrow, bounded BATCH, CLOCK, M1/W all32 counters, Modify protection and MAINT return passed; WB2 g3 ESC/Ctrl-C cancellation, WORK routing and provider/module CRC refusal passed",
     "A": "Live service dispatch, bank-safe flash load, CLOCK, BATCH and MAINT/FLASH return passed",
-    "B": "Same slot checks, binding and physical saved-default boot; native owner RAM/ZP verification afterward; installed services g2/WB2 g3 repair, cancellation and owner restoration passed"
+    "B": "Same slot checks, binding and physical saved-default boot; native owner RAM/ZP verification afterward; installed services g2/WB2 g3 repair, cancellation and owner restoration passed; WB2 g4 AUTO selection/cancellation from board-loaded module qualified"
   },
   "RTCC_RAM_acceptance": "docs/MON_AB_G2_RAM_ACCEPTANCE.md",
   "RTCC_RAM_receipt": "monitors/validation/2512-mona-g00000002-RAM-rtcc.json",
-  "current_install_receipt": "monitors/validation/2512-mon-g8-services-repair.json",
+  "current_install_receipt": "monitors/validation/2512-store-auto-wb4.json",
   "command_manual": "docs/MONA_COMMANDS.md",
   "A_B_personalities": "Identical at owner request; distinct personalities deferred",
   "usability_plan": "docs/MONA_USABILITY_PLAN.md",
-  "next_checkpoint": "FLASH sector buffer/editor and MAINT/CONFIG navigation; AUTO flash/SSRAM T/S/R, APPS/source/ASM/DEBUG and full b35 parity remain open",
+  "next_checkpoint": "SSRAM PROGRAM Store/AUTO and separate Table/Restore discovery; full b35 parity remains open",
   "hardware_access": true,
   "flashing": true,
   "trial_monitor_erases": 2,
@@ -51,13 +51,13 @@
   "installed_board": "2512",
   "installed_generation": "00000008",
   "installed_default": "B",
-  "latest_install_monitor_erases": 2,
-  "latest_install_journal_appends": 9,
+  "latest_install_monitor_erases": 0,
+  "latest_install_journal_appends": 3,
   "next_candidate_manifest": null,
   "next_workbench_manifest": null,
   "next_candidate_execution_qualified": null,
   "next_candidate_installed": null,
-  "workbench_checkpoint": "docs/MON_AB_G8_2512_ACCEPTANCE.md",
+  "workbench_checkpoint": "docs/MON_STORE_AUTO_2512_ACCEPTANCE.md",
   "next_RAM_scope": null,
   "EDU_SRAM_target": {
     "PROGRAM": "SS1 status code retained; source/program writes and AUTO routing remain planned",
@@ -65,15 +65,15 @@
     "messages": "Planned separate append-only WORKSPACE allocation, outside PROGRAM and boot/wear C/D"
   },
   "next_install_scope": null,
-  "current_workbench_manifest": "monitors/candidates/wb2-g00000003/manifest.json",
+  "current_workbench_manifest": "monitors/candidates/wb2-g00000004/manifest.json",
   "current_workbench_RAM_qualified": true,
   "current_workbench_flash_installed": true,
   "latest_trial_original_scope_met": true,
   "latest_trial_unplanned_D_erase": 0,
   "latest_trial_history_restored": true,
-  "latest_trial_total_sector_erases": 8,
+  "latest_trial_total_sector_erases": 3,
   "current_command_manual": "docs/MONA_COMMANDS.md",
-  "Store_manual": "docs/MONA_STORE.md",
+  "Store_manual": "docs/MON_STORE_AUTO.md",
   "scope_deviation": "docs/G6_D_ROTATION_REMEDIATION.md",
   "capacity_preflight": "tools/native_journal_room.py",
   "runtime_product": "STR8-N",
@@ -83,14 +83,14 @@
   "parity_checklist": "docs/MON_B35_PARITY.md",
   "required_unfinished_gates": [
     "BATCH",
-    "AUTO T/S/R: flash and SSRAM PROGRAM",
+    "SSRAM PROGRAM Store/AUTO and separate cross-backend Table/Restore discovery",
     "APPS and native/owner application launch",
     "Full 2.0b35 capability including source/ASM/DEBUG, maintenance/config/opaque/maps and rich status",
     "Separate append-only WORKSPACE messages"
   ],
   "next_candidate_review": null,
   "next_workbench_interface": null,
-  "current_service_manifest": "monitors/candidates/services-g00000002-r3/manifest.json",
+  "current_service_manifest": "monitors/candidates/services-g00000002-wb4/manifest.json",
   "monitor_left_installed": true,
   "latest_trial_history_preserved": true,
   "g6_scope_incident": "Historical extra D erase and exact-row recovery remain recorded in docs/G6_D_ROTATION_REMEDIATION.md",
@@ -99,7 +99,16 @@
     "MON_A": 67,
     "MON_B": 67,
     "B3_E_dispatcher": 981,
-    "WB2_code_block": 273
+    "WB2_code_block": 63
   },
-  "latest_trial_repair_scope": "docs/MON_AB_G8_WORK_REPAIR_SCOPE.md"
+  "latest_trial_repair_scope": null,
+  "latest_storage_scope": "docs/MON_STORE_AUTO_2512_SCOPE.md",
+  "native_zero_erase_operations_remaining": 1,
+  "RAM_module_at_closeout": {
+    "generation": "00000003",
+    "sha256": "d9976346d1f00630a6fef6e597b288b2e134c3a568d2e3ddb6bcb60c722dfb17",
+    "valid_CRC": true,
+    "current_flash_generation": "00000004",
+    "explicit_reload": "B2 then G 8000; Q returns MON B"
+  }
 }

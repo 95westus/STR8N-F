@@ -144,13 +144,15 @@ def repackage_monitor(out, source_manifest, monitor_manifest):
     return report
 
 
-def repackage_workbench(out, source_manifest, workbench_manifest, generation):
+def repackage_workbench(out, source_manifest, workbench_manifest, generation, bundle_generation=None):
     """Keep dispatcher/loader code; replace the versioned module payload only."""
     out=Path(out).resolve();source_path=Path(source_manifest).resolve()
     if out.exists():raise ValueError('Fresh output directory required')
     old=json.loads(source_path.read_text(encoding='utf-8'))
     wbpath=Path(workbench_manifest).resolve();wb=json.loads(wbpath.read_text(encoding='utf-8'))
     assert old['F_sha256']==wb['foundation_sha256'] and old['generation']==f'{generation:08X}'
+    bundle_generation=generation if bundle_generation is None else bundle_generation
+    assert 1<=bundle_generation<=0xffffffff
     for name,digest in old['source_sha256'].items():assert sha((ROOT/name).read_bytes())==digest,name
     module=(wbpath.parent/wb['module']['filename']).read_bytes()
     assert sha(module)==wb['module']['sha256'] and len(module)==7168 and binascii.crc_hqx(module,65535)==0
@@ -159,11 +161,11 @@ def repackage_workbench(out, source_manifest, workbench_manifest, generation):
         body=(source_path.parent/name).read_bytes();assert sha(body)==item['sha256']
         if item['variant']=='B2 bundle':
             assert body[512:520]==module[:8] and body[3:11]==b'WF\x02\x1cPR05'
-            prefix=bytearray(body[:512]);prefix[11:15]=generation.to_bytes(4,'little')
+            prefix=bytearray(body[:512]);prefix[11:15]=bundle_generation.to_bytes(4,'little')
             body=(bytes(prefix)+module).ljust(8192,b'\xff')
             report['artifacts'][name]['sha256']=sha(body)
         (out/name).write_bytes(body)
-    report.update(workbench_manifest=str(wbpath.relative_to(ROOT)),bundle_generation=generation,
+    report.update(workbench_manifest=str(wbpath.relative_to(ROOT)),bundle_generation=bundle_generation,
                   build_passes=0,assembler_linker_invocations=0,branch_layout={},
                   reused_service_images_from=str(source_path.relative_to(ROOT)),module_payload_replaced=True)
     (out/'manifest.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8',newline='\n')

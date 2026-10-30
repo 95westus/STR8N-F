@@ -5,7 +5,7 @@ and the linked live receipts. Generation alone does not identify a candidate;
 revision suffixes and SHA-256 values matter. These are development components,
 separate from the published N-F 0.3.0 foundation downloads.
 
-G8 current: `g00000008-r2`, `services-g00000002-r3`, `wb2-g00000003`.
+G8 current: `g00000008-r2`, `services-g00000002-wb4`, `wb2-g00000004`.
 The service bundle includes the matching WB2 payload. Do not mix arbitrary
 monitor/service/module layouts. See [2512 acceptance](../../docs/MON_AB_G8_2512_ACCEPTANCE.md).
 

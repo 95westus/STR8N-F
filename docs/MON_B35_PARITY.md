@@ -4,7 +4,7 @@ Updated 2026-10-29. A and B remain identical. Product naming is **STR8-N / MON
 A/B**, with a separate monitor version and generation. Mona is retired; old
 artifact filenames, hashes, installed g6 banners and acceptance receipts remain
 historical evidence. New build outputs use `STR8N-MON-...` and
-`STR8N-WORKBENCH-...`. [g8/WB2 g3 and services](MON_AB_G8_2512_ACCEPTANCE.md) are installed on 2512
+`STR8N-WORKBENCH-...`. [g8/WB2 g4 and services](MON_AB_G8_2512_ACCEPTANCE.md) are installed on 2512
 for the documented subset. Full b35 parity remains open.
 
 ## Baseline and completion rule
@@ -25,7 +25,7 @@ binary is insufficient: its successful workflow, failure paths, data formats,
 return path and storage ownership must work under frozen BASE1. No legacy
 private entry is called merely because its image is still present.
 
-Current evidence is [g8 / WB2 g3 on 2512](MON_AB_G8_2512_ACCEPTANCE.md).
+Current evidence is [g8 / WB2 g4 on 2512](MON_AB_G8_2512_ACCEPTANCE.md).
 The build manifests intentionally retain their original build-only status;
 the later acceptance receipt supplies execution evidence for those exact bytes.
 
@@ -35,9 +35,9 @@ the later acceptance receipt supplies execution evidence for those exact bytes.
 | --- | --- | --- |
 | D/M/G/L and bank prompt | Hex/ASCII dump, inline RAM Modify, force `!M`, bank selection, G and ROM raw-BIN L qualified | Interactive editing/continuation, legacy S19 monitor loading, cancellation and application return workflows; retain raw BIN and F's existing semantics |
 | `T` Table | WB2 lists selected-bank flash SR01 records | Bank/range listing and automatic discovery across admitted flash and SSRAM PROGRAM; show backend/location, pending/corrupt records and unambiguous identity |
-| `S` Store | Manual flash address in a declared B0/B1 AREA; erased-span preflight, YES, commit last; RAM trial qualified | AUTO placement in admitted flash record arenas and SSRAM PROGRAM; correct capacity/overlap checks, duplicate policy, readback and source/output SAVE integration |
+| `S` Store | Explicit address or AUTO append start in a declared B0/B1 AREA; preflight/YES/commit-last/restore/run qualified in WB2 g4 | SSRAM PROGRAM Store/AUTO; correct capacity/overlap checks, duplicate policy, readback and source/output SAVE integration |
 | `R` Restore/run | Selected-bank unique name or address, optional load-only L | Automatic resolution across admitted flash and SSRAM PROGRAM; explicit backend/location override, ambiguity refusal, checked load/run and return |
-| `BATCH cmd;cmd` | WB2 g3 returning-module subset installed; normal/failure paths and positive ESC/Ctrl-C stop qualified | Complete core/native-app parity: legacy 34 text-byte queue, separator checks before execution, failure stop and checked prompt/handoff behavior |
+| `BATCH cmd;cmd` | WB2 g4 (g3 implementation retained) returning-module subset installed; normal/failure paths and positive ESC/Ctrl-C stop qualified | Complete core/native-app parity: legacy 34 text-byte queue, separator checks before execution, failure stop and checked prompt/handoff behavior |
 | `APPS` and named launch | Native service catalogue/dispatcher installed; legacy images retained and unqualified | Discover/validate/list installed compatible apps and availability; named launch/return for native services and owner apps; do not list incompatible retained bytes as runnable |
 | SOURCE / ASM | Source and assembler assets retained | Edit, assemble, diagnostics, symbols/output ownership, Store/Restore/source SAVE/LOAD, run and return; no edits to PROGRAM by WORKSPACE logging |
 | DEBUG | Retained legacy component, incompatible private bindings | Disassembly, registers, memory, RAM breakpoints, step/continue and exit/hook restoration; mode-specific CPU qualification; no implicit flash breakpoint erase |
@@ -54,20 +54,20 @@ checks must be named and versioned, not silently attributed to legacy records.
 Battery policy and tracked erase counts do not measure battery health or prior
 physical flash wear. Missing EDU/SSRAM must report unavailability promptly.
 
-## AUTO storage contract to implement
+## Store AUTO and separate discovery contract
 
-AUTO means **placement, listing and name resolution**, not automatic execution
-at startup or permission to erase/format. T/S/R are one consistent front end
-for flash records and SSRAM PROGRAM records; explicit bank/address and backend
-selection remain available. Exact extended syntax is settled at implementation.
+AUTO means **determining the storage start address** for Store. The owner
+clarified this on 2026-10-29. It does not choose a backend or run an image.
+Table/Restore discovery is a separate required feature. T/S/R retain one front
+end for flash and SSRAM PROGRAM, with explicit bank/address/backend selection.
 
 - `T`: enumerate the configured/admitted scope on both backends and identify
   each result by backend and bank/address or SRAM record identity.
-- `S ... AUTO ...`: allocate only inside the selected, admitted record arena
-  or mounted PROGRAM allocation. If multiple destination backends are eligible,
-  use an explicit saved/selected destination policy and display the chosen target
-  before confirmation. Never guess from erased bytes or silently spill to another
-  backend. Full, unavailable, unmounted or overlapping storage fails clearly.
+- `S ... AUTO ...`: determine a start only inside the already selected, admitted
+  record arena or mounted PROGRAM allocation. Display the bank/backend and start
+  before confirmation. Never guess ownership from erased bytes or silently spill
+  to another backend. Full, unavailable, unmounted or overlapping storage fails
+  clearly. WB2 g4 qualifies append-tail placement for flash; PROGRAM is pending.
 - `R name [L]`: search the configured scope, refuse multiple matches, validate
   the chosen record and its destination before copying, then load only or run as
   requested. An explicit qualified location resolves ambiguity.
@@ -137,3 +137,15 @@ the next command. Provider-only and module-only CRC refusal/repaired admission
 passed in RAM; installed B passed WORK routing and both cancellation keys.
 The earlier size table is historical. Complete BATCH/core/app coverage, AUTO
 flash/SSRAM T/S/R, advanced CLOCK/FLASH/CONFIG and source/ASM/DEBUG remain gates.
+
+## WB2 g4 flash AUTO checkpoint
+
+[2512 acceptance](MON_STORE_AUTO_2512_ACCEPTANCE.md) closes automatic flash
+Store start-address selection, including complete/pending FF payload extents,
+cross-boundary/full/corrupt refusal, NO and Store/Table/Restore/run. It uses
+three erases/appends, restores B0 fully and preserves the fresh RAM/ZP snapshot.
+Current free bytes are F367, A/B67 each, E981, WB2 **63**; the preceding g8 size
+report is historical. A valid cached g3 was restored with owner RAM: B2/G8000
+explicitly loads current flash g4. SSRAM PROGRAM Store/AUTO and cross-backend
+Table/Restore discovery remain separate open ports. One ordinary journal append
+remains; the next larger flash trial requires a reviewed C/D rotation scope.
