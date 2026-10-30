@@ -130,3 +130,14 @@ Full SOURCE/ASM/DEBUG, complete core/app BATCH parity, advanced CLOCK, the
 4KB FLASH editor, CONFIG integration and persistent WORKSPACE messages remain
 unfinished. Battery condition/prior physical flash wear remain unverified;
 tracked counts and policy are not physical-health measurements.
+
+## Later qualification and next release
+
+The unchanged installed payloads subsequently passed
+[positive PROGRAM Store/Restore/run on 2609](2609_PROGRAM_POSITIVE_ACCEPTANCE.md),
+including exact full-SRAM/owner-RAM restoration and zero flash writes. That
+later receipt adds evidence to the existing binaries; it does not replace the
+published preview 1 ZIP or its original manual snapshot.
+
+The owner requires [resident ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md) in the
+next MON/tools release. Their BASE1 port and live qualification are open.

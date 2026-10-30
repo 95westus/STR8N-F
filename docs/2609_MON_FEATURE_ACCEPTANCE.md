@@ -76,3 +76,12 @@ only the necessary dispatcher repair was assembled, once.
 Private evidence is retained under the 2609 feature-install, g4-repair and
 RTC-qualification directories in the parent project's output/qualification.
 Published N-F 0.3.0 bytes and existing downloads remain unchanged.
+
+## Subsequent positive PROGRAM gate
+
+The same installed tools later passed the
+[2609 PROGRAM Store/Restore/run trial](2609_PROGRAM_POSITIVE_ACCEPTANCE.md).
+Its separate receipt adds positive SS1 storage/run evidence with all temporary
+bytes restored and no flash/journal writes. The earlier query/cancel-only
+checkpoint above remains historical; neither pass qualifies flash AP/02 launch,
+native mode or the still-required [ASM/DBG port](MON_ASM_DBG_RELEASE_GATE.md).

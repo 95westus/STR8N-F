@@ -1,0 +1,3 @@
+# Immutable reference copies retain their original bytes and line endings.
+*.asm -text -whitespace
+*.inc -text -whitespace

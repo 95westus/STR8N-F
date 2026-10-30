@@ -26,8 +26,13 @@ new PROGRAM/APPS passed its separate RAM tests.
 
 The [Foundation release path and next qualification](docs/FOUNDATION_RELEASE_PATH.md)
 separate the released 4 KB foundation from optional monitor features. The next
-live gate is positive PROGRAM Store/Restore/run on 2609, with exact temporary
-SRAM restoration and no flash writes.
+release requires further qualification. Positive PROGRAM Store/Restore/run
+[passed on 2609](docs/2609_PROGRAM_POSITIVE_ACCEPTANCE.md), with complete SRAM
+and owner-RAM restoration and zero flash writes.
+
+**The next MON/tools release requires resident ASM and DBG.** Their
+[port and qualification gate](docs/MON_ASM_DBG_RELEASE_GATE.md) is open;
+preview 1 remains a smaller historical increment.
 
 Preview free bytes within components: F367, MON A/B67 each, E82, WB2 g5 30,
 PROGRAM487. These are not declarations of free owner sectors. The historical

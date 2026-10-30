@@ -1,6 +1,8 @@
 # 2609 PROGRAM Store/Restore/run: scope review
 
-Prepared October 30, 2026. **Prepared, not write-authorized.** This gate is
+Prepared October 30, 2026. **Approved, completed and passed** within the
+temporary SRAM scope below. See [acceptance](2609_PROGRAM_POSITIVE_ACCEPTANCE.md).
+This gate is
 65C816 emulation / FT245 on 2609 only, using the installed MON B g8,
 services g4, WB2 g5 and PROGRAM/SP1 g1 from published preview 1. F stays
 STR8N-F v0.3.0 g00000001 BASE1 / PR05. No firmware replacement is proposed.
@@ -76,8 +78,14 @@ The sealed private plan is
 SHA-256 `bffc613383033c2679d74ca38692045c99153ac93aa6bdac8323d251a3d54897`.
 Its 767-byte RAM restorer was built once, has the distinct `PB>` prompt and
 SHA-256 `5dadab107c2663f6b75b8b2267b0ca480c3dcda854219b1635063cad68ff68a1`.
-It has not yet been run. Captures, original SRAM blocks, the restorer and host
+It was run in the approved trial. Captures, original SRAM blocks, the restorer and host
 driver remain private; no owner bytes are included in public receipts.
+
+The two host-only handshake/acknowledgement corrections and preserving
+continuations are recorded in acceptance. The Q-only amendment has plan hash
+`0c2cfeb4bb5c71b41732bbbf188e1664ece1e01aca7aad976e97a72121db6d48`;
+the 1280-byte scope and restorer binary were unchanged. This completed trial
+grants no further storage-write or flashing permission.
 
 ## Boundary after passing
 

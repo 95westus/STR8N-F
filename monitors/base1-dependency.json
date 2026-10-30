@@ -41,7 +41,7 @@
   "command_manual": "docs/MONA_COMMANDS.md",
   "A_B_personalities": "Identical at owner request; distinct personalities deferred",
   "usability_plan": "docs/MONA_USABILITY_PLAN.md",
-  "next_checkpoint": "SSRAM PROGRAM Store/AUTO and separate Table/Restore discovery; full b35 parity remains open",
+  "next_checkpoint": "Resident ASM/DBG port and live qualification required for next MON/tools release; remaining CPU/backend gates stay explicit",
   "hardware_access": true,
   "flashing": true,
   "trial_monitor_erases": 2,
@@ -134,6 +134,16 @@
       "PROGRAM": 487
     },
     "source_ASM_DEBUG_complete": false,
-    "CPU_65C02_services_g4_retested": false
+    "CPU_65C02_services_g4_retested": false,
+    "PROGRAM_816E_positive_qualified": true,
+    "PROGRAM_positive_receipt": "monitors/validation/2609-program-positive.json",
+    "PROGRAM_positive_acceptance": "docs/2609_PROGRAM_POSITIVE_ACCEPTANCE.md",
+    "next_release_required_components": [
+      "ASM",
+      "DBG"
+    ],
+    "next_release_gate": "docs/MON_ASM_DBG_RELEASE_GATE.md",
+    "ASM_DBG_source_reference": "monitors/devtools/legacy-reference/provenance.json",
+    "next_release_ready": false
   }
 }

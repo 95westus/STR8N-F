@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "role": "Unmodified reference source for BASE1 ASM/DBG port",
+  "status": "REFERENCE_ONLY_NOT_BASE1_EXECUTION_QUALIFIED",
+  "installable": false,
+  "required_next_release_components": [
+    "ASM",
+    "DBG"
+  ],
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "source_files": {
+    "assembler/asm-app.asm": {
+      "original": "src/current/assembler/asm-app.asm",
+      "bytes": 60742,
+      "sha256": "34664a74dfb89f15d8da2b259cf96d2ee5d8ca0a2567295d858c570263686774"
+    },
+    "assembler/layout.inc": {
+      "original": "src/current/assembler/layout.inc",
+      "bytes": 1699,
+      "sha256": "f3aa85f02c2d0e7d98c5d0cd2b1798ef842ab8ee255a8860c9faf38966f0504d"
+    },
+    "assembler/source-equ.inc": {
+      "original": "src/current/assembler/source-equ.inc",
+      "bytes": 61,
+      "sha256": "d68c2a2630c90fc2b9eff6cffd66b0621a97481916ec52b223c21e55a4de7b30"
+    },
+    "debugger/debugger.asm": {
+      "original": "src/current/debugger/debugger.asm",
+      "bytes": 23903,
+      "sha256": "1423f76f9281e2d663260f9bbdb6dbed6f1a08179e6a49ae399fd2d75bc10510"
+    },
+    "debugger/layout.inc": {
+      "original": "src/current/debugger/layout.inc",
+      "bytes": 1032,
+      "sha256": "bce7d669dc2cb8720b83ba36bf402be7a855c303d8363d5b96b7cfcd1e132dba"
+    },
+    "debugger/generated.inc": {
+      "original": "src/current/debugger/generated.inc",
+      "bytes": 263,
+      "sha256": "c56da5ffb9a13ddcb2b61f498d91e7ea67d432e6b5326f8e1ddb33680f8dc216"
+    },
+    "debugger/disasm.inc": {
+      "original": "src/current/debugger/disasm.inc",
+      "bytes": 3666,
+      "sha256": "cd96ea029b01eb7a51cf1226d4064a1d2d9e1e74851935db98ded50b4ca46a0b"
+    },
+    "debugger/step-flow.inc": {
+      "original": "src/current/debugger/step-flow.inc",
+      "bytes": 2836,
+      "sha256": "534eb386467bdcf8bf18a65cb51819fedf94a6adae8d4184bef8370729fccf52"
+    },
+    "source-store/source.asm": {
+      "original": "src/current/source-store/source.asm",
+      "bytes": 15045,
+      "sha256": "5f9272f86e522a1301f4dfa7deb770d6ab02c0f76f88ed3fd411f3a7ea49f2c9"
+    },
+    "source-store/state.inc": {
+      "original": "src/current/source-store/state.inc",
+      "bytes": 597,
+      "sha256": "96ba639093debd47ef84b4926db9c1454ab3c8d77f927d4d5e0a2d1881fc818e"
+    },
+    "source-store/flash.inc": {
+      "original": "src/current/source-store/flash.inc",
+      "bytes": 13420,
+      "sha256": "7017c423f4fe4dea4092f31b57de6f2599199ef143e32e8c783cc8948bc7ff26"
+    },
+    "source-store/asm-equ.inc": {
+      "original": "src/current/source-store/asm-equ.inc",
+      "bytes": 11737,
+      "sha256": "78ec98cf6221a7def62373e4f04e36b1ddee20834f9974bfef314d49713cc74e"
+    },
+    "source-store/storage-equ.inc": {
+      "original": "src/current/source-store/storage-equ.inc",
+      "bytes": 43,
+      "sha256": "b527ede9508b0e1821cc6708e7be9468d9b148fc382f1690f1a3de3dcf013959"
+    },
+    "source-store/worker-equ.inc": {
+      "original": "src/current/source-store/worker-equ.inc",
+      "bytes": 208,
+      "sha256": "059664d2bc4eb530f7ecbefc32827dd4658e6a6c65aacb9c90ee27854aca0396"
+    },
+    "storage/source-adapter.inc": {
+      "original": "src/current/storage/source-adapter.inc",
+      "bytes": 940,
+      "sha256": "ac310b119aaeb331bbdf30565228e609076a0dc4f3443194c41ab420f8d5941b"
+    }
+  },
+  "copied_byte_identically": true,
+  "original_tree_modified": false,
+  "builds": 0,
+  "hardware_access": false,
+  "release_gate": "docs/MON_ASM_DBG_RELEASE_GATE.md"
+}

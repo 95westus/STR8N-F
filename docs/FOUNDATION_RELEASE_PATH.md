@@ -30,14 +30,14 @@ See the [stable release](https://github.com/95westus/STR8N-F/releases/tag/v0.3.0
 and its [acceptance](2609_MON_FEATURE_ACCEPTANCE.md). Existing archives and
 their tags remain immutable. Adding the Foundation wording does not rebuild F.
 
-## Next qualification: positive PROGRAM on 2609
+## Closed qualification: positive PROGRAM on 2609
 
-2609's installed preview has passed query/Table, missing-name Restore and
-AUTO/NO. Positive Store/Restore/run retains 2512's earlier 65C02 RAM evidence.
-The next gate is the complete positive PROGRAM workflow on 2609/65C816
-emulation using its installed, byte-identical preview payloads.
-The [exact PROGRAM trial scope](2609_PROGRAM_POSITIVE_SCOPE.md) is prepared
-separately; preparing it does not authorize its temporary SRAM writes.
+2609's installed preview now passed [positive PROGRAM acceptance](2609_PROGRAM_POSITIVE_ACCEPTANCE.md),
+including Store/AUTO, latest-version Restore/run, directory-full and CRC
+refusals, public return, complete SRAM equality and owner RAM/ZP restoration.
+It used the installed, byte-identical preview payloads and the separately
+[approved PROGRAM trial scope](2609_PROGRAM_POSITIVE_SCOPE.md). The following
+describes that completed gate; it grants no further write permission.
 
 First capture the complete 128 KiB SRAM twice through guarded reads, compare
 all flash banks, and restore/read back owner RAM/ZP. Admit temporary targets
@@ -60,6 +60,11 @@ services, WB2 and PROGRAM are reused. No CPU simulation or second firmware
 build is required. This document grants no storage-write permission.
 
 ## Following checkpoints
+
+The owner has made [resident ASM and DBG](MON_ASM_DBG_RELEASE_GATE.md)
+mandatory for the next monitor/tools release. Completing PROGRAM alone does
+not close that release goal. The existing Foundation and preview 1 downloads
+remain their original scoped releases.
 
 1. Retest the current services-g4 RAM path on 2512/65C02. Keep its older
    installed tools until a separate installation scope is approved.
