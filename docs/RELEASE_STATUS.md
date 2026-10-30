@@ -4,10 +4,11 @@ Release preparation: **October 28, 2026**. F is **0.3.0 g00000001 / BASE1 /
 PR05**, exactly 4096 frozen bytes. The public ABI is unchanged. **Mona** is
 the planned optional monitor, with no binary included in this release.
 
-> Give me 4KB, I can give you 4 boards.
+> 4KB of firmware. One board. Up to four boot environments.
 
-With ~32KB RAM shared by four selectable bank environments. This describes
-the bank architecture; hardware qualification is limited to the receipts.
+Compatible, user-supplied images run one at a time on shared CPU/RAM/peripherals.
+This describes the bank architecture; hardware qualification is limited to
+the receipts.
 
 ## Closed 2512 cases
 

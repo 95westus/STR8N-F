@@ -1,5 +1,5 @@
 {
-  "stage": "0.3.0 scoped release preparation; F and runtime unchanged; Mona planned",
+  "stage": "Published 0.3.0 release closeout; main promotion through PR #2",
   "profile": "BASE1",
   "identity": {
     "product": "STR8N-F",
@@ -34,8 +34,8 @@
     "2609"
   ],
   "board_2205_touched": false,
-  "published": false,
-  "publication_state_note": "Packaging-time snapshot; external publication receipt and GitHub release record later publication",
+  "published": true,
+  "publication_state_note": "Current source records public 0.3.0 publication; immutable archived metadata remains the packaging-time snapshot",
   "execution_qualified": false,
   "local_git_branch": "codex/str8nf-base1",
   "artifacts": {
@@ -86,7 +86,6 @@
   "address_proof": "validation/pr05-address-proof.json",
   "independent_helpers_rebuilt": false,
   "remaining": [
-    "Publication of the final scoped 0.3.0 assets",
     "Additional package routes and broader platforms remain separately unqualified",
     "Mona and additional service ABI are follow-on work"
   ],
@@ -239,5 +238,7 @@
     "name": "Mona",
     "status": "PLANNED",
     "included": false
-  }
+  },
+  "main_promotion_pull_request": "https://github.com/95westus/STR8N-F/pull/2",
+  "release_closeout": "docs/RELEASE_CLOSEOUT.md"
 }

@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "tag": "v0.3.0",
   "prerelease": false,
-  "status": "release-0.3.0-scoped",
+  "status": "published-0.3.0-scoped",
   "firmware_lineage": "STR8N-F 0.3.0 / F g00000001 / BASE1 / PR05",
   "repository": "https://github.com/95westus/STR8N-F",
   "release_scope": "Frozen 4KB F and unchanged runtime tools with reviewed 2512 cases and the 2609 rc1 existing-SNBT ZIP upgrade; final package live trial NOT_RUN",
@@ -25,15 +25,15 @@
     "validation/2512-programmer-f-cd-acceptance.json",
     "validation/2609-rc1-zip-upgrade-acceptance.json"
   ],
-  "release_line": "Give me 4KB, I can give you 4 boards.",
+  "release_line": "4KB of firmware. One board. Up to four boot environments.",
   "RAM_line": "With ~32KB RAM shared by four selectable bank environments.",
   "assembly_builds_for_packaging": 0,
   "F_rebuilt_for_packaging": false,
   "CPU_simulations_for_packaging": 0,
   "serial_access_for_packaging": false,
   "board_2205_accessed": false,
-  "published": false,
-  "publication_state_note": "Packaging-time snapshot; external publication receipt and GitHub release record later publication",
+  "published": true,
+  "publication_state_note": "Current source records public 0.3.0 publication; immutable archived metadata remains the packaging-time snapshot",
   "packaged_migration_test": "NOT_RUN",
   "hardware_qualified": false,
   "qualified_scope": "Reviewed 2512 / 65C02 cases and 2609 / 65C816 emulation existing-SNBT ZIP upgrade; FT245 / Windows only",
@@ -59,5 +59,7 @@
     "name": "Mona",
     "status": "PLANNED",
     "included": false
-  }
+  },
+  "main_promotion_pull_request": "https://github.com/95westus/STR8N-F/pull/2",
+  "release_closeout": "docs/RELEASE_CLOSEOUT.md"
 }

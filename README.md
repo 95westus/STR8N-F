@@ -1,67 +1,53 @@
-# STR8N-F â€” BASE1 / PR05
+# STR8N-F v0.3.0 — BASE1 / PR05
 
-**Next optional feature release:** [release plan](docs/MON_FEATURE_RELEASE_PLAN.md),
-[preview manual](docs/MON_FEATURE_PREVIEW.md) and
-[2609 RAM readiness](docs/2609_MON_FEATURE_RAM_ACCEPTANCE.md).
-MON B g8, services g4 and WB2 g5 / PROGRAM are now
-[installed and accepted on 2609/65C816 emulation](docs/2609_MON_FEATURE_ACCEPTANCE.md),
-including CLOCK, forced reload, PROGRAM Table, BATCH and AUTO/NO.
-The original [five-sector installation](docs/2609_MON_FEATURE_INSTALL_SCOPE.md)
-and separate [D/E repair](docs/2609_MAINT_RELOAD_REPAIR_SCOPE.md) are recorded.
-RTC/NTP collection is re-admitted; 2604 remains the intact rc1 reference.
-Published N-F v0.3.0 stays unchanged; full ASM/DEBUG parity remains unfinished.
+**Optional MON/tools preview:** MON B 0.1.0-dev g8, services g4, WB2 g5 and
+PROGRAM/SP1 are [installed and accepted on 2609/65C816 emulation](docs/2609_MON_FEATURE_ACCEPTANCE.md).
+CLOCK, explicit reload, PROGRAM Table, bounded BATCH and AUTO/NO passed;
+RTC/NTP collection is re-admitted. 2604 remains the intact rc1 reference.
+The published N-F foundation and its downloads stay unchanged.
 
-**MON A/B development branch:** [development plan](docs/MON_AB_PLAN.md)
-and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
-MON A/B **0.1.0-dev g00000008** is [installed and tested on 2512](docs/MON_AB_G8_2512_ACCEPTANCE.md),
-with identical A/B commands and the familiar B0> through B3> prompt.
-**M1/M2/M3 and W are back**, using the optional B3:E dispatcher without borrowing
-owner RAM. **CLOCK** opens a bounded read-only RTC page. **MAINT/FLASH** enter
-an admitted cached workbench, loading B2:8/9 if absent/invalid. No host BIN is
-needed. The module has
-Table/Restore, AREA/Store with [AUTO flash start-address selection](docs/MON_STORE_AUTO.md),
-EDU/SRAM status and the bounded BATCH subset.
+Read the [preview manual](docs/MON_FEATURE_PREVIEW.md),
+[release plan](docs/MON_FEATURE_RELEASE_PLAN.md) and
+[full b35 parity checklist](docs/MON_B35_PARITY.md). SOURCE/ASM/DEBUG,
+advanced CLOCK, the 4KB FLASH editor and CONFIG integration remain unfinished.
+2512 retains its [earlier installed workbench](docs/MON_STORE_AUTO_2512_ACCEPTANCE.md);
+new PROGRAM/APPS passed its separate RAM tests.
 
-The saved B default boots g8. All original boot/wear rows, other images and
-owner RAM/ZP were preserved and verified after physical RESET; COM4 is released.
-WORK dispatch and positive BATCH ESC/Ctrl-C cancellation also passed the
-service repair. The installed tools use STR8-N / MON A/B; Mona is retired. F and published
-N-F v0.3.0 downloads remain unchanged.
+Preview free bytes within components: F367, MON A/B67 each, E82, WB2 g5 30,
+PROGRAM487. These are not declarations of free owner sectors. The historical
+branch spelling is retained; runtime naming is STR8-N / MON A/B.
 
-A later [storage/APPS checkpoint](docs/STORAGE_APPS_COMMANDS.md) has passed
-2512 RAM qualification: PROGRAM Store/AUTO, shared Table/Restore, CRC-checked
-APPS launch and public return. Its expanded flash installation awaits the
-[reviewed B2:A and C-journal rotation scope](docs/STORAGE_APPS_2512_SCOPE_REVIEW.md).
-One explicitly approved superseded SRAM CLK entry was retired after confirming
-an identical retained payload, freeing11264 PROGRAM bytes; distinct builds
-remain. The new [current-time host collector](docs/TIME_SAMPLES.md) passed
-on-demand and periodic live tests without a BIN or board-storage write.
-These development results do not change the installed version or published kit.
 
-**Full 2.0b35 capability remains the completion target**, including SSRAM
-PROGRAM Store/AUTO and cross-backend discovery installation, full source/ASM/DEBUG, CLOCK administration,
-the 4KB FLASH editor and the merged MAINT/CONFIG pages. See the
-[command manual](docs/MONA_COMMANDS.md), [accepted services design](docs/MON_BOARD_SERVICES_PLAN.md)
-and [parity checklist](docs/MON_B35_PARITY.md). These planned features are not
-implied by the current command names.
+> 4KB of firmware. One board. Up to four boot environments.
 
-2512's installed g8/WB2 g4 free bytes: **F 367; MON A/B 67 each; E 981; WB2 63**.
-2609's preview has **E 82; WB2 g5 30; PROGRAM 487** free bytes within those
-components; F and MON space is unchanged. Explicit MAINT/CLOCK loads
-borrow RAM 4800-66FF; application RAM while loaded is 0200-47FF. M1/W do not load
-that module. The refined layout saves 2KB RAM and one flash sector against the
-earlier 9KB prototype. Owner restoration reinstated valid cached WB2 g3 on2512.
-To use current flash **g4**, select **B2**, then **G 8000**; Q returns to MON B.
-See [AUTO acceptance](docs/MON_STORE_AUTO_2512_ACCEPTANCE.md) for exact scope,
-preservation, measured sizes and the remaining one-append journal capacity.
+For WDC's **W65C02SXB** and **W65C816SXB** boards:
 
-> Give me 4KB, I can give you 4 boards.
+| SXB board | N-F CPU mode | Optional matching EDU add-on |
+| --- | --- | --- |
+| W65C02SXB | 65C02 | W65C02EDU |
+| W65C816SXB | 65C816 emulation | W65C816EDU |
 
-*With ~32KB RAM shared by the selected bank environment.*
+The EDU add-ons are optional; BASE1 boot/recovery does not require EDU.
+See [WDC's board descriptions](https://wdc65xx.com/Single-Board-Computers)
+for the hardware. N-F's tested scope is listed below.
 
-One 4096-byte bootstrap/recovery component opens four selectable flash banks
-for your own images and environments. Four bank environments share that RAM;
-hardware qualification is listed below. The raw-L application range is
+Choose among compatible, user-supplied images in four selectable flash banks.
+One environment runs at a time on the same physical CPU, RAM (approximately
+32KB on the supported boards) and peripherals. Applications and operating
+environments are supplied separately; this kit provides boot/recovery tools.
+
+**[Download N-F v0.3.0 — BASE1 / PR05](https://github.com/95westus/STR8N-F/releases/tag/v0.3.0)**:
+[4KB F.bin](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/F.bin),
+[operator kit](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-BASE1-0.3.0.zip),
+[source ZIP](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/STR8N-F-BASE1-0.3.0-source.zip)
+and [checksums](https://github.com/95westus/STR8N-F/releases/download/v0.3.0/SHA256SUMS.txt).
+Read the [user manual](docs/USER_MANUAL.md) for WDC migration, opaque-image
+installation and saving a bank as the default. The operator kit includes the
+WDC RAM migration programs and Python serial terminal. F.bin and the manual
+are additive release downloads; original ZIPs and the v0.3.0 tag stay intact.
+
+One 4096-byte bootstrap/recovery component selects among those flash banks.
+Hardware qualification is listed below. The raw-L application range is
 $0200-$64FF; preservation tools escrow $0200-$66FF and owner ZP $00-$DF.
 
 **STR8N-F 0.3.0 is the scoped 4KB foundation release.** F remains
@@ -165,3 +151,12 @@ independent. [F_FREEZE.json](F_FREEZE.json) and the
 Packaging copied verified existing firmware without rebuilding, simulation,
 board access or publication. The later 2609 upgrade is recorded separately;
 the tested rc1 ZIP remains immutable.
+
+## Source branches
+
+`main` is the integration branch for the current released foundation and
+documentation. The immutable `v0.3.0` tag identifies the released source;
+later documentation commits do not change the download archives. New work
+uses short `codex/...` feature branches and pull requests into `main`.
+Mona and proposed service/ABI extensions are follow-on work. See
+[development policy](docs/DEVELOPMENT.md).
