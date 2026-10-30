@@ -71,13 +71,24 @@ scoped releases.
    [passed on 2512/65C02](2512_SERVICES_G4_INSTALL_ACCEPTANCE.md), including
    physical saved-default B boot and complete owner RAM/ZP preservation.
    The approved five erases are complete; they grant no further write allowance.
-2. Qualify AP/02 named owner-app launch on 2609 only after a specific disposable
-   flash sector and its restore/wear scope are reviewed. PROGRAM run/return
-   does not qualify flash AP/02 launch.
-3. If qualifying the packaged WDC or programmer-F routes, use only a fresh
+2. **Closed:** current PROGRAM positive SS1 Store/Restore/run and CRC refusal
+   passed on [2609](2609_PROGRAM_POSITIVE_ACCEPTANCE.md) and
+   [2512](2512_PROGRAM_POSITIVE_ACCEPTANCE.md). The 2512 host directory-slot
+   planning error and restoring continuation are explicit; every original
+   SRAM/RAM byte is restored. Its original narrow scope is not marked passed.
+3. **Closed:** [AP/02 named flash-app launch on 2609](2609_AP02_ACCEPTANCE.md),
+   help/public return, exact retained-WDC restoration and RTC readmission.
+   Exactly two B0:9 erases and two wear appends; all 17 old rows retained,
+   zero F writes or C/D erases. This adds no further write permission.
+4. Proposed next checkpoint: a bounded soak on the unchanged installed
+   images with the existing RTC/NTP schedule. Check the actual response,
+   image/RAM preservation and clock-continuity evidence; do not infer
+   unobserved behavior from an occasional sample. No new soak was started
+   by this qualification closeout.
+5. If qualifying the packaged WDC or programmer-F routes, use only a fresh
    extraction and review C/D/F replacement separately. That requires an
    admitted target; the no-flash PROGRAM trial cannot authorize it.
-4. Continue SOURCE/ASM/DEBUG and remaining command parity as separate module
+6. Continue SOURCE/ASM/DEBUG and remaining command parity as separate module
    increments. Keep 2604's rc1 reference intact until replacement workflows
    pass. Keep 2205 out of firmware changes and retain historical branches.
 
@@ -92,11 +103,12 @@ Current MON/tools evidence:
 | --- | --- | --- |
 | Installed MON B g8, current g4 maps/wear and TIME | Passed | Passed |
 | Matching flash MAINT LOAD, CLOCK, PROGRAM Table, BATCH and AUTO/NO | Passed | Passed |
-| Positive current SP1 SS1 Store/Restore/run and CRC refusal | Not repeated in this trial | Passed |
-| Positive AP/02 flash-app launch through current g4 | Not repeated in this trial | Pending reviewed target |
+| Positive current SP1 SS1 Store/Restore/run and CRC refusal | Passed explicit Store; host scope error exactly repaired | Passed AUTO/explicit Store |
+| Positive AP/02 flash-app launch through current g4 | Earlier g3 receipt; not repeated with g4 | Passed; original WDC restored |
 | Resident ASM/DBG | Deferred; nonblocking | Deferred; nonblocking |
 
-The 2512 acceptance preserves its earlier Store/AUTO and application receipts
-as separate historical scopes; it does not turn query/cancel checks into new
-positive writes. No published archive, release tag or frozen F byte changes
-with these later source receipts.
+The 2512 positive trial used AUTO preview/NO and explicit payload placement;
+its earlier AUTO and application receipts remain separate historical scopes.
+The scope-planning failure, actual slot order and full preserving recovery
+are retained in its composite receipt. No published archive, release tag or
+frozen F byte changes with these later source receipts.

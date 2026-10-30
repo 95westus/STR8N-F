@@ -12,6 +12,14 @@ BATCH and AUTO/NO. Positive PROGRAM write/run remains a separately named
 CPU/backend scope. These later source receipts leave preview 1's published
 archive and Foundation downloads unchanged.
 
+Current positive Store/Restore/run now passed on
+[2512/65C02](2512_PROGRAM_POSITIVE_ACCEPTANCE.md) and
+[2609/65C816 emulation](2609_PROGRAM_POSITIVE_ACCEPTANCE.md). The 2512
+composite receipt discloses its host directory-slot planning error and exact
+restoring continuation; it does not claim the original narrow scope passed.
+Current-g4 [AP/02 flash launch on 2609](2609_AP02_ACCEPTANCE.md) also passed,
+with the original retained WDC bank restored and RTC sampling readmitted.
+
 ## Package and terminal
 
 The candidate contains an unchanged copy of the published N-F operator kit in
@@ -91,8 +99,11 @@ Q                  return from MON to recovery
 MON and workbench Q have different destinations: an installed workbench's Q
 returns through HOLD to its active admitted monitor; MON's Q enters REC>.
 Retained AP/01 programs and old private-provider apps are not made compatible
-by appearing in a memory map. Actual launch/return of the AP/02 example passed
-on2512/65C02;2609/816E tested inventory/missing-app refusal, not an owner app.
+by appearing in a memory map. Earlier AP/02 launch/return passed on 2512 with
+services g3; current services g4 now also passed positive launch on 2609/816E.
+The example's CPU header must match 02 or 16 as appropriate, with valid header
+and payload CRCs. The 2609 fixture reused the same executable body with its
+CPU 16 header; its original WDC sector was restored afterward.
 
 Inside WORKBENCH:
 

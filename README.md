@@ -28,9 +28,13 @@ At B3>, `MAINT LOAD` loads the current tools over a valid older RAM cache.
 
 The [Foundation release path and next qualification](docs/FOUNDATION_RELEASE_PATH.md)
 separate the released 4 KB foundation from optional monitor features. The next
-release must retain its stated CPU/backend limits. Positive PROGRAM Store/Restore/run
-[passed on 2609](docs/2609_PROGRAM_POSITIVE_ACCEPTANCE.md), with complete SRAM
-and owner-RAM restoration and zero flash writes.
+release must retain its stated CPU/backend limits. Current PROGRAM Store/Restore/run
+passed on [2609](docs/2609_PROGRAM_POSITIVE_ACCEPTANCE.md) and
+[2512](docs/2512_PROGRAM_POSITIVE_ACCEPTANCE.md). The 2512 report discloses a
+host directory-slot planning error and its exact full-SRAM/RAM recovery.
+[AP/02 flash-app launch on 2609](docs/2609_AP02_ACCEPTANCE.md) also passed;
+the original WDC image was restored, wear history retained and RTC/NTP
+readmitted. These later source receipts leave published downloads unchanged.
 
 **Resident ASM and DBG are planned follow-on work and do not block the current
 MON/tools release.** Their [port and qualification plan](docs/MON_ASM_DBG_RELEASE_GATE.md)

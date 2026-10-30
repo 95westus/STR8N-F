@@ -24,6 +24,12 @@ owner RAM/ZP and flash preservation. Services g4 now also
 matching installed reload and physical boot also passed within the separately
 approved five-erase scope. Owner RAM/ZP, SRAM, boot policy and golden F are
 preserved; old C history is archived as approved and D records retained.
+Current [2512 PROGRAM Store/Restore/run](2512_PROGRAM_POSITIVE_ACCEPTANCE.md)
+also passed. Its host assumed the wrong directory-slot order; the original
+failed report and exact additional-slot restoration remain explicit, with
+full SRAM and owner RAM/ZP equality confirmed. [2609 AP/02 launch](2609_AP02_ACCEPTANCE.md)
+then passed within its two-erase B0:9 scope; the retained WDC image was restored,
+old wear records retained and the unchanged RTC instrument readmitted.
 SOURCE/ASM/DEBUG is follow-on implementation work. See the
 [Foundation release path](FOUNDATION_RELEASE_PATH.md) for the remaining package
 and CPU/backend qualification boundaries.
