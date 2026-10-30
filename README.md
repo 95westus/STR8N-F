@@ -1,5 +1,16 @@
 # STR8N-F â€” BASE1 / PR05
 
+**Next optional feature release:** [release plan](docs/MON_FEATURE_RELEASE_PLAN.md),
+[preview manual](docs/MON_FEATURE_PREVIEW.md) and
+[2609 RAM readiness](docs/2609_MON_FEATURE_RAM_ACCEPTANCE.md).
+MON B g8, services g4 and WB2 g5 / PROGRAM are now
+[installed and accepted on 2609/65C816 emulation](docs/2609_MON_FEATURE_ACCEPTANCE.md),
+including CLOCK, forced reload, PROGRAM Table, BATCH and AUTO/NO.
+The original [five-sector installation](docs/2609_MON_FEATURE_INSTALL_SCOPE.md)
+and separate [D/E repair](docs/2609_MAINT_RELOAD_REPAIR_SCOPE.md) are recorded.
+RTC/NTP collection is re-admitted; 2604 remains the intact rc1 reference.
+Published N-F v0.3.0 stays unchanged; full ASM/DEBUG parity remains unfinished.
+
 **MON A/B development branch:** [development plan](docs/MON_AB_PLAN.md)
 and [checkpoint 1 compatibility findings](docs/MON_AB_COMPATIBILITY_REVIEW.md).
 MON A/B **0.1.0-dev g00000008** is [installed and tested on 2512](docs/MON_AB_G8_2512_ACCEPTANCE.md),
@@ -34,7 +45,9 @@ the 4KB FLASH editor and the merged MAINT/CONFIG pages. See the
 and [parity checklist](docs/MON_B35_PARITY.md). These planned features are not
 implied by the current command names.
 
-Free bytes: **F 367; MON A/B 67 each; E 981; WB2 63**. Explicit MAINT/CLOCK loads
+2512's installed g8/WB2 g4 free bytes: **F 367; MON A/B 67 each; E 981; WB2 63**.
+2609's preview has **E 82; WB2 g5 30; PROGRAM 487** free bytes within those
+components; F and MON space is unchanged. Explicit MAINT/CLOCK loads
 borrow RAM 4800-66FF; application RAM while loaded is 0200-47FF. M1/W do not load
 that module. The refined layout saves 2KB RAM and one flash sector against the
 earlier 9KB prototype. Owner restoration reinstated valid cached WB2 g3 on2512.

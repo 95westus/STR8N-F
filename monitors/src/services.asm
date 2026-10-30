@@ -95,6 +95,7 @@ S_MODULE_NAMES:
         BCC S_MODULE
         BRA S_REQUEST_LOAD
 S_MAINT_ARGS:
+        STX S_FORCE_END
         JSR S_SKIP
         BEQ S_REQUEST_LOAD
         LDY #0
@@ -108,6 +109,9 @@ S_FORCE_WORD:
         BCC S_FORCE_WORD
         JSR S_END_ARGS
         BCC S_UNHANDLED
+        ; LOAD belongs to this dispatcher; WB receives its normal MAINT.
+        LDX S_FORCE_END
+        STZ S_LINE,X
         LDA #2
         STA S_LOADER_REQUEST
         BRA S_MODULE

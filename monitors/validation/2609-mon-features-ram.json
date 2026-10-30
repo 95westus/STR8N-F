@@ -1,0 +1,32 @@
+{
+  "board": "2609",
+  "CPU": "65C816 emulation",
+  "passed": true,
+  "native_TIME_valid": true,
+  "PROGRAM_readiness_passed": true,
+  "PROGRAM_AUTO_reached_confirmation": true,
+  "HOLD_restored": true,
+  "all_flash_banks_unchanged": true,
+  "owner_RAM_restored": true,
+  "owner_ZP_restored": true,
+  "port_released": true,
+  "flash_writes": 0,
+  "journal_writes": 0,
+  "SRAM_data_writes": 0,
+  "RTC_SET": 0,
+  "trim_writes": 0,
+  "PF_ACK": 0,
+  "packets": {
+    "RAM trial composite": {
+      "filename": "STR8N-MON-SERVICES-g00000008-RAM.bin",
+      "sha256": "0d8ca453877a71becbd21360a6757c37a1488c68f7a6aca9f8e2c75de90b6758"
+    },
+    "Full tool RAM packet": {
+      "filename": "STR8N-TOOLS-WB2-SP1-g00000003-RAM.bin",
+      "sha256": "0ae64d54ff50f2f7c8132e1dad109dc06d36e348e3e2b0f4767d414d350b7842"
+    }
+  },
+  "finished_utc": "2026-10-30T13:08:32.227712+00:00",
+  "scope": "RAM only;816 Store canceled with NO, no positive816 write/run or ROM boot claim",
+  "source_report_sha256": "31803b88796dbea21c8733afa37e5415429494187c5ebd353d8da06bd2185483"
+}

@@ -110,5 +110,30 @@
     "valid_CRC": true,
     "current_flash_generation": "00000004",
     "explicit_reload": "B2 then G 8000; Q returns MON B"
+  },
+  "optional_feature_preview": {
+    "label": "MON g8 / tools preview1",
+    "installed_board": "2609",
+    "CPU": "65C816 emulation / FT245",
+    "MON_B_generation": "00000008",
+    "MON_A_retained_unqualified": true,
+    "service_manifest": "monitors/candidates/services-g00000004/manifest.json",
+    "workbench_manifest": "monitors/candidates/wb2-g00000005-r3/manifest.json",
+    "program_manifest": "monitors/candidates/program-sp1-g00000001-r4/manifest.json",
+    "acceptance": "docs/2609_MON_FEATURE_ACCEPTANCE.md",
+    "manual": "docs/MON_FEATURE_PREVIEW.md",
+    "hardware_receipt": "monitors/validation/2609-mon-feature-install.json",
+    "RTC_receipt": "monitors/validation/2609-mon-feature-rtc.json",
+    "default": "S unchanged",
+    "F_writes": 0,
+    "free_bytes": {
+      "F": 367,
+      "MON_each": 67,
+      "E": 82,
+      "WB2": 30,
+      "PROGRAM": 487
+    },
+    "source_ASM_DEBUG_complete": false,
+    "CPU_65C02_services_g4_retested": false
   }
 }

@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "board": "2609",
+  "CPU": "65C816 emulation",
+  "passed": true,
+  "profile": "BASE1-MONB8-RTC-RAM1-2609",
+  "F_sha256": "8f4d35ac66730daa773515980983fcf442be3b1bdf1e523d3752ec3615657cc1",
+  "client_sha256": "64193001954948bd9a38c612244f38a2022b0f4b2ce77579e07c6d778104bae5",
+  "sample_count": 9,
+  "reference_UTC": "2026-10-30T13:37:17.933744Z",
+  "RTC_minus_NTP_interval_s": [
+    0.03231024265289306,
+    0.2892010259628296
+  ],
+  "trim_steps": -14,
+  "time_set": false,
+  "trim_changed": false,
+  "PF_ACK": false,
+  "EEPROM_writes": false,
+  "flash_writes": false,
+  "SRAM_data_writes": false,
+  "all_banks_double_verified_unchanged": true,
+  "owner_RAM_ZP_restored_verified": true,
+  "final_context": "REC>",
+  "port_released": true,
+  "hourly_schedule_unchanged": true,
+  "historical_samples_and_baselines_retained": true,
+  "source_report_sha256": "3ea5532bb4ab0cc079863031fac7e21b9831b0551b3933934f3c49d28e1a8cdc"
+}
